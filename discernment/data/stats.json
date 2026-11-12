@@ -1,0 +1,129 @@
+[
+ {
+  "claim": "Exp 1: oracle above self on day 14",
+  "test": "Welch t / Mann-Whitney U",
+  "groups": "oracle 63.2 \u00b1 0.2 (n=5) vs self 27.0 \u00b1 11.9 (n=4)",
+  "statistic": "t = 6.08",
+  "p": 0.008929969666817408,
+  "p_mw": 0.01794281133563812,
+  "primary": true,
+  "p_holm": 0.01250122895470523
+ },
+ {
+  "claim": "Exp 1: oracle above both on day 14",
+  "test": "Welch t / Mann-Whitney U",
+  "groups": "oracle 63.2 \u00b1 0.2 (n=5) vs both 23.1 \u00b1 17.0 (n=5)",
+  "statistic": "t = 5.26",
+  "p": 0.006250614477352615,
+  "p_mw": 0.011159425282914753,
+  "primary": true,
+  "p_holm": 0.01250122895470523
+ },
+ {
+  "claim": "Exp 1: self against no learning on day 14",
+  "test": "Welch t / Mann-Whitney U",
+  "groups": "self 27.0 \u00b1 11.9 (n=4) vs none 14.2 \u00b1 2.2 (n=5)",
+  "statistic": "t = 2.12",
+  "p": 0.11877406535807286,
+  "p_mw": 0.19047619047619047,
+  "primary": false
+ },
+ {
+  "claim": "Exp 2: oracle against sense v2 on day 14",
+  "test": "Welch t / Mann-Whitney U",
+  "groups": "oracle 62.0 \u00b1 1.0 (n=5) vs sense 39.7 \u00b1 21.3 (n=5)",
+  "statistic": "t = 2.34",
+  "p": 0.07937187199141457,
+  "p_mw": 0.011925233593017595,
+  "primary": false
+ },
+ {
+  "claim": "Exp 2: sense v2 against both on day 14",
+  "test": "Welch t / Mann-Whitney U",
+  "groups": "sense 39.7 \u00b1 21.3 (n=5) vs both 16.1 \u00b1 11.1 (n=5)",
+  "statistic": "t = 2.19",
+  "p": 0.0707057969899983,
+  "p_mw": 0.09523809523809523,
+  "primary": false
+ },
+ {
+  "claim": "Exp 3: oracle above sense v2 on day 14",
+  "test": "Welch t / Mann-Whitney U",
+  "groups": "oracle 62.0 \u00b1 1.1 (n=5) vs sense 22.5 \u00b1 30.8 (n=5)",
+  "statistic": "t = 2.87",
+  "p": 0.04545600133134237,
+  "p_mw": 0.010909498364269283,
+  "primary": false
+ },
+ {
+  "claim": "Exp 4: oracle against sense v3 on day 14",
+  "test": "Welch t / Mann-Whitney U",
+  "groups": "oracle 62.8 \u00b1 0.6 (n=5) vs sense 45.1 \u00b1 25.3 (n=5)",
+  "statistic": "t = 1.56",
+  "p": 0.19325932075637528,
+  "p_mw": 0.011159425282914753,
+  "primary": false
+ },
+ {
+  "claim": "Exp 4: oracle above sense v3 on day 60",
+  "test": "Welch t / Mann-Whitney U",
+  "groups": "oracle 61.8 \u00b1 0.9 (n=5) vs sense 14.7 \u00b1 9.7 (n=5)",
+  "statistic": "t = 10.80",
+  "p": 0.00038158879822443927,
+  "p_mw": 0.007936507936507936,
+  "primary": true,
+  "p_holm": 0.0011447663946733179
+ },
+ {
+  "claim": "5.6: share of failed lessons against day-14 exam, all lives",
+  "test": "Spearman rank correlation",
+  "groups": "n=97 lives",
+  "statistic": "rho = -0.81",
+  "p": 2.894089338319397e-23,
+  "primary": false
+ },
+ {
+  "claim": "5.6: share of failed lessons against day-14 exam, lives not judged by the oracle",
+  "test": "Spearman rank correlation",
+  "groups": "n=72 lives",
+  "statistic": "rho = -0.61",
+  "p": 1.2665390888524174e-08,
+  "primary": true,
+  "p_holm": 6.332695444262087e-08
+ },
+ {
+  "claim": "5.6: a failed lesson on night 1 predicts collapse (sense lives)",
+  "test": "Fisher exact",
+  "groups": "collapsed 6 of 7 with one, 0 of 13 without",
+  "statistic": "odds ratio = inf",
+  "p": 0.00018059855521155834,
+  "primary": true,
+  "p_holm": 0.0007223942208462333
+ },
+ {
+  "claim": "5.4: v3 misreads give-ups and polite complaints less than v2",
+  "test": "Fisher exact (unpaired; conservative)",
+  "groups": "v2 93 of 589, v3 6 of 589",
+  "statistic": "odds ratio = 18.2",
+  "p": 1.1695104152380374e-22,
+  "primary": true,
+  "p_holm": 7.017062491428225e-22
+ },
+ {
+  "claim": "Exp 5: 1.7B oracle against 1.7B sense v3 on day 30 (all exam tasks)",
+  "test": "Welch t / Mann-Whitney U",
+  "groups": "oracle 13.4 \u00b1 5.1 (n=3) vs sense 4.4 \u00b1 5.9 (n=3)",
+  "statistic": "t = 1.99",
+  "p": 0.11895056663564388,
+  "p_mw": 0.2,
+  "primary": false
+ },
+ {
+  "claim": "Exp 5: 1.7B sense v3 lives fell from day 0 to day 30 (all exam tasks)",
+  "test": "paired t",
+  "groups": "day 0 22.7 vs day 30 4.4 (n=3 lives)",
+  "statistic": "t = 6.12",
+  "p": 0.025704838109059436,
+  "primary": false
+ }
+]

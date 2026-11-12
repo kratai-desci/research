@@ -1,0 +1,53 @@
+\section{Statistics}
+
+Every test in the paper, recomputed from the experiment databases by paper/stats.py in the repository. Each life (one seed) is one sample. Two-group comparisons are reported as a Welch t-test and a Mann-Whitney U test, because sense lives either stay near the \emph{oracle} or collapse, so the data are not bell-shaped. The six primary claims (marked $\star$) are Holm-corrected as one family; the others are supporting.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\caption{Statistical tests.}\label{tab:B1}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Claim
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Groups (mean $\pm$ SD, lives)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Test
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+p
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Claim
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Groups (mean $\pm$ SD, lives)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Test
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+p
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+$\star$ Exp 1: \emph{oracle} above \emph{self}, day 14 & 63.2 $\pm$ 0.2 (5) vs 27.0 $\pm$ 11.9 (4) & Welch t = 6.08; Mann-Whitney & 0.009; 0.018; Holm 0.019 \\
+$\star$ Exp 1: \emph{oracle} above \emph{both}, day 14 & 63.2 $\pm$ 0.2 (5) vs 23.1 $\pm$ 17.0 (5) & Welch t = 5.26; Mann-Whitney & 0.006; 0.011; Holm 0.019 \\
+Exp 1: \emph{self} against no learning, day 14 & 27.0 $\pm$ 11.9 (4) vs 14.2 $\pm$ 2.2 (5) & Welch t = 2.12; Mann-Whitney & 0.12; 0.19 \\
+Exp 2: \emph{oracle} against \emph{sense v2}, day 14 & 62.0 $\pm$ 1.0 (5) vs 39.7 $\pm$ 21.3 (5) & Welch t = 2.34; Mann-Whitney & 0.08; 0.012 \\
+Exp 2: \emph{sense v2} against \emph{both}, day 14 & 39.7 $\pm$ 21.3 (5) vs 16.1 $\pm$ 11.1 (5) & Welch t = 2.19; Mann-Whitney & 0.07; 0.10 \\
+Exp 3: \emph{oracle} above \emph{sense v2}, day 14 & 62.0 $\pm$ 1.1 (5) vs 22.5 $\pm$ 30.8 (5) & Welch t = 2.87; Mann-Whitney & 0.045; 0.011 \\
+Exp 4: \emph{oracle} against \emph{sense v3}, day 14 & 62.8 $\pm$ 0.6 (5) vs 45.1 $\pm$ 25.3 (5) & Welch t = 1.56; Mann-Whitney & 0.19; 0.011 \\
+$\star$ Exp 4: \emph{oracle} above \emph{sense v3}, day 60 & 61.8 $\pm$ 0.9 (5) vs 14.7 $\pm$ 9.7 (5) & Welch t = 10.80; Mann-Whitney & \textless{} 0.001; 0.008; Holm 0.002 \\
+$\star$ 5.4: v3 misreads give-ups and polite complaints less than v2 & 6 of 589 vs 93 of 589 & Fisher exact (unpaired, conservative) & \textless{} 0.001; Holm \textless{} 0.001 \\
+5.6: share of failed lessons against day-14 exam, all lives & 97 lives & Spearman $\rho$ = -0.81 & \textless{} 0.001 \\
+$\star$ 5.6: the same, lives not judged by the \emph{oracle} & 72 lives & Spearman $\rho$ = -0.61 & \textless{} 0.001; Holm \textless{} 0.001 \\
+$\star$ 5.6: a failed lesson on night 1 predicts collapse & collapsed 6 of 7 with one, 0 of 13 without & Fisher exact & \textless{} 0.001; Holm \textless{} 0.001 \\
+Exp 5: 1.7B \emph{sense v3} lives fell, day 0 to day 30 & 22.7 vs 4.4 (3, paired) & paired t = 6.12 & 0.026 \\
+Exp 5: 1.7B \emph{oracle} against 1.7B \emph{sense v3}, day 30 & 13.4 $\pm$ 5.1 (3) vs 4.4 $\pm$ 5.9 (3) & Welch t = 1.99; Mann-Whitney & 0.12; 0.20 \\
+\end{longtable}
+
+With 3-5 lives per group these tests have little power: a p-value above 0.05 does not show the groups are alike. Where a single collapsed life inflates the spread (Exp 2-4, day 14), the rank test, which every sense life below every \emph{oracle} life satisfies, is the fairer reading.

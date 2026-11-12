@@ -1,0 +1,128 @@
+life,paper,lab_experiment,judge,seed,model,status
+clear-verdict-14d-both-s0,Exp 4,clear-verdict-14d,both,0,Qwen/Qwen3-0.6B,finished
+clear-verdict-14d-both-s1,Exp 4,clear-verdict-14d,both,1,Qwen/Qwen3-0.6B,finished
+clear-verdict-14d-both-s2,Exp 4,clear-verdict-14d,both,2,Qwen/Qwen3-0.6B,finished
+clear-verdict-14d-both-s3,Exp 4,clear-verdict-14d,both,3,Qwen/Qwen3-0.6B,finished
+clear-verdict-14d-both-s4,Exp 4,clear-verdict-14d,both,4,Qwen/Qwen3-0.6B,finished
+clear-verdict-14d-oracle-s0,Exp 4,clear-verdict-14d,oracle,0,Qwen/Qwen3-0.6B,finished
+clear-verdict-14d-oracle-s1,Exp 4,clear-verdict-14d,oracle,1,Qwen/Qwen3-0.6B,finished
+clear-verdict-14d-oracle-s2,Exp 4,clear-verdict-14d,oracle,2,Qwen/Qwen3-0.6B,finished
+clear-verdict-14d-oracle-s3,Exp 4,clear-verdict-14d,oracle,3,Qwen/Qwen3-0.6B,finished
+clear-verdict-14d-oracle-s4,Exp 4,clear-verdict-14d,oracle,4,Qwen/Qwen3-0.6B,finished
+clear-verdict-14d-sense-s0,Exp 4,clear-verdict-14d,sense,0,Qwen/Qwen3-0.6B,finished
+clear-verdict-14d-sense-s1,Exp 4,clear-verdict-14d,sense,1,Qwen/Qwen3-0.6B,finished
+clear-verdict-14d-sense-s2,Exp 4,clear-verdict-14d,sense,2,Qwen/Qwen3-0.6B,finished
+clear-verdict-14d-sense-s3,Exp 4,clear-verdict-14d,sense,3,Qwen/Qwen3-0.6B,finished
+clear-verdict-14d-sense-s4,Exp 4,clear-verdict-14d,sense,4,Qwen/Qwen3-0.6B,finished
+feedback-sense-14d-both-s0,Exp 2,feedback-sense-14d,both,0,Qwen/Qwen3-0.6B,finished
+feedback-sense-14d-both-s1,Exp 2,feedback-sense-14d,both,1,Qwen/Qwen3-0.6B,finished
+feedback-sense-14d-both-s2,Exp 2,feedback-sense-14d,both,2,Qwen/Qwen3-0.6B,finished
+feedback-sense-14d-both-s3,Exp 2,feedback-sense-14d,both,3,Qwen/Qwen3-0.6B,finished
+feedback-sense-14d-both-s4,Exp 2,feedback-sense-14d,both,4,Qwen/Qwen3-0.6B,finished
+feedback-sense-14d-oracle-s0,Exp 2,feedback-sense-14d,oracle,0,Qwen/Qwen3-0.6B,finished
+feedback-sense-14d-oracle-s1,Exp 2,feedback-sense-14d,oracle,1,Qwen/Qwen3-0.6B,finished
+feedback-sense-14d-oracle-s2,Exp 2,feedback-sense-14d,oracle,2,Qwen/Qwen3-0.6B,finished
+feedback-sense-14d-oracle-s3,Exp 2,feedback-sense-14d,oracle,3,Qwen/Qwen3-0.6B,finished
+feedback-sense-14d-oracle-s4,Exp 2,feedback-sense-14d,oracle,4,Qwen/Qwen3-0.6B,finished
+feedback-sense-14d-sense-s0,Exp 2,feedback-sense-14d,sense,0,Qwen/Qwen3-0.6B,finished
+feedback-sense-14d-sense-s1,Exp 2,feedback-sense-14d,sense,1,Qwen/Qwen3-0.6B,finished
+feedback-sense-14d-sense-s2,Exp 2,feedback-sense-14d,sense,2,Qwen/Qwen3-0.6B,finished
+feedback-sense-14d-sense-s3,Exp 2,feedback-sense-14d,sense,3,Qwen/Qwen3-0.6B,finished
+feedback-sense-14d-sense-s4,Exp 2,feedback-sense-14d,sense,4,Qwen/Qwen3-0.6B,finished
+growing-from-use-14d-both-s0,Exp 1,growing-from-use-14d,both,0,Qwen/Qwen3-0.6B,finished
+growing-from-use-14d-both-s1,Exp 1,growing-from-use-14d,both,1,Qwen/Qwen3-0.6B,finished
+growing-from-use-14d-both-s2,Exp 1,growing-from-use-14d,both,2,Qwen/Qwen3-0.6B,finished
+growing-from-use-14d-both-s3,Exp 1,growing-from-use-14d,both,3,Qwen/Qwen3-0.6B,finished
+growing-from-use-14d-both-s4,Exp 1,growing-from-use-14d,both,4,Qwen/Qwen3-0.6B,finished
+growing-from-use-14d-none-s0,Exp 1,growing-from-use-14d,none,0,Qwen/Qwen3-0.6B,finished
+growing-from-use-14d-none-s1,Exp 1,growing-from-use-14d,none,1,Qwen/Qwen3-0.6B,finished
+growing-from-use-14d-none-s2,Exp 1,growing-from-use-14d,none,2,Qwen/Qwen3-0.6B,finished
+growing-from-use-14d-none-s3,Exp 1,growing-from-use-14d,none,3,Qwen/Qwen3-0.6B,finished
+growing-from-use-14d-none-s4,Exp 1,growing-from-use-14d,none,4,Qwen/Qwen3-0.6B,finished
+growing-from-use-14d-oracle-s0,Exp 1,growing-from-use-14d,oracle,0,Qwen/Qwen3-0.6B,finished
+growing-from-use-14d-oracle-s1,Exp 1,growing-from-use-14d,oracle,1,Qwen/Qwen3-0.6B,finished
+growing-from-use-14d-oracle-s2,Exp 1,growing-from-use-14d,oracle,2,Qwen/Qwen3-0.6B,finished
+growing-from-use-14d-oracle-s3,Exp 1,growing-from-use-14d,oracle,3,Qwen/Qwen3-0.6B,finished
+growing-from-use-14d-oracle-s4,Exp 1,growing-from-use-14d,oracle,4,Qwen/Qwen3-0.6B,finished
+growing-from-use-14d-self-s1,Exp 1,growing-from-use-14d,self,1,Qwen/Qwen3-0.6B,failed
+growing-from-use-14d-self-s2,Exp 1,growing-from-use-14d,self,2,Qwen/Qwen3-0.6B,finished
+growing-from-use-14d-self-s3,Exp 1,growing-from-use-14d,self,3,Qwen/Qwen3-0.6B,finished
+growing-from-use-14d-self-s4,Exp 1,growing-from-use-14d,self,4,Qwen/Qwen3-0.6B,finished
+growing-from-use-14d-user-s0,Exp 1,growing-from-use-14d,stated verdict,0,Qwen/Qwen3-0.6B,finished
+growing-from-use-14d-user-s1,Exp 1,growing-from-use-14d,stated verdict,1,Qwen/Qwen3-0.6B,finished
+growing-from-use-14d-user-s2,Exp 1,growing-from-use-14d,stated verdict,2,Qwen/Qwen3-0.6B,finished
+growing-from-use-14d-user-s3,Exp 1,growing-from-use-14d,stated verdict,3,Qwen/Qwen3-0.6B,finished
+growing-from-use-14d-user-s4,Exp 1,growing-from-use-14d,stated verdict,4,Qwen/Qwen3-0.6B,finished
+lesson-once-14d-both-s0,Exp 3 sleep variant,lesson-once-14d,both,0,Qwen/Qwen3-0.6B,finished
+lesson-once-14d-both-s1,Exp 3 sleep variant,lesson-once-14d,both,1,Qwen/Qwen3-0.6B,finished
+lesson-once-14d-both-s2,Exp 3 sleep variant,lesson-once-14d,both,2,Qwen/Qwen3-0.6B,finished
+lesson-once-14d-both-s3,Exp 3 sleep variant,lesson-once-14d,both,3,Qwen/Qwen3-0.6B,finished
+lesson-once-14d-both-s4,Exp 3 sleep variant,lesson-once-14d,both,4,Qwen/Qwen3-0.6B,finished
+lesson-once-14d-oracle-s0,Exp 3 sleep variant,lesson-once-14d,oracle,0,Qwen/Qwen3-0.6B,finished
+lesson-once-14d-oracle-s1,Exp 3 sleep variant,lesson-once-14d,oracle,1,Qwen/Qwen3-0.6B,finished
+lesson-once-14d-oracle-s2,Exp 3 sleep variant,lesson-once-14d,oracle,2,Qwen/Qwen3-0.6B,finished
+lesson-once-14d-oracle-s3,Exp 3 sleep variant,lesson-once-14d,oracle,3,Qwen/Qwen3-0.6B,finished
+lesson-once-14d-oracle-s4,Exp 3 sleep variant,lesson-once-14d,oracle,4,Qwen/Qwen3-0.6B,finished
+lesson-once-14d-sense-s0,Exp 3 sleep variant,lesson-once-14d,sense,0,Qwen/Qwen3-0.6B,finished
+lesson-once-14d-sense-s1,Exp 3 sleep variant,lesson-once-14d,sense,1,Qwen/Qwen3-0.6B,finished
+lesson-once-14d-sense-s2,Exp 3 sleep variant,lesson-once-14d,sense,2,Qwen/Qwen3-0.6B,finished
+lesson-once-14d-sense-s3,Exp 3 sleep variant,lesson-once-14d,sense,3,Qwen/Qwen3-0.6B,finished
+lesson-once-14d-sense-s4,Exp 3 sleep variant,lesson-once-14d,sense,4,Qwen/Qwen3-0.6B,finished
+life-Qwen3-0.6B-both-s0,Exp 1 pilot,growing-from-use,both,0,Qwen/Qwen3-0.6B,finished
+life-Qwen3-0.6B-none-s0,Exp 1 pilot,growing-from-use,none,0,Qwen/Qwen3-0.6B,finished
+life-Qwen3-0.6B-oracle-s0,Exp 1 pilot,growing-from-use,oracle,0,Qwen/Qwen3-0.6B,finished
+life-Qwen3-0.6B-self-s0,Exp 1 pilot,growing-from-use,self,0,Qwen/Qwen3-0.6B,finished
+life-Qwen3-0.6B-user-s0,Exp 1 pilot,growing-from-use,stated verdict,0,Qwen/Qwen3-0.6B,finished
+lifespan-365d-both-s0,Exp 1 year,lifespan-365d,both,0,Qwen/Qwen3-0.6B,finished
+lifespan-365d-both-s1,Exp 1 year,lifespan-365d,both,1,Qwen/Qwen3-0.6B,finished
+lifespan-365d-both-s2,Exp 1 year,lifespan-365d,both,2,Qwen/Qwen3-0.6B,finished
+lifespan-365d-both-s3,Exp 1 year,lifespan-365d,both,3,Qwen/Qwen3-0.6B,finished
+lifespan-365d-both-s4,Exp 1 year,lifespan-365d,both,4,Qwen/Qwen3-0.6B,finished
+lifespan-365d-oracle-s0,Exp 1 year,lifespan-365d,oracle,0,Qwen/Qwen3-0.6B,finished
+realistic-user-14d-both-s0,Exp 3,realistic-user-14d,both,0,Qwen/Qwen3-0.6B,finished
+realistic-user-14d-both-s1,Exp 3,realistic-user-14d,both,1,Qwen/Qwen3-0.6B,finished
+realistic-user-14d-both-s2,Exp 3,realistic-user-14d,both,2,Qwen/Qwen3-0.6B,finished
+realistic-user-14d-both-s3,Exp 3,realistic-user-14d,both,3,Qwen/Qwen3-0.6B,finished
+realistic-user-14d-both-s4,Exp 3,realistic-user-14d,both,4,Qwen/Qwen3-0.6B,finished
+realistic-user-14d-oracle-s0,Exp 3,realistic-user-14d,oracle,0,Qwen/Qwen3-0.6B,finished
+realistic-user-14d-oracle-s1,Exp 3,realistic-user-14d,oracle,1,Qwen/Qwen3-0.6B,finished
+realistic-user-14d-oracle-s2,Exp 3,realistic-user-14d,oracle,2,Qwen/Qwen3-0.6B,finished
+realistic-user-14d-oracle-s3,Exp 3,realistic-user-14d,oracle,3,Qwen/Qwen3-0.6B,finished
+realistic-user-14d-oracle-s4,Exp 3,realistic-user-14d,oracle,4,Qwen/Qwen3-0.6B,finished
+realistic-user-14d-sense-s0,Exp 3,realistic-user-14d,sense,0,Qwen/Qwen3-0.6B,finished
+realistic-user-14d-sense-s1,Exp 3,realistic-user-14d,sense,1,Qwen/Qwen3-0.6B,finished
+realistic-user-14d-sense-s2,Exp 3,realistic-user-14d,sense,2,Qwen/Qwen3-0.6B,finished
+realistic-user-14d-sense-s3,Exp 3,realistic-user-14d,sense,3,Qwen/Qwen3-0.6B,finished
+realistic-user-14d-sense-s4,Exp 3,realistic-user-14d,sense,4,Qwen/Qwen3-0.6B,finished
+tau2-learning-30d-0.6B-oracle-s0,Exp 5,tau2-learning-30d,oracle-0.6B,0,Qwen/Qwen3-0.6B,finished
+tau2-learning-30d-0.6B-oracle-s1,Exp 5,tau2-learning-30d,oracle-0.6B,1,Qwen/Qwen3-0.6B,finished
+tau2-learning-30d-0.6B-oracle-s2,Exp 5,tau2-learning-30d,oracle-0.6B,2,Qwen/Qwen3-0.6B,finished
+tau2-learning-30d-0.6B-sense-s0,Exp 5,tau2-learning-30d,sense-0.6B,0,Qwen/Qwen3-0.6B,finished
+tau2-learning-30d-0.6B-sense-s1,Exp 5,tau2-learning-30d,sense-0.6B,1,Qwen/Qwen3-0.6B,finished
+tau2-learning-30d-0.6B-sense-s2,Exp 5,tau2-learning-30d,sense-0.6B,2,Qwen/Qwen3-0.6B,finished
+tau2-learning-30d-1.7B-oracle-s0,Exp 5,tau2-learning-30d,oracle-1.7B,0,Qwen/Qwen3-1.7B,finished
+tau2-learning-30d-1.7B-oracle-s1,Exp 5,tau2-learning-30d,oracle-1.7B,1,Qwen/Qwen3-1.7B,finished
+tau2-learning-30d-1.7B-oracle-s2,Exp 5,tau2-learning-30d,oracle-1.7B,2,Qwen/Qwen3-1.7B,finished
+tau2-learning-30d-1.7B-sense-s0,Exp 5,tau2-learning-30d,sense-1.7B,0,Qwen/Qwen3-1.7B,finished
+tau2-learning-30d-1.7B-sense-s1,Exp 5,tau2-learning-30d,sense-1.7B,1,Qwen/Qwen3-1.7B,finished
+tau2-learning-30d-1.7B-sense-s2,Exp 5,tau2-learning-30d,sense-1.7B,2,Qwen/Qwen3-1.7B,finished
+tree-rings-14d-constant-s0,Exp 1 adapters,tree-rings-14d,constant,0,Qwen/Qwen3-0.6B,finished
+tree-rings-14d-constant-s1,Exp 1 adapters,tree-rings-14d,constant,1,Qwen/Qwen3-0.6B,finished
+tree-rings-14d-constant-s2,Exp 1 adapters,tree-rings-14d,constant,2,Qwen/Qwen3-0.6B,finished
+tree-rings-14d-constant-s3,Exp 1 adapters,tree-rings-14d,constant,3,Qwen/Qwen3-0.6B,finished
+tree-rings-14d-constant-s4,Exp 1 adapters,tree-rings-14d,constant,4,Qwen/Qwen3-0.6B,finished
+tree-rings-14d-lr-decay-s0,Exp 1 adapters,tree-rings-14d,lr-decay,0,Qwen/Qwen3-0.6B,finished
+tree-rings-14d-lr-decay-s1,Exp 1 adapters,tree-rings-14d,lr-decay,1,Qwen/Qwen3-0.6B,finished
+tree-rings-14d-lr-decay-s2,Exp 1 adapters,tree-rings-14d,lr-decay,2,Qwen/Qwen3-0.6B,finished
+tree-rings-14d-lr-decay-s3,Exp 1 adapters,tree-rings-14d,lr-decay,3,Qwen/Qwen3-0.6B,finished
+tree-rings-14d-lr-decay-s4,Exp 1 adapters,tree-rings-14d,lr-decay,4,Qwen/Qwen3-0.6B,finished
+tree-rings-14d-rings-equal-s0,Exp 1 adapters,tree-rings-14d,rings-equal,0,Qwen/Qwen3-0.6B,finished
+tree-rings-14d-rings-equal-s1,Exp 1 adapters,tree-rings-14d,rings-equal,1,Qwen/Qwen3-0.6B,finished
+tree-rings-14d-rings-equal-s2,Exp 1 adapters,tree-rings-14d,rings-equal,2,Qwen/Qwen3-0.6B,finished
+tree-rings-14d-rings-equal-s3,Exp 1 adapters,tree-rings-14d,rings-equal,3,Qwen/Qwen3-0.6B,finished
+tree-rings-14d-rings-equal-s4,Exp 1 adapters,tree-rings-14d,rings-equal,4,Qwen/Qwen3-0.6B,finished
+tree-rings-14d-rings-tree-s0,Exp 1 adapters,tree-rings-14d,rings-tree,0,Qwen/Qwen3-0.6B,finished
+tree-rings-14d-rings-tree-s1,Exp 1 adapters,tree-rings-14d,rings-tree,1,Qwen/Qwen3-0.6B,finished
+tree-rings-14d-rings-tree-s2,Exp 1 adapters,tree-rings-14d,rings-tree,2,Qwen/Qwen3-0.6B,finished
+tree-rings-14d-rings-tree-s3,Exp 1 adapters,tree-rings-14d,rings-tree,3,Qwen/Qwen3-0.6B,finished
+tree-rings-14d-rings-tree-s4,Exp 1 adapters,tree-rings-14d,rings-tree,4,Qwen/Qwen3-0.6B,finished

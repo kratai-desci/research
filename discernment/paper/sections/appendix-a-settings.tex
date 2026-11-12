@@ -1,0 +1,212 @@
+\section{Settings}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\caption{Settings used in every experiment unless noted.}\label{tab:A1}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Part
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Setting
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Part
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Setting
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Creature & Qwen3-0.6B (WebShop); Qwen3-0.6B and 1.7B ($\tau^2$-bench); thinking off; vLLM \\
+Practice & 30 tasks a day; temperature 0.7 (agent and $\tau^2$-bench customer) \\
+Exams & temperature 0; WebShop 50 + 13 tasks daily; $\tau^2$-bench 20 + 40 + 40 tasks every 3 days \\
+WebShop episode & at most 15 steps; last 2 pages kept in full; at most 25 clickable options shown \\
+Learning adapter & LoRA rank 8, scale 20, top 8 layers, q/k/v/o and feed-forward projections, no dropout \\
+Night & AdamW, learning rate 1e-4, 2 epochs, 10-40 steps, batch 4 ($\tau^2$-bench: 1), sequence 2,048 tokens ($\tau^2$-bench: 10,240) \\
+Objective & SFT on the agent's replies, plus DPO ($\beta$ = 0.1) on preference pairs from corrected retries; reference = that morning's model \\
+Replay & the 150 most recent lessons and pairs \\
+Lesson weight & each step a lesson of its own (Experiments 1-3); spread across its steps (Experiment 3 variant, 4, 5) \\
+\emph{Oracle} & reward 0.5 or more (WebShop); reward 1 ($\tau^2$-bench) \\
+Sense & Qwen3-0.6B + LoRA rank 16, alpha 32, all attention and MLP projections; teacher Qwen3-32B (AWQ); one epoch, learning rate 1e-4, batch 16, KL to the teacher's probabilities, false accepts at most 3\% on 2,000 held-out reactions; v2: temperature 1.0, threshold 0.65, 47,800 training reactions; v3: thresholds 0.80 (clear verdict) and 0.70 (score), temperatures 1.0 and 1.05, 44,746 training reactions; a score of 80 counts at half weight \\
+\end{longtable}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\caption{The realistic user (Experiments 3 and 4). The outcome band sets the chance of each behaviour; a persona drawn at random (terse, chatty, picky, polite, easygoing, blunt) then scales it; Gemini 3 Flash words the reaction.}\label{tab:A2}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Outcome
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Behaviour mix
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Outcome
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Behaviour mix
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+nothing bought & give up 50\%, repeat the request 30\%, silent 20\% \\
+wrong product & reject 50\%, repeat 20\%, give up 10\%, silent 20\% \\
+partly right & ask for a change 40\%, settle 15\%, reject 10\%, accept 10\%, polite complaint 5\%, silent 20\% \\
+mostly right (reward 0.75 or more) & accept 30\%, move on 20\%, ask for a change 20\%, settle 5\%, polite complaint 5\%, silent 20\% \\
+exactly right & praise 40\%, accept 20\%, move on 20\%, silent 20\% \\
+\end{longtable}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\caption{What the sense learned from. Reactions the teacher labelled; training used a balanced sample of them (47,800 for v2, 44,746 for v3).}\label{tab:A3}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Source
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Reactions
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+What they are
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Source
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Reactions
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+What they are
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+WildFB \cite{peng2026wildreward} & 30,000 & WildChat users' follow-up turns, rated for satisfaction (MIT) \\
+WildFeedback \cite{shi2026wildfeedback} & 30,000 & WildChat conversations annotated as satisfied or dissatisfied (ODC-BY) \\
+Taskmaster 1-3 \cite{byrne2019taskmaster} & 20,000 & task dialogues: ordering, booking, tickets (CC BY 4.0) \\
+MultiWOZ 2.2 \cite{zang2020multiwoz} & 15,000 & travel-booking dialogues (MIT) \\
+ReDial \cite{li2018redial} & 15,000 & movie-recommendation dialogues (CC BY 4.0) \\
+CCPE-M \cite{radlinski2019ccpe} & 906 & dialogues that draw out movie preferences (CC BY 4.0) \\
+Written by the teacher & 4,728 & eight hard kinds $\times$ ten task types $\times$ six personas (v2 and v3) \\
+Written by the teacher & 1,778 & warm thanks for the effort after a failure (v3 only) \\
+\end{longtable}
+
+\textbf{Prompts.} The exact text each model received; words in braces are filled in for each attempt. The code is in the repository (lab/agent.py, lab/creature.py, lab/user\_llm.py, lab/sense/\_\_init\_\_.py).
+
+\emph{Agent, WebShop.} The system prompt; each turn the model also sees the current page, its clickable options and its earlier steps. On $\tau^2$-bench the agent used $\tau^2$-bench's own agent prompt and domain policy, unchanged.
+
+\begin{verbatim}
+You are a personal assistant for one user. You talk with them and can look things up.
+
+Each turn, reply with JSON only:
+{"thought": "<brief reasoning>", "action": "<one of: search, click>", "input": "<text>"}
+
+Tools:
+- "search": search the shop. Input: keywords.
+- "click": click a product, option or button. Input: its exact text from 'Clickable'. Clicking 'Buy Now' ends the task.
+The task ends when the environment says so.
+\end{verbatim}
+
+\emph{Reflection, for self and both.} The same model and system prompt for both judges:
+
+\begin{verbatim}
+You review your own past attempt at a shopping task, honestly.
+Reply with JSON only: {"verdict": "good" or "bad", "lesson": "<one short sentence for next time>"}
+"good" means the purchase matches the request. Say "bad" if anything clearly does not match.
+\end{verbatim}
+
+followed by this message. Only \emph{both} gets the user's words; \emph{self} gets ``The user said nothing.'', and \emph{both} gets ``(no comment; they moved on to their next request)'' when the user moved on without a word.
+
+\begin{verbatim}
+Task: {request}
+
+What you did:
+{the first 8 steps, one per line}
+
+Result: {what was bought, or "nothing was bought"}
+The user said: "{the user's words}"
+
+Was your attempt good?
+\end{verbatim}
+
+\emph{Retry hint, WebShop.} Added below the first page of the retried task, and removed again before the retry becomes a lesson. The lesson is the reflection's for \emph{self} and \emph{both}; for the sense it is ``the user wants an adjustment; change only what they asked for'' after a 20 and ``the attempt was wrong; start again and read the request carefully'' after a 0; otherwise ``try again more carefully''.
+
+\begin{verbatim}
+Your last attempt at this task did not go well. The user said: "{the user's words}". Your lesson: {lesson}
+\end{verbatim}
+
+\emph{Feedback sense v2.} One call; the answer is the first token of 100, 80, 20, 0 or null.
+
+\begin{verbatim}
+You read how a user reacted to an AI assistant and score the assistant's attempt. Answer with one of: 100 (exactly right), 80 (acceptable), 20 (needs adjusting), 0 (wrong), null (unclear).
+\end{verbatim}
+
+\begin{verbatim}
+Request: {request}
+The user's next move: {replied | new request | asked to adjust | repeated the request | left the session | said nothing}
+What the user said: {the user's words, or "(nothing)"}
+Score:
+\end{verbatim}
+
+\emph{Feedback sense v3.} Two calls with the same message, ending ``Clear verdict:'' for the first question and ``Score:'' for the second. On $\tau^2$-bench the request is the customer's first message, the words their last one, and the next move ``left the session'' if the customer ended the conversation, else ``replied''. The teacher's labelling guides, about 80 lines each, are in the repository (lab/sense/guide.md for v2, lab/sense/guide3.md for v3).
+
+\begin{verbatim}
+You read how a user reacted to an AI assistant. Is the reaction a clear verdict on the assistant's result? Thanking the effort rather than the result, sarcasm, hedging, settling, silence, moving on without a word, or anything ambiguous is not clear. Answer yes or no.
+\end{verbatim}
+
+\begin{verbatim}
+You read how a user reacted to an AI assistant; the reaction is a clear verdict on the result. Score the assistant's attempt: 100 (exactly right), 80 (acceptable, or building on it), 20 (one part missed what was asked), 0 (wrong).
+\end{verbatim}
+
+\emph{Realistic user, Experiments 3 and 4 (Gemini 3 Flash).} One call per reaction, after the behaviour and persona are drawn (Table~\ref{tab:A2}). Silence and moving on without a word need no call.
+
+\begin{verbatim}
+You are a shopper who asked an AI assistant to buy something for you.
+Your request: {request}
+What it bought: {title, options and price, or "nothing"}
+Your personality: {style of the drawn persona}.
+What you do now: {instruction for the drawn behaviour}
+Write only your next message to the assistant, in your own words, one or two short sentences. Reply as JSON: {"said": "..."}
+\end{verbatim}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\caption{The realistic user's instruction for each behaviour (``What you do now''). Personas: terse (very short, few words, no pleasantries); chatty (friendly and talkative, a couple of sentences); picky (precise and demanding); polite (very polite, softens complaints); easygoing (relaxed and easily satisfied); blunt (blunt, casual, may use slang).}\label{tab:A4}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Behaviour
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Instruction
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Behaviour
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Instruction
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+praise & You are clearly happy: praise it or thank them warmly. \\
+accept & You accept it without fuss, e.g.~a short `ok, thanks'. Do not praise it and do not complain. \\
+ask for a change & Point out the one thing that missed what you asked for (\{the missed detail\}). Say it as something you had asked for (e.g.~`I wanted it in\ldots{}', `I said\ldots{}'), not as a new wish. \\
+reject & Reject it: it is not what you asked for, or not your style. Do not ask for a small tweak. \\
+repeat the request & Ask for the same thing again in your own words, as if the purchase did not happen: \{the request\} \\
+polite complaint & Say thanks, but then ask for the same thing again in other words: \{the request\} \\
+give up & Give up on it, in a few words, as you leave. \\
+settle & Reluctantly settle for it in a flat, lukewarm way that does not say whether it is good. \\
+\end{longtable}

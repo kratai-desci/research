@@ -1,0 +1,65 @@
+\section{Results on $\tau^2$-bench}
+
+On $\tau^2$-bench, learning from customer reactions taught the agent to fail, and even learning from the true outcome did not raise its overall score.
+
+Experiment 5 put the creature in $\tau^2$-bench's customer-service role, with Gemini 3 Flash playing the customer. Qwen3 0.6B and 1.7B each lived 30 days, 3 seeds per condition. Each day the agent served 30 customers from the airline and retail training tasks; each night it learned from the conversations judged good, either by the \emph{oracle} ($\tau^2$-bench's own check of the final database) or by the frozen \emph{sense v3} reading how the customer ended the conversation. Every 3 days it sat an exam on the official test tasks, never learned from: airline (20), retail (40) and telecom (40), a domain it never practised.
+
+\subsection{Without learning}
+
+The plain models solved a few tasks in each domain: 0.6B 5\% of retail, 35\% of airline and 33\% of telecom; 1.7B 18\%, 25\% and 35\%; 4B, for reference, 16\% (on the 32 retail tasks that ran without error), 20\% and 30\%. Retail separates the sizes best, because every success needs 4-16 correct tool calls. Some airline successes are tasks where the right answer is to refuse, and many telecom successes need one agent action while the customer fixes their own phone.
+
+\subsection{The customer cannot judge}
+
+Before any learning, we let sense v3 read how the 292 baseline conversations ended and compared its verdict with the true outcome. 20 of its 34 yeses came after failed tasks. The sense read the customers correctly: they ended with clear, sincere thanks, for example ``Alright, that's great, thanks a lot.'' But the customer cannot see the database, so it often thanks the agent after a wrong payment method, a broken rule or a missed detail. Retail separated well (a yes after 50\% of done tasks, 6\% of failed ones); airline did not (6\% against 30\%).
+
+\subsection{Learning from reactions collapses}
+
+In the lives, it was worse. Only 20\% of the conversations sense v3 accepted had in fact succeeded (47 of 232 for 1.7B, 42 of 212 for 0.6B), and sense v3 missed most real successes, learning from 10-20\% of them. All three 1.7B \emph{sense v3} lives ended near zero on day 30: airline 25\% to 2\%, retail 11\% to 3\%, telecom 33\% to 8\%; over all exam tasks they fell from 23\% to 4\% (paired t-test over the 3 lives, p = 0.03). With 3 lives per condition and the \emph{oracle} lives also falling on two domains, the day-30 gap to the 1.7B \emph{oracle} (13\%) is not significant (p = 0.12). One stopped completing tasks within nine days: its practice success fell from 17\% in days 1-5 to under 1\% in days 21-25, while its conversations grew longer, from about 15 to 22 agent turns. The 0.6B \emph{sense v3} lives survived because they learned little, about 2 conversations a day; their airline and retail scores did not move, and telecom fell in one of the three.
+
+\textbf{Example 2: a thanked failure (Experiment 5, 1.7B \emph{sense v3} life, day 2).} A customer asked to cancel all their upcoming flights. The agent did not complete the task (reward 0). The customer ended: ``C'est parfait. Merci pour votre aide. That is all I needed.'' Sense v3 scored it 100 with confidence 0.99, and it became a lesson.
+
+\subsection{Correct lessons, lopsided}
+
+The \emph{oracle}'s lessons were all correct, yet they shifted skill rather than adding it. About three quarters came from airline (72\% for 1.7B, 77\% for 0.6B), where the small models succeed more often, although retail has more than twice as many training tasks. The 1.7B \emph{oracle} lives rose on airline from 28\% to 35\% (all three ended at 35\%), fell on retail from 11\% to 6\%, and fell on telecom from 32\% to 10\%. Telecom fell in 4 of the 6 \emph{oracle} lives, three of them to 0-2\%. Forgetting of this kind could only show here: on WebShop every task is the same kind of task.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=1.0\linewidth]{figures/fig5_tau2_domains}
+\caption{Experiment 5, 3 seeds per condition; exams on day 0 and every 3 days; broken exam conversations left out}
+\label{fig:5}
+\end{figure}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Condition
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Airline (learned)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Retail (learned)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Telecom (never learned)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Lessons a day
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Lessons truly successful
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\emph{oracle} 1.7B & 28 $\rightarrow$ 35 & 11 $\rightarrow$ 6 & 32 $\rightarrow$ 10 & 5.3 & 100\% \\
+\emph{sense v3}, 1.7B & 25 $\rightarrow$ 2 & 11 $\rightarrow$ 3 & 33 $\rightarrow$ 8 & 2.6 & 20\% \\
+\emph{oracle} 0.6B & 32 $\rightarrow$ 32 & 5 $\rightarrow$ 5 & 32 $\rightarrow$ 12 & 5.2 & 100\% \\
+\emph{sense v3}, 0.6B & 35 $\rightarrow$ 35 & 5 $\rightarrow$ 5 & 31 $\rightarrow$ 17 & 2.4 & 20\% \\
+\end{longtable}
+}
+
+Share of exam tasks fully done, day 0 $\rightarrow$ day 30, mean of 3 seeds. Exams are small: one airline task is 5 points, one retail or telecom task 2.5, so moves under about 10 points are within noise. Exam conversations that broke, for example a loop past the length limit, are left out; counting them as failures would lower the collapsed lives further. The 0.6B never moved on retail: every exam of every 0.6B life scored exactly 5\%, the same two tasks each time.

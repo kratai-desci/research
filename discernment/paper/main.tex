@@ -1,0 +1,42 @@
+% Learning through Discernment. Compile with pdflatex + bibtex (e.g. latexmk -pdf main.tex), or on Overleaf.
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs,longtable,array,calc}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\usepackage{fvextra}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\fvset{fontsize=\small}
+\RecustomVerbatimEnvironment{verbatim}{Verbatim}{breaklines=true,fontsize=\small,frame=single}
+\setlength{\emergencystretch}{3em}
+
+\title{Learning through Discernment: when a small language model learns from user feedback on the job, and when it decays}
+\author{Author names to be added}
+\date{Draft, November 2026}
+
+\begin{document}
+\maketitle
+\input{sections/abstract}
+\input{sections/1-introduction}
+\input{sections/2-related-work}
+\input{sections/3-creature}
+\input{sections/4-setup}
+\input{sections/5-webshop}
+\input{sections/6-tau2}
+\input{sections/7-discussion}
+\input{sections/8-limitations}
+\input{sections/9-conclusion}
+
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+
+\appendix
+\input{sections/appendix-a-settings}
+\input{sections/appendix-b-statistics}
+\end{document}

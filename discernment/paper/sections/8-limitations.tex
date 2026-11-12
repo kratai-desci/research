@@ -1,0 +1,15 @@
+\section{Limitations}
+
+\begin{itemize}
+\tightlist
+\item
+  Small models only (0.6B and 1.7B); larger models may judge themselves better.
+\item
+  Simulated users throughout (our own on WebShop, Gemini on $\tau^2$-bench); real users may give more or fewer clear verdicts.
+\item
+  3-5 seeds and small exams (one $\tau^2$-bench airline task is 5 points).
+\item
+  $\tau^2$-bench run with Gemini as customer and grader, not the published GPT simulator; scores are comparable, not identical.
+\item
+  No fix for forgetting or for the late fade was tested. The judges are simplified stand-ins for published methods, not their original implementations. We designed the WebShop user, and the sense's live test uses its reactions.
+\end{itemize}

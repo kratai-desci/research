@@ -1,0 +1,30 @@
+\section{Introduction}
+
+The introduction argues that on-device models need a way to learn on the job, that the hard part is deciding what to learn from, and that we measure this over long lives rather than single updates.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Motivation:} small models on phones and devices meet new tasks after release; retraining in the cloud is costly and slow. A model that improves from its own daily work would close that gap.
+\item
+  \textbf{The core problem:} learning on the job needs a judge of which episodes were good. Without a true outcome, the options are the model's own judgment or the user's reaction, and both can be wrong.
+\item
+  \textbf{The gap:} most work measures one round of improvement on a fixed benchmark. Little measures what happens over weeks of nightly updates, where small errors in the judge compound.
+\item
+  \textbf{Our approach:} a ``creature'' that works by day and sleeps on its lessons at night, run for 14 days to a year under different judges, including a separate frozen model, the feedback sense, that reads the user's reaction. We call what it must provide discernment: telling an informed, clear verdict on the result from a polite, vague or uninformed reaction. The other judges are simplified versions of published approaches, compared with it under the same model, tasks and training budget.
+\item
+  \textbf{Contributions:}
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    A long-horizon test of nightly self-training for small models, on WebShop and $\tau^2$-bench, with an oracle as the upper bound.
+  \item
+    Evidence that learning from the model's own judgment decays, and that what decides a life is the share of failed attempts among its lessons, not their number ($\rho$ = -0.81 across 97 lives): a few accepted give-ups can collapse a life.
+  \item
+    A feedback sense with discernment, which first asks whether the user gave a clear verdict. It removes most bad lessons and reaches near-oracle scores for two weeks, then fades for reasons we leave open.
+  \item
+    Evidence that learning from reactions fails when users cannot see the outcome, and that even correct but lopsided lessons cause forgetting.
+  \end{enumerate}
+\end{itemize}

@@ -1,0 +1,1 @@
+{"started": 1793777638.073339, "stage": "teacher done", "teach": {"rows": 110906, "done": 110906}, "updated": 1793788288.5849168, "check": {"rows": 110906, "teacher_labels": {"0": 5076, "20": 12552, "80": 34842, "100": 13262, "null": 45174}, "wildfb_side_agreement": 0.809, "wildfb_teacher_unclear": 0.491, "wildfeedback_side_agreement": 0.854}}

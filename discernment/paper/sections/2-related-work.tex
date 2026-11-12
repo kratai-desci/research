@@ -1,0 +1,21 @@
+\section{Related work}
+
+We place the work where continual learning, learning from feedback and self-training meet. References to collect: {[}to do{]}.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Continual learning and forgetting:} replay, regularisation (for example EWC) and parameter-efficient adapters such as LoRA; most studies use labelled task streams, not unlabelled daily work.
+\item
+  \textbf{Learning from human feedback:} RLHF and DPO learn from explicit preference labels collected offline; we learn from implicit reactions online.
+\item
+  \textbf{Self-training and self-reward:} models that judge or reward their own outputs; known to drift and to reward-hack, which our self-judging lives reproduce.
+\item
+  \textbf{Learning from user reactions:} work on implicit feedback in dialogue, and MemoryBench (learning from user feedback, ICML 2026).
+\item
+  \textbf{Agent benchmarks with simulated users:} $\tau$-bench and $\tau^2$-bench, WebShop; the gap between what a user sees and the true outcome.
+\item
+  \textbf{To write: why no direct comparison with published results.} The published methods behind our judges (STaR, self-rewarding models, Reflexion, learning from implicit feedback) were tested over one round of improvement, not over weeks of nightly updates. No long-life results exist to compare against, so we run simplified versions in one shared loop; say this is a deliberate control, not a shortcut.
+\item
+  \textbf{To write: the two ``sleep'' papers} (Language Models Need Sleep, arXiv 2606.03979; Do Language Models Need Sleep?, CMU/UMD): they study how memories are consolidated, given the lessons; we study who decides what the lessons are.
+\end{itemize}
