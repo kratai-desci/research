@@ -2,21 +2,24 @@
 
 We ran five experiments on two benchmarks, each with an \emph{oracle} condition as the upper bound and several seeds per condition (Table~\ref{tab:1}).
 
+\textbf{Why small models.} Learning on the job matters most where a model lives with its user: on a phone, a laptop or a local server, where the user's reactions need never leave the device. Models there are small, so we study Qwen3 at 0.6B (all experiments) and 1.7B (Experiment 5). The whole loop fits on one 24 GB GPU: the sense is itself a 0.6B model served beside the creature, and a night's training on WebShop takes minutes (see Compute below). Small models also leave room to improve (the 0.6B starts at 13 of 100 on WebShop), and their low cost let us run 127 lives, with three to five seeds for most conditions. Whether larger models, which may judge themselves better, decay less when they are the judge is left open (Section 8).
+
 \textbf{Benchmarks.} WebShop \cite{yao2022webshop} (Experiments 1-4) is a simulated online shop with 1.18 million real products and 12,087 shopping requests written by crowd workers. The creature reads a request, searches, browses and buys; an attempt ends with a purchase or after 15 steps. The reward, 0 to 1, scores how well the bought product matches the request on its type, attributes, options and price \cite{yao2022webshop}. $\tau^2$-bench \cite{barres2026tau2} (Experiment 5), which extends $\tau$-bench \cite{yao2025taubench}, is a customer-service benchmark: the agent talks with a simulated customer and calls the domain's tools to change bookings, orders or phone plans under a written policy. Success is judged from the final state of the database. In telecom both sides act: the customer also uses tools on their own phone, as the agent directs \cite{barres2026tau2}. We used the train and test splits published in $\tau^2$-bench's repository and its airline, retail and telecom domains, with Gemini 3 Flash as the customer and as $\tau^2$-bench's graders in place of the published GPT models. Scores are therefore comparable to published ones, not identical.
 
-\textbf{Simulated users.} We wrote WebShop's simulated user. In Experiments 1 and 2 it reacts plainly to the outcome: it stays silent 20\% of the time and otherwise says one fixed kind of sentence per outcome (no purchase, wrong kind of product, close but missing an option, perfect). From Experiment 3 on it reacts as people do: its behaviour is drawn from a mix tied to the outcome and to a persona (clear thanks, complaints, polite give-ups, vague replies, moving on without a word), and Gemini words each reaction (Table~\ref{tab:A2}; prompt in Appendix A). Because we designed this user, results that depend on it carry that design, and the sense's live test (5.4) uses its reactions. Two things limit the risk: the sense was never trained on shopping reactions, and Section 6 tests it against a simulated customer we did not design ($\tau^2$-bench's).
+\textbf{Simulated users.} We wrote WebShop's simulated user. In Experiments 1 and 2 it reacts plainly to the outcome: it stays silent 20\% of the time and otherwise says one fixed kind of sentence per outcome (no purchase, wrong kind of product, close but not quite right, perfect). From Experiment 3 on it reacts as people do: its behaviour is drawn from a mix tied to the outcome and to a persona (clear thanks, complaints, polite give-ups, vague replies, moving on without a word), and Gemini words each reaction (Table~\ref{tab:A2}; prompt in Appendix A). Because we designed this user, results that depend on it carry that design, and the sense's live test (5.4) uses its reactions. Two things limit the risk: the sense was never trained on shopping reactions, and Section 6 tests it against a simulated customer we did not design ($\tau^2$-bench's).
 
-\textbf{Protocol.} The first 100 of WebShop's synthetic goals are held out from practice; the exam uses 50 of them, plus 13 written by people, every morning. With the \emph{oracle} as judge, an attempt with reward 0.5 or more becomes a lesson; we call an attempt below 0.5 a failure throughout. An attempt judged bad by any judge other than the \emph{oracle} gets one retry, with the user's comment and the creature's own lesson as a hint (Appendix A); a successful retry becomes a lesson (without the hint) and a preference pair (the retry over the failed attempt). $\tau^2$-bench has no retry: the customer cannot be asked to react twice.
+\textbf{Protocol.} The first 100 of WebShop's synthetic goals are held out from practice; the exam uses 50 of them, plus 13 written by people, every morning. With the \emph{oracle} as judge, an attempt with reward 0.5 or more becomes a lesson; we call an attempt below 0.5 a failure throughout. An attempt judged bad by any judge other than the \emph{oracle} gets one retry, with the user's comment and the creature's own lesson as a hint (Appendix A); a successful retry becomes a lesson (without the hint) and a preference pair (the retry over the failed attempt). On $\tau^2$-bench the creature practises 30 conversations a day on the airline and retail training tasks; the exam, on day 0 and every third day after, uses the airline (20) and retail (40) test tasks and telecom (40), a domain it never practises. $\tau^2$-bench has no retry: the customer cannot be asked to react twice.
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1274}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2293}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1847}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2293}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2293}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1100}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2700}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1700}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2400}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2100}}@{}}
 \caption{The experiments.}\label{tab:1}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
+Exp.
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Question
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
@@ -30,6 +33,7 @@ Seeds $\times$ days
 \endfirsthead
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
+Exp.
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Question
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
@@ -43,13 +47,15 @@ Seeds $\times$ days
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-Experiment 1 & Who should decide what is learned? Does the decline pass with time, or depend on the adapter? & WebShop, 0.6B & \emph{oracle}, \emph{self}, \emph{both}, \emph{stated verdict}, \emph{none}; \emph{both} over a year; \emph{both} with four adapter designs & 5 $\times$ 14 (pilot 1 $\times$ 6); 5 $\times$ 365; 5 $\times$ 14 \\
-Experiment 2 & Does a separate, frozen judge help? & WebShop, 0.6B & \emph{oracle}, \emph{both}, \emph{sense v2} & 5 $\times$ 14 \\
-Experiment 3 & Does it survive realistic users? & WebShop, 0.6B, realistic user & \emph{oracle}, \emph{both}, \emph{sense v2}; then the same with lessons counted once & 5 $\times$ 14, twice \\
-Experiment 4 & Does waiting for a clear verdict help? & WebShop, 0.6B, realistic user & \emph{oracle}, \emph{both}, \emph{sense v3} & 5 $\times$ 60 \\
-Experiment 5 & What if the user cannot see the outcome? & $\tau^2$-bench, 0.6B and 1.7B & \emph{oracle}, \emph{sense v3} & 3 $\times$ 30 per size \\
+1 & Who should decide what is learned? & WebShop, 0.6B & \emph{oracle}, \emph{self}, \emph{both}, \emph{stated verdict}, \emph{none} & $5 \times 14$ (pilot $1 \times 6$) \\ \addlinespace
+1, year & Does the decline pass with time? & WebShop, 0.6B & \emph{both}, \emph{oracle} & $5 \times 365$ (\emph{oracle} $1 \times 365$) \\ \addlinespace
+1, adapters & Does it depend on the adapter? & WebShop, 0.6B & \emph{both} with four adapter designs & $5 \times 14$ each \\ \addlinespace
+2 & Does a separate, frozen judge help? & WebShop, 0.6B & \emph{oracle}, \emph{both}, \emph{sense v2} & $5 \times 14$ \\ \addlinespace
+3 & Does it survive realistic users? & WebShop, 0.6B, realistic user & \emph{oracle}, \emph{both}, \emph{sense v2}; then the same with each lesson counted once in sleep and sleep only after 5 new lessons & $5 \times 14$, twice \\ \addlinespace
+4 & Does waiting for a clear verdict help? & WebShop, 0.6B, realistic user & \emph{oracle}, \emph{both}, \emph{sense v3}; each lesson counted once in sleep & $5 \times 60$ (planned as 14, then extended) \\ \addlinespace
+5 & What if the user cannot see the outcome? & $\tau^2$-bench, 0.6B and 1.7B & \emph{oracle}, \emph{sense v3} & $3 \times 30$ per size \\
 \end{longtable}
 
-\textbf{Measures.} The exam score over days, as the mean of seeds with the lowest and highest life; the number of lessons a day; the share of lessons whose attempt had truly succeeded; and, for the sense, its accuracy on a fixed set of recorded reactions. Statistics treat each life as one sample; two groups are compared with a Welch t-test and a Mann-Whitney U test, and the primary claims are Holm-corrected \cite{holm1979}. Appendix B lists every test, and src/stats.py in the repository recomputes them.
+\textbf{Measures.} The exam score over days, as the mean of seeds with the lowest and highest life. On WebShop it is the mean reward, 0 to 100, on the 50 synthetic tasks (the 13 written by people were also run each morning but are not used in the results); on $\tau^2$-bench it is the share of tasks fully done, per domain. We also report the number of lessons a day; the share of lessons whose attempt had truly succeeded; and, for the sense, its accuracy on 300 fixed recorded reactions. Statistics treat each life as one sample; two groups are compared with a Welch t-test and a Mann-Whitney U test, and the primary claims are Holm-corrected \cite{holm1979}. Appendix B lists every test, and src/stats.py in the repository recomputes them.
 
-\textbf{Compute.} Lives ran on single NVIDIA L4 GPUs on Google Cloud, one or two lives per GPU. In all, 127 lives ran for about 1,300 hours and made about 490,000 attempts, practice and exams together. On WebShop a night's training took 1-4 minutes (median 2, the 0.6B \emph{oracle} life of Experiment 4). Building the two senses, teacher labels and student training, took about 7 GPU-hours.
+\textbf{Compute.} Lives ran on single NVIDIA L4 GPUs on Google Cloud, one or two lives per GPU. In all, 127 lives ran for about 1,300 hours and made about 351,000 attempts: practice, retries and exam tasks together. On WebShop a night's training took 1-4 minutes (median 2, the 0.6B \emph{oracle} life of Experiment 4). Building the two senses, teacher labels and student training, took about 7 GPU-hours.

@@ -7,6 +7,8 @@ The introduction argues that on-device models need a way to learn on the job, th
 \item
   \textbf{Motivation:} small models on phones and devices meet new tasks after release; retraining in the cloud is costly and slow. A model that improves from its own daily work would close that gap.
 \item
+  \textbf{To write: why small models.} Turn the size into the point: learning on the job matters most where the model lives with its user (phone, laptop, local server), so the user's reactions never leave the device, and models there are small. We therefore study 0.6B and 1.7B, and the whole loop (creature, sense, nightly training) fits on one 24 GB GPU. Small models also have the most room to improve, and their low cost allowed 127 lives with 3-5 seeds for most conditions. Larger models stay future work (Section 4, ``Why small models''; Section 8).
+\item
   \textbf{The core problem:} learning on the job needs a judge of which episodes were good. Without a true outcome, the options are the model's own judgment or the user's reaction, and both can be wrong.
 \item
   \textbf{The gap:} most work measures one round of improvement on a fixed benchmark. Little measures what happens over weeks of nightly updates, where small errors in the judge compound.

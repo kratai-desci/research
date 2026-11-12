@@ -11,6 +11,8 @@ Three conditions decide whether learning from users works: the judge keeps faile
 \item
   \textbf{Replay follows success.} Lessons come from what the model already does well, so replay narrows its skills; balancing by domain or task type is the obvious fix.
 \item
+  \textbf{To write: what model size may change.} What decided a life was the share of failed attempts among its lessons, which is set by the judge, not the learner, so it should hold for larger models too. The 1.7B did not escape it on $\tau^2$-bench: all three 1.7B \emph{sense v3} lives ended near zero (6). What may change with size is self-judging, since a larger model may judge itself better; that stays open (Section 8). For local models, the judge must be small too, as the sense is.
+\item
   \textbf{Practical advice:} ask users for a verdict only when they can check the result; mix in verified outcomes where available; balance replay across skills.
 \item
   \textbf{To write: future work.} A fix for forgetting (replay balanced by domain or task type, tested on $\tau^2$-bench); an explanation of the late fade (an \emph{oracle} limited to about 2 lessons a day); a test of the sense on real users' reactions; larger models.

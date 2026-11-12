@@ -1,3 +1,6 @@
+% NOTE (to write): when the abstract is revised, keep the small-model choice as a strength, in one clause:
+% learning on the job matters most for local / on-device models, so we study the sizes that run there (0.6B, 1.7B),
+% and the whole loop (creature, sense, nightly training) fits on one 24 GB GPU. See Section 4, "Why small models".
 \begin{abstract}
 Small language models deployed on a device could keep improving by learning from their own work, but only if something decides which experiences are worth learning from. We study this in a ``creature'': a frozen Qwen3 model (0.6B or 1.7B) with a small LoRA adapter that works by day and, each night, trains on the episodes judged good, replaying recent lessons. Over lives of up to 60 days we compare judges modelled on published approaches: the model's own judgment (as in self-rewarding models), its reflection on the user's reaction, the user's stated verdict read without error, a separate frozen ``feedback sense'' model that reads the reaction, and an oracle that knows the true outcome (as in training on verified successes).
 
