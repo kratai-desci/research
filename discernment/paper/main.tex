@@ -40,6 +40,9 @@
 \bibliography{references}
 
 \appendix
+% Appendix tables and figures are numbered by appendix: A1, A2, ..., B1.
+\counterwithin{table}{section}\counterwithin{figure}{section}
+\renewcommand{\thetable}{\Alph{section}\arabic{table}}\renewcommand{\thefigure}{\Alph{section}\arabic{figure}}
 \input{sections/appendix-a-settings}
 \input{sections/appendix-b-statistics}
 \end{document}
