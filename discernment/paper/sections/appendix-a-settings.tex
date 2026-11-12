@@ -1,8 +1,8 @@
 \section{Settings}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.6667}}@{}}
 \caption{Settings used in every experiment unless noted.}\label{tab:A1}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
@@ -36,8 +36,8 @@ Sense & Qwen3-0.6B + LoRA rank 16, alpha 32, all attention and MLP projections; 
 \end{longtable}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.4857}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5143}}@{}}
 \caption{The realistic user (Experiments 3 and 4). The outcome band sets the chance of each behaviour; a persona drawn at random (terse, chatty, picky, polite, easygoing, blunt) then scales it; Gemini 3 Flash words the reaction.}\label{tab:A2}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
@@ -65,9 +65,9 @@ exactly right & praise 40\%, accept 20\%, move on 20\%, silent 20\% \\
 \end{longtable}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2927}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2195}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.4878}}@{}}
 \caption{What the sense learned from. Reactions the teacher labelled; training used a balanced sample of them (47,800 for v2, 44,746 for v3).}\label{tab:A3}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
@@ -101,7 +101,7 @@ Written by the teacher & 4,728 & eight hard kinds $\times$ ten task types $\time
 Written by the teacher & 1,778 & warm thanks for the effort after a failure (v3 only) \\
 \end{longtable}
 
-\textbf{Prompts.} The exact text each model received; words in braces are filled in for each attempt. The code is in the repository (lab/agent.py, lab/creature.py, lab/user\_llm.py, lab/sense/\_\_init\_\_.py).
+\textbf{Prompts.} The exact text each model received; words in braces are filled in for each attempt. The code is in the repository (src/lab/agent.py, src/lab/creature.py, src/lab/user\_llm.py and src/lab/sense/).
 
 \emph{Agent, WebShop.} The system prompt; each turn the model also sees the current page, its clickable options and its earlier steps. On $\tau^2$-bench the agent used $\tau^2$-bench's own agent prompt and domain policy, unchanged.
 
@@ -158,7 +158,7 @@ What the user said: {the user's words, or "(nothing)"}
 Score:
 \end{verbatim}
 
-\emph{Feedback sense v3.} Two calls with the same message, ending ``Clear verdict:'' for the first question and ``Score:'' for the second. On $\tau^2$-bench the request is the customer's first message, the words their last one, and the next move ``left the session'' if the customer ended the conversation, else ``replied''. The teacher's labelling guides, about 80 lines each, are in the repository (lab/sense/guide.md for v2, lab/sense/guide3.md for v3).
+\emph{Feedback sense v3.} Two calls with the same message, ending ``Clear verdict:'' for the first question and ``Score:'' for the second. On $\tau^2$-bench the request is the customer's first message, the words their last one, and the next move ``left the session'' if the customer ended the conversation, else ``replied''. The teacher's labelling guides, about 80 lines each, are in the repository (src/lab/sense/guide.md for v2, src/lab/sense/guide3.md for v3).
 
 \begin{verbatim}
 You read how a user reacted to an AI assistant. Is the reaction a clear verdict on the assistant's result? Thanking the effort rather than the result, sarcasm, hedging, settling, silence, moving on without a word, or anything ambiguous is not clear. Answer yes or no.
@@ -180,8 +180,8 @@ Write only your next message to the assistant, in your own words, one or two sho
 \end{verbatim}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.6667}}@{}}
 \caption{The realistic user's instruction for each behaviour (``What you do now''). Personas: terse (very short, few words, no pleasantries); chatty (friendly and talkative, a couple of sentences); picky (precise and demanding); polite (very polite, softens complaints); easygoing (relaxed and easily satisfied); blunt (blunt, casual, may use slang).}\label{tab:A4}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright

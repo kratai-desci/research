@@ -21,7 +21,7 @@ uv run --with matplotlib python src/figures.py    # the data figures -> paper/fi
 uv run --with matplotlib python src/diagrams.py   # Fig. 1 and the sense diagram -> paper/figures/
 ```
 
-Compile the paper with `latexmk -pdf main.tex` in `paper/` (pdflatex + bibtex), or upload `paper/` to Overleaf.
+Compile the paper in `paper/` with `tectonic -X compile main.tex` or `latexmk -pdf main.tex` (pdflatex + bibtex), or upload `paper/` to Overleaf.
 
 ## Data (`data/`)
 

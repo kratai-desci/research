@@ -52,6 +52,7 @@ def curves(exp, splits=("probe",), domain=None):
 
 
 def band_plot(ax, series, styles, label_names=None):
+    ends = []
     for j, (color, lw, band, dash) in styles.items():
         if j not in series:
             continue
@@ -60,9 +61,12 @@ def band_plot(ax, series, styles, label_names=None):
         if band:
             ax.fill_between(days, [min(series[j][d]) for d in days], [max(series[j][d]) for d in days], color=color, alpha=0.13, lw=0)
         ax.plot(days, mean, color=color, lw=lw, ls=dash, marker="o", ms=2.2)
-        name = (label_names or {}).get(j, j)
-        ax.annotate(f"{name} {mean[-1]:.0f}", (days[-1], mean[-1]), xytext=(4, 0), textcoords="offset points",
-                    va="center", color=color, fontsize=8)
+        ends.append([mean[-1], days[-1], f"{(label_names or {}).get(j, j)} {mean[-1]:.0f}", color])
+    ends.sort()
+    for k in range(1, len(ends)):  # keep end labels at least 5 points apart
+        ends[k][0] = max(ends[k][0], ends[k - 1][0] + 5)
+    for y, x, text, color in ends:
+        ax.annotate(text, (x, y), xytext=(4, 0), textcoords="offset points", va="center", color=color, fontsize=8)
     ax.set_ylim(0, 100)
     ax.set_ylabel("WebShop exam (0-100)")
     ax.set_xlabel("day")

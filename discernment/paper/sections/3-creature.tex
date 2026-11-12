@@ -2,7 +2,7 @@
 
 We call the system a creature: a small language-model agent that works by day and is fine-tuned at night (its ``sleep'') on lessons chosen by a judge. These names label an ordinary continual fine-tuning loop; they make no claim about biology. Its base model never changes; everything it learns lives in a small LoRA adapter, trained each night on the day's lessons (Fig.~\ref{fig:1}).
 
-\begin{figure}[t]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=0.9\linewidth]{figures/fig1_creature}
 \caption{The creature's parts (top), its daily cycle (middle), the feedback sense (bottom) and how the sense was built, once, before any life (dashed); the judge, highlighted, is what the experiments vary}
@@ -78,7 +78,7 @@ A yes makes the attempt a lesson; an 80 counts half, since ``fine, next'' says l
 
 \emph{Student and calibration.} The student learns to match the teacher's probabilities (KL divergence) on 47,800 reactions, balanced so that no task type or answer dominates, for one epoch (learning rate 1e-4, batch 16, under an hour on one GPU). In half the training rows the request is hidden, so the sense must rely on the reaction itself. After training, a temperature is fitted on 2,000 held-out reactions, and a confidence threshold is chosen as the lowest that keeps false accepts (a no read as a yes) at or under 3\%; below it, the sense answers null. This is sense v2 (an earlier v1, trained on one dataset's own labels, was replaced before the experiments reported here). Its threshold is 0.65. On the held-out reactions it gave a verdict on 30\% of them, agreed with the teacher's side on 92\% of those, and read 2.9\% of the teacher's noes as a yes. Trained nine more times, each time without one task type and tested on it, it read 0.5-8.1\% of the unseen type's noes as a yes (Fig.~\ref{fig:8}b). Four types stayed under the 3\% target and three barely passed it; writing (6.9\%) and booking and ordering (8.1\%), the type closest to shopping, did not. A new kind of task can loosen the sense.
 
-\begin{figure}[t]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=1.0\linewidth]{figures/fig8_teacher_and_unseen_tasks}
 \caption{(a) the v3 teacher's labels for the 6,506 reactions it wrote (sense3 build); (b) nine sense v2 builds, each trained without one task type and tested on it (sense2 leave-one-task-out runs)}
@@ -87,7 +87,7 @@ A yes makes the attempt a lesson; an 80 counts half, since ``fine, next'' says l
 
 \emph{Sense v3.} It replaces v2's single question with two, because Experiment 3 showed where one question fails: warm thanks for the effort after a failure reads like approval (5.3). First, is the reaction a clear verdict on the result at all? Thanks for trying, sarcasm, hedging, settling, silence and moving on without a word are not. Only if it is: which score? The teacher answered both, under a revised guide, for 63,248 reactions: up to 2,000 for each pairing of task type and v2 answer, the eight written kinds again, and 1,778 new reactions of a ninth kind, warm thanks for the effort after a failure. It judged 41\% of them not clear. One LoRA learns both answers from 44,746 of them, the score weighted by how clear the teacher found the reaction. Its two thresholds, 0.80 for a clear verdict and 0.70 for the score, were chosen on 2,000 held-out reactions as the one that keeps false accepts, now also counting an unclear reaction read as a yes, at 3\% while keeping the most real yeses. On those reactions it kept 44\% of the teacher's yeses and agreed with the teacher's side on 95\% of the verdicts it gave. In use, a reaction must pass both gates before the creature learns from it (Fig.~\ref{fig:9}). The first gate changes how some common reactions are read (Table~\ref{tab:4}): moving on to the next request without a word was an 80, a half-weight yes, for v2, and thanks for trying could pass as approval; for v3, neither is a clear verdict.
 
-\begin{figure}[t]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=1.0\linewidth]{figures/fig9_sense_decision}
 \caption{How the two versions of the sense decide; thresholds from calibration (3.2), outcomes as in Table~\ref{tab:4}}
@@ -95,11 +95,11 @@ A yes makes the attempt a lesson; an 80 counts half, since ``fine, next'' says l
 \end{figure}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2857}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2222}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.0635}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2857}}@{}}
 \caption{How v2 and v3 read the same reactions, and what the creature does. Examples from the two labelling guides; v3 first asks whether the reaction is a clear verdict, and scores it only if it is.}\label{tab:4}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
