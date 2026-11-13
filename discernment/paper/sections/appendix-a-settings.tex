@@ -32,7 +32,7 @@ Objective & SFT on the agent's replies, plus DPO ($\beta$ = 0.1) on preference p
 Replay & the 150 most recent lessons and pairs \\
 Lesson weight & each step a lesson of its own (Experiments 1-3); spread across its steps (Experiment 3 variant, 4, 5) \\
 \emph{Oracle} & reward 0.5 or more (WebShop); reward 1 ($\tau^2$-bench) \\
-Sense & Qwen3-0.6B + LoRA rank 16, alpha 32, all attention and MLP projections; teacher Qwen3-32B (AWQ); one epoch, learning rate 1e-4, batch 16, KL to the teacher's probabilities, false accepts at most 3\% on 2,000 held-out reactions; v2: temperature 1.0, threshold 0.65, 47,800 training reactions; v3: thresholds 0.80 (clear verdict) and 0.70 (score), temperatures 1.0 and 1.05, 44,746 training reactions; a score of 80 counts at half weight \\
+Sense & v1 (Experiment 2): the same model and LoRA trained on 45,514 WildFB reactions with WildFB's labels, threshold 0.70; v2 and v3: Qwen3-0.6B + LoRA rank 16, alpha 32, all attention and MLP projections; teacher Qwen3-32B (AWQ); one epoch, learning rate 1e-4, batch 16, KL to the teacher's probabilities, false accepts at most 3\% on 2,000 held-out reactions; v2: temperature 1.0, threshold 0.65, 47,800 training reactions; v3: thresholds 0.80 (clear verdict) and 0.70 (score), temperatures 1.0 and 1.05, 44,746 training reactions; a score of 80 counts at half weight \\
 \end{longtable}
 
 \begin{longtable}[]{@{}

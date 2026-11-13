@@ -71,10 +71,10 @@ compare("Exp 1: oracle above self on day 14", "oracle", group(e1, "oracle", 14),
 compare("Exp 1: oracle above both on day 14", "oracle", group(e1, "oracle", 14), "both", group(e1, "both", 14), primary=True)
 compare("Exp 1: self against no learning on day 14", "self", group(e1, "self", 14), "none", group(e1, "none", 14))
 
-# Experiment 2: sense v2, day 14
+# Experiment 2: sense v1, day 14
 e2 = lives("feedback-sense-14d")
-compare("Exp 2: oracle against sense v2 on day 14", "oracle", group(e2, "oracle", 14), "sense", group(e2, "sense", 14))
-compare("Exp 2: sense v2 against both on day 14", "sense", group(e2, "sense", 14), "both", group(e2, "both", 14))
+compare("Exp 2: oracle against sense v1 on day 14", "oracle", group(e2, "oracle", 14), "sense", group(e2, "sense", 14))
+compare("Exp 2: sense v1 against both on day 14", "sense", group(e2, "sense", 14), "both", group(e2, "both", 14))
 
 # Experiment 3: realistic users
 e3 = lives("realistic-user-14d")

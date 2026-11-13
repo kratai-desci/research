@@ -131,12 +131,12 @@ day14 = {e["life"]: float(e["mean_score"]) for e in EXAMS if e["life"] in life a
 def kind(l):
     j = l["judge"]
     if j == "sense":
-        return "sense v3" if l["lab_experiment"] == "clear-verdict-14d" else "sense v2"
+        return {"clear-verdict-14d": "sense v3", "feedback-sense-14d": "sense v1"}.get(l["lab_experiment"], "sense v2")
     return j if j in ("oracle", "stated verdict") else "self-judging"
 
 
 fig, ax = plt.subplots(figsize=(6.4, 3.4))
-colors = {"self-judging": LIGHT, "stated verdict": PINK, "sense v2": "#24467a", "sense v3": GREEN, "oracle": BLUE}
+colors = {"self-judging": LIGHT, "stated verdict": PINK, "sense v1": "#8a6fbf", "sense v2": "#24467a", "sense v3": GREEN, "oracle": BLUE}
 for k, c in colors.items():
     pts = [(100 * les[n][1] / les[n][0], day14[n]) for n, l in life.items() if kind(l) == k and les[n][0] > 0 and n in day14]
     ax.scatter([p[0] for p in pts], [p[1] for p in pts], s=22, color=c, alpha=0.8, label=k.replace("stated verdict", "stated"), lw=0)

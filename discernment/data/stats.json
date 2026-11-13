@@ -29,7 +29,7 @@
   "primary": false
  },
  {
-  "claim": "Exp 2: oracle against sense v2 on day 14",
+  "claim": "Exp 2: oracle against sense v1 on day 14",
   "test": "Welch t / Mann-Whitney U",
   "groups": "oracle 62.0 \u00b1 1.0 (n=5) vs sense 39.7 \u00b1 21.3 (n=5)",
   "statistic": "t = 2.34",
@@ -38,7 +38,7 @@
   "primary": false
  },
  {
-  "claim": "Exp 2: sense v2 against both on day 14",
+  "claim": "Exp 2: sense v1 against both on day 14",
   "test": "Welch t / Mann-Whitney U",
   "groups": "sense 39.7 \u00b1 21.3 (n=5) vs both 16.1 \u00b1 11.1 (n=5)",
   "statistic": "t = 2.19",

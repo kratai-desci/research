@@ -34,9 +34,9 @@ It never recovered. The \emph{both} lives peaked around day 6 (52, lives 42-58),
 
 Neither time nor the adapter explains the decline. What the judge lets in does, and the rest of this section follows that thread.
 
-\subsection{A separate, frozen judge: sense v2}
+\subsection{A separate, frozen judge: sense v1}
 
-Experiment 2 gave the creature a judge it cannot change: the feedback sense (v2), a frozen Qwen3-0.6B with its own LoRA that reads the user's reaction to each attempt. It ran against the \emph{oracle} and \emph{both}, 5 seeds, 14 days, with the same user as Experiment 1.
+Experiment 2 gave the creature a judge it cannot change: the feedback sense in its first build (v1; 3.2), a frozen Qwen3-0.6B with its own LoRA that reads the user's reaction to each attempt. It ran against the \emph{oracle} and \emph{both}, 5 seeds, 14 days, with the same user as Experiment 1.
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}llll@{}}
@@ -47,12 +47,12 @@ Judge & Day 0 & Day 7 & Day 14 \\
 \bottomrule\noalign{}
 \endlastfoot
 \emph{oracle} & 11 & 62 (61-63) & 62 (61-63) \\
-\emph{sense v2} & 13 & 19 (7-43) & 40 (6-59) \\
+\emph{sense v1} & 13 & 19 (7-43) & 40 (6-59) \\
 \emph{both} & 13 & 47 (36-57) & 16 (3-32) \\
 \end{longtable}
 }
 
-\emph{Sense v2} learned more slowly but did not fall back. It also learned from very little: 0-7 lessons per life in 14 days, against 247-274 for the \emph{oracle}. By day 14, four of its five lives stood at 34-59 and were still rising, while every \emph{both} life had fallen from its day-7 peak. On day 14 \emph{sense v2} (39.7 $\pm$ 21.3) was ahead of \emph{both} (16.1 $\pm$ 11.1) and behind the \emph{oracle} (62.0 $\pm$ 1.0). With 5 seeds and one \emph{sense v2} life at 6, the t-test finds neither gap significant (p = 0.07 and 0.08); a rank test, less swayed by that one life, puts the gap to the \emph{oracle} at p = 0.01 (Appendix B). Sense v2's own accuracy stayed fixed, as intended: on 300 recorded reactions it read 82.6\% correctly on day 0 and 82.8\% on day 14. A variant that read the sense through the creature's learning brain was planned, but its lives scored 0 from day 0 because of a setup fault and were stopped; it is not reported.
+\emph{Sense v1} learned more slowly but did not fall back. It also learned from very little: 0-7 lessons per life in 14 days, against 247-274 for the \emph{oracle}. By day 14, four of its five lives stood at 34-59 and were still rising, while every \emph{both} life had fallen from its day-7 peak. On day 14 \emph{sense v1} (39.7 $\pm$ 21.3) was ahead of \emph{both} (16.1 $\pm$ 11.1) and behind the \emph{oracle} (62.0 $\pm$ 1.0). With 5 seeds and one \emph{sense v1} life at 6, the t-test finds neither gap significant (p = 0.07 and 0.08); a rank test, less swayed by that one life, puts the gap to the \emph{oracle} at p = 0.01 (Appendix B). Sense v1's own accuracy stayed fixed, as intended: on 300 recorded reactions it read 82.6\% correctly on day 0 and 82.8\% on day 14. A variant that read the sense through the creature's learning brain was planned, but its lives scored 0 from day 0 because of a setup fault and were stopped; it is not reported.
 
 \subsection{Realistic users break sense v2}
 
@@ -109,8 +109,8 @@ Across the WebShop experiments (1-4, including the adapter designs of 5.1), what
 \label{fig:6}
 \end{figure}
 
-Across 97 lives, the share of failed attempts among a life's lessons in its first 14 days predicted its day-14 exam closely (Spearman $\rho$ = -0.81, p \textless{} 0.001). The \emph{oracle} lives, all at 0\% failures and about 63, do not drive this alone: among the 72 lives not judged by the \emph{oracle}, $\rho$ = -0.61 (p \textless{} 0.001). Every \emph{oracle} life learned only from successes and ended at 60-63. Self-judging lives let in 17-47\% failures and ended anywhere from 0 to 54. The sense lives, v2 and v3 together, split cleanly: the ten that let in under 10\% failures ended at 34-60; the nine that let in 45\% or more ended at 0-52, six of them at 0-3.
+Across 97 lives, the share of failed attempts among a life's lessons in its first 14 days predicted its day-14 exam closely (Spearman $\rho$ = -0.81, p \textless{} 0.001). The \emph{oracle} lives, all at 0\% failures and about 63, do not drive this alone: among the 72 lives not judged by the \emph{oracle}, $\rho$ = -0.61 (p \textless{} 0.001). Every \emph{oracle} life learned only from successes and ended at 60-63. Self-judging lives let in 17-47\% failures and ended anywhere from 0 to 54. The sense lives, all three versions together, split cleanly: the ten that let in under 10\% failures ended at 34-60; the nine that let in 45\% or more ended at 0-52, six of them at 0-3.
 
-The number of lessons mattered less than we expected. In Experiment 2 the \emph{sense v2} lives learned from only 0-7 lessons in 14 days and still reached 34-59; in Experiment 1, the \emph{stated verdict} learned from 0-7, none of them failures, and reached up to 61. A few correct lessons are enough to teach the shop's basic routine, and a few wrong ones are enough to undo it.
+The number of lessons mattered less than we expected. In Experiment 2 the \emph{sense v1} lives learned from only 0-7 lessons in 14 days and still reached 34-59; in Experiment 1, the \emph{stated verdict} learned from 0-7, none of them failures, and reached up to 61. A few correct lessons are enough to teach the shop's basic routine, and a few wrong ones are enough to undo it.
 
-This explains why a single bad night can end a sense life. A sense life learned from only 0-6 lessons on night 1, so one failed attempt could be most of its first night's training. Of the 20 sense lives in Experiments 2-4 (v2 in Experiments 2 and 3, v3 in Experiment 4), seven learned from a failed attempt on night 1, and six of those seven ended at 0-3 (Fisher exact test, p \textless{} 0.001). Of the thirteen without one, none ended below 28, except one that never learned anything at all (6).
+This explains why a single bad night can end a sense life. A sense life learned from only 0-6 lessons on night 1, so one failed attempt could be most of its first night's training. Of the 20 sense lives in Experiments 2-4 (v1 in Experiment 2, v2 in Experiment 3, v3 in Experiment 4), seven learned from a failed attempt on night 1, and six of those seven ended at 0-3 (Fisher exact test, p \textless{} 0.001). Of the thirteen without one, none ended below 28, except one that never learned anything at all (6).
