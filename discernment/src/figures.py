@@ -164,7 +164,6 @@ ax.legend(fontsize=8, frameon=False, loc="lower right")
 ax.set_title("Sense v3 stopped reading polite complaints and give-ups as success")
 save(fig, "fig3_sense_v2_v3")
 
-# Fig 8: (a) the teacher's reading of the reactions it wrote; (b) sense v2 on unseen task types
 gaps = json.loads((DATA / "sense" / "sense3_status.json").read_text())["check"]["gaps"]
 kinds = [("accepts", "plain acceptance", "yes"), ("builds_on", "builds on the result", "yes"), ("strong_reject", "firm rejection", "no"),
          ("not_my_style", "'not my style'", "no"), ("polite_unhappy", "politely unhappy", "no"), ("vague", "vague", "not clear"),
@@ -173,7 +172,8 @@ loto = {}
 for p in sorted((DATA / "sense").glob("sense2_train-no-*-status.json")):
     st = json.loads(p.read_text())
     loto[st["hold_out"]] = 100 * st["eval2"]["held_out_task"]["false_accept"]
-fig, (a1, a2) = plt.subplots(1, 2, figsize=(7.8, 3.6), gridspec_kw={"width_ratios": [1.15, 1]})
+# Fig 8a: the v3 teacher's reading of the reactions it wrote (shown with sense v3, 3.2)
+fig, a1 = plt.subplots(figsize=(5.2, 3.4))
 ys = list(range(len(kinds)))[::-1]
 for y, (k, name, _) in zip(ys, kinds):
     c = gaps[k]; n = sum(c.values())
@@ -182,9 +182,14 @@ for y, (k, name, _) in zip(ys, kinds):
     a1.text(102, y, f"{yes:.0f}% yes", va="center", fontsize=7.5, color=BLUE if yes >= 10 and k not in ("accepts", "builds_on") else DARK)
 a1.set_yticks(ys, [f"{n}  [{w}]" for _, n, w in kinds], fontsize=7.5)
 a1.set_xlim(0, 125); a1.set_xticks([0, 50, 100]); a1.set_xlabel("teacher's reading (%): yes / no / not clear")
-a1.set_title("(a) Teacher (Qwen3-32B) on reactions it wrote", fontsize=9)
 from matplotlib.patches import Patch
-a1.legend(handles=[Patch(color=BLUE, label="yes"), Patch(color=GREY, label="no"), Patch(color="#e3e3dc", label="not clear")], fontsize=7, frameon=False, ncol=3, loc="lower center", bbox_to_anchor=(0.45, -0.32))
+a1.legend(handles=[Patch(color=BLUE, label="yes"), Patch(color=GREY, label="no"), Patch(color="#e3e3dc", label="not clear")], fontsize=7, frameon=False, ncol=3, loc="lower center", bbox_to_anchor=(0.4, -0.34))
+a1.set_title("Even the teacher read half of polite complaints and sarcasm as a yes", loc="left", fontsize=9.5, fontweight="bold")
+fig.tight_layout()
+save(fig, "fig8a_teacher_written")
+
+# Fig 8b: sense v2 on task types it never saw (shown with sense v2, 3.2)
+fig, a2 = plt.subplots(figsize=(5.2, 3.0))
 items = sorted(loto.items(), key=lambda kv: kv[1])
 a2.barh(range(len(items)), [v for _, v in items], color=GREY)
 a2.set_yticks(range(len(items)), [k for k, _ in items], fontsize=7.5)
@@ -192,7 +197,6 @@ a2.axvline(3, color=DARK, ls=":", lw=1); a2.text(3, len(items) - 0.4, "3% target
 for i, (_, v) in enumerate(items):
     a2.text(v + 0.15, i, f"{v:.1f}%", va="center", fontsize=7.5)
 a2.set_xlim(0, 10); a2.set_xlabel("unseen type's noes read as a yes (%)")
-a2.set_title("(b) Sense v2, one task type left out", fontsize=9)
-fig.suptitle("Even the teacher read half of polite complaints and sarcasm as a yes", x=0.02, ha="left", fontsize=10, fontweight="bold")
-fig.tight_layout(w_pad=4)
-save(fig, "fig8_teacher_and_unseen_tasks")
+a2.set_title("Sense v2 on a task type it never saw", loc="left", fontsize=9.5, fontweight="bold")
+fig.tight_layout()
+save(fig, "fig8b_v2_unseen_tasks")
