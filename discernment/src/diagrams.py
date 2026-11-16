@@ -1,4 +1,4 @@
-"""Draw the paper's two diagrams (Fig 1: the creature; Fig 9: how the three versions of the sense decide) into paper/figures/.
+"""Draw the paper's two diagrams (Fig 1: the creature; Fig 9: how sense v3 decides) into paper/figures/.
 
   uv run --with matplotlib python src/diagrams.py [out dir]
 """
@@ -82,27 +82,19 @@ for i, (t, lines) in enumerate(build):
         arrow(ax, [(40 + 176 * i + 152, 661), (40 + 176 * (i + 1), 661)])
 save(fig, "fig1_creature")
 
-# Fig 9: how the three versions of the sense decide
-fig, ax = canvas(760, 520)
-ax.text(24, 28, "v1 and v2 ask which score; v3 first asks whether there is a verdict at all", fontsize=12, fontweight="bold", color=INK, va="center")
-rows = [(68, "Sense v1 (Experiment 2): learned WildFB's own labels", "null when it is less than 0.70 sure (a fixed threshold)"),
-        (198, "Sense v2 (Experiment 3): learned a teacher's labels", "null when it is less than 0.65 sure (calibrated)")]
-for y, title, rule in rows:
-    ax.text(24, y, title, fontsize=10.5, fontweight="bold", color=INK, va="center")
-    box(ax, 24, y + 14, 120, 76, "Reaction", ["request, next", "move, words"])
-    box(ax, 168, y + 14, 372, 76, "One question: which score?", ["100, 80, 20, 0 or null, in a single step", rule])
-    arrow(ax, [(144, y + 52), (168, y + 52)]); arrow(ax, [(540, y + 52), (564, y + 52)])
-ax.text(24, 328, "Sense v3 (Experiments 4 and 5): learned a teacher's two answers", fontsize=10.5, fontweight="bold", color=INK, va="center")
-box(ax, 24, 342, 120, 76, "Reaction", ["request, next", "move, words"])
-box(ax, 168, 342, 172, 76, "1  A clear verdict?", ["on the result, not the", "effort; at least 0.80 sure"], main=True)
-box(ax, 368, 342, 172, 76, "2  Which score?", ["100, 80, 20 or 0;", "at least 0.70 sure"])
-box(ax, 168, 450, 172, 44, "null: nothing learned")
-ax.text(356, 464, "stops here: thanks for trying, the next request with", fontsize=8.5, color=QUIET, va="center")
-ax.text(356, 480, "no comment, sarcasm, settling, silence (Table 2)", fontsize=8.5, color=QUIET, va="center")
-box(ax, 564, 82, 172, 336, "The creature then")
-for y, (a, b) in zip((190, 250, 310), (("yes (100, 80): a lesson", "80 at half weight"), ("no (20, 0): a retry", "on WebShop, with a hint"), ("null: nothing", ""))):
+# Fig 9: how sense v3 decides (v1 and v2 ask only the second question)
+fig, ax = canvas(760, 262)
+ax.text(24, 28, "Sense v3 asks two questions before the creature learns anything", fontsize=12, fontweight="bold", color=INK, va="center")
+box(ax, 24, 56, 120, 76, "Reaction", ["request, next", "move, words"])
+box(ax, 168, 56, 172, 76, "1  A clear verdict?", ["on the result, not the", "effort; at least 0.80 sure"], main=True)
+box(ax, 368, 56, 172, 76, "2  Which score?", ["100, 80, 20 or 0;", "at least 0.70 sure"])
+box(ax, 168, 168, 172, 44, "null: nothing learned")
+for k, line in enumerate(["stops here: thanks for trying,", "the next request with no comment,", "sarcasm, settling, silence (Table 2)"]):
+    ax.text(356, 174 + 16 * k, line, fontsize=8.5, color=QUIET, va="center")
+box(ax, 564, 56, 172, 180, "The creature then")
+for y, (a, b) in zip((100, 148, 196), (("yes (100, 80): a lesson", "80 at half weight"), ("no (20, 0): a retry", "on WebShop, with a hint"), ("null: nothing", ""))):
     ax.text(578, y, a, fontsize=9, color=INK, va="center"); ax.text(578, y + 16, b, fontsize=8.5, color=QUIET, va="center")
-for pts in ([(144, 380), (168, 380)], [(340, 380), (368, 380)], [(540, 380), (564, 380)], [(254, 418), (254, 450)]):
+for pts in ([(144, 94), (168, 94)], [(340, 94), (368, 94)], [(540, 94), (564, 94)], [(254, 132), (254, 168)]):
     arrow(ax, pts)
-ax.text(343, 370, "yes", fontsize=8, color=QUIET); ax.text(262, 436, "no", fontsize=8, color=QUIET)
+ax.text(343, 84, "yes", fontsize=8, color=QUIET); ax.text(262, 152, "no", fontsize=8, color=QUIET)
 save(fig, "fig9_sense_decision")

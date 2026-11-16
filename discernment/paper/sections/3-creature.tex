@@ -68,7 +68,7 @@ Where the benchmark allows it, an attempt judged bad gets one retry, and a succe
 
 The sense (Fig.~\ref{fig:1}, bottom) is the creature's source of discernment, and is used only in the sense condition: a second, frozen Qwen3-0.6B with its own LoRA (rank 16), served beside the creature and never trained during a life. It reads three things: the user's request, the kind of move the user made next (replied, made a new request, asked to adjust, repeated the request, left, said nothing) and the user's words. It never sees what the creature did or how it turned out, so it reads people rather than judging the work. Because the sense is frozen and separate, the creature cannot change how it is judged.
 
-We built three versions, one after another, each meant to fix a weakness of the one before. All three share the model, the inputs and the answers described next; they differ in what they learned from and in how they decide (Fig.~\ref{fig:9}). Section 4 says which experiment used which.
+We built three versions, one after another, each meant to fix a weakness of the one before. All three share the model, the inputs and the answers described next; they differ in what they learned from and in how they decide (Table~\ref{tab:4}). Section 4 says which experiment used which.
 
 \emph{What every version shares.} The sense gives one of five answers: 100 (exactly right), 80 (acceptable, or good enough to build on), 20 (one part missed what was asked), 0 (wrong) or null (unclear); Table~\ref{tab:4} gives examples. They form two groups with a gap between them: 100 and 80 are a yes, 20 and 0 are a no, and there is no middle score. A reaction that does not clearly belong to one side is null, and nothing is learned from it. The gap is deliberate. The creature should learn only from a clear signal, so the sense must commit to a side or abstain, rather than hand the judge a lukewarm 50 to round one way or the other. Null comes about when the reaction says nothing about the result (silence, ``hmm'', settling, leaving without a word) or when the sense is not confident enough of its answer (under its confidence threshold); v3 adds a third way (below). Each answer begins with a different token (0, 2, 8, 1, n), so the sense decides in one forward pass, and its confidence is the probability of that first token.
 
@@ -93,19 +93,21 @@ The student learns to match the teacher's probabilities (KL divergence) on 47,80
 
 \begin{figure}[htbp]
 \centering
+\includegraphics[width=1.0\linewidth]{figures/fig9_sense_decision}
+\caption{How sense v3 decides: a reaction must pass both gates before the creature learns from it. v1 and v2 ask only the second question, with one threshold (0.70 and 0.65)}
+\label{fig:9}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
 \includegraphics[width=0.75\linewidth]{figures/fig8a_teacher_written}
 \caption{How the teacher, under v3's guide, read the 6,506 reactions it wrote; in brackets, the reading each kind was written to have}
 \label{fig:8a}
 \end{figure}
 
-\emph{Side by side.} Table~\ref{tab:4} shows how the three versions read the same reactions, and Fig.~\ref{fig:9} how each decides.
+\emph{Side by side.} Table~\ref{tab:4} shows how the three versions read the same reactions.
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=1.0\linewidth]{figures/fig9_sense_decision}
-\caption{How the three versions of the sense decide; thresholds as in 3.2, outcomes as in Table~\ref{tab:4}}
-\label{fig:9}
-\end{figure}
+
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.2600}}
