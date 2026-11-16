@@ -23,10 +23,10 @@ OUT.mkdir(parents=True, exist_ok=True)
 
 # lab experiment name -> where it appears in the paper
 PAPER = {
-    "growing-from-use": "Exp 1 pilot",
-    "growing-from-use-14d": "Exp 1",
-    "lifespan-365d": "Exp 1 year",
-    "tree-rings-14d": "Exp 1 adapters",
+    "growing-from-use": "Exp 1-A pilot",
+    "growing-from-use-14d": "Exp 1-A",
+    "lifespan-365d": "Exp 1-B",
+    "tree-rings-14d": "Exp 1-C",
     "feedback-sense-14d": "Exp 2",
     "realistic-user-14d": "Exp 3",
     "lesson-once-14d": "Exp 3 sleep variant",

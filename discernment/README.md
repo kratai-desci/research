@@ -33,7 +33,7 @@ Compile the paper in `paper/` with `tectonic -X compile main.tex` or `latexmk -p
 | `attempts.csv.gz` | practice attempt or retry | `day`, `kind` (practice / retry), `task`, `score` (reward × 100), `lesson` (yes / no / none: whether the judge made it a lesson), `verdict` (the judge's own words or the sense's label and confidence), `request`, `user_said` (the simulated user's reaction; WebShop prefixes the behaviour and next move) |
 | `sense_checks.csv.gz` | daily check of the sense on fixed recorded reactions | `kind`, `item`, `correct`, `said`, `sense_read` |
 | `configs.csv` | life | the settings it ran with (judge, days, exam schedule, user, sleep options, adapter design, sense), with start and finish times; see `EXPERIMENTS.md` |
-| `sense/` | the two sense builds | teacher and training status for v2 and v3, the nine leave-one-task-out builds of v2, and the 2,622 recorded reactions of the v2/v3 test (`sense3_live.jsonl`) |
+| `sense/` | the three sense builds | the build record of v1 (`sense1_status.json`: data, training and held-out evaluation); teacher and training status for v2 and v3, the nine leave-one-task-out builds of v2, and the 2,622 recorded reactions of the v2/v3 test (`sense3_live.jsonl`) |
 
 ## Full logs and models (level 3)
 
@@ -60,12 +60,33 @@ sets up WebShop and its HTTP bridge, and `src/setup/tau2_gemini.sh` sets up τ²
 
 The paper numbers experiments in story order; the code and data use lab names.
 
-| Paper | Lab name |
-| --- | --- |
-| Experiment 1 (five judges; pilot; year of life; adapter designs) | growing-from-use-14d; growing-from-use; lifespan-365d; tree-rings-14d |
-| Experiment 2 (a separate, frozen sense; the first build, v1) | feedback-sense-14d |
-| Experiment 3 (realistic users; sleep variant) | realistic-user-14d; lesson-once-14d |
-| Experiment 4 (sense v3, 60 days) | clear-verdict-14d |
-| Experiment 5 (τ²-bench) | tau2-learning-30d |
+| Paper | `paper` column in `data/` | Lab name |
+| --- | --- | --- |
+| Experiment 1-A (five judges, 14 days; and a 6-day pilot) | Exp 1-A; Exp 1-A pilot | growing-from-use-14d; growing-from-use |
+| Experiment 1-B (a year) | Exp 1-B | lifespan-365d |
+| Experiment 1-C (four adapter designs) | Exp 1-C | tree-rings-14d |
+| Experiment 2 (sense v1) | Exp 2 | feedback-sense-14d |
+| Experiment 3 (sense v2, realistic users; and its sleep variant) | Exp 3; Exp 3 sleep variant | realistic-user-14d; lesson-once-14d |
+| Experiment 4 (sense v3, 60 days) | Exp 4 | clear-verdict-14d |
+| Experiment 5 (sense v3 on τ²-bench) | Exp 5 | tau2-learning-30d |
 
 The judge called *stated verdict* in the paper is `user` in the code.
+
+## Figures
+
+Figure files keep the names they were drawn under; this is where each appears in the paper and what draws it.
+
+| Paper | File (`paper/figures/`) | Drawn by |
+| --- | --- | --- |
+| Figure 1 | `fig1_creature` | `src/diagrams.py` |
+| Figure 2 | `fig8b_v2_unseen_tasks` | `src/figures.py` |
+| Figure 3 | `fig9_sense_decision` | `src/diagrams.py` |
+| Figure 4 | `fig8a_teacher_written` | `src/figures.py` |
+| Figure 5 | `fig2_exp1_judges` | `src/figures.py` |
+| Figure 6 | `fig7_year_of_life` | `src/figures.py` |
+| Figure 7 | `fig3_sense_v2_v3` | `src/figures.py` |
+| Figure 8 | `fig4_sense_v3_60_days` | `src/figures.py` |
+| Figure 9 | `fig5_tau2_domains` | `src/figures.py` |
+| Figure 10 | `fig6_failed_lessons` | `src/figures.py` |
+
+Table 2's v1 column comes from `src/sense_v1_table.py`, run on the v1 adapter in the level-3 archive.

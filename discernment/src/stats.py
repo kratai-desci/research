@@ -67,9 +67,9 @@ def compare(claim, a_name, a, b_name, b, primary=False):
 
 # Experiment 1: five judges, day 14
 e1 = lives("growing-from-use-14d")
-compare("Exp 1: oracle above self on day 14", "oracle", group(e1, "oracle", 14), "self", group(e1, "self", 14), primary=True)
-compare("Exp 1: oracle above both on day 14", "oracle", group(e1, "oracle", 14), "both", group(e1, "both", 14), primary=True)
-compare("Exp 1: self against no learning on day 14", "self", group(e1, "self", 14), "none", group(e1, "none", 14))
+compare("Exp 1-A: oracle above self on day 14", "oracle", group(e1, "oracle", 14), "self", group(e1, "self", 14), primary=True)
+compare("Exp 1-A: oracle above both on day 14", "oracle", group(e1, "oracle", 14), "both", group(e1, "both", 14), primary=True)
+compare("Exp 1-A: self against no learning on day 14", "self", group(e1, "self", 14), "none", group(e1, "none", 14))
 
 # Experiment 2: sense v1, day 14
 e2 = lives("feedback-sense-14d")

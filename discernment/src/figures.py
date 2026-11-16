@@ -118,7 +118,7 @@ fig.tight_layout()
 save(fig, "fig5_tau2_domains")
 
 # Fig 6: share of failed lessons against the day-14 exam, 97 lives
-EXPS = {"growing-from-use-14d": "Exp 1", "tree-rings-14d": "Exp 1 adapters", "feedback-sense-14d": "Exp 2",
+EXPS = {"growing-from-use-14d": "Exp 1-A", "tree-rings-14d": "Exp 1-C", "feedback-sense-14d": "Exp 2",
         "realistic-user-14d": "Exp 3", "lesson-once-14d": "Exp 3b", "clear-verdict-14d": "Exp 4"}
 life = {l["life"]: l for l in LIVES if l["lab_experiment"] in EXPS}
 les = defaultdict(lambda: [0, 0])

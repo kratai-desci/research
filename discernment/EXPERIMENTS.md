@@ -50,10 +50,10 @@ names: `user` is the paper's *stated verdict*.
 
 | Paper | Lab name | Judges (`--signal`) | Seeds | Other arguments | Sense adapter |
 | --- | --- | --- | --- | --- | --- |
-| Exp 1, pilot | `growing-from-use` | oracle, user, self, both, none | 0 | `--days 6` | - |
-| Exp 1 | `growing-from-use-14d` | oracle, user, self, both, none | 0-4 | `--days 14` | - |
-| Exp 1, year | `lifespan-365d` | both (seeds 0-4), oracle (seed 0) | | `--days 365 --exam-every 1:30,2:90,7` | - |
-| Exp 1, adapters | `tree-rings-14d` | both | 0-4 | `--days 14 --brain <constant, lr-decay, rings-equal, rings-tree> --condition <same>` | - |
+| Exp 1-A, pilot | `growing-from-use` | oracle, user, self, both, none | 0 | `--days 6` | - |
+| Exp 1-A | `growing-from-use-14d` | oracle, user, self, both, none | 0-4 | `--days 14` | - |
+| Exp 1-B | `lifespan-365d` | both (seeds 0-4), oracle (seed 0) | | `--days 365 --exam-every 1:30,2:90,7` | - |
+| Exp 1-C | `tree-rings-14d` | both | 0-4 | `--days 14 --brain <constant, lr-decay, rings-equal, rings-tree> --condition <same>` | - |
 | Exp 2 | `feedback-sense-14d` | oracle, both, sense | 0-4 | `--days 14` | sense **v1** (see below) |
 | Exp 3 | `realistic-user-14d` | oracle, both, sense | 0-4 | `--days 14 --user llm` | sense v2 |
 | Exp 3, sleep variant | `lesson-once-14d` | oracle, both, sense | 0-4 | `--days 14 --user llm --lesson-once --min-lessons 5` | sense v2 |
@@ -67,7 +67,7 @@ Notes:
   the fixed reactions differs from v2's (it agrees with Experiment 3's sense on 213 of 302 reactions on day 0).
 - **Experiment 4** ran 14 days with daily exams, then every life was resumed (`--resume`) to day 60, examined daily
   to day 30 and every second day after. `--stream-days 14` keeps the practice tasks the 14-day life would have had.
-- **The year** examined daily to day 30, every second day to day 90, then weekly.
+- **The year (1-B)** was examined daily to day 30, every second day to day 90, then weekly.
 - Lives with the same seed meet the same practice tasks in the same order, and the user's random draws come from
   the same seed; practice sampling is not seeded.
 
