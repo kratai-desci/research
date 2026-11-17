@@ -14,6 +14,13 @@ while hearing the user (both), and a separate, frozen "feedback sense" that read
 | `data/` | per-life records from which every number, test and figure in the paper can be recomputed |
 | `EXPERIMENTS.md` | how each experiment was set up and launched, with the settings every life ran with |
 
+## Funding and licence
+
+This work was funded by Decentralized Science, Inc., which owns the intellectual property in it. The code in `src/`
+is under the MIT licence (`LICENSE`); the data, paper, figures and level-3 archive are under CC BY 4.0
+(`LICENSE-DATA`). Copyright is held by Decentralized Science, Inc. Third-party datasets, benchmarks and models keep
+their own licences.
+
 ## Rebuild the numbers and figures
 
 ```bash
