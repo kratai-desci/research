@@ -1,32 +1,25 @@
 \section{Introduction}
 
-The introduction argues that on-device models need a way to learn on the job, that the hard part is deciding what to learn from, and that we measure this over long lives rather than single updates.
+Small language models now run on phones, laptops and local servers, and once released they meet tasks their training did not anticipate. Retraining them centrally is slow, and it would mean sending the user's interactions away from the device. A model that improved from its own daily work, learning overnight and on the device, would close that gap: small models built for devices \cite{liu2024mobilellm} and fine-tuning on the device itself \cite{zhu2023pockengine, zheng2025review} make this setting realistic. It is also where learning on the job matters most, and it is the setting we study, with models of 0.6B and 1.7B parameters (Section 4).
 
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Motivation:} small models on phones and devices meet new tasks after release; retraining in the cloud is costly and slow. A model that improves from its own daily work would close that gap.
-\item
-  \textbf{To write: why small models.} Turn the size into the point: learning on the job matters most where the model lives with its user (phone, laptop, local server), so the user's reactions never leave the device, and models there are small. We therefore study 0.6B and 1.7B, and the whole loop (creature, sense, nightly training) fits on one 24 GB GPU. Small models also have the most room to improve, and their low cost allowed 127 lives with 3-5 seeds for most conditions. Larger models stay future work (Section 4, ``Why small models''; Section 7).
-\item
-  \textbf{The core problem:} learning on the job needs a judge of which episodes were good. Without a true outcome, the options are the model's own judgment or the user's reaction, and both can be wrong.
-\item
-  \textbf{The gap:} most work measures one round of improvement on a fixed benchmark. Little measures what happens over weeks of nightly updates, where small errors in the judge compound.
-\item
-  \textbf{Our approach:} a ``creature'' that works by day and sleeps on its lessons at night, run for 14 days to a year under different judges, including a separate frozen model, the feedback sense, that reads the user's reaction. We call what it must provide discernment: telling an informed, clear verdict on the result from a polite, vague or uninformed reaction. The other judges are simplified versions of published approaches, compared with it under the same model, tasks and training budget.
-\item
-  \textbf{Contributions:}
+The hard part is not the training but the judgment. Learning on the job needs something to decide which of the day's attempts were good enough to learn from. Without a true outcome there are two obvious candidates: the model's own judgment of its work \cite{yuan2024selfrewarding}, or the user's reaction to it \cite{hancock2019learning, shi2026wildfeedback}. Both can be wrong. Models judge their own work poorly \cite{huang2024large}, and users are often polite about failures, thanking the assistant for trying and moving on. A wrong lesson is not merely wasted: once trained on, it teaches the model to repeat the failure.
 
-  \begin{enumerate}
-  \def\labelenumi{\arabic{enumi}.}
-  \tightlist
-  \item
-    A long-horizon test of nightly self-training for small models, on WebShop and $\tau^2$-bench, with an oracle as the upper bound.
-  \item
-    Evidence that learning from the model's own judgment decays, and that what decides a life is the share of failed attempts among its lessons, not their number ($\rho$ = -0.81 across 97 lives): a few accepted give-ups can collapse a life.
-  \item
-    A feedback sense with discernment, which first asks whether the user gave a clear verdict. It removes most bad lessons and reaches near-oracle scores for two weeks, then fades for reasons we leave open.
-  \item
-    Evidence that learning from reactions fails when users cannot see the outcome, and that even correct but lopsided lessons cause forgetting.
-  \end{enumerate}
-\end{itemize}
+Most work on self-training and on learning from feedback measures one or a few rounds of improvement on a fixed benchmark \cite{zelikman2022star, singh2024beyond, yuan2024selfrewarding}. Little measures what happens over weeks of nightly updates, where each night's model learns from what the previous nights taught it, and where a judge's small errors can compound.
+
+We study that setting with a ``creature'': a frozen small model with a LoRA adapter that works by day and is fine-tuned each night on the attempts a judge accepts, replaying its recent lessons. We compare judges that stand in for published approaches, under one loop, the same tasks and the same training budget: the true outcome (an \emph{oracle} and upper bound), the user's stated verdict read without error, and the model's own reflection on its attempt, with and without the user's words. As an alternative to the model judging itself, we build a separate, frozen ``feedback sense'' that reads the user's reaction to each attempt. We built it in three versions, each meant to fix a weakness of the one before. What it must provide we call \emph{discernment}: telling an informed, clear verdict on the result from a polite, vague or uninformed reaction. We ran five experiments on WebShop \cite{yao2022webshop} and $\tau^2$-bench \cite{barres2026tau2}, with lives of 14 days to a year: 127 lives in all.
+
+Learning from its own judgment, the creature improved and then decayed, over 14 days and over a year, and whatever the design of its adapter. The first sense held up with a user who reacts plainly to the outcome. The second, facing users who react as people do, took polite give-ups for success, and three of its five lives collapsed after learning from them on the first night. The third, which first asks whether the user gave a clear verdict at all, kept four of its five lives near the \emph{oracle} for two weeks, then faded slowly although its lessons stayed clean. On $\tau^2$-bench, where the customer cannot see whether its task was done, the sense read the customers' reactions correctly, yet 80\% of what it learned were failures that the customers had thanked the agent for. Across all lives, one number predicted where a life ended: the share of failed attempts among its lessons ($\rho$ = -0.81 across 97 lives).
+
+Our contributions are:
+\begin{enumerate}
+\item
+  A long-horizon test of nightly self-training for small models: five experiments, 127 lives of up to a year, two benchmarks and an \emph{oracle} upper bound, with all data and code public.
+\item
+  Evidence that what decides a life is the precision of its lessons, not their number or the kind of judge, and that a few accepted failures can collapse it.
+\item
+  A feedback sense with discernment, built in three versions, and the failure mode it addresses: polite reactions to failure.
+\item
+  Two limits of learning from users: a reaction carries no information the user did not have, and even correct lessons can fade when they are scarce or cause forgetting when they are lopsided.
+\end{enumerate}
+
+Section 2 places the work among related research; Section 3 describes the creature and the feedback sense; Section 4 the experimental setup; Section 5 the results, one experiment per subsection; and Sections 6-8 the discussion, limitations and conclusion.
