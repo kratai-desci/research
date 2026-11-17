@@ -1,6 +1,6 @@
-\subsection{Experiment 5: Sense v3 on $\tau^2$-bench}
+\subsection{Experiment 5: Sense v3 when the user cannot see the outcome}
 
-On $\tau^2$-bench, learning from customer reactions taught the agent to fail, and even learning from the true outcome did not raise its overall score.
+Our WebShop user always knew whether a purchase was right, because we designed it to react to the outcome. Experiment 5 removes both conditions: $\tau^2$-bench's customer is not ours, and it cannot see whether its task was done, since the result lives in a database it never sees. There, learning from customer reactions taught the agent to fail, and even learning from the true outcome did not raise its overall score.
 
 Experiment 5 put the creature in $\tau^2$-bench's customer-service role, with Gemini 3 Flash playing the customer. Qwen3 0.6B and 1.7B each lived 30 days, 3 seeds per condition. Each day the agent served 30 customers from the airline and retail training tasks; each night it learned from the conversations judged good, either by the \emph{oracle} ($\tau^2$-bench's own check of the final database) or by the frozen \emph{sense v3} reading how the customer ended the conversation. Every 3 days it sat an exam on the official test tasks, never learned from: airline (20), retail (40) and telecom (40), a domain it never practised.
 
@@ -12,7 +12,7 @@ Experiment 5 put the creature in $\tau^2$-bench's customer-service role, with Ge
 
 \textbf{Example 2: a thanked failure (Experiment 5, 1.7B \emph{sense v3} life, day 2).} A customer asked to cancel all their upcoming flights. The agent did not complete the task (reward 0). The customer ended: ``C'est parfait. Merci pour votre aide. That is all I needed.'' Sense v3 scored it 100 with confidence 0.99, and it became a lesson.
 
-\textbf{Correct lessons, lopsided.} The \emph{oracle}'s lessons were all correct, yet they shifted skill rather than adding it. About three quarters came from airline (72\% for 1.7B, 77\% for 0.6B), where the small models succeed more often, although retail has more than twice as many training tasks. The 1.7B \emph{oracle} lives rose on airline from 28\% to 35\% (all three ended at 35\%), fell on retail from 11\% to 6\%, and fell on telecom from 32\% to 10\%. Telecom fell in 4 of the 6 \emph{oracle} lives, three of them to 0-2\%. Forgetting of this kind could only show here: on WebShop every task is the same kind of task.
+\textbf{A second finding: correct lessons can still forget.} The \emph{oracle}'s lessons were all correct, yet they shifted skill rather than adding it. About three quarters came from airline (72\% for 1.7B, 77\% for 0.6B), where the small models succeed more often, although retail has more than twice as many training tasks. The 1.7B \emph{oracle} lives rose on airline from 28\% to 35\% (all three ended at 35\%), fell on retail from 11\% to 6\%, and fell on telecom from 32\% to 10\%. Telecom fell in 4 of the 6 \emph{oracle} lives, three of them to 0-2\%. Forgetting of this kind could only show here: on WebShop every task is the same kind of task.
 
 \begin{figure}[htbp]
 \centering
