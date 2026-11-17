@@ -35,6 +35,8 @@ Compile the paper in `paper/` with `tectonic -X compile main.tex` or `latexmk -p
 | `configs.csv` | life | the settings it ran with (judge, days, exam schedule, user, sleep options, adapter design, sense), with start and finish times; see `EXPERIMENTS.md` |
 | `sense/` | the three sense builds | the build record of v1 (`sense1_status.json`: data, training and held-out evaluation); teacher and training status for v2 and v3, the nine leave-one-task-out builds of v2, and the 2,622 recorded reactions of the v2/v3 test (`sense3_live.jsonl`) |
 
+`status` is the lab's own record of how a life ended. One life is marked `failed` although it is complete: `growing-from-use-14d-self-s1` ran all 14 days, has every exam (days 0-14) and is used in every analysis. Experiment 1-A has only four *self* lives because the fifth (seed 0) crashed early and is not in the data, as the paper says.
+
 ## Full logs and models (level 3)
 
 The full step-by-step logs and the three sense adapters are too large for git and are archived separately
