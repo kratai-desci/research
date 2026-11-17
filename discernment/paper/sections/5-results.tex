@@ -38,27 +38,20 @@ Neither time nor the adapter explains the decline. What the judge lets in does, 
 
 Experiment 2 gave the creature a judge it cannot change: the feedback sense in its first build (v1; 3.2), a frozen Qwen3-0.6B with its own LoRA that reads the user's reaction to each attempt. It ran against the \emph{oracle} and \emph{both}, 5 seeds, 14 days, with the same user as Experiment 1.
 
-{\def\LTcaptype{none} % do not increment counter
-\begin{longtable}[]{@{}llll@{}}
-\toprule\noalign{}
-Judge & Day 0 & Day 7 & Day 14 \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-\emph{oracle} & 11 & 62 (61-63) & 62 (61-63) \\
-\emph{sense v1} & 13 & 19 (7-43) & 40 (6-59) \\
-\emph{both} & 13 & 47 (36-57) & 16 (3-32) \\
-\end{longtable}
-}
+\emph{Sense v1} learned more slowly but did not fall back (Fig.~\ref{fig:10}a). It also learned from very little: 0-7 lessons per life in 14 days, against 247-274 for the \emph{oracle}. By day 14, four of its five lives stood at 34-59 and were still rising, while every \emph{both} life had fallen from its day-7 peak. On day 14 \emph{sense v1} (39.7 $\pm$ 21.3) was ahead of \emph{both} (16.1 $\pm$ 11.1) and behind the \emph{oracle} (62.0 $\pm$ 1.0). With 5 seeds and one \emph{sense v1} life at 6, the t-test finds neither gap significant (p = 0.07 and 0.08); a rank test, less swayed by that one life, puts the gap to the \emph{oracle} at p = 0.01 (Appendix B). Sense v1's own accuracy stayed fixed, as intended: on 302 recorded reactions it read 82.6\% correctly on day 0 and 82.8\% on day 14. A variant that read the sense through the creature's learning brain was planned, but its lives scored 0 from day 0 because of a setup fault and were stopped; it is not reported.
 
-\emph{Sense v1} learned more slowly but did not fall back. It also learned from very little: 0-7 lessons per life in 14 days, against 247-274 for the \emph{oracle}. By day 14, four of its five lives stood at 34-59 and were still rising, while every \emph{both} life had fallen from its day-7 peak. On day 14 \emph{sense v1} (39.7 $\pm$ 21.3) was ahead of \emph{both} (16.1 $\pm$ 11.1) and behind the \emph{oracle} (62.0 $\pm$ 1.0). With 5 seeds and one \emph{sense v1} life at 6, the t-test finds neither gap significant (p = 0.07 and 0.08); a rank test, less swayed by that one life, puts the gap to the \emph{oracle} at p = 0.01 (Appendix B). Sense v1's own accuracy stayed fixed, as intended: on 302 recorded reactions it read 82.6\% correctly on day 0 and 82.8\% on day 14. A variant that read the sense through the creature's learning brain was planned, but its lives scored 0 from day 0 because of a setup fault and were stopped; it is not reported.
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1.0\linewidth]{figures/fig10_exp2_exp3}
+\caption{Experiments 2 and 3, 5 seeds per judge, daily exams: mean of the lives, with the lowest-to-highest range shaded; in (b) each \emph{sense v2} life is drawn on its own}
+\label{fig:10}
+\end{figure}
 
 \subsection{Experiment 3: Sense v2 and realistic users}
 
 Experiment 3 replaced the user with one that reacts as people do. Its behaviour is drawn from a mix tied to the outcome and a persona, and worded by Gemini: clear thanks, complaints, but also polite give-ups, vague replies and moving on without a word. \emph{Oracle}, \emph{both} and \emph{sense v2}, 5 seeds, 14 days.
 
-The \emph{sense v2} lives split in two. Two reached 55 and 57 by day 14, close to the \emph{oracle}'s 62. The other three fell to 0-3 on day 1 and never recovered. Each had learned on night 1 from one to three polite give-ups that sense v2 had read as success (Example 1 below); 96-100\% of everything those three lives learned were failed attempts. The \emph{both} lives rose to 48 by day 3 and fell to 15 (2-36). On day 14 the \emph{sense v2} lives averaged 22.5 $\pm$ 30.8 against the \emph{oracle}'s 62.0 $\pm$ 1.1 (Welch t-test p = 0.045, Mann-Whitney p = 0.01); the spread is the split itself.
+The \emph{sense v2} lives split in two (Fig.~\ref{fig:10}b). Two reached 55 and 57 by day 14, close to the \emph{oracle}'s 62. The other three fell to 0-3 on day 1 and never recovered. Each had learned on night 1 from one to three polite give-ups that sense v2 had read as success (Example 1 below); 96-100\% of everything those three lives learned were failed attempts. The \emph{both} lives rose to 48 by day 3 and fell to 15 (2-36). On day 14 the \emph{sense v2} lives averaged 22.5 $\pm$ 30.8 against the \emph{oracle}'s 62.0 $\pm$ 1.1 (Welch t-test p = 0.045, Mann-Whitney p = 0.01); the spread is the split itself.
 
 \textbf{Example 1: a give-up sense v2 took for success (Experiment 3, night 1).} The shopper asked for men's loafers in size 6.5 under \$60. The creature bought nothing (reward 0). The user ended:
 
@@ -72,16 +65,18 @@ Sense v2 scored this reaction 100, the top score, with confidence 0.92, and the 
 
 \subsection{Experiment 4: Sense v3, waiting for a clear verdict}
 
-Experiment 4 used sense v3 (Section 3), our fullest attempt at discernment. It first asks whether the reaction is a clear verdict on the result; thanks for the effort, sarcasm, hedging, silence or moving on count as no verdict, and nothing is learned from them. Only a clear verdict is then scored. Same user as Experiment 3, with each lesson counted once in sleep (Table~\ref{tab:1}).
+Experiment 4 used sense v3, which waits for a clear verdict before it scores a reaction (3.2). Same user as Experiment 3, with each lesson counted once in sleep (Table~\ref{tab:1}).
 
-On 2,622 recorded reactions from Experiment 3, sense v3 read 1.2\% of reactions that were neither praise nor acceptance as a yes, against 5.0\% for v2, and read 1.0\% of give-ups and polite complaints as success, against 15.8\% (Fig.~\ref{fig:3}; Fisher exact test, p \textless{} 0.001). The price was a stricter reading of real approval: it took 59\% of plain acceptances as a yes, against 70\% for v2. In the lives, four of five \emph{sense v3} lives stood at 53-60 on day 14, against the \emph{oracle}'s 63 (62-63). Averaged over all five lives \emph{sense v3} (45.1 $\pm$ 25.3) was not reliably below the \emph{oracle} by a t-test (62.8 $\pm$ 0.6; p = 0.19), because the one collapsed life dominates the spread; by a rank test it was (p = 0.01), since every \emph{sense v3} life scored below every \emph{oracle} life. The fifth fell to 0 after learning from a single give-up on night 1. The \emph{both} lives peaked at 53 on day 7 and fell to 19 by day 14, as before.
+\textbf{The live test.} Before the lives began, we had both versions read the same 2,622 reactions recorded in the Experiment 3 lives, up to 300 of each behaviour (Fig.~\ref{fig:3}). Sense v3 read 1.2\% of reactions that were neither praise nor acceptance as a yes, against 5.0\% for v2, and read 1.0\% of give-ups and polite complaints as success, against 15.8\% (Fisher exact test, p \textless{} 0.001). The price was a stricter reading of real approval: it took 59\% of plain acceptances as a yes, against 70\% for v2.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=1.0\linewidth]{figures/fig3_sense_v2_v3}
-\caption{Sense live test: up to 300 recorded reactions per behaviour from the Experiment 3 lives (2,622 in all), read by both versions of the sense}
+\caption{The live test: sense v2 and v3 reading the same 2,622 reactions recorded in the Experiment 3 lives, up to 300 per behaviour}
 \label{fig:3}
 \end{figure}
+
+\textbf{The first 14 days.} Four of the five \emph{sense v3} lives stood at 53-60 on day 14, against the \emph{oracle}'s 63 (62-63). The fifth fell to 0 after learning from a single give-up on night 1. Averaged over all five lives \emph{sense v3} (45.1 $\pm$ 25.3) was not reliably below the \emph{oracle} by a t-test (62.8 $\pm$ 0.6; p = 0.19), because the one collapsed life dominates the spread; by a rank test it was (p = 0.01), since every \emph{sense v3} life scored below every \emph{oracle} life. The \emph{both} lives peaked at 53 on day 7 and fell to 19 by day 14, as before.
 
 
 \textbf{Days 15-60: clean but scarce lessons fade.} Every life of Experiment 4 was extended to 60 days.

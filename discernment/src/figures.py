@@ -90,6 +90,28 @@ ax.set_xlim(0, 365)
 ax.set_title("Self-judging never recovered: after a year the both lives scored 5, the oracle 61")
 save(fig, "fig7_year_of_life")
 
+# Fig 10: Experiments 2 and 3, sense v1 and sense v2 over 14 days
+V1, V2 = "#8a6fbf", "#c8553d"
+fig, (a1, a2) = plt.subplots(1, 2, figsize=(7.6, 3.1), sharey=True)
+s = curves("feedback-sense-14d")
+band_plot(a1, s, {"oracle": (BLUE, 2.2, True, "-"), "sense": (V1, 2.2, True, "-"), "both": (GREY, 1.8, False, "-")}, {"sense": "sense v1"})
+a1.set_xlim(0, 14); a1.set_xticks([0, 7, 14])
+a1.set_title("(a) Experiment 2: sense v1 kept rising", fontsize=9)
+s = curves("realistic-user-14d")
+band_plot(a2, s, {"oracle": (BLUE, 2.2, True, "-"), "both": (GREY, 1.8, False, "-")})
+lives = defaultdict(dict)
+for e in EXAMS:
+    if e["life"].startswith("realistic-user-14d-sense-") and e["split"] == "probe":
+        lives[e["life"]][int(e["day"])] = float(e["mean_score"])
+for k, (life, by_day) in enumerate(sorted(lives.items())):
+    days = sorted(by_day)
+    a2.plot(days, [by_day[d] for d in days], color=V2, lw=1.1, marker="o", ms=1.6, label="sense v2, each life" if k == 0 else None)
+a2.legend(loc="upper left", fontsize=7.5, frameon=False)
+a2.set_xlim(0, 14); a2.set_xticks([0, 7, 14]); a2.set_ylabel("")
+a2.set_title("(b) Experiment 3: 3 of 5 sense v2 lives collapsed", fontsize=9)
+fig.tight_layout(w_pad=3)
+save(fig, "fig10_exp2_exp3")
+
 # Fig 4: Experiment 4, sense v3 over 60 days
 s = curves("clear-verdict-14d")
 fig, ax = plt.subplots(figsize=(6.4, 3.2))
@@ -136,7 +158,7 @@ def kind(l):
 
 
 fig, ax = plt.subplots(figsize=(6.4, 3.4))
-colors = {"self-judging": LIGHT, "stated verdict": PINK, "sense v1": "#8a6fbf", "sense v2": "#24467a", "sense v3": GREEN, "oracle": BLUE}
+colors = {"self-judging": LIGHT, "stated verdict": PINK, "sense v1": "#8a6fbf", "sense v2": "#c8553d", "sense v3": GREEN, "oracle": BLUE}
 for k, c in colors.items():
     pts = [(100 * les[n][1] / les[n][0], day14[n]) for n, l in life.items() if kind(l) == k and les[n][0] > 0 and n in day14]
     ax.scatter([p[0] for p in pts], [p[1] for p in pts], s=22, color=c, alpha=0.8, label=k.replace("stated verdict", "stated"), lw=0)

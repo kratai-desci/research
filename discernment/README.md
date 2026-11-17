@@ -84,9 +84,10 @@ Figure files keep the names they were drawn under; this is where each appears in
 | Figure 4 | `fig8a_teacher_written` | `src/figures.py` |
 | Figure 5 | `fig2_exp1_judges` | `src/figures.py` |
 | Figure 6 | `fig7_year_of_life` | `src/figures.py` |
-| Figure 7 | `fig3_sense_v2_v3` | `src/figures.py` |
-| Figure 8 | `fig4_sense_v3_60_days` | `src/figures.py` |
-| Figure 9 | `fig5_tau2_domains` | `src/figures.py` |
-| Figure 10 | `fig6_failed_lessons` | `src/figures.py` |
+| Figure 7 | `fig10_exp2_exp3` | `src/figures.py` |
+| Figure 8 | `fig3_sense_v2_v3` | `src/figures.py` |
+| Figure 9 | `fig4_sense_v3_60_days` | `src/figures.py` |
+| Figure 10 | `fig5_tau2_domains` | `src/figures.py` |
+| Figure 11 | `fig6_failed_lessons` | `src/figures.py` |
 
 Table 2's v1 column comes from `src/sense_v1_table.py`, run on the v1 adapter in the level-3 archive.
