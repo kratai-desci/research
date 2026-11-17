@@ -1,21 +1,22 @@
 \section{Related work}
 
-We place the work where continual learning, learning from feedback and self-training meet. References to collect: {[}to do{]}.
+We place the work where continual learning, learning from feedback and self-training meet. \textbf{Outline, to be written as prose;} every reference below has been checked against its published source.
 
 \begin{itemize}
-\tightlist
 \item
-  \textbf{Continual learning and forgetting:} replay, regularisation (for example EWC) and parameter-efficient adapters such as LoRA; most studies use labelled task streams, not unlabelled daily work.
+  \textbf{Continual learning and forgetting.} What fine-tuning on a stream does to earlier skills: catastrophic interference \cite{mccloskey1989catastrophic}, regularisation such as EWC \cite{kirkpatrick2017overcoming}, experience replay \cite{rolnick2019experience} and a survey of the field \cite{delange2022continual}; for language models, forgetting during continual fine-tuning \cite{luo2025empirical} and the finding that LoRA \cite{hu2022lora} learns less and forgets less than full fine-tuning \cite{biderman2024lora}. Most of this work uses labelled task streams; our creature learns from its own unlabelled daily work. Supports the replay design, 1-C and the forgetting in Experiment 5.
 \item
-  \textbf{Learning from human feedback:} RLHF and DPO learn from explicit preference labels collected offline; we learn from implicit reactions online.
+  \textbf{Learning from human feedback.} Preferences collected offline and learned through a reward model \cite{christiano2017deep, ouyang2022training}, from AI feedback \cite{bai2022constitutional}, or directly \cite{rafailov2023dpo}; KTO learns from a binary good or bad signal per example \cite{ethayarajh2024model}, the closest to our yes/no lessons. All learn from explicit labels collected offline; we learn from implicit reactions, online.
 \item
-  \textbf{Self-training and self-reward:} models that judge or reward their own outputs; known to drift and to reward-hack, which our self-judging lives reproduce.
+  \textbf{Self-training and self-judgment.} The family our \emph{oracle} and \emph{self} judges stand in for: training on verified successes (expert iteration \cite{anthony2017thinking}, STaR \cite{zelikman2022star}, rejection-sampling fine-tuning \cite{yuan2023scaling}, ReST \cite{gulcehre2023reinforced}, ReST-EM \cite{singh2024beyond}) and models that judge or reward their own outputs \cite{yuan2024selfrewarding, wu2025meta}. Why self-judging drifts: models cannot reliably correct their own reasoning without outside feedback \cite{huang2024large}, LLM judges carry systematic biases \cite{zheng2023judging}, optimising a proxy reward eventually lowers the true one \cite{gao2023scaling}, and training on a model's own outputs can collapse it \cite{shumailov2024ai}.
 \item
-  \textbf{Learning from user reactions:} work on implicit feedback in dialogue, and MemoryBench (learning from user feedback, ICML 2026).
+  \textbf{Learning from deployment and implicit user feedback.} The closest work: models that keep learning from what users say after deployment. Chatbots that learn from their own conversations \cite{hancock2019learning, shuster2022blenderbot, xu2023learning}; implicit feedback in translation, which proved more useful than explicit star ratings \cite{kreutzer2018can}; feedback that occurs naturally in chats \cite{doneyehiya2024naturally}, mined at scale \cite{shi2026wildfeedback, peng2026wildreward}; retrospective learning from the implicit signals in past interactions \cite{chen2025retrospective}; and MemoryBench, a benchmark for learning from simulated user feedback \cite{ai2026memorybench}. Our difference: who decides what is learned, over weeks of nightly updates, and when reactions cannot be trusted.
 \item
-  \textbf{Agent benchmarks with simulated users:} $\tau$-bench and $\tau^2$-bench, WebShop; the gap between what a user sees and the true outcome.
+  \textbf{LLM agents and their benchmarks.} Agents that reason and act \cite{yao2023react} or reflect on their failures \cite{shinn2023reflexion}; agents tuned on their own trajectories \cite{zeng2024agenttuning}, including with DPO on failed and successful attempts on WebShop \cite{song2024trial}, and across many environments \cite{xi2025agentgym}. The benchmarks we use, WebShop \cite{yao2022webshop}, $\tau$-bench \cite{yao2025taubench} and $\tau^2$-bench \cite{barres2026tau2}, and the gap between what a simulated user sees and the true outcome.
 \item
-  \textbf{To write: why no direct comparison with published results.} The published methods behind our judges (STaR, self-rewarding models, Reflexion, learning from implicit feedback) were tested over one round of improvement, not over weeks of nightly updates. No long-life results exist to compare against, so we run simplified versions in one shared loop; say this is a deliberate control, not a shortcut.
+  \textbf{Small and on-device models.} Why we study 0.6B and 1.7B (Section 4): small models built for devices \cite{liu2024mobilellm, yang2025qwen3}, fine-tuning on the device itself \cite{zhu2023pockengine}, and a review of language models at the edge \cite{zheng2025review}.
 \item
-  \textbf{To write: the two ``sleep'' papers} (Language Models Need Sleep, arXiv 2606.03979; Do Language Models Need Sleep?, CMU/UMD): they study how memories are consolidated, given the lessons; we study who decides what the lessons are.
+  \textbf{Sleep and consolidation.} Complementary learning systems \cite{mcclelland1995why}, the origin of the day and night framing; and two recent ``sleep'' papers for language models: consolidating what was in context into the weights, with synthetic ``dreaming'' \cite{behrouz2026language}, and offline computation between inputs to improve later inference \cite{lee2026do}. Both study what a sleep phase does with what the model has seen; we study who decides what it should learn from.
+\item
+  \textbf{Why no direct comparison with published results.} The published methods behind our judges were tested over one round of improvement, not over weeks of nightly updates. No long-life results exist to compare against, so we run simplified versions in one shared loop; this is a deliberate control, not a shortcut.
 \end{itemize}

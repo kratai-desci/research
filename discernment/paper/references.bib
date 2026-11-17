@@ -132,3 +132,387 @@
   pages = {65--70},
   year = {1979}
 }
+
+% Related work, verified 2026-11-17 (titles, authors, venues from official sources)
+% Verified references for the related-work section.
+% Checked 2026-11-17 against arXiv API, ACL Anthology, PMLR, NeurIPS proceedings, Crossref, OpenAlex.
+
+% ---------- Continual learning and forgetting ----------
+
+@incollection{mccloskey1989catastrophic,
+  title     = {Catastrophic Interference in Connectionist Networks: The Sequential Learning Problem},
+  author    = {McCloskey, Michael and Cohen, Neal J.},
+  booktitle = {Psychology of Learning and Motivation},
+  volume    = {24},
+  pages     = {109--165},
+  publisher = {Academic Press},
+  year      = {1989},
+  doi       = {10.1016/S0079-7421(08)60536-8}
+}
+
+@article{kirkpatrick2017overcoming,
+  title   = {Overcoming Catastrophic Forgetting in Neural Networks},
+  author  = {Kirkpatrick, James and Pascanu, Razvan and Rabinowitz, Neil and Veness, Joel and Desjardins, Guillaume and Rusu, Andrei A. and Milan, Kieran and Quan, John and Ramalho, Tiago and Grabska-Barwinska, Agnieszka and Hassabis, Demis and Clopath, Claudia and Kumaran, Dharshan and Hadsell, Raia},
+  journal = {Proceedings of the National Academy of Sciences},
+  volume  = {114},
+  number  = {13},
+  pages   = {3521--3526},
+  year    = {2017},
+  doi     = {10.1073/pnas.1611835114}
+}
+
+@inproceedings{rolnick2019experience,
+  title     = {Experience Replay for Continual Learning},
+  author    = {Rolnick, David and Ahuja, Arun and Schwarz, Jonathan and Lillicrap, Timothy P. and Wayne, Greg},
+  booktitle = {Advances in Neural Information Processing Systems},
+  volume    = {32},
+  year      = {2019},
+  url       = {https://papers.nips.cc/paper_files/paper/2019/hash/fa7cdfad1a5aaf8370ebeda47a1ff1c3-Abstract.html}
+}
+
+@article{delange2022continual,
+  title   = {A Continual Learning Survey: Defying Forgetting in Classification Tasks},
+  author  = {De Lange, Matthias and Aljundi, Rahaf and Masana, Marc and Parisot, Sarah and Jia, Xu and Leonardis, Ale{\v{s}} and Slabaugh, Gregory and Tuytelaars, Tinne},
+  journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  volume  = {44},
+  number  = {7},
+  year    = {2022},
+  note    = {Early access 2021},
+  doi     = {10.1109/TPAMI.2021.3057446}
+}
+
+@article{luo2025empirical,
+  title   = {An Empirical Study of Catastrophic Forgetting in Large Language Models During Continual Fine-Tuning},
+  author  = {Luo, Yun and Yang, Zhen and Meng, Fandong and Li, Yafu and Zhou, Jie and Zhang, Yue},
+  journal = {IEEE Transactions on Audio, Speech and Language Processing},
+  volume  = {33},
+  pages   = {3776--3786},
+  year    = {2025},
+  doi     = {10.1109/TASLPRO.2025.3606231},
+  note    = {arXiv:2308.08747 (2023)}
+}
+
+@article{biderman2024lora,
+  title   = {{LoRA} Learns Less and Forgets Less},
+  author  = {Biderman, Dan and Portes, Jacob and Gonzalez Ortiz, Jose Javier and Paul, Mansheej and Greengard, Philip and Jennings, Connor and King, Daniel and Havens, Sam and Chiley, Vitaliy and Frankle, Jonathan and Blakeney, Cody and Cunningham, John P.},
+  journal = {Transactions on Machine Learning Research},
+  year    = {2024},
+  note    = {Featured Certification},
+  url     = {https://openreview.net/forum?id=aloEru2qCG}
+}
+
+% ---------- Learning from feedback / preferences ----------
+
+@inproceedings{christiano2017deep,
+  title     = {Deep Reinforcement Learning from Human Preferences},
+  author    = {Christiano, Paul F. and Leike, Jan and Brown, Tom B. and Martic, Miljan and Legg, Shane and Amodei, Dario},
+  booktitle = {Advances in Neural Information Processing Systems},
+  volume    = {30},
+  year      = {2017},
+  url       = {https://papers.nips.cc/paper_files/paper/2017/hash/d5e2c0adad503c91f91df240d0cd4e49-Abstract.html}
+}
+
+@inproceedings{ouyang2022training,
+  title     = {Training Language Models to Follow Instructions with Human Feedback},
+  author    = {Ouyang, Long and Wu, Jeff and Jiang, Xu and Almeida, Diogo and Wainwright, Carroll L. and Mishkin, Pamela and Zhang, Chong and Agarwal, Sandhini and Slama, Katarina and Ray, Alex and Schulman, John and Hilton, Jacob and Kelton, Fraser and Miller, Luke and Simens, Maddie and Askell, Amanda and Welinder, Peter and Christiano, Paul and Leike, Jan and Lowe, Ryan},
+  booktitle = {Advances in Neural Information Processing Systems},
+  volume    = {35},
+  pages     = {27730--27744},
+  year      = {2022}
+}
+
+@misc{bai2022constitutional,
+  title         = {Constitutional {AI}: Harmlessness from {AI} Feedback},
+  author        = {Bai, Yuntao and Kadavath, Saurav and Kundu, Sandipan and Askell, Amanda and Kernion, Jackson and Jones, Andy and Chen, Anna and Goldie, Anna and Mirhoseini, Azalia and McKinnon, Cameron and Chen, Carol and Olsson, Catherine and Olah, Christopher and Hernandez, Danny and Drain, Dawn and Ganguli, Deep and Li, Dustin and Tran-Johnson, Eli and Perez, Ethan and Kerr, Jamie and Mueller, Jared and Ladish, Jeffrey and Landau, Joshua and Ndousse, Kamal and Lukosuite, Kamile and Lovitt, Liane and Sellitto, Michael and Elhage, Nelson and Schiefer, Nicholas and Mercado, Noemi and DasSarma, Nova and Lasenby, Robert and Larson, Robin and Ringer, Sam and Johnston, Scott and Kravec, Shauna and El Showk, Sheer and Fort, Stanislav and Lanham, Tamera and Telleen-Lawton, Timothy and Conerly, Tom and Henighan, Tom and Hume, Tristan and Bowman, Samuel R. and Hatfield-Dodds, Zac and Mann, Ben and Amodei, Dario and Joseph, Nicholas and McCandlish, Sam and Brown, Tom and Kaplan, Jared},
+  year          = {2022},
+  eprint        = {2212.08073},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2212.08073}
+}
+
+@inproceedings{ethayarajh2024model,
+  title     = {Model Alignment as Prospect Theoretic Optimization},
+  author    = {Ethayarajh, Kawin and Xu, Winnie and Muennighoff, Niklas and Jurafsky, Dan and Kiela, Douwe},
+  booktitle = {Proceedings of the 41st International Conference on Machine Learning},
+  series    = {Proceedings of Machine Learning Research},
+  volume    = {235},
+  pages     = {12634--12651},
+  publisher = {PMLR},
+  year      = {2024},
+  url       = {https://proceedings.mlr.press/v235/ethayarajh24a.html},
+  note      = {arXiv title: ``{KTO}: Model Alignment as Prospect Theoretic Optimization''}
+}
+
+% ---------- Self-training, judges, self-improvement ----------
+
+@misc{gulcehre2023reinforced,
+  title         = {Reinforced Self-Training ({ReST}) for Language Modeling},
+  author        = {Gulcehre, Caglar and Paine, Tom Le and Srinivasan, Srivatsan and Konyushkova, Ksenia and Weerts, Lotte and Sharma, Abhishek and Siddhant, Aditya and Ahern, Alex and Wang, Miaosen and Gu, Chenjie and Macherey, Wolfgang and Doucet, Arnaud and Firat, Orhan and de Freitas, Nando},
+  year          = {2023},
+  eprint        = {2308.08998},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2308.08998}
+}
+
+@article{singh2024beyond,
+  title   = {Beyond Human Data: Scaling Self-Training for Problem-Solving with Language Models},
+  author  = {Singh, Avi and Co-Reyes, John D. and Agarwal, Rishabh and Anand, Ankesh and Patil, Piyush and Garcia, Xavier and Liu, Peter J. and Harrison, James and Lee, Jaehoon and Xu, Kelvin and Parisi, Aaron and Kumar, Abhishek and Alemi, Alex and Rizkowsky, Alex and Nova, Azade and Adlam, Ben and Bohnet, Bernd and Elsayed, Gamaleldin and Sedghi, Hanie and Mordatch, Igor and Simpson, Isabelle and Gur, Izzeddin and Snoek, Jasper and Pennington, Jeffrey and Hron, Jiri and Kenealy, Kathleen and Swersky, Kevin and Mahajan, Kshiteej and Culp, Laura and Xiao, Lechao and Bileschi, Maxwell L. and Constant, Noah and Novak, Roman and Liu, Rosanne and Warkentin, Tris and Qian, Yundi and Bansal, Yamini and Dyer, Ethan and Neyshabur, Behnam and Sohl-Dickstein, Jascha and Fiedel, Noah},
+  journal = {Transactions on Machine Learning Research},
+  year    = {2024},
+  note    = {arXiv:2312.06585}
+}
+
+@inproceedings{anthony2017thinking,
+  title     = {Thinking Fast and Slow with Deep Learning and Tree Search},
+  author    = {Anthony, Thomas and Tian, Zheng and Barber, David},
+  booktitle = {Advances in Neural Information Processing Systems},
+  volume    = {30},
+  year      = {2017},
+  url       = {https://papers.nips.cc/paper_files/paper/2017/hash/d8e1344e27a5b08cdfd5d027d9b8d6de-Abstract.html}
+}
+
+@inproceedings{wu2025meta,
+  title     = {Meta-Rewarding Language Models: Self-Improving Alignment with {LLM}-as-a-Meta-Judge},
+  author    = {Wu, Tianhao and Yuan, Weizhe and Golovneva, Olga and Xu, Jing and Tian, Yuandong and Jiao, Jiantao and Weston, Jason E. and Sukhbaatar, Sainbayar},
+  booktitle = {Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing},
+  pages     = {11537--11554},
+  address   = {Suzhou, China},
+  publisher = {Association for Computational Linguistics},
+  year      = {2025},
+  doi       = {10.18653/v1/2025.emnlp-main.583},
+  url       = {https://aclanthology.org/2025.emnlp-main.583/}
+}
+
+@inproceedings{huang2024large,
+  title     = {Large Language Models Cannot Self-Correct Reasoning Yet},
+  author    = {Huang, Jie and Chen, Xinyun and Mishra, Swaroop and Zheng, Huaixiu Steven and Yu, Adams Wei and Song, Xinying and Zhou, Denny},
+  booktitle = {The Twelfth International Conference on Learning Representations (ICLR)},
+  year      = {2024},
+  url       = {https://arxiv.org/abs/2310.01798}
+}
+
+@inproceedings{zheng2023judging,
+  title     = {Judging {LLM}-as-a-Judge with {MT-Bench} and {Chatbot Arena}},
+  author    = {Zheng, Lianmin and Chiang, Wei-Lin and Sheng, Ying and Zhuang, Siyuan and Wu, Zhanghao and Zhuang, Yonghao and Lin, Zi and Li, Zhuohan and Li, Dacheng and Xing, Eric P. and Zhang, Hao and Gonzalez, Joseph E. and Stoica, Ion},
+  booktitle = {Advances in Neural Information Processing Systems (Datasets and Benchmarks Track)},
+  volume    = {36},
+  pages     = {46595--46623},
+  year      = {2023}
+}
+
+@inproceedings{gao2023scaling,
+  title     = {Scaling Laws for Reward Model Overoptimization},
+  author    = {Gao, Leo and Schulman, John and Hilton, Jacob},
+  booktitle = {Proceedings of the 40th International Conference on Machine Learning},
+  series    = {Proceedings of Machine Learning Research},
+  volume    = {202},
+  pages     = {10835--10866},
+  publisher = {PMLR},
+  year      = {2023},
+  url       = {https://proceedings.mlr.press/v202/gao23h.html}
+}
+
+@article{shumailov2024ai,
+  title   = {{AI} Models Collapse When Trained on Recursively Generated Data},
+  author  = {Shumailov, Ilia and Shumaylov, Zakhar and Zhao, Yiren and Papernot, Nicolas and Anderson, Ross and Gal, Yarin},
+  journal = {Nature},
+  volume  = {631},
+  number  = {8022},
+  pages   = {755--759},
+  year    = {2024},
+  doi     = {10.1038/s41586-024-07566-y}
+}
+
+% ---------- Learning after deployment from user feedback ----------
+
+@inproceedings{hancock2019learning,
+  title     = {Learning from Dialogue after Deployment: Feed Yourself, Chatbot!},
+  author    = {Hancock, Braden and Bordes, Antoine and Mazar{\'e}, Pierre-Emmanuel and Weston, Jason},
+  booktitle = {Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics},
+  pages     = {3667--3684},
+  address   = {Florence, Italy},
+  publisher = {Association for Computational Linguistics},
+  year      = {2019},
+  doi       = {10.18653/v1/P19-1358}
+}
+
+@misc{shuster2022blenderbot,
+  title         = {{BlenderBot} 3: A Deployed Conversational Agent that Continually Learns to Responsibly Engage},
+  author        = {Shuster, Kurt and Xu, Jing and Komeili, Mojtaba and Ju, Da and Smith, Eric Michael and Roller, Stephen and Ung, Megan and Chen, Moya and Arora, Kushal and Lane, Joshua and Behrooz, Morteza and Ngan, William and Poff, Spencer and Goyal, Naman and Szlam, Arthur and Boureau, Y-Lan and Kambadur, Melanie and Weston, Jason},
+  year          = {2022},
+  eprint        = {2208.03188},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2208.03188}
+}
+
+@inproceedings{xu2023learning,
+  title     = {Learning New Skills after Deployment: Improving Open-Domain Internet-Driven Dialogue with Human Feedback},
+  author    = {Xu, Jing and Ung, Megan and Komeili, Mojtaba and Arora, Kushal and Boureau, Y-Lan and Weston, Jason},
+  booktitle = {Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
+  pages     = {13557--13572},
+  address   = {Toronto, Canada},
+  publisher = {Association for Computational Linguistics},
+  year      = {2023},
+  doi       = {10.18653/v1/2023.acl-long.758}
+}
+
+@inproceedings{kreutzer2018can,
+  title     = {Can Neural Machine Translation be Improved with User Feedback?},
+  author    = {Kreutzer, Julia and Khadivi, Shahram and Matusov, Evgeny and Riezler, Stefan},
+  booktitle = {Proceedings of the 2018 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 3 (Industry Papers)},
+  pages     = {92--105},
+  address   = {New Orleans, Louisiana},
+  publisher = {Association for Computational Linguistics},
+  year      = {2018},
+  doi       = {10.18653/v1/N18-3012}
+}
+
+@misc{doneyehiya2024naturally,
+  title         = {Naturally Occurring Feedback is Common, Extractable and Useful},
+  author        = {Don-Yehiya, Shachar and Choshen, Leshem and Abend, Omri},
+  year          = {2024},
+  eprint        = {2407.10944},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2407.10944}
+}
+
+@inproceedings{chen2025retrospective,
+  title     = {Retrospective Learning from Interactions},
+  author    = {Chen, Zizhao and Gul, Mustafa Omer and Chen, Yiwei and Geng, Gloria and Wu, Anne and Artzi, Yoav},
+  booktitle = {Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
+  pages     = {24580--24606},
+  address   = {Vienna, Austria},
+  publisher = {Association for Computational Linguistics},
+  year      = {2025},
+  doi       = {10.18653/v1/2025.acl-long.1200}
+}
+
+@inproceedings{ai2026memorybench,
+  title     = {{MemoryBench}: A Benchmark for Memory and Continual Learning in {LLM} Systems},
+  author    = {Ai, Qingyao and Tang, Yichen and Wang, Changyue and Long, Jianming and Su, Weihang and Liu, Yiqun},
+  booktitle = {Proceedings of the 43rd International Conference on Machine Learning},
+  series    = {Proceedings of Machine Learning Research},
+  volume    = {306},
+  pages     = {1341--1383},
+  publisher = {PMLR},
+  year      = {2026},
+  url       = {https://proceedings.mlr.press/v306/ai26e.html}
+}
+
+% ---------- LLM agents ----------
+
+@inproceedings{yao2023react,
+  title     = {{ReAct}: Synergizing Reasoning and Acting in Language Models},
+  author    = {Yao, Shunyu and Zhao, Jeffrey and Yu, Dian and Du, Nan and Shafran, Izhak and Narasimhan, Karthik and Cao, Yuan},
+  booktitle = {The Eleventh International Conference on Learning Representations (ICLR)},
+  year      = {2023},
+  url       = {https://arxiv.org/abs/2210.03629}
+}
+
+@inproceedings{zeng2024agenttuning,
+  title     = {{AgentTuning}: Enabling Generalized Agent Abilities for {LLMs}},
+  author    = {Zeng, Aohan and Liu, Mingdao and Lu, Rui and Wang, Bowen and Liu, Xiao and Dong, Yuxiao and Tang, Jie},
+  booktitle = {Findings of the Association for Computational Linguistics: ACL 2024},
+  pages     = {3053--3077},
+  address   = {Bangkok, Thailand},
+  publisher = {Association for Computational Linguistics},
+  year      = {2024},
+  doi       = {10.18653/v1/2024.findings-acl.181}
+}
+
+@inproceedings{song2024trial,
+  title     = {Trial and Error: Exploration-Based Trajectory Optimization of {LLM} Agents},
+  author    = {Song, Yifan and Yin, Da and Yue, Xiang and Huang, Jie and Li, Sujian and Lin, Bill Yuchen},
+  booktitle = {Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
+  pages     = {7584--7600},
+  address   = {Bangkok, Thailand},
+  publisher = {Association for Computational Linguistics},
+  year      = {2024},
+  doi       = {10.18653/v1/2024.acl-long.409}
+}
+
+@inproceedings{xi2025agentgym,
+  title     = {{AgentGym}: Evaluating and Training Large Language Model-based Agents across Diverse Environments},
+  author    = {Xi, Zhiheng and Ding, Yiwen and Chen, Wenxiang and Hong, Boyang and Guo, Honglin and Wang, Junzhe and Guo, Xin and Yang, Dingwen and Liao, Chenyang and He, Wei and Gao, Songyang and Chen, Lu and Zheng, Rui and Zou, Yicheng and Gui, Tao and Zhang, Qi and Qiu, Xipeng and Huang, Xuanjing and Wu, Zuxuan and Jiang, Yu-Gang},
+  booktitle = {Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
+  pages     = {27914--27961},
+  address   = {Vienna, Austria},
+  publisher = {Association for Computational Linguistics},
+  year      = {2025},
+  doi       = {10.18653/v1/2025.acl-long.1355},
+  note      = {arXiv:2406.04151 (2024), titled ``AgentGym: Evolving Large Language Model-based Agents across Diverse Environments''}
+}
+
+% ---------- On-device models and training ----------
+
+@inproceedings{liu2024mobilellm,
+  title     = {{MobileLLM}: Optimizing Sub-billion Parameter Language Models for On-Device Use Cases},
+  author    = {Liu, Zechun and Zhao, Changsheng and Iandola, Forrest and Lai, Chen and Tian, Yuandong and Fedorov, Igor and Xiong, Yunyang and Chang, Ernie and Shi, Yangyang and Krishnamoorthi, Raghuraman and Lai, Liangzhen and Chandra, Vikas},
+  booktitle = {Proceedings of the 41st International Conference on Machine Learning},
+  series    = {Proceedings of Machine Learning Research},
+  volume    = {235},
+  pages     = {32431--32454},
+  publisher = {PMLR},
+  year      = {2024},
+  url       = {https://proceedings.mlr.press/v235/liu24ce.html}
+}
+
+@inproceedings{zhu2023pockengine,
+  title     = {{PockEngine}: Sparse and Efficient Fine-tuning in a Pocket},
+  author    = {Zhu, Ligeng and Hu, Lanxiang and Lin, Ji and Chen, Wei-Ming and Wang, Wei-Chen and Gan, Chuang and Han, Song},
+  booktitle = {Proceedings of the 56th Annual IEEE/ACM International Symposium on Microarchitecture (MICRO)},
+  pages     = {1381--1394},
+  publisher = {ACM},
+  year      = {2023},
+  doi       = {10.1145/3613424.3614307}
+}
+
+@article{zheng2025review,
+  title   = {A Review on Edge Large Language Models: Design, Execution, and Applications},
+  author  = {Zheng, Yue and Chen, Yuhao and Qian, Bin and Shi, Xiufang and Shu, Yuanchao and Chen, Jiming},
+  journal = {ACM Computing Surveys},
+  volume  = {57},
+  number  = {8},
+  pages   = {1--35},
+  year    = {2025},
+  doi     = {10.1145/3719664}
+}
+
+% Alternative (arXiv only, not peer-reviewed as far as checked):
+
+% ---------- Sleep / consolidation ----------
+
+@misc{behrouz2026language,
+  title         = {Language Models Need Sleep: Learning to Self-Modify and Consolidate Memories},
+  author        = {Behrouz, Ali and Hashemi, Farnoosh and Javanmard, Adel and Mirrokni, Vahab},
+  year          = {2026},
+  eprint        = {2606.03979},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG},
+  url           = {https://arxiv.org/abs/2606.03979}
+}
+
+@misc{lee2026do,
+  title         = {Do Language Models Need Sleep? Offline Recurrence for Improved Online Inference},
+  author        = {Lee, Sangyun and McLeish, Sean and Goldstein, Tom and Fanti, Giulia},
+  year          = {2026},
+  eprint        = {2605.26099},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2605.26099}
+}
+
+@article{mcclelland1995why,
+  title   = {Why There Are Complementary Learning Systems in the Hippocampus and Neocortex: Insights from the Successes and Failures of Connectionist Models of Learning and Memory},
+  author  = {McClelland, James L. and McNaughton, Bruce L. and O'Reilly, Randall C.},
+  journal = {Psychological Review},
+  volume  = {102},
+  number  = {3},
+  pages   = {419--457},
+  year    = {1995},
+  doi     = {10.1037/0033-295X.102.3.419}
+}
