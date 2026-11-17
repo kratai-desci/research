@@ -1,3 +1,16 @@
 \section{Conclusion}
 
-Nightly self-training lets a small model improve on the job only while failed attempts stay out of its lessons. Knowing the true outcome is the surest way to keep them out, though on its own it did not prevent forgetting on $\tau^2$-bench. Discernment, reading the user's reaction for a clear and informed verdict, can stand in for that judge for a while, but only if the user can see the result. Where the user cannot, learning from users teaches failure.
+\textbf{Outline for review, to be written as one paragraph (target about 150-200 words).} One sentence per point; no new results.
+
+\begin{itemize}
+\item
+  \textbf{C1. The question.} Can a small model keep improving on the job, overnight, from the reactions of the people it works for, with no one checking the result?
+\item
+  \textbf{C2. What decides.} The judge: a life improves only while failed attempts stay out of its lessons, and a few wrong lessons can undo it (D1).
+\item
+  \textbf{C3. Who can judge.} Not the model itself, which learns and then decays (D2); a separate, frozen reader of the user can, for a while, if it has discernment, waiting for a clear verdict on the result instead of taking politeness for approval (D3).
+\item
+  \textbf{C4. Its limits.} Discernment cannot recover what the user did not see: where the user cannot check the result, learning from users teaches failure (D4); and even correct lessons can fade or narrow the model's skills (D5).
+\item
+  \textbf{C5. Closing line.} Learning from users works when the judge keeps failures out, the user can see the outcome, and the lessons cover the skills evenly; the data and code to test this further are public.
+\end{itemize}
