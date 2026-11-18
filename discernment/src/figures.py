@@ -74,7 +74,7 @@ def band_plot(ax, series, styles, label_names=None):
 
 
 # Fig 2: Experiment 1, (a) five judges over 14 days and (b) a year of life, side by side
-fig, (a1, a2) = plt.subplots(1, 2, figsize=(6.9, 2.6), gridspec_kw={"width_ratios": [1, 1.25], "wspace": 0.5})
+fig, (a1, a2) = plt.subplots(1, 2, figsize=(6.3, 2.05), gridspec_kw={"width_ratios": [1, 1.25], "wspace": 0.5})
 band_plot(a1, curves("growing-from-use-14d"), {"oracle": (BLUE, 2.2, True, "-"), "self": (DARK, 2.0, True, "-"), "both": (GREY, 2.0, False, "-"),
                   "stated verdict": (LIGHT, 1.4, False, "-"), "none": (GREY, 1.2, False, "--")}, {"stated verdict": "stated"})
 a1.set_xlim(0, 14); a1.set_title("(a) Experiment 1-A: 14 days", fontsize=9)
@@ -84,7 +84,7 @@ save(fig, "fig2_exp1_judges")
 
 # Fig 10: Experiments 2 and 3, sense v1 and sense v2 over 14 days
 V1, V2 = "#8a6fbf", "#c8553d"
-fig, (a1, a2) = plt.subplots(1, 2, figsize=(7.6, 3.1), sharey=True)
+fig, (a1, a2) = plt.subplots(1, 2, figsize=(6.3, 2.15), sharey=True)
 s = curves("feedback-sense-14d")
 band_plot(a1, s, {"oracle": (BLUE, 2.2, True, "-"), "sense": (V1, 2.2, True, "-"), "both": (GREY, 1.8, False, "-")}, {"sense": "sense v1"})
 a1.set_xlim(0, 14); a1.set_xticks([0, 7, 14])
