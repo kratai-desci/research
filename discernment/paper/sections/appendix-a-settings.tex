@@ -1,4 +1,4 @@
-\section{Settings}
+\section{Settings}\label{app:protocol}
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.3333}}
@@ -34,6 +34,11 @@ Lesson weight & each step a lesson of its own (Experiments 1-3); spread across i
 \emph{Oracle} & reward 0.5 or more (WebShop); reward 1 ($\tau^2$-bench) \\
 Sense & v1 (Experiment 2): the same model and LoRA trained on 39,775 WildFB reactions with WildFB's labels plus 5,739 added silent or non-committal replies as null, threshold 0.70; v2 and v3: Qwen3-0.6B + LoRA rank 16, alpha 32, all attention and MLP projections; teacher Qwen3-32B (AWQ); one epoch, learning rate 1e-4, batch 16, KL to the teacher's probabilities, false accepts at most 3\% on 2,000 held-out reactions; v2: temperature 1.0, threshold 0.65, 47,800 training reactions; v3: thresholds 0.80 (clear verdict) and 0.70 (score), temperatures 1.0 and 1.05, 44,746 training reactions; a score of 80 counts at half weight \\
 \end{longtable}
+
+\textbf{Protocol details.} The longest lives were examined less often later on: the year-long lives daily to day 30, every second day to day 90 and weekly after, and Experiment 4 every second day after day 30. On $\tau^2$-bench the exam uses the airline (20), retail (40) and telecom (40) test tasks, and the exam tasks are the same for every life. A seed fixes which training tasks a life works on and in what order, and the simulated user's random draws (silence, wording, persona and behaviour); practice sampling is not seeded, so even lives with the same seed differ from their first attempt.
+
+\textbf{Compute.} Lives ran on single NVIDIA L4 GPUs on Google Cloud, eight lives at a time on one GPU in Experiment 1 and two at a time in the others; the whole loop fits on one 24 GB GPU, because the sense is itself a 0.6B model served beside the creature. In all, 127 lives ran for about 1,300 hours and made about 351,000 attempts: practice, retries and exam tasks together. On WebShop a night's training took 1-4 minutes (median 2, the 0.6B \emph{oracle} life of Experiment 4). Building the three senses took about 8 GPU-hours (v1 1.5; v2 3.6 and v3 3.1, teacher labels and student training), and the nine leave-one-task-out builds of v2 another 5.6.
+
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.4857}}
