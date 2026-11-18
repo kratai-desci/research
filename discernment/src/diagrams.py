@@ -47,13 +47,12 @@ def save(fig, name):
     plt.close(fig); print(OUT / f"{name}.pdf")
 
 
-# Fig 1: the creature
-fig, ax = canvas(760, 720)
-ax.text(24, 30, "A judge decides what the creature learns each night", fontsize=12, fontweight="bold", color=INK, va="center")
-box(ax, 24, 56, 712, 132, fill=TINT); ax.text(40, 78, "The creature", fontsize=10.5, fontweight="bold", color=INK, va="center")
-box(ax, 40, 100, 520, 72, "Learning adapter: a LoRA (rank 8, top 8 layers)", ["everything the creature learns lives here;", "loaded into the model each morning"])
-box(ax, 576, 100, 144, 72, "Base model", ["Qwen3 0.6B / 1.7B", "frozen, never changes"])
-bw, rowY, bh = 154, 272, 104
+# Fig 1: the creature (wide and short, so it sits in the text instead of taking a page)
+fig, ax = canvas(760, 372)
+box(ax, 24, 6, 712, 94, fill=TINT); ax.text(40, 22, "The creature", fontsize=10.5, fontweight="bold", color=INK, va="center")
+box(ax, 40, 34, 520, 58, "Learning adapter: a LoRA (rank 8, top 8 layers)", ["everything the creature learns lives here; loaded each morning"])
+box(ax, 576, 34, 144, 58, "Base model", ["Qwen3 0.6B or 1.7B"])
+bw, rowY, bh = 154, 136, 100
 cx = lambda i: 24 + i * (bw + 32); mid = lambda i: cx(i) + bw / 2; cy = rowY + bh / 2
 steps = [("1  Day: work", ["30 new tasks;", "explores, temp. 0.7;", "the user reacts"], False),
          ("2  Judge", ["picks the attempts", "worth learning:", "oracle, stated verdict,", "self, both or sense"], True),
@@ -63,23 +62,16 @@ for i, (t, lines, main) in enumerate(steps):
     box(ax, cx(i), rowY, bw, bh, t, lines, main=main)
 for i in range(3):
     arrow(ax, [(cx(i) + bw, cy), (cx(i + 1), cy)])
-arrow(ax, [(mid(0), 172), (mid(0), rowY)], "runs the day's work", (mid(0) + 8, 228))
-arrow(ax, [(mid(2), rowY), (mid(2), 172)], "updates the adapter", (mid(2) + 8, 228))
-arrow(ax, [(mid(1), 408), (mid(1), rowY + bh)], "sense judge only", (mid(1) + 8, 396))
-arrow(ax, [(mid(3), rowY + bh), (mid(3), 536), (mid(0), 536), (mid(0), rowY + bh)])
-ax.text((mid(0) + mid(3)) / 2, 552, "next day", fontsize=8.5, color=QUIET, ha="center", va="center")
-box(ax, 186, 408, 334, 104, "Feedback sense: separate and frozen",
+arrow(ax, [(mid(0), 92), (mid(0), rowY)], "runs the day's work", (mid(0) + 8, 114))
+arrow(ax, [(mid(2), rowY), (mid(2), 92)], "updates the adapter", (mid(2) + 8, 114))
+box(ax, 24, 266, 320, 100, "Feedback sense: separate and frozen",
     ["Qwen3-0.6B with its own LoRA, never trained", "during a life. Reads the request, the user's", "words and next move, never the result.",
      "v1, v2: one question; v3 first asks if clear."])
-arrow(ax, [(470, 592), (470, 512)], "frozen result", (478, 578))
-box(ax, 24, 592, 712, 116, dashed=True)
-ax.text(40, 612, "Building the sense, before any life (3.2): v2 and v3; v1 used WildFB's labels", fontsize=10, fontweight="bold", color=INK, va="center")
-build = [("Reactions", ["110,906 from 6 datasets", "+ hard cases, written"]), ("Teacher: Qwen3-32B", ["labels each reaction", "with its probabilities"]),
-         ("Student: Qwen3-0.6B", ["a LoRA learns to match", "the teacher (KL)"]), ("Calibration", ["threshold: at most 3%", "of noes read as a yes"])]
-for i, (t, lines) in enumerate(build):
-    box(ax, 40 + 176 * i, 626, 152, 70, t, lines, size=8.2)
-    if i < 3:
-        arrow(ax, [(40 + 176 * i + 152, 661), (40 + 176 * (i + 1), 661)])
+arrow(ax, [(mid(1), 266), (mid(1), rowY + bh)], "sense judge only", (mid(1) + 8, 251))
+box(ax, 372, 266, 364, 100, "Building the sense (v2, v3), before any life", [
+    "Reactions: 110,906 from 6 datasets + hard cases", "Teacher Qwen3-32B labels each, with probabilities",
+    "Student Qwen3-0.6B (LoRA) learns to match (KL)", "Calibrated: at most 3% of noes read as a yes"], dashed=True)
+arrow(ax, [(372, 316), (344, 316)])
 save(fig, "fig1_creature")
 
 # Fig 9: how sense v3 decides (v1 and v2 ask only the second question)

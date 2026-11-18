@@ -1,28 +1,38 @@
-% Learning through Discernment. Compile with pdflatex + bibtex (e.g. latexmk -pdf main.tex), or on Overleaf.
-\documentclass[11pt]{article}
+% Learning through Discernment. TMLR format (single column, 10 pt).
+% Compile with tectonic -X compile main.tex, or pdflatex + bibtex.
+% \anontrue: anonymous version for review (author block, funding and repository link hidden).
+% \anonfalse: preprint version for arXiv, with authors, funding and links.
+\documentclass[10pt]{article}
+\newif\ifanon\anontrue
+\ifanon\usepackage{tmlr}\else\usepackage[preprint]{tmlr}\fi
 \usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage[margin=1in]{geometry}
-\usepackage{lmodern}
 \usepackage{amsmath,amssymb}
 \usepackage{graphicx}
 \usepackage{booktabs,longtable,array,calc}
-\usepackage[numbers,sort&compress]{natbib}
 \usepackage{xcolor}
 \usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\usepackage{url}
 \usepackage{fvextra}
 \usepackage[section]{placeins}  % floats stay within their own section
 \providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \fvset{fontsize=\small}
 \RecustomVerbatimEnvironment{verbatim}{Verbatim}{breaklines=true,fontsize=\small,frame=single}
 \setlength{\emergencystretch}{3em}
+\let\cite\citep  % the TMLR style cites by author and year; \cite is parenthetical
+
+\ifanon
+  \newcommand{\repo}{a repository that we will link after review}
+\else
+  \newcommand{\repo}{\url{https://github.com/kratai-desci/research/tree/discernment/discernment}}
+\fi
 
 \title{Learning through Discernment: when a small language model learns from user feedback on the job, and when it decays}
-\author{Sirisilp Kongsilp\\[2pt]
-\small Decentralized Science, Inc.\\
-\small Department of Computer Engineering, Faculty of Engineering, Kasetsart University\\
-\small \texttt{tai@kratai.com}, \texttt{sirisilp.k@ku.th}}
-\date{November 2026}
+\author{\name Sirisilp Kongsilp \email tai@kratai.com, sirisilp.k@ku.th \\
+      \addr Decentralized Science, Inc.\\
+      \addr Department of Computer Engineering, Faculty of Engineering, Kasetsart University}
+\def\month{MM}  % camera-ready month
+\def\year{YYYY} % camera-ready year
+\def\openreview{\url{https://openreview.net/forum?id=XXXX}} % camera-ready OpenReview link
 
 \begin{document}
 \maketitle
@@ -37,11 +47,10 @@
 \input{sections/6-discussion}
 \input{sections/7-limitations}
 \input{sections/8-conclusion}
-% Funding and licence: remove this line (and the author block above) in a double-blind submission.
-\input{sections/funding}
+\ifanon\else\input{sections/funding}\fi
 
-\bibliographystyle{unsrtnat}
 \bibliography{references}
+\bibliographystyle{tmlr}
 
 \appendix
 % Appendix tables and figures are numbered by appendix: A1, A2, ..., B1.
@@ -49,4 +58,5 @@
 \renewcommand{\thetable}{\Alph{section}\arabic{table}}\renewcommand{\thefigure}{\Alph{section}\arabic{figure}}
 \input{sections/appendix-a-settings}
 \input{sections/appendix-b-statistics}
+\input{sections/appendix-creature-sense}
 \end{document}
