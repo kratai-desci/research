@@ -1,0 +1,79 @@
+\section{The creature}
+
+We call the system a creature: a small language-model agent that works by day and is fine-tuned at night (its ``sleep'') on lessons chosen by a judge. These names label an ordinary continual fine-tuning loop; they make no claim about biology. Its base model never changes; everything it learns lives in a small LoRA adapter (Fig.~\ref{fig:1}).
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.7\linewidth]{figures/fig1_creature}
+\caption{The creature's parts (top), its daily cycle (middle), the feedback sense (bottom) and how the sense was built, once, before any life (dashed); the judge, highlighted, is what the experiments vary}
+\label{fig:1}
+\end{figure}
+
+\subsection{The daily cycle}
+
+The base model is a frozen Qwen3 \cite{yang2025qwen3} of 0.6B or 1.7B parameters, with a rank-8 LoRA \cite{hu2022lora} as its only learning part. Each day (Fig.~\ref{fig:1}, step 1) the creature works through 30 new tasks, sampling at temperature 0.7 so it explores, and after each attempt the simulated user reacts in words. The true outcome is logged for analysis, but the creature sees it only when the \emph{oracle} is its judge. A judge then decides which attempts become lessons (step 2, highlighted because it is the one part the experiments vary). At night (step 3) only the adapter is trained, with supervised fine-tuning on the lessons plus DPO \cite{rafailov2023dpo} on preference pairs, replaying the 150 most recent training examples, one per step of a lesson, so old lessons fade out as new ones arrive; on WebShop a lesson takes about 3 or 4 steps, so where each lesson counts once the replay holds about 40--50 lessons, and on $\tau^2$-bench the 150 most recent lessons. Each morning (step 4) the creature sits an exam on fixed held-out tasks, never learned from, attempted greedily, and the next day starts with the adapter that night produced. Appendix~\ref{app:details} and Table~\ref{tab:A1} give every setting.
+
+We compare five judges (Table~\ref{tab:3}), each a simplified stand-in for a published family of methods.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.1700}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.4900}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3400}}@{}}
+\caption{The judges. Only the sense condition uses the feedback sense.}\label{tab:3}\tabularnewline
+\toprule\noalign{}
+Judge & What decides, and what it sees & Stands in for \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+Judge & What decides, and what it sees & Stands in for \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\emph{oracle} & the benchmark's own score (reward 0.5 or more on WebShop, a full pass on $\tau^2$-bench): the true outcome & training only on verified successes (STaR \cite{zelikman2022star}, rejection-sampling fine-tuning \cite{yuan2023scaling}); an upper bound no deployed system has \\
+\emph{stated verdict} (``\emph{stated}'' in figures) & a fixed rule on the kind of reaction the simulated user chose to give, not its words: praise is a yes; silence, settling or moving on is nothing; anything else is a no & explicit user feedback read without error; an ideal no deployed system has \\
+\emph{self} & the creature itself, from its own steps and what it bought; not the user's reaction & self-rewarding models \cite{yuan2024selfrewarding} \\
+\emph{both} & the creature itself, from its own steps, what it bought and the user's words & Reflexion-style reflection with outside feedback \cite{shinn2023reflexion} \\
+\emph{sense} & a separate, frozen model (3.2), from the request and the user's next move and words; never the result & our proposal \\
+\end{longtable}
+
+\emph{Self} and \emph{both} are the same model with the same prompt; only \emph{both} has the user's reaction in its prompt. The \emph{stated verdict} is the ceiling of a reader of reactions: it never misreads one, and with our plain user (Section 4) it accepts fewer attempts than the \emph{oracle} and never a failure. A last condition, \emph{none}, has no judge and no sleep. Where the benchmark allows it, an attempt judged bad by any judge but the \emph{oracle} gets one retry, and a successful retry becomes a lesson and a preference pair (Section 4); the \emph{oracle} therefore yields no retries and no preference pairs. None of the judges is the original implementation of its method; each is the simplest version that fits the same nightly loop, so differences between conditions come from the judge, together with the retries and preference pairs that only the other judges produce.
+
+\subsection{The feedback sense}
+
+The sense (Fig.~\ref{fig:1}, bottom) is the creature's source of discernment, and is used only in the sense condition: a second, frozen Qwen3-0.6B with its own LoRA, never trained during a life. It reads three things: the user's request, the kind of move the user made next (replied, made a new request, asked to adjust, repeated the request, left, said nothing) and the user's words. It never sees what the creature did or how it turned out, so it reads people rather than judging the work, and the creature cannot change how it is judged.
+
+It gives one of five answers: 100 (exactly right), 80 (acceptable, or good enough to build on), 20 (one part missed what was asked), 0 (wrong) or null (unclear). 100 and 80 are a yes, 20 and 0 are a no, and there is no middle score: a reaction that does not clearly belong to one side is null, and nothing is learned from it. The gap is deliberate, because the creature should learn only from a clear signal. A yes makes the attempt a lesson (an 80 counts half); on WebShop a no triggers the retry, with a hint matched to the answer; on $\tau^2$-bench, which has no retry, a no teaches nothing.
+
+We built three versions, one after another, each meant to fix a weakness of the one before (Table~\ref{tab:4}; Section 4 says which experiment used which).
+
+\textbf{Sense v1} learned one dataset's labels \cite{peng2026wildreward}. It took warm thanks for a failed attempt (``Thank you so much for trying! I'll look on my own'') and a lukewarm ``I guess that'll do'' for success, both with confidence above 0.9.
+
+\textbf{Sense v2} is distilled \cite{hinton2015distilling} from a Qwen3-32B teacher that labelled moments from six public datasets, none about shopping, plus hard reactions the teacher wrote. A calibrated threshold keeps its false accepts at or under 3\% on held-out reactions, though they rose to 8.1\% on a task type it never saw (Appendix~\ref{app:details}). It still asks a single question, which score, so a reaction must look like a no to be refused: warm thanks for the effort after a failed attempt carries no complaint and can score as approval.
+
+\textbf{Sense v3} asks two questions. First, is the reaction a clear verdict on the result at all? Thanks for trying, sarcasm, hedging, settling, silence and moving on without a word are not. Only if it is: which score? A reaction must pass both gates before the creature learns from it, a clear verdict at 0.80 confidence or more and then a score at 0.70 or more (Fig.~\ref{fig:9}, Appendix~\ref{app:details}), and the first gate changes how some common reactions are read (Table~\ref{tab:4}).
+
+Two limits follow from how the senses were built. The teacher is not a perfect reader: of the reactions it wrote itself, under v3's guide it read half of the politely unhappy and half of the sarcastic ones as a yes, and the student inherits such mistakes; the first gate and the thresholds are meant to keep them out of the lessons. And v3 is not blind to the failure that motivated it: its labelling guide includes a worked example almost word for word like the give-up of Example~1 (Section 4). Appendix~\ref{app:details} gives the data, the teacher, the training, the thresholds, the held-out results and the leave-one-task-out test of v2.
+
+\begin{table}[t]
+\centering\small
+\caption{How the three versions read the same reactions, and what the creature does. The v2 and v3 columns are examples from their labelling guides; v1 had no guide, so its column is v1's own reading, tried under three different requests (``80 or null'': it varied with the request).}\label{tab:4}
+\begin{tabular}{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.2400}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.0900}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1300}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.0700}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.3700}}@{}}
+\toprule
+Reaction & v1 & v2 & v3: clear? & v3 & What the creature does \\
+\midrule
+``Ok, that works'' & 100 & 80 & yes & 80 & lesson: full weight for v1, half for v2 and v3 \\
+the next request, with no comment & 80 or null & 80 (in use, mostly null) & no & null & v1: sometimes half weight; v2: in use mostly nothing; v3: nothing \\
+``Thank you so much for trying! I'll look on my own'' & 100 & often a yes & no & null & v1: learns a failure at full weight; v2: often does; v3: nothing \\
+``I guess that'll do''; ``hmm''; silence & 100; null; null & null & no & null & v1 learns ``I guess that'll do'' at full weight; otherwise nothing \\
+``I said size 9'' & 20 & 20 & yes & 20 & retries, told to change only what the user asked for \\
+``No, that's not what I asked''; repeats the request & 0; null & 0 & yes & 0 & retries, told to start again (v1: only after the explicit no) \\
+\bottomrule
+\end{tabular}
+\end{table}
