@@ -13,7 +13,7 @@ Each subsection is one experiment, in the order they were run: Experiment 1 asks
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=1.0\linewidth]{figures/fig2_exp1_judges}
-\caption{Experiment 1-A, 5 seeds per judge, daily exams; one self life crashed early and is left out}
+\caption{Experiment 1. (a) Five judges, 5 seeds each, daily exams: only the \emph{oracle} kept what it learned, 63 on day 14 against 27 for self-judging; one \emph{self} life crashed early and is left out. (b) A year: 5 \emph{both} lives and 1 \emph{oracle} life, with exams daily to day 30, every 2 days to day 90, then weekly; self-judging never recovered (5 after a year, the \emph{oracle} 61). Lines are means over lives, bands the lowest to highest life.}
 \label{fig:2}
 \end{figure}
 
@@ -22,13 +22,6 @@ On day 14 the \emph{oracle} averaged 63.2 $\pm$ 0.2 (mean $\pm$ standard deviati
 Self-judging learned as fast as the \emph{oracle} at first and then lost most of it. By day 7 the \emph{self} lives averaged 55 and the \emph{both} lives 45 (lives 32-59); by day 14 every one of those nine lives had fallen below its own day-7 score, one to 0. The \emph{oracle} reached 62 by day 7 and stayed there. The \emph{stated verdict} rose slowly and unevenly (14-61 on day 14). Only four \emph{self} lives completed the 14 days; the fifth crashed early and is left out. A 6-day pilot showed the same shape: the \emph{self} life rose from 13 to 34 by day 1 and fell to 9 by day 6.
 
 \textbf{1-B: a year.} Does the decline pass with time? We let the \emph{both} creature, the self-judge that also hears the user, live for a year: 365 days, 5 seeds, beside one \emph{oracle} life. WebShop's practice tasks run out after about 227 days, so later days revisit old tasks.
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=1.0\linewidth]{figures/fig7_year_of_life}
-\caption{Experiment 1-B, a year: 5 both lives and 1 oracle life; exams daily to day 30, every 2 days to day 90, then weekly}
-\label{fig:7}
-\end{figure}
 
 It never recovered. The \emph{both} lives peaked around day 6 (52, lives 42-58), were back at their starting level of 15 by day 14, and ended the year at 5 (0-19), three of the five at 0. The \emph{oracle} life rose from 15 to 64 by day 14 and stayed between 55 and 64 for the rest of the year (61 on day 365). These are separate lives from the 14-day \emph{both} condition above (23 on day 14, lives 0-46); the two ranges overlap. A first attempt at this run crashed when two nights ran out of GPU memory at once and was restarted from scratch.
 
@@ -73,8 +66,8 @@ Experiment 4 used sense v3, which waits for a clear verdict before it scores a r
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=1.0\linewidth]{figures/fig3_sense_v2_v3}
-\caption{The live test: sense v2 and v3 reading the same 2,622 reactions recorded in the Experiment 3 lives, up to 300 per behaviour}
+\includegraphics[width=0.82\linewidth]{figures/fig3_sense_v2_v3}
+\caption{The live test: sense v2 and v3 reading the same 2,622 reactions recorded in the Experiment 3 lives, up to 300 per behaviour. Sense v3 stopped reading polite complaints and give-ups as success. Rejections, repeated requests, moving on without words and silence (0 of 1,092 reactions) were read as a yes by neither version.}
 \label{fig:3}
 \end{figure}
 
@@ -85,8 +78,8 @@ Experiment 4 used sense v3, which waits for a clear verdict before it scores a r
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=1.0\linewidth]{figures/fig4_sense_v3_60_days}
-\caption{Experiment 4, 5 seeds per judge, 60 days; exams daily to day 30, then every 2 days}
+\includegraphics[width=0.89\linewidth]{figures/fig4_sense_v3_60_days}
+\caption{Experiment 4, 5 seeds per judge, 60 days; exams daily to day 30, then every 2 days. Sense v3 held near 45 for two weeks, then faded to 15 by day 60; the \emph{oracle} stayed at 62.}
 \label{fig:4}
 \end{figure}
 

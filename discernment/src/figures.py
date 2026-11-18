@@ -2,7 +2,7 @@
 
   uv run --with matplotlib python src/figures.py [data dir] [out dir]
 
-Fig 1 and Fig 9 are diagrams (src/diagrams.py); the others are drawn here from the rows in data/.
+Fig 1 and the sense diagram are diagrams (src/diagrams.py); the others are drawn here from the rows in data/.
 """
 
 import csv
@@ -73,22 +73,14 @@ def band_plot(ax, series, styles, label_names=None):
     ax.grid(axis="y", color="#e5e5e5", lw=0.6)
 
 
-# Fig 2: Experiment 1, five judges over 14 days
-s = curves("growing-from-use-14d")
-fig, ax = plt.subplots(figsize=(6.4, 3.2))
-band_plot(ax, s, {"oracle": (BLUE, 2.2, True, "-"), "self": (DARK, 2.0, True, "-"), "both": (GREY, 2.0, False, "-"),
+# Fig 2: Experiment 1, (a) five judges over 14 days and (b) a year of life, side by side
+fig, (a1, a2) = plt.subplots(1, 2, figsize=(6.9, 2.6), gridspec_kw={"width_ratios": [1, 1.25], "wspace": 0.5})
+band_plot(a1, curves("growing-from-use-14d"), {"oracle": (BLUE, 2.2, True, "-"), "self": (DARK, 2.0, True, "-"), "both": (GREY, 2.0, False, "-"),
                   "stated verdict": (LIGHT, 1.4, False, "-"), "none": (GREY, 1.2, False, "--")}, {"stated verdict": "stated"})
-ax.set_xlim(0, 14)
-ax.set_title("Only the oracle kept what it learned: 63 on day 14, against 27 for self-judging")
+a1.set_xlim(0, 14); a1.set_title("(a) Experiment 1-A: 14 days", fontsize=9)
+band_plot(a2, curves("lifespan-365d"), {"oracle": (BLUE, 1.8, False, "-"), "both": (DARK, 1.8, True, "-")})
+a2.set_xlim(0, 365); a2.set_ylabel(""); a2.set_title("(b) Experiment 1-B: a year", fontsize=9)
 save(fig, "fig2_exp1_judges")
-
-# Fig 7: Experiment 1, a year of life
-s = curves("lifespan-365d")
-fig, ax = plt.subplots(figsize=(6.4, 3.0))
-band_plot(ax, s, {"oracle": (BLUE, 1.8, False, "-"), "both": (DARK, 1.8, True, "-")})
-ax.set_xlim(0, 365)
-ax.set_title("Self-judging never recovered: after a year the both lives scored 5, the oracle 61")
-save(fig, "fig7_year_of_life")
 
 # Fig 10: Experiments 2 and 3, sense v1 and sense v2 over 14 days
 V1, V2 = "#8a6fbf", "#c8553d"
@@ -114,11 +106,10 @@ save(fig, "fig10_exp2_exp3")
 
 # Fig 4: Experiment 4, sense v3 over 60 days
 s = curves("clear-verdict-14d")
-fig, ax = plt.subplots(figsize=(6.4, 3.2))
+fig, ax = plt.subplots(figsize=(5.6, 2.45))
 band_plot(ax, s, {"oracle": (BLUE, 2.2, True, "-"), "sense": (GREEN, 2.2, True, "-"), "both": (GREY, 1.8, False, "-")},
           {"sense": "sense v3"})
 ax.set_xlim(0, 60)
-ax.set_title("Sense v3 held near 45 for two weeks, then faded to 15 by day 60; the oracle stayed at 62")
 save(fig, "fig4_sense_v3_60_days")
 
 # Fig 5: Experiment 5, tau2-bench exams per domain
@@ -134,8 +125,6 @@ for ax, dom in zip(axes, ("airline", "retail", "telecom")):
     ax.set_xlim(0, 30); ax.set_ylim(0, 50); ax.set_xlabel("day"); ax.grid(axis="y", color="#e5e5e5", lw=0.6)
 axes[0].set_ylabel("exam tasks fully done (%)")
 axes[2].legend(fontsize=7, frameon=False, loc="upper right")
-fig.suptitle("Oracle lessons moved skill to airline; retail and telecom fell. The 1.7B sense v3 lives collapsed",
-             x=0.02, ha="left", fontsize=10, fontweight="bold")
 fig.tight_layout()
 save(fig, "fig5_tau2_domains")
 
@@ -157,24 +146,25 @@ def kind(l):
     return j if j in ("oracle", "stated verdict") else "self-judging"
 
 
-fig, ax = plt.subplots(figsize=(6.4, 3.4))
+fig, ax = plt.subplots(figsize=(4.3, 2.5))
 colors = {"self-judging": LIGHT, "stated verdict": PINK, "sense v1": "#8a6fbf", "sense v2": "#c8553d", "sense v3": GREEN, "oracle": BLUE}
 for k, c in colors.items():
     pts = [(100 * les[n][1] / les[n][0], day14[n]) for n, l in life.items() if kind(l) == k and les[n][0] > 0 and n in day14]
-    ax.scatter([p[0] for p in pts], [p[1] for p in pts], s=22, color=c, alpha=0.8, label=k.replace("stated verdict", "stated"), lw=0)
+    ax.scatter([p[0] for p in pts], [p[1] for p in pts], s=18, color=c, alpha=0.8, label=k.replace("stated verdict", "stated"), lw=0)
 ax.set_xlabel("share of lessons that were failed attempts (%)"); ax.set_ylabel("exam on day 14")
 ax.set_xlim(-3, 103); ax.set_ylim(-3, 70); ax.grid(axis="y", color="#e5e5e5", lw=0.6)
-ax.legend(fontsize=8, frameon=False, loc="upper right")
-ax.set_title("The more of its lessons were failed attempts, the lower a life ended (Spearman ρ = -0.81)")
+ax.legend(fontsize=7.5, frameon=False, loc="upper right")
 save(fig, "fig6_failed_lessons")
 
 # Fig 3: sense v2 against v3 on 2,622 recorded reactions
 ev = json.loads((DATA / "sense" / "sense3_train-status.json").read_text())["eval3"]
 order = [("praise", "praise"), ("accept", "accept"), ("settle", "settle for less"), ("adjust", "ask for a change"),
-         ("polite_unhappy", "polite complaint"), ("give_up", "give up"), ("reject", "reject"), ("repeat", "repeat the request"),
-         ("move_on", "move on, no words"), ("silent", "silent")]
+         ("polite_unhappy", "polite complaint"), ("give_up", "give up")]
+# reject, repeat the request, move on without words and silence were read as a yes 0 times by both versions (see the caption)
+for b in ("reject", "repeat", "move_on", "silent"):
+    assert ev["live"]["yes_by_behaviour"][b].startswith("0/") and ev["live_v2"]["yes_by_behaviour"][b].startswith("0/"), b
 pct = lambda key, b: 100 * int(ev[key]["yes_by_behaviour"][b].split("/")[0]) / int(ev[key]["yes_by_behaviour"][b].split("/")[1])
-fig, ax = plt.subplots(figsize=(6.4, 3.4))
+fig, ax = plt.subplots(figsize=(5.0, 1.95))
 ys = range(len(order))[::-1]
 ax.barh([y + 0.2 for y in ys], [pct("live_v2", b) for b, _ in order], height=0.38, color=LIGHT, label="sense v2")
 ax.barh([y - 0.2 for y in ys], [pct("live", b) for b, _ in order], height=0.38, color=GREEN, label="sense v3 (waits for a clear verdict)")
@@ -182,8 +172,7 @@ ax.set_yticks(list(ys), [n for _, n in order])
 for t, (b, _) in zip(ax.get_yticklabels(), order):
     t.set_fontweight("bold" if b in ("polite_unhappy", "give_up") else "normal")
 ax.set_xlim(0, 105); ax.set_xlabel("share of each reaction read as a yes (%)")
-ax.legend(fontsize=8, frameon=False, loc="lower right")
-ax.set_title("Sense v3 stopped reading polite complaints and give-ups as success")
+ax.legend(fontsize=7.5, frameon=False, loc="lower right")
 save(fig, "fig3_sense_v2_v3")
 
 gaps = json.loads((DATA / "sense" / "sense3_status.json").read_text())["check"]["gaps"]
@@ -206,7 +195,6 @@ a1.set_yticks(ys, [f"{n}  [{w}]" for _, n, w in kinds], fontsize=7.5)
 a1.set_xlim(0, 125); a1.set_xticks([0, 50, 100]); a1.set_xlabel("teacher's reading (%): yes / no / not clear")
 from matplotlib.patches import Patch
 a1.legend(handles=[Patch(color=BLUE, label="yes"), Patch(color=GREY, label="no"), Patch(color="#e3e3dc", label="not clear")], fontsize=7, frameon=False, ncol=3, loc="lower center", bbox_to_anchor=(0.4, -0.34))
-a1.set_title("Even the teacher read half of polite complaints and sarcasm as a yes", loc="left", fontsize=9.5, fontweight="bold")
 fig.tight_layout()
 save(fig, "fig8a_teacher_written")
 
@@ -219,6 +207,5 @@ a2.axvline(3, color=DARK, ls=":", lw=1); a2.text(3, len(items) - 0.4, "3% target
 for i, (_, v) in enumerate(items):
     a2.text(v + 0.15, i, f"{v:.1f}%", va="center", fontsize=7.5)
 a2.set_xlim(0, 10); a2.set_xlabel("unseen type's noes read as a yes (%)")
-a2.set_title("Sense v2 on a task type it never saw", loc="left", fontsize=9.5, fontweight="bold")
 fig.tight_layout()
 save(fig, "fig8b_v2_unseen_tasks")
