@@ -90,9 +90,8 @@ Figure files keep the names they were drawn under; this is where each appears in
 | Figure 1 | `fig1_creature` | `src/diagrams.py` |
 | Figure 2 | `fig2_exp1_judges` (panels a and b) | `src/figures.py` |
 | Figure 3 | `fig10_exp2_exp3` | `src/figures.py` |
-| Figure 4 | `fig3_sense_v2_v3` | `src/figures.py` |
-| Figure 5 | `fig4_sense_v3_60_days` | `src/figures.py` |
-| Figure 6 | `fig6_failed_lessons` | `src/figures.py` |
+| Figure 4 | `fig4_exp4_live_and_60_days` (panels a and b) | `src/figures.py` |
+| Figure 5 | `fig6_failed_lessons` | `src/figures.py` |
 | Figure C1 (appendix) | `fig8b_v2_unseen_tasks` | `src/figures.py` |
 | Figure C2 (appendix) | `fig8a_teacher_written` | `src/figures.py` |
 | Figure C3 (appendix) | `fig9_sense_decision` | `src/diagrams.py` |

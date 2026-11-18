@@ -64,7 +64,7 @@ def band_plot(ax, series, styles, label_names=None):
         ends.append([mean[-1], days[-1], f"{(label_names or {}).get(j, j)} {mean[-1]:.0f}", color])
     ends.sort()
     for k in range(1, len(ends)):  # keep end labels at least 5 points apart
-        ends[k][0] = max(ends[k][0], ends[k - 1][0] + 5)
+        ends[k][0] = max(ends[k][0], ends[k - 1][0] + 7)
     for y, x, text, color in ends:
         ax.annotate(text, (x, y), xytext=(4, 0), textcoords="offset points", va="center", color=color, fontsize=8)
     ax.set_ylim(0, 100)
@@ -104,13 +104,28 @@ a2.set_title("(b) Experiment 3: 3 of 5 sense v2 lives collapsed", fontsize=9)
 fig.tight_layout(w_pad=3)
 save(fig, "fig10_exp2_exp3")
 
-# Fig 4: Experiment 4, sense v3 over 60 days
-s = curves("clear-verdict-14d")
-fig, ax = plt.subplots(figsize=(5.6, 2.45))
-band_plot(ax, s, {"oracle": (BLUE, 2.2, True, "-"), "sense": (GREEN, 2.2, True, "-"), "both": (GREY, 1.8, False, "-")},
+# Fig 4: Experiment 4, (a) sense v2 against v3 on 2,622 recorded reactions, (b) the lives over 60 days
+ev = json.loads((DATA / "sense" / "sense3_train-status.json").read_text())["eval3"]
+order = [("praise", "praise"), ("accept", "accept"), ("settle", "settle for less"), ("adjust", "ask for a change"),
+         ("polite_unhappy", "polite complaint"), ("give_up", "give up")]
+# reject, repeat the request, move on without words and silence were read as a yes 0 times by both versions (see the caption)
+for b in ("reject", "repeat", "move_on", "silent"):
+    assert ev["live"]["yes_by_behaviour"][b].startswith("0/") and ev["live_v2"]["yes_by_behaviour"][b].startswith("0/"), b
+pct = lambda key, b: 100 * int(ev[key]["yes_by_behaviour"][b].split("/")[0]) / int(ev[key]["yes_by_behaviour"][b].split("/")[1])
+fig, (a1, a2) = plt.subplots(1, 2, figsize=(6.3, 2.2), gridspec_kw={"width_ratios": [1, 1.1], "wspace": 0.62})
+ys = range(len(order))[::-1]
+a1.barh([y + 0.2 for y in ys], [pct("live_v2", b) for b, _ in order], height=0.38, color=LIGHT, label="sense v2")
+a1.barh([y - 0.2 for y in ys], [pct("live", b) for b, _ in order], height=0.38, color=GREEN, label="sense v3")
+a1.set_yticks(list(ys), [n for _, n in order], fontsize=7.5)
+for t, (b, _) in zip(a1.get_yticklabels(), order):
+    t.set_fontweight("bold" if b in ("polite_unhappy", "give_up") else "normal")
+a1.set_xlim(0, 105); a1.set_xlabel("share of each reaction read as a yes (%)", fontsize=8)
+a1.legend(fontsize=7, frameon=False, loc="lower right")
+a1.set_title("(a) Live test of the senses", fontsize=9)
+band_plot(a2, curves("clear-verdict-14d"), {"oracle": (BLUE, 2.0, True, "-"), "sense": (GREEN, 2.0, True, "-"), "both": (GREY, 1.6, False, "-")},
           {"sense": "sense v3"})
-ax.set_xlim(0, 60)
-save(fig, "fig4_sense_v3_60_days")
+a2.set_xlim(0, 60); a2.set_title("(b) Experiment 4: 60 days", fontsize=9)
+save(fig, "fig4_exp4_live_and_60_days")
 
 # Fig 5: Experiment 5, tau2-bench exams per domain
 fig, axes = plt.subplots(1, 3, figsize=(7.0, 2.8), sharey=True)
@@ -156,24 +171,6 @@ ax.set_xlim(-3, 103); ax.set_ylim(-3, 70); ax.grid(axis="y", color="#e5e5e5", lw
 ax.legend(fontsize=7.5, frameon=False, loc="upper right")
 save(fig, "fig6_failed_lessons")
 
-# Fig 3: sense v2 against v3 on 2,622 recorded reactions
-ev = json.loads((DATA / "sense" / "sense3_train-status.json").read_text())["eval3"]
-order = [("praise", "praise"), ("accept", "accept"), ("settle", "settle for less"), ("adjust", "ask for a change"),
-         ("polite_unhappy", "polite complaint"), ("give_up", "give up")]
-# reject, repeat the request, move on without words and silence were read as a yes 0 times by both versions (see the caption)
-for b in ("reject", "repeat", "move_on", "silent"):
-    assert ev["live"]["yes_by_behaviour"][b].startswith("0/") and ev["live_v2"]["yes_by_behaviour"][b].startswith("0/"), b
-pct = lambda key, b: 100 * int(ev[key]["yes_by_behaviour"][b].split("/")[0]) / int(ev[key]["yes_by_behaviour"][b].split("/")[1])
-fig, ax = plt.subplots(figsize=(5.0, 1.95))
-ys = range(len(order))[::-1]
-ax.barh([y + 0.2 for y in ys], [pct("live_v2", b) for b, _ in order], height=0.38, color=LIGHT, label="sense v2")
-ax.barh([y - 0.2 for y in ys], [pct("live", b) for b, _ in order], height=0.38, color=GREEN, label="sense v3 (waits for a clear verdict)")
-ax.set_yticks(list(ys), [n for _, n in order])
-for t, (b, _) in zip(ax.get_yticklabels(), order):
-    t.set_fontweight("bold" if b in ("polite_unhappy", "give_up") else "normal")
-ax.set_xlim(0, 105); ax.set_xlabel("share of each reaction read as a yes (%)")
-ax.legend(fontsize=7.5, frameon=False, loc="lower right")
-save(fig, "fig3_sense_v2_v3")
 
 gaps = json.loads((DATA / "sense" / "sense3_status.json").read_text())["check"]["gaps"]
 kinds = [("accepts", "plain acceptance", "yes"), ("builds_on", "builds on the result", "yes"), ("strong_reject", "firm rejection", "no"),
