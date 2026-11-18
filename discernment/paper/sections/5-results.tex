@@ -1,6 +1,6 @@
 \section{Results}
 
-WebShop scores are the exam: the mean reward, 0 to 100, on 50 held-out tasks never learned from. Each number is the mean of 5 seeds, with ranges over lives where given. Experiment 1 asks who should judge before there is any sense (5.1); Experiments 2-4 try the three versions of the sense in turn (5.2-5.4); Experiment 5 takes sense v3 to a benchmark whose customer cannot see the outcome (5.5); and 5.6 looks across all WebShop lives.
+WebShop scores are the exam: the mean reward, 0 to 100, on 50 held-out tasks never learned from. Each number is the mean of 5 seeds, with ranges over lives where given.
 
 \textbf{What a WebShop life learns.} Nearly all of what is learned, and lost, on WebShop is to finish the purchase. Before any learning the creature bought something on only 19\% of the exam tasks and ran into the 15-step limit on about 80\% (day 0, all 115 WebShop lives). With the \emph{oracle} as judge it bought on 99\% by day 14, in 3 steps on average (25 lives). The reward of a purchase hardly changed: 67 out of 100 before, 63 after. The 12 lives that collapsed (exam of 3 or below on day 14) bought on 4\%, below where they began. So ``collapse'' on WebShop means the creature stopped buying, and what the lessons teach is mostly to press \emph{Buy Now}, not to match products better. These counts come from the step logs in the level-3 archive, not from \texttt{data/}.
 
@@ -11,7 +11,7 @@ WebShop scores are the exam: the mean reward, 0 to 100, on 50 held-out tasks nev
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.95\linewidth]{figures/fig2_exp1_judges}
-\caption{Experiment 1. (a) Five judges, 5 seeds each, daily exams: only the \emph{oracle} kept what it learned, 63 on day 14 against 27 for self-judging; one \emph{self} life crashed early and is left out. (b) A year: 5 \emph{both} lives and 1 \emph{oracle} life, with exams daily to day 30, every 2 days to day 90, then weekly; self-judging never recovered (5 after a year, the \emph{oracle} 61). Lines are means over lives, bands the lowest to highest life.}
+\caption{Experiment 1. (a) Five judges, 5 seeds each: only the \emph{oracle} kept what it learned. (b) A year: 5 \emph{both} lives and 1 \emph{oracle} life, with exams daily to day 30, every 2 days to day 90, then weekly. Lines are means, bands the lowest to highest life; one \emph{self} life crashed early and is left out.}
 \label{fig:2}
 \end{figure}
 
@@ -55,7 +55,7 @@ Experiment 4 used sense v3, which waits for a clear verdict before it scores a r
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=1.0\linewidth]{figures/fig4_exp4_live_and_60_days}
-\caption{Experiment 4. (a) The live test: sense v2 and v3 reading the same 2,622 reactions recorded in the Experiment 3 lives, up to 300 per behaviour. Sense v3 stopped reading polite complaints and give-ups as success; rejections, repeated requests, moving on without words and silence (0 of 1,092 reactions) were read as a yes by neither version. (b) The lives, 5 seeds per judge, 60 days, exams daily to day 30 and then every 2 days: sense v3 held near 45 for two weeks, then faded to 15 by day 60; the \emph{oracle} stayed at 62.}
+\caption{Experiment 4. (a) The live test: sense v2 and v3 reading the same 2,622 reactions from the Experiment 3 lives, up to 300 per behaviour; rejections, repeated requests, moving on without words and silence (0 of 1,092 reactions) were read as a yes by neither version. (b) The lives, 5 seeds per judge; exams daily to day 30, then every 2 days.}
 \label{fig:4}
 \end{figure}
 
