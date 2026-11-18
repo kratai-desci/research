@@ -21,8 +21,8 @@ Experiment 5 put the creature in $\tau^2$-bench's customer-service role, with Ge
 \label{fig:5}
 \end{figure}
 
-{\def\LTcaptype{none} % do not increment counter
-\begin{longtable}[]{@{}
+\begin{center}\small
+\begin{tabular}{@{}
   >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1565}}
   >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1565}}
   >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1565}}
@@ -43,15 +43,13 @@ Lessons a day
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Lessons truly successful
 \end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
+\midrule
 \emph{oracle} 1.7B & 28 $\rightarrow$ 35 & 11 $\rightarrow$ 6 & 32 $\rightarrow$ 10 & 5.3 & 100\% \\
 \emph{sense v3}, 1.7B & 25 $\rightarrow$ 2 & 11 $\rightarrow$ 3 & 33 $\rightarrow$ 8 & 2.6 & 20\% \\
 \emph{oracle} 0.6B & 32 $\rightarrow$ 32 & 5 $\rightarrow$ 5 & 32 $\rightarrow$ 12 & 5.2 & 100\% \\
 \emph{sense v3}, 0.6B & 35 $\rightarrow$ 35 & 5 $\rightarrow$ 5 & 31 $\rightarrow$ 17 & 2.4 & 20\% \\
-\end{longtable}
-}
+\bottomrule
+\end{tabular}
+\end{center}
 
 Share of exam tasks fully done, day 0 $\rightarrow$ day 30, mean of 3 seeds. Exams are small: one airline task is 5 points, one retail or telecom task 2.5, so moves under about 10 points are within noise. Exam conversations that broke, for example a loop past the length limit, are left out; counting them as failures would lower the collapsed lives further. The 0.6B barely moved on retail: every 0.6B life scored exactly 5\% on day 0 and on day 30, and 59 of its 66 retail exams scored 5\%.

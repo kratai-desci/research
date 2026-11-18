@@ -13,3 +13,7 @@ paper/main.pdf
 
 # level-3 archive (published separately, too large for git)
 level3/
+
+# generated arXiv upload package (rebuild from paper/)
+paper/arxiv/
+paper/discernment-arxiv.zip
