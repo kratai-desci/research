@@ -23,14 +23,14 @@ def canvas(w, h):
     return fig, ax
 
 
-def box(ax, x, y, w, h, title=None, lines=(), main=False, fill=None, dashed=False, size=9):
+def box(ax, x, y, w, h, title=None, lines=(), main=False, fill=None, dashed=False, size=9, step=16, gap=19):
     ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle="round,pad=0,rounding_size=8", lw=2 if main else 1.1,
                                 ec=ACC if main else EDGE, fc=(fill or ("#e4edfb" if main else "white")), ls="--" if dashed else "-"))
     ty = y + 22
     if title:
-        ax.text(x + 12, ty, title, fontsize=size, fontweight="bold", color=INK, va="center"); ty += 19
+        ax.text(x + 12, ty, title, fontsize=size, fontweight="bold", color=INK, va="center"); ty += gap
     for line in lines:
-        ax.text(x + 12, ty, line, fontsize=size - 1.2, color=INK if main else QUIET, va="center"); ty += 16
+        ax.text(x + 12, ty, line, fontsize=size - 1.2, color=INK if main else QUIET, va="center"); ty += step
 
 
 def arrow(ax, pts, label=None, at=None):
@@ -48,30 +48,31 @@ def save(fig, name):
 
 
 # Fig 1: the creature (wide and short, so it sits in the text instead of taking a page)
-fig, ax = canvas(760, 372)
-box(ax, 24, 6, 712, 94, fill=TINT); ax.text(40, 22, "The creature", fontsize=10.5, fontweight="bold", color=INK, va="center")
-box(ax, 40, 34, 520, 58, "Learning adapter: a LoRA (rank 8, top 8 layers)", ["everything the creature learns lives here; loaded each morning"])
-box(ax, 576, 34, 144, 58, "Base model", ["Qwen3 0.6B or 1.7B"])
-bw, rowY, bh = 154, 136, 100
+T = dict(step=14.5, gap=17)  # tighter lines inside the boxes
+fig, ax = canvas(760, 326)
+box(ax, 24, 6, 712, 80, fill=TINT); ax.text(40, 20, "The creature", fontsize=10.5, fontweight="bold", color=INK, va="center")
+box(ax, 40, 28, 520, 50, "Learning adapter: a LoRA (rank 8, top 8 layers)", ["everything the creature learns lives here; loaded each morning"], **T)
+box(ax, 576, 28, 144, 50, "Base model", ["Qwen3 0.6B or 1.7B"], **T)
+bw, rowY, bh = 154, 108, 92
 cx = lambda i: 24 + i * (bw + 32); mid = lambda i: cx(i) + bw / 2; cy = rowY + bh / 2
 steps = [("1  Day: work", ["30 new tasks;", "explores, temp. 0.7;", "the user reacts"], False),
          ("2  Judge", ["picks the attempts", "worth learning:", "oracle, stated verdict,", "self, both or sense"], True),
          ("3  Night: sleep", ["SFT + DPO on the", "lessons; replays", "the last 150"], False),
          ("4  Exam", ["held-out tasks,", "never learned from;", "greedy, temp. 0"], False)]
 for i, (t, lines, main) in enumerate(steps):
-    box(ax, cx(i), rowY, bw, bh, t, lines, main=main)
+    box(ax, cx(i), rowY, bw, bh, t, lines, main=main, **T)
 for i in range(3):
     arrow(ax, [(cx(i) + bw, cy), (cx(i + 1), cy)])
-arrow(ax, [(mid(0), 92), (mid(0), rowY)], "runs the day's work", (mid(0) + 8, 114))
-arrow(ax, [(mid(2), rowY), (mid(2), 92)], "updates the adapter", (mid(2) + 8, 114))
-box(ax, 24, 266, 320, 100, "Feedback sense: separate and frozen",
+arrow(ax, [(mid(0), 78), (mid(0), rowY)], "runs the day's work", (mid(0) + 8, 93))
+arrow(ax, [(mid(2), rowY), (mid(2), 78)], "updates the adapter", (mid(2) + 8, 93))
+box(ax, 24, 228, 320, 92, "Feedback sense: separate and frozen",
     ["Qwen3-0.6B with its own LoRA, never trained", "during a life. Reads the request, the user's", "words and next move, never the result.",
-     "v1, v2: one question; v3 first asks if clear."])
-arrow(ax, [(mid(1), 266), (mid(1), rowY + bh)], "sense judge only", (mid(1) + 8, 251))
-box(ax, 372, 266, 364, 100, "Building the sense (v2, v3), before any life", [
+     "v1, v2: one question; v3 first asks if clear."], **T)
+arrow(ax, [(mid(1), 228), (mid(1), rowY + bh)], "sense judge only", (mid(1) + 8, 214))
+box(ax, 372, 228, 364, 92, "Building the sense (v2, v3), before any life", [
     "Reactions: 110,906 from 6 datasets + hard cases", "Teacher Qwen3-32B labels each, with probabilities",
-    "Student Qwen3-0.6B (LoRA) learns to match (KL)", "Calibrated: at most 3% of noes read as a yes"], dashed=True)
-arrow(ax, [(372, 316), (344, 316)])
+    "Student Qwen3-0.6B (LoRA) learns to match (KL)", "Calibrated: at most 3% of noes read as a yes"], dashed=True, **T)
+arrow(ax, [(372, 274), (344, 274)])
 save(fig, "fig1_creature")
 
 # Fig 9: how sense v3 decides (v1 and v2 ask only the second question)

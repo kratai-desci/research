@@ -161,14 +161,14 @@ def kind(l):
     return j if j in ("oracle", "stated verdict") else "self-judging"
 
 
-fig, ax = plt.subplots(figsize=(4.3, 2.5))
+fig, ax = plt.subplots(figsize=(6.3, 2.0))
 colors = {"self-judging": LIGHT, "stated verdict": PINK, "sense v1": "#8a6fbf", "sense v2": "#c8553d", "sense v3": GREEN, "oracle": BLUE}
 for k, c in colors.items():
     pts = [(100 * les[n][1] / les[n][0], day14[n]) for n, l in life.items() if kind(l) == k and les[n][0] > 0 and n in day14]
     ax.scatter([p[0] for p in pts], [p[1] for p in pts], s=18, color=c, alpha=0.8, label=k.replace("stated verdict", "stated"), lw=0)
 ax.set_xlabel("share of lessons that were failed attempts (%)"); ax.set_ylabel("exam on day 14")
 ax.set_xlim(-3, 103); ax.set_ylim(-3, 70); ax.grid(axis="y", color="#e5e5e5", lw=0.6)
-ax.legend(fontsize=7.5, frameon=False, loc="upper right")
+ax.legend(fontsize=7.5, frameon=False, loc="upper right", ncol=2, columnspacing=1.2)
 save(fig, "fig6_failed_lessons")
 
 
