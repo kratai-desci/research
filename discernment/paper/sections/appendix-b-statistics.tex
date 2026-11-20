@@ -1,6 +1,6 @@
 \section{Statistics}\label{app:stats}
 
-Every test in the paper, recomputed from the experiment databases by src/stats.py in the repository. Each life (one seed) is one sample. Two-group comparisons are reported as a Welch t-test and a Mann-Whitney U test, because sense lives either stay near the \emph{oracle} or collapse, so the data are not bell-shaped. The six primary claims (marked $\star$) are Holm-corrected as one family; the others are supporting.
+Every test in the paper, recomputed from the released data by src/stats.py in the repository. Each life (one seed) is one sample. Two-group comparisons are reported as a Welch t-test and a Mann-Whitney U test, because sense lives either stay near the \emph{oracle} or collapse, so the data are not bell-shaped. The six primary claims (marked $\star$) are Holm-corrected as one family; the others are supporting.
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2687}}
@@ -48,6 +48,8 @@ $\star$ 5.6: the same, lives not judged by the \emph{oracle} & 72 lives & Spearm
 $\star$ 5.6: a failed lesson on night 1 predicts collapse & collapsed 6 of 7 with one, 0 of 13 without & Fisher exact & \textless{} 0.001; Holm \textless{} 0.001 \\
 Exp 5: 1.7B \emph{sense v3} lives fell, day 0 to day 30 & 22.7 vs 4.4 (3, paired) & paired t = 6.12 & 0.026 \\
 Exp 5: 1.7B \emph{oracle} against 1.7B \emph{sense v3}, day 30 & 13.4 $\pm$ 5.1 (3) vs 4.4 $\pm$ 5.9 (3) & Welch t = 1.99; Mann-Whitney & 0.12; 0.20 \\
+Exp 5: 1.7B \emph{oracle} lives fell, day 0 to day 30 & 22.7 vs 13.4 (3, paired) & paired t = 2.42 & 0.14 \\
+Exp 5: 0.6B \emph{oracle} lives fell, day 0 to day 30 & 21.0 vs 13.0 (3, paired) & paired t = 2.49 & 0.13 \\
 \end{longtable}
 
 With 3-5 lives per group these tests have little power: a p-value above 0.05 does not show the groups are alike. Where a single collapsed life inflates the spread (Exp 2-4, day 14), the rank test, which every sense life below every \emph{oracle} life satisfies, is the fairer reading.

@@ -27,6 +27,7 @@ their own licences.
 uv run --with scipy python src/stats.py           # every test in Appendix B -> data/stats.json
 uv run --with matplotlib python src/figures.py    # the data figures -> paper/figures/
 uv run --with matplotlib python src/diagrams.py   # Fig. 1 and the sense diagram -> paper/figures/
+python3 src/tau2_reactions.py                     # the customer's last messages behind the 94% in Section 5.5
 ```
 
 Compile the paper in `paper/` with `tectonic -X compile main.tex` or `latexmk -pdf main.tex` (pdflatex + bibtex), or upload `paper/` to Overleaf. `main.tex` builds the anonymous review version; change `\anontrue` to `\anonfalse` for the version with authors, funding and links. The first arXiv version (a longer, article-class layout) is at commit `63613c8`.

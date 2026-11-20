@@ -136,6 +136,17 @@ results.append({"claim": "Exp 5: 1.7B sense v3 lives fell from day 0 to day 30 (
                 "groups": f"day 0 {sum(d0[k] for k in both) / len(both):.1f} vs day 30 {sum(d30[k] for k in both) / len(both):.1f} (n={len(both)} lives)",
                 "statistic": f"t = {p.statistic:.2f}", "p": float(p.pvalue), "primary": False})
 
+# Experiment 5: did the oracle lives fall too? (3 lives per size, paired, day 0 to day 30, all exam tasks)
+for size in ("1.7B", "0.6B"):
+    names = {l["life"] for l in e5 if l["judge"] == f"oracle-{size}"}
+    d0, d30 = exam(names, 0, ALL), exam(names, 30, ALL)
+    both = sorted(set(d0) & set(d30))
+    p = stats.ttest_rel([d0[k] for k in both], [d30[k] for k in both])
+    fell = sum(d30[k] < d0[k] for k in both)
+    results.append({"claim": f"Exp 5: {size} oracle lives fell from day 0 to day 30 (all exam tasks)", "test": "paired t",
+                    "groups": f"day 0 {sum(d0[k] for k in both) / len(both):.1f} vs day 30 {sum(d30[k] for k in both) / len(both):.1f} (n={len(both)} lives, {fell} fell)",
+                    "statistic": f"t = {p.statistic:.2f}", "p": float(p.pvalue), "primary": False})
+
 # Holm correction over the primary claims
 prim = sorted([r for r in results if r["primary"]], key=lambda r: r["p"])
 running = 0.0

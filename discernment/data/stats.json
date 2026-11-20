@@ -125,5 +125,21 @@
   "statistic": "t = 6.12",
   "p": 0.025704838109059436,
   "primary": false
+ },
+ {
+  "claim": "Exp 5: 1.7B oracle lives fell from day 0 to day 30 (all exam tasks)",
+  "test": "paired t",
+  "groups": "day 0 22.7 vs day 30 13.4 (n=3 lives, 3 fell)",
+  "statistic": "t = 2.42",
+  "p": 0.13636378986459607,
+  "primary": false
+ },
+ {
+  "claim": "Exp 5: 0.6B oracle lives fell from day 0 to day 30 (all exam tasks)",
+  "test": "paired t",
+  "groups": "day 0 21.0 vs day 30 13.0 (n=3 lives, 3 fell)",
+  "statistic": "t = 2.49",
+  "p": 0.13057173279733789,
+  "primary": false
  }
 ]
