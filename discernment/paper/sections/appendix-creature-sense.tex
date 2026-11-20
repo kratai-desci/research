@@ -1,6 +1,6 @@
 \section{Creature and sense details}\label{app:details}
 
-This appendix holds the details moved out of Section 3: how a day and a night work, and how the three senses were built and tested.
+This appendix holds the details moved out of Section~\ref{sec:creature}: how a day and a night work, and how the three senses were built and tested.
 
 \subsection{The creature}
 
@@ -8,9 +8,9 @@ This appendix holds the details moved out of Section 3: how a day and a night wo
 
 \textbf{Day.} In the first step of each day (Fig.~\ref{fig:1}, step 1), the creature works through a fixed number of new tasks (30 a day in every experiment), sampling at temperature 0.7 so it explores. After each attempt the simulated user reacts in words. The true outcome is logged for analysis, but the creature sees it only when the \emph{oracle} is its judge.
 
-\textbf{Night.} At night (Fig.~\ref{fig:1}, step 3) the adapter, and only the adapter, is trained on the lessons with supervised fine-tuning, plus DPO \cite{rafailov2023dpo} ($\beta$ = 0.1) on the preference pairs. Learning rate 1e-4, 2 epochs, at most 40 steps a night. Each night replays the 150 most recent training examples, one per step of a lesson, so old lessons fade out as new ones arrive; on WebShop a lesson takes about 3 or 4 steps, so where each lesson counts once the replay holds about 40--50 lessons, and on $\tau^2$-bench it holds the 150 most recent lessons. A lesson can count once for each of its steps, or once in all, with its loss spread across its steps so that a 15-step attempt counts as much as a 3-step one; Section 4 says which experiments used which.
+\textbf{Night.} At night (Fig.~\ref{fig:1}, step 3) the adapter, and only the adapter, is trained on the lessons with supervised fine-tuning, plus DPO \cite{rafailov2023dpo} ($\beta$ = 0.1) on the preference pairs. Learning rate 1e-4, 2 epochs, at most 40 steps a night. Each night replays the 150 most recent training examples, one per step of a lesson, so old lessons fade out as new ones arrive; on WebShop a lesson takes about 3 or 4 steps, so where each lesson counts once the replay holds about 40--50 lessons, and on $\tau^2$-bench it holds the 150 most recent lessons. A lesson can count once for each of its steps, or once in all, with its loss spread across its steps so that a 15-step attempt counts as much as a 3-step one; Section~\ref{sec:setup} says which experiments used which.
 
-\textbf{Exams.} The exam (Fig.~\ref{fig:1}, step 4) uses fixed held-out tasks, never learned from, attempted greedily (temperature 0): every morning on WebShop (less often late in the long lives; Section 4), every 3 days on $\tau^2$-bench, and on day 0 before any learning. The next day starts with the adapter that night produced (the loop along the bottom of Fig.~\ref{fig:1}), so each day's work uses everything learned so far.
+\textbf{Exams.} The exam (Fig.~\ref{fig:1}, step 4) uses fixed held-out tasks, never learned from, attempted greedily (temperature 0): every morning on WebShop (less often late in the long lives; Section~\ref{sec:setup}), every 3 days on $\tau^2$-bench, and on day 0 before any learning. The next day starts with the adapter that night produced (the loop along the bottom of Fig.~\ref{fig:1}), so each day's work uses everything learned so far.
 
 \subsection{Building the senses}
 
