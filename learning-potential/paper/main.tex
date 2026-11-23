@@ -717,7 +717,10 @@ retrieval beat fine-tuning for injecting knowledge \citep{ovadia2024fine,soudani
 small model, weights were the only route that worked below the floor. Self-written notes, which improved large models in
 the cheatsheet and playbook designs \citep{suzgun2026dynamic,zhang2026agentic}, did not help any model at this scale; the
 generic, repeated lessons of Section~\ref{sec:res-notes} are an extreme form of the brevity bias and context collapse
-that Zhang et al.~\citep{zhang2026agentic} describe in evolving contexts.
+that Zhang et al.~\citep{zhang2026agentic} describe in evolving contexts. LifelongAgentBench found that replaying past
+experience in the prompt helps agents little, because of irrelevant information and limited context
+\citep{zheng2025lifelongagentbench}; in small models we see the same limit more sharply, as retrieved examples gave
+significant gains only on practice and lowered practice for Qwen3-1.7B, whose prompts were already the longest.
 
 Two other explanations fit less well. Retrieved examples are written in BFCL's reference syntax rather than in each
 model's own call format, so a weak model might simply fail to carry them over; but the notes, which are plain advice,
@@ -788,7 +791,9 @@ job, for these models, is real but local; practice tasks that are harder, more v
 benchmark's difficulty would test how far it can reach. The result is also a lesson about evaluation: for the models above the floor, LoRA's probe
 gains of 22 to 42 points arrived at the benchmark at a size its 200 target questions cannot resolve, so a single benchmark
 category is too blunt an instrument to judge learning on the job, and a larger held-out test, or one pooled over seeds,
-is needed to tell a small gain from none.
+is needed to tell a small gain from none. Benchmarks that score learning along the stream itself
+\citep{wu2024streambench,wei2025evomemory} measure the first of our three distances; our results show how much the
+other two can change the picture.
 
 \subsection{Teaching vs judging}\label{sec:teachjudge}
 The two kinds of feedback suit different starting points. Below the floor only teaching works: judging learns from
