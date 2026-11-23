@@ -76,8 +76,10 @@ writing notes about what worked \citep{suzgun2026dynamic,zhang2026agentic} or by
 examples \citep{zheng2024synapse}; or through its weights, by continual fine-tuning of a small adapter
 \citep{hu2022lora}. These routes are usually studied separately and with large models. Where they have been compared
 \citep{mosbach2023few,ovadia2024fine,soudani2024fine}, the comparison was made once, on fixed labelled data, for
-classification or factual knowledge, with no feedback on the model's own attempts. Whether small models can learn tool use
-continually, and which route serves them, is open.
+classification or factual knowledge, with no feedback on the model's own attempts. Benchmarks that track learning over a
+stream of tasks exist, but they mostly evaluate in-context strategies by a single score along the stream
+(Section~\ref{sec:rw-eval}). Whether small models can learn tool use continually, and which route serves them, is
+open.
 
 This paper is a measurement study. Rather than propose a new learning method, we build an evaluation protocol for
 learning on the job and use it to compare three existing methods under the same conditions. What we measure is each
