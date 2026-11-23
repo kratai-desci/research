@@ -697,6 +697,14 @@ minimum competence that in-context learning needs and that weights can supply: L
 by producing no call at all, answering in prose or writing code instead, so an example of the right call had nothing to
 build on, whereas LFM2.5, which already produced calls, did gain from retrieval while practising.
 
+This reverses what earlier comparisons found for other kinds of learning, where the context route did as well as
+fine-tuning or better: few-shot fine-tuning and in-context learning generalised similarly \citep{mosbach2023few}, and
+retrieval beat fine-tuning for injecting knowledge \citep{ovadia2024fine,soudani2024fine}. For a procedural skill in a
+small model, weights were the only route that worked below the floor. Self-written notes, which improved large models in
+the cheatsheet and playbook designs \citep{suzgun2026dynamic,zhang2026agentic}, did not help any model at this scale; the
+generic, repeated lessons of Section~\ref{sec:res-notes} are an extreme form of the brevity bias and context collapse
+that Zhang et al.~\citep{zhang2026agentic} describe in evolving contexts.
+
 Two other explanations fit less well. Retrieved examples are written in BFCL's reference syntax rather than in each
 model's own call format, so a weak model might simply fail to carry them over; but the notes, which are plain advice,
 failed as completely, and LoRA, which trains on the model's own format, succeeded. Falcon's prompts overran its short
@@ -710,7 +718,13 @@ Learning changed more than the skill being practised. The largest change was not
 (Fig.~\ref{fig:overcalling}): after LoRA teaching, every model called a tool when none fitted, losing 31 to 75 points
 of correct abstention, and LFM2.5 and Qwen3.5 did so under judging too, while Llama and Falcon called correctly more
 often. A likely cause is that every practice task asks for calls in every turn, so the training targets never show the
-model declining; practice for tool use should include requests that no tool can serve. Notes shifted the same balance in
+model declining; practice for tool use should include requests that no tool can serve. Function-calling work has met
+this problem in offline training: Hammer adds a dataset of irrelevant functions so that small on-device models stay
+able to decline \citep{lin2025robust}, and our results show what on-the-job learning does without such data. Nor is this
+the forgetting that continual fine-tuning is usually checked for \citep{kirkpatrick2017overcoming,luo2025empirical}.
+LoRA with replay \citep{rolnick2019experience}, which forgets less than full fine-tuning \citep{biderman2024lora},
+still changed the model's habits, and a check of retained skills alone would have missed it, since correct calls even
+rose for two models. Notes shifted the same balance in
 either direction, and LoRA also erased Qwen3.5's memory score in every seed. An overall score blurs all of this: a model
 that gains on the target category and loses its ability to decline may score the same overall as before. Evaluations of
 learning on the job should therefore report each category, with the target named in advance.
@@ -727,8 +741,10 @@ A likely reason is distance from the model's own behaviour. Its passed attempts 
 training on them sharpens habits it has; expert calls, and reasoning written for them by a model that was given the
 answer, pull it towards outputs it would not produce, and the pull spreads to other skills. This is the logic of
 self-imitation and self-training \citep{oh2018self,zelikman2022star}, and our results suggest it matters more for
-preserving a model's other skills than for raising its target score. These results come from one reasoning model, and
-teaching was also variable for Qwen3.5, so the instability is not unique to reasoning models.
+preserving a model's other skills than for raising its target score. Reasoning is now trained into models directly
+\citep{guo2025deepseek,yang2025qwen3}; our results suggest that later fine-tuning on answers alone can undo part of that
+training, and that rationalization \citep{zelikman2022star} protects it only in part. These results come from one
+reasoning model, and teaching was also variable for Qwen3.5, so the instability is not unique to reasoning models.
 
 \subsection{Small gains on BFCL}\label{sec:transfer}
 \begin{figure}[t]
@@ -751,7 +767,9 @@ The main reason is likely that our tasks are easier than BFCL's, and the frozen 
 multi-turn task each solved two and a half to three times as much of our probe as of BFCL multi-turn base (Qwen3-1.7B 51
 against 20, LFM2.5 26 against 9, Qwen3.5 25.5 against 8.5). The first of our three generations spelled out every step,
 which BFCL leaves to the model, and BFCL's tasks probably also demand longer plans and closer tracking of state. Our tasks
-share one generator's style as well, so part of what was learned may be that style rather than the tools. Learning on the
+share one generator's style as well, so part of what was learned may be that style rather than the tools. This gap is
+the price of never practising on BFCL's own questions, which we avoided because public benchmarks may leak into
+training \citep{golchin2024time}. Learning on the
 job, for these models, is real but local; practice tasks that are harder, more varied, or calibrated against the
 benchmark's difficulty would test how far it can reach. The result is also a lesson about evaluation: for the models above the floor, LoRA's probe
 gains of 22 to 42 points arrived at the benchmark at a size its 200 target questions cannot resolve, so a single benchmark
