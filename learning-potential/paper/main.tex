@@ -71,8 +71,9 @@ examples \citep{zheng2024synapse}; or through its weights, by continual fine-tun
 \citep{hu2022lora}. These routes are usually studied separately and with large models. Where they have been compared
 \citep{mosbach2023few,ovadia2024fine,soudani2024fine}, the comparison was made once, on a fixed dataset, for classification or factual knowledge, with no feedback on the model's own attempts. Benchmarks that track learning over a
 stream of tasks exist, but they mostly evaluate in-context strategies by a single score along the stream
-(Section~\ref{sec:rw-eval}). Whether small models can learn tool use continually, and which route serves them, is
-open.
+(Section~\ref{sec:rw-eval}). Whether small models can learn tool use continually, and which route serves them, is open. We set out to find which of
+today's small models can learn tool use on the job, and so are worth building on, and how each learning method affects
+them (Section~\ref{sec:design} states the research questions).
 
 This paper is a measurement study. Rather than propose a new learning method, we build an evaluation protocol for
 learning on the job and use it to compare three existing methods under the same conditions. What we measure is each
@@ -207,14 +208,15 @@ oracle gives feedback after each task, and a learning method turns the feedback 
 of past tasks, or an adapter) that the next task uses. Everything except the learning method and the kind of feedback is
 held fixed across runs: the models and their harness, the tasks and, for a given seed, their order, the probe set and the final exam.
 
-The design answers four questions:
+The design answers three questions:
 \begin{itemize}[leftmargin=2.6em,itemsep=1pt,topsep=3pt]
-\item[\textbf{RQ1}] Can a method lift a model that cannot yet do the task at all? (Section~\ref{sec:floor})
-\item[\textbf{RQ2}] What else changes when a small model learns, and does a reasoning model need different targets?
-  (Sections~\ref{sec:side} and~\ref{sec:reasoningft})
-\item[\textbf{RQ3}] How far do gains made in practice reach, to unseen tasks of the same kind and to the official
-  benchmark? (Section~\ref{sec:transfer})
-\item[\textbf{RQ4}] Which kind of feedback suits which model? (Section~\ref{sec:teachjudge})
+\item[\textbf{RQ1}] Which of today's small models can learn tool use on the job, and so are worth building on?
+  (Sections~\ref{sec:floor} and~\ref{sec:choice})
+\item[\textbf{RQ2}] How does each learning method, notes, retrieval or LoRA, affect such a model: on the tasks it
+  practises, on unseen tasks, on the official benchmark, and in its other skills? (Sections~\ref{sec:side}
+  to~\ref{sec:transfer})
+\item[\textbf{RQ3}] Does it matter whether the feedback shows the answer (teaching) or only judges it (judging)?
+  (Section~\ref{sec:teachjudge})
 \end{itemize}
 
 We use a few terms throughout. A \emph{run} is one model learning by one method from one kind of feedback (an
@@ -439,7 +441,8 @@ form of self-imitation \citep{oh2018self,zelikman2022star}. A model that passes 
 
 \subsubsection{Teaching with the reasoning kept}
 Training a reasoning model on targets with an empty think block may teach it to stop reasoning, besides teaching it the
-calls. To separate the two, a third LoRA arm for Qwen3-1.7B keeps reasoning in the targets. At each step of the replay,
+calls. Plain teaching did harm Qwen3-1.7B in the first runs (Section~\ref{sec:res-reasoning}), so to separate the two we added
+a third LoRA arm for Qwen3-1.7B that keeps reasoning in the targets. At each step of the replay,
 the base model (not the adapter) sees the conversation so far and a one-off hint showing the correct next reply, and is
 asked to reason briefly about why that reply is right without mentioning the hint, as in STaR's rationalization
 \citep{zelikman2022star}. The reasoning is capped at 512 tokens, cut at the last full sentence, and stripped of any
@@ -699,15 +702,15 @@ would take longer and would have to run while the device is idle. The cost of ev
 (Section~\ref{sec:compute}).
 
 \section{Discussion}\label{sec:discussion}
-We take the four research questions in turn: whether a method can lift a model from zero (RQ1,
-Section~\ref{sec:floor}), what else changes when a model learns, in general and in a reasoning model (RQ2,
-Sections~\ref{sec:side} and~\ref{sec:reasoningft}), how far the gains reach beyond the practice tasks (RQ3,
-Section~\ref{sec:transfer}), and which feedback suits which model (RQ4, Section~\ref{sec:teachjudge}). We then set out
-the limits of the study (Section~\ref{sec:limits}) and, given them, the implications for practice
-(Section~\ref{sec:guidance}).
+We take the three research questions in turn. For RQ1, the floor decides which methods are open to a model
+(Section~\ref{sec:floor}). For RQ2, learning changed more than the practised skill (Section~\ref{sec:side}), most of all
+in the reasoning model (Section~\ref{sec:reasoningft}), and its gains reached the official benchmark only in part
+(Section~\ref{sec:transfer}). For RQ3, the two kinds of feedback suit different starting points
+(Section~\ref{sec:teachjudge}). We then answer RQ1 model by model (Section~\ref{sec:choice}), set out the limits of the
+study (Section~\ref{sec:limits}) and, given them, the implications for practice (Section~\ref{sec:guidance}).
 
 \subsection{Only LoRA lifts models from zero}\label{sec:floor}
-RQ1 has the clearest answer, and it reveals a floor: only weight updates lifted a model that could not yet do the task
+The first part of the answer to RQ1 is a floor: only weight updates lifted a model that could not yet do the task
 by more than a point or two. Models that solve no multi-turn task gained nothing from their own notes and about a
 point on practice from correct worked examples of the same tools, with no significant gain on unseen tasks, yet continual
 LoRA lifted all three on our tasks and two of them, Llama and Gemma, on the official benchmark. We read this as a
@@ -752,8 +755,8 @@ that gains on the target category and loses its ability to decline may score the
 learning on the job should therefore report each category, with the target named in advance.
 
 \subsection{Fine-tuning reasoning models}\label{sec:reasoningft}
-For the reasoning model, the second part of RQ2, what Qwen3-1.7B was trained on mattered more than whether its
-reasoning was kept. We expected the empty think
+For the reasoning model, RQ2 had a different answer from the other models, which led us to the follow-up arm: what
+Qwen3-1.7B was trained on mattered more than whether its reasoning was kept. We expected the empty think
 block in the expert targets to be the cause of the harm, by teaching the model to stop reasoning. Keeping the reasoning
 steadied learning and cut the losses in live and non-live questions by more than half, but did not remove the harm
 (correct abstention still fell by 20 points), and it was the only arm to lower the benchmark's target category
@@ -780,7 +783,7 @@ seeds show the seed mean. Solid: significant after Holm correction; hatched: not
 gain at any stage), retrieval for the models below the floor (within two points of zero), and retrieval for Qwen3-1.7B (practice $-$6.0,
 significant; no significant change on the probe or BFCL).}\label{fig:transfer}
 \end{figure}
-On RQ3, gains reached unseen tasks of the same kind but arrived at the official benchmark small: significant on its
+On how far a method's gains reach (RQ2), gains reached unseen tasks of the same kind but arrived at the official benchmark small: significant on its
 target category only for Llama and Gemma, and for LFM2.5 and Qwen3.5 only when pooled over its 800 multi-turn
 questions. Fig.~\ref{fig:transfer} brings together the gains reported in Section~\ref{sec:results} at three distances from
 practice. Retrieval's gains were of similar size on practice and on the probe for LFM2.5, but on 200 probe tasks they
@@ -807,7 +810,7 @@ or seeds, is needed to tell a small gain from none. Benchmarks that score learni
 other two can change the picture.
 
 \subsection{Teaching vs judging}\label{sec:teachjudge}
-On RQ4, the two kinds of feedback suit different starting points. Below the floor only teaching works: judging learns from
+On RQ3, the two kinds of feedback suit different starting points. Below the floor only teaching works: judging learns from
 passed tasks, and a model that passes none learns nothing. Above it, judging gained no less on the benchmark. Against teaching in the same seed, LoRA
 judging gained 2.5 and 2.0 more points on BFCL multi-turn base for LFM2.5 and Qwen3.5 (not significant) and, over three
 seeds, 7.3 more for Qwen3-1.7B (significant), although teaching gained more on our own tasks for LFM2.5 (17 points more
@@ -816,6 +819,17 @@ on the probe, significant). For the reasoning model, judging was the only LoRA a
 over-calling, however: LFM2.5 and Qwen3.5 lost 30 and 63 points of correct abstention under judging too, and Qwen3.5 lost 11 points more on BFCL's non-live questions by judging than by teaching (significant). These
 results suggest a schedule we did not test: teach a model until it can succeed, then let it learn from its own verified
 successes.
+
+\subsection{Which models to build on}\label{sec:choice}
+Taken together, the results answer RQ1 model by model, for oracle feedback and this domain. Among the models above the
+floor, LFM2.5-1.2B was the steadiest and cheapest to train: its three seeds ended within 2.5 points of each other on the probe (+37 to +39.5 under teaching) and an update took about a minute on an A100. Qwen3.5-0.8B learned the most, despite being the
+smallest (probe +42.5 under judging), but under teaching its seeds ended up to 14 points apart on the probe, an update took about 16 minutes, and it
+lost the most correct abstention under judging ($-$63). Below the floor, Llama-3.2-1B and Gemma-3-1B are the candidates:
+with taught examples, LoRA lifted both by 10 to 11 points on BFCL multi-turn base, consistently over three seeds.
+Qwen3-1.7B, the strongest frozen model, learned safely only from its own successes. Falcon3-1B was the weakest
+candidate: its prompts overran its context, many of its training examples did not fit in memory, and its BFCL gain was
+not significant. Every model over-called after LoRA teaching, so whichever is chosen needs practice that includes
+requests no tool can serve.
 
 \subsection{Limitations and threats to validity}\label{sec:limits}
 \emph{Scope.} The oracle makes these results a ceiling, not the behaviour of a deployable system that must judge
@@ -863,7 +877,7 @@ test rather than as rules.
 
 \section{Conclusion}\label{sec:conclusion}
 We built an evaluation protocol for learning on the job, practice on BFCL's tools with a held-out probe and the
-official exam, and used it to measure three ways a small model can learn tool use; the tasks, code and per-question
+official exam, and used it to ask which small models can learn tool use on the job and how three learning methods affect them; the tasks, code and per-question
 results are released. Small language models can learn tool use on the job, but how they learn depends on where they
 start. Models below a
 floor of competence, solving no multi-turn task, learned little except through their weights; models above it
