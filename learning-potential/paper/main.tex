@@ -129,8 +129,9 @@ Section~\ref{sec:conclusion} concludes.
 This study sits where three lines of work meet: language models that use tools (Section~\ref{sec:rw-tools}), small
 models that run on devices and how they are trained to call tools (Section~\ref{sec:rw-train}), and models that keep
 learning after deployment. Learning after deployment takes two routes: through the context, by writing notes or retrieving past
-experience (Section~\ref{sec:rw-context}), or through the weights, by fine-tuning (Section~\ref{sec:rw-weights}). Studies
-that compare the two routes are discussed last (Section~\ref{sec:rw-position}), where we place our study against them.
+experience (Section~\ref{sec:rw-context}), or through the weights, by fine-tuning (Section~\ref{sec:rw-weights}). Benchmarks
+that evaluate learning over a stream of tasks (Section~\ref{sec:rw-eval}) and studies that compare the two routes
+(Section~\ref{sec:rw-position}) are discussed last, where we place our study against them.
 
 \subsection{Tool use by language models}\label{sec:rw-tools}
 Language models act through tools by interleaving reasoning with calls \citep{yao2023react}, by learning where calls
@@ -181,6 +182,17 @@ answers alone does to them. STaR's rationalization, generating a rationale given
 LoRA method uses replay; its teaching arm is supervised fine-tuning on the expected calls, its judging arm is
 self-imitation of the model's own passed attempts, and a third arm uses rationalization to keep a reasoning model's
 reasoning in its targets.
+
+\subsection{Evaluating learning over a stream}\label{sec:rw-eval}
+Most benchmarks, BFCL included, score a model as it is. A few measure improvement along a stream of tasks. StreamBench
+feeds an agent a sequence of inputs with feedback on each and tracks how its score changes \citep{wu2024streambench};
+LifelongAgentBench builds interdependent tasks in three interactive environments and finds that replaying past
+experience in the prompt helps little, because of irrelevant information and limited context
+\citep{zheng2025lifelongagentbench}; Evo-Memory turns datasets into task streams to compare more than ten memory modules
+\citep{wei2025evomemory}. These benchmarks mostly evaluate memory and other in-context strategies, by the score along
+the stream. Our protocol differs in what it holds fixed and what it measures: it compares in-context methods with weight
+updates under the same oracle, separates gains on the practice stream from gains on held-out tasks and on the official
+benchmark, reports what changes in every other category, and tests each claim on paired questions.
 
 \subsection{Comparing the two routes}\label{sec:rw-position}
 Several studies compare learning in context with learning in weights. With the model and number of examples held
