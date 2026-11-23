@@ -584,8 +584,9 @@ Under teaching, LoRA produced the largest gains on our tasks (Fig.~\ref{fig:lora
 +34.5 and +38.5; Falcon, with one seed, rose by +31 on the probe. All of these are significant. On BFCL multi-turn base
 the picture changes: Llama (+10.3, interval 6.8 to 14.0) and Gemma (+11.0, 7.3 to 15.0) gained significantly in every
 seed, but LFM2.5 (+3.5), Qwen3.5 (+5.7, $p=0.024$ before correction) and Falcon (+3, one seed) did not; pooled over BFCL's four multi-turn categories, one Qwen3.5 seed did
-gain significantly (+7.6). Falcon's training also skipped examples that were too long or did not fit in the GPU's
-memory, 729 times in its run (Gemma's: 357; the other models' teaching runs: none). Qwen3.5's three seeds also differed on the probe (54.5 to 68.5 at task 1,200; one seed fell to 28.5 at task 200 and
+gain significantly (+7.6). LoRA's training skipped examples that were too long or did not fit in the GPU's
+memory 729 times in Falcon's run and 315 to 441 times in each of Gemma's three runs; no other teaching run skipped
+any. Qwen3.5's three seeds also differed on the probe (54.5 to 68.5 at task 1,200; one seed fell to 28.5 at task 200 and
 recovered), whereas LFM2.5's ended within 2.5 points of each other.
 
 Under judging, LoRA learned where the model already passed tasks: the probe rose significantly for LFM2.5 (+22) and
@@ -747,8 +748,8 @@ build on, whereas LFM2.5, which already produced calls, did gain from retrieval 
 Two other explanations fit less well. Retrieved examples are written in BFCL's reference syntax rather than in each
 model's own call format, so a weak model might simply fail to carry them over; but the notes, which are plain advice,
 failed as completely, and LoRA, which trains on the model's own format, succeeded. Falcon's prompts overran its short
-context, and its training skipped many examples that did not fit in memory, which may explain why its BFCL gain was
-smaller than Llama's and Gemma's; but Llama and Gemma failed by not
+context in 60\% of its frozen tasks, which may explain why its BFCL gain was smaller than Llama's and Gemma's (its
+training also skipped about twice as many examples as Gemma's, but Gemma still gained clearly); but Llama and Gemma failed by not
 calling, not by running out of room. In-context learning is known to grow with model size \citep{brown2020language},
 and the floor may be where that ability runs out for a given task.
 
@@ -850,8 +851,7 @@ noise.
 
 \emph{Implementation.} Settings were fixed before the runs and not tuned for any method, and another notes prompt or
 retrieval budget might do better. Two of the six handlers are ours, and two models ran on a newer vLLM. LoRA adapts
-fewer layers in LFM2.5 and Qwen3.5 than in the other models (Section~\ref{sec:methods}), it skipped many of Falcon's
-and Gemma's training examples for lack of GPU memory (Section~\ref{sec:res-lora}), and retrieved examples use
+fewer layers in LFM2.5 and Qwen3.5 than in the other models (Section~\ref{sec:methods}), it skipped hundreds of Falcon's and Gemma's training examples that were too long or did not fit in GPU memory (Section~\ref{sec:res-lora}), and retrieved examples use
 BFCL's reference syntax rather than each model's own format. Costs were measured on server GPUs (L4 and A100), shared
 in different ways, so they compare the methods but do not give on-device times. Adapters were hot-loaded during
 practice and merged into the weights for the exam; the two are mathematically equivalent, but we did not check that they
