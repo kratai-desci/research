@@ -181,8 +181,8 @@ reasoning in its targets.
 \subsection{Evaluating learning over a stream}\label{sec:rw-eval}
 Most benchmarks, BFCL included, score a model as it is. A few measure improvement along a stream of tasks. StreamBench
 feeds an agent a sequence of inputs with feedback on each and tracks how its score changes \citep{wu2024streambench};
-LifelongAgentBench builds interdependent tasks in three interactive environments and finds that replaying past
-experience in the prompt helps little, because of irrelevant information and limited context
+LifelongAgentBench builds interdependent tasks in three interactive environments and finds that replaying past experience in the prompt helps unevenly, and can stop helping or hurt as it grows,
+because of irrelevant information and limited context
 \citep{zheng2025lifelongagentbench}; Evo-Memory turns datasets into task streams to compare more than ten memory modules
 \citep{wei2025evomemory}. These benchmarks mostly evaluate memory and other in-context strategies, by the score along
 the stream. Our protocol differs in what it holds fixed and what it measures: it compares in-context methods with weight
@@ -515,8 +515,8 @@ We report each method in turn (Sections~\ref{sec:res-notes}--\ref{sec:res-reason
 Section~\ref{sec:methods}, then compare them (Section~\ref{sec:bfcl}) and give their cost (Section~\ref{sec:res-cost}).
 For each method we give the gain over the frozen model on practice, the change on the probe, the change on BFCL
 multi-turn base against the frozen score, and any significant change in BFCL's other groups. Three-seed cells are reported as
-the mean with a 95\% interval over questions, single runs as the change with McNemar's $p$; ``significant'' means a
-Holm-adjusted $p<0.05$ within its family of tests (Section~\ref{sec:stats}).
+the mean with a 95\% interval over questions, single runs as the change with McNemar's $p$; ``significant'' means a Holm-adjusted $p<0.05$ within its family of tests (Section~\ref{sec:stats}).
+Section~\ref{sec:answers} draws these results together as answers to the research questions.
 
 Frozen, the six models span the range the study needs. On the practice tasks Qwen3-1.7B solves 52.8\%, LFM2.5 30.0\%
 and Qwen3.5 25.9\%; on the probe they start at 51.0\%, 26.0\% and 25.5\%. Llama, Falcon and Gemma solve none, and
