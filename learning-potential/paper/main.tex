@@ -704,8 +704,9 @@ would take longer and would have to run while the device is idle. The cost of ev
 We take the four research questions in turn: whether a method can lift a model from zero (RQ1,
 Section~\ref{sec:floor}), what else changes when a model learns, in general and in a reasoning model (RQ2,
 Sections~\ref{sec:side} and~\ref{sec:reasoningft}), how far the gains reach beyond the practice tasks (RQ3,
-Section~\ref{sec:transfer}), and which feedback suits which model (RQ4, Section~\ref{sec:teachjudge}). We then draw out
-implications for practice (Section~\ref{sec:guidance}) and set out the limits of the study (Section~\ref{sec:limits}).
+Section~\ref{sec:transfer}), and which feedback suits which model (RQ4, Section~\ref{sec:teachjudge}). We then set out
+the limits of the study (Section~\ref{sec:limits}) and, given them, the implications for practice
+(Section~\ref{sec:guidance}).
 
 \subsection{Only LoRA lifts models from zero}\label{sec:floor}
 RQ1 has the clearest answer, and it reveals a floor: only weight updates lifted a model that could not yet do the task.
@@ -812,23 +813,6 @@ over-calling, however: LFM2.5 and Qwen3.5 lost 30 and 63 points of correct abste
 lost more on BFCL's non-live questions by judging than by teaching ($-$15.5 against $-$4.5). A natural schedule
 follows: teach a model until it can succeed, then let it learn from its own verified successes.
 
-\subsection{Implications for practice}\label{sec:guidance}
-Within the limits set out next (Section~\ref{sec:limits}), the results suggest four implications for systems that learn
-tool use on the job. They come from six models, one domain and oracle feedback, so we offer them as starting points to
-test rather than as rules.
-\begin{itemize}[leftmargin=1.5em,itemsep=1pt,topsep=3pt]
-\item \emph{Let the route follow the model's starting point.} A frozen check on a few practice tasks may show whether
-  context methods are open to a model at all; for the models below the floor, only fine-tuning on taught examples
-  helped, and self-written notes helped no model (Sections~\ref{sec:res-notes} and~\ref{sec:floor}).
-\item \emph{Consider teaching first and then learning from the model's own successes.} Above the floor this gained no
-  less on the benchmark in our runs, and it was the only route that spared the reasoning model
-  (Sections~\ref{sec:reasoningft} and~\ref{sec:teachjudge}).
-\item \emph{Include practice requests that no tool can serve.} This is the likely remedy for learning to call tools
-  regardless (Section~\ref{sec:side}), although we did not test it.
-\item \emph{Judge learning per category and outside the practice distribution,} on held-out tests large enough to
-  resolve gains of a few points (Section~\ref{sec:transfer}).
-\end{itemize}
-
 \subsection{Limitations and threats to validity}\label{sec:limits}
 \emph{Scope.} The oracle makes these results a ceiling, not the behaviour of a deployable system that must judge
 itself. The study covers one domain (BFCL's tools, multi-turn), practice tasks written by one LLM, six models of 0.8B to
@@ -853,6 +837,22 @@ BFCL's reference syntax rather than each model's own format. Costs were measured
 in different ways, so they compare the methods but do not give on-device times. Adapters were hot-loaded during
 practice and merged into the weights for the exam; the two are mathematically equivalent, but we did not check that they
 give identical outputs.
+
+\subsection{Implications for practice}\label{sec:guidance}
+Given these limits, the results suggest four implications for systems that learn tool use on the job. They come from six models, one domain and oracle feedback, so we offer them as starting points to
+test rather than as rules.
+\begin{itemize}[leftmargin=1.5em,itemsep=1pt,topsep=3pt]
+\item \emph{Let the route follow the model's starting point.} A frozen check on a few practice tasks may show whether
+  context methods are open to a model at all; for the models below the floor, only fine-tuning on taught examples
+  helped, and self-written notes helped no model (Sections~\ref{sec:res-notes} and~\ref{sec:floor}).
+\item \emph{Consider teaching first and then learning from the model's own successes.} Above the floor this gained no
+  less on the benchmark in our runs, and it was the only route that spared the reasoning model
+  (Sections~\ref{sec:reasoningft} and~\ref{sec:teachjudge}).
+\item \emph{Include practice requests that no tool can serve.} This is the likely remedy for learning to call tools
+  regardless (Section~\ref{sec:side}), although we did not test it.
+\item \emph{Judge learning per category and outside the practice distribution,} on held-out tests large enough to
+  resolve gains of a few points (Section~\ref{sec:transfer}).
+\end{itemize}
 
 \section{Conclusion}\label{sec:conclusion}
 Small language models can learn tool use on the job, but how they learn depends on where they start. Models below a
