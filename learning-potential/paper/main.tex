@@ -94,31 +94,26 @@ questions, and the per-question results of every run are released. We apply the 
 developers, of 0.8B to 1.7B nominal parameters, each learning by self-written notes, retrieved experience or continual
 LoRA, with key cells repeated over three seeds (Fig.~\ref{fig:design}).
 
-Our answers, in brief. On RQ1, there is a floor: the three models that solve no multi-turn task when frozen gain
-nothing from notes and at most a point or two from correct worked examples, yet continual LoRA lifts all three on our
-tasks and two of them on the official benchmark; above the floor, LFM2.5 learned the most steadily and cheaply and
-Qwen3.5 the most. On RQ2, learning happens mainly through the weights, and its gains are real but mostly local: notes
-improve no model on the multi-turn tasks they were written for; LoRA's gains carry over to unseen tasks of the same kind,
-but on the official benchmark's target category, where the changes range from $-$8 to +9 points, no gain survives
-correction for multiple comparisons, and only pooled over BFCL's 800 multi-turn questions did three runs of LFM2.5 and
-Qwen3.5 gain significantly, by 3.4 to 7.6 points. Learning also has side effects that an overall score hides: LoRA
-training on expert tool calls taught every model to call a tool even when none fits, and in the reasoning model expert
-targets harmed its other skills, which keeping its reasoning in the targets reduced but did not remove. On RQ3, under
-LoRA, teaching is needed to pass the floor, and beyond it learning from the model's own successes gained no less on the
-benchmark, significantly more for the reasoning model, which it alone among the LoRA arms left unharmed. Measuring
-learning on the job therefore needs held-out tests larger than a single benchmark category, reported category by
-category.
-
-Our contributions are:
+Our contributions are as follows.
 \begin{itemize}[leftmargin=1.5em,itemsep=1pt,topsep=3pt]
-\item an evaluation protocol for learning on the job: a practice ground on BFCL's tools that shares no questions with
+\item We build an evaluation protocol for learning on the job: a practice ground on BFCL's tools that shares no questions with
   BFCL, a fixed practice stream and probe set, and a measurement that separates learning in practice, on unseen tasks
-  and on the official benchmark, reports side effects per category, and tests every claim on paired questions;
-\item a controlled comparison, under this protocol, of learning through context and through weights, with identical
-  tasks, order and oracle;
-\item the answers above, including the limit on what one benchmark category can detect, and what they suggest for
-  learning on the job (Section~\ref{sec:guidance});
-\item the code, the practice tasks and the per-question results of every run.
+  and on the official benchmark, reports side effects per category, and tests every claim on paired questions.
+\item We compare learning in context with learning in weights across six small models, under identical tasks,
+  order and oracle.
+\item We show that a competence floor decides the route: models that solve no multi-turn task gain at most a point or
+  two from notes or worked examples, but continual LoRA lifts two of them by about ten points on the benchmark; this
+  tells which models are worth building on.
+\item We show that gains reach unseen tasks of the same kind, but on the benchmark's target category no gain above the
+  floor survives correction for multiple comparisons, and only pooling its 800 multi-turn questions detects some, so a
+  single benchmark category is too blunt to judge learning on the job.
+\item We show that learning has side effects an overall score hides: after LoRA teaching every model calls tools when none fits,
+  and expert targets harm a reasoning model's other skills while its own successes do not.
+\item We show that the feedback must suit the starting point: taught examples are needed below the floor, while above
+  it learning from the model's own successes gains no less on the benchmark, and significantly more for the reasoning
+  model.
+\item We release the code, the practice tasks and the per-question results of every run, and draw implications for
+  practice (Section~\ref{sec:guidance}).
 \end{itemize}
 Section~\ref{sec:related} reviews related work, Section~\ref{sec:design} describes the design,
 Section~\ref{sec:results} reports the results, Section~\ref{sec:discussion} discusses them, and
