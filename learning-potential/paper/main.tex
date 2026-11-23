@@ -94,19 +94,20 @@ questions, and the per-question results of every run are released. We apply the 
 developers, of 0.8B to 1.7B nominal parameters, each learning by self-written notes, retrieved experience or continual
 LoRA, with key cells repeated over three seeds (Fig.~\ref{fig:design}).
 
-Four results stand out. First, there is a floor: the three models that solve no multi-turn task when frozen gain nothing from notes and at
-most a point or two from correct worked examples, yet continual LoRA lifts all three on our tasks
-and two of them on the official benchmark; notes improve no model on the multi-turn tasks they were written for.
-Second, learning has side effects that an overall score hides. In every model we tested, LoRA training on expert tool
-calls taught it to call a tool even when none fits. In the reasoning model, expert targets harmed its other skills;
-keeping its reasoning in the targets reduced that harm but lowered its benchmark score, and only training on its own
-verified successes avoided harm. Third, above the floor, practice gains are real
-but mostly local: LoRA's carry over to unseen tasks of the same kind, but on the official benchmark's target category,
-where the changes range from $-$8 to +9 points, no gain survives correction for multiple comparisons. Only pooled over
-BFCL's 800 multi-turn questions did three runs of LFM2.5 and Qwen3.5 gain significantly, by 3.4 to 7.6 points.
-Measuring learning on the job therefore needs held-out tests larger than a single benchmark category. Fourth, the two kinds of feedback suit different stages: under LoRA, teaching is needed to pass the floor, and beyond it learning from the model's own successes gained no
-less on the benchmark, and significantly more for the reasoning model, which it alone among the LoRA arms left
-unharmed.
+Our answers, in brief. On RQ1, there is a floor: the three models that solve no multi-turn task when frozen gain
+nothing from notes and at most a point or two from correct worked examples, yet continual LoRA lifts all three on our
+tasks and two of them on the official benchmark; above the floor, LFM2.5 learned the most steadily and cheaply and
+Qwen3.5 the most. On RQ2, learning happens mainly through the weights, and its gains are real but mostly local: notes
+improve no model on the multi-turn tasks they were written for; LoRA's gains carry over to unseen tasks of the same kind,
+but on the official benchmark's target category, where the changes range from $-$8 to +9 points, no gain survives
+correction for multiple comparisons, and only pooled over BFCL's 800 multi-turn questions did three runs of LFM2.5 and
+Qwen3.5 gain significantly, by 3.4 to 7.6 points. Learning also has side effects that an overall score hides: LoRA
+training on expert tool calls taught every model to call a tool even when none fits, and in the reasoning model expert
+targets harmed its other skills, which keeping its reasoning in the targets reduced but did not remove. On RQ3, under
+LoRA, teaching is needed to pass the floor, and beyond it learning from the model's own successes gained no less on the
+benchmark, significantly more for the reasoning model, which it alone among the LoRA arms left unharmed. Measuring
+learning on the job therefore needs held-out tests larger than a single benchmark category, reported category by
+category.
 
 Our contributions are:
 \begin{itemize}[leftmargin=1.5em,itemsep=1pt,topsep=3pt]
@@ -115,7 +116,7 @@ Our contributions are:
   and on the official benchmark, reports side effects per category, and tests every claim on paired questions;
 \item a controlled comparison, under this protocol, of learning through context and through weights, with identical
   tasks, order and oracle;
-\item the four findings above, including the limit on what one benchmark category can detect, and what they suggest for
+\item the answers above, including the limit on what one benchmark category can detect, and what they suggest for
   learning on the job (Section~\ref{sec:guidance});
 \item the code, the practice tasks and the per-question results of every run.
 \end{itemize}
@@ -589,8 +590,8 @@ Under teaching, LoRA produced the largest gains on our tasks (Fig.~\ref{fig:lora
 the picture changes: Llama (+10.3, interval 6.8 to 14.0) and Gemma (+11.0, 7.3 to 15.0) gained significantly in every
 seed, but LFM2.5 (+3.5), Qwen3.5 (+5.7, $p=0.024$ before correction) and Falcon (+3, one seed) did not; pooled over BFCL's four multi-turn categories, one Qwen3.5 seed did
 gain significantly (+7.6). Falcon's training also skipped examples that were too long or did not fit in the GPU's
-memory, 729 times in its run (Gemma's: 357; the other models' teaching runs: none). Qwen3.5's three
-seeds also differed on the probe (54.5 to 68.5 at task 1,200; one seed fell to 28.5 at task 200 and recovered).
+memory, 729 times in its run (Gemma's: 357; the other models' teaching runs: none). Qwen3.5's three seeds also differed on the probe (54.5 to 68.5 at task 1,200; one seed fell to 28.5 at task 200 and
+recovered), whereas LFM2.5's ended within 2.5 points of each other.
 
 Under judging, LoRA learned where the model already passed tasks: the probe rose significantly for LFM2.5 (+22) and
 Qwen3.5 (+42.5), while their gains on BFCL multi-turn base (+4.5 and +9) were not significant after correction;
