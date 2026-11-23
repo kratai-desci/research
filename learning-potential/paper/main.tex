@@ -44,7 +44,7 @@ Measuring the Learning Potential of Notes, Retrieval and LoRA for Tool Use}
 \cortext[1]{Corresponding author}
 \begin{abstract}
 Small language models (0.8B--1.7B nominal parameters) are increasingly deployed on devices where they must use tools they were
-not trained for. How much can such a model learn from practice? We measure the \emph{learning potential} of six small
+not trained for. How much can such a model learn from practice? We measure the \emph{learning potential} of six
 models from five families: the most a model gains on the job when feedback is perfect. Each model works through the
 same 1,200 multi-turn tool-use tasks, built on the Berkeley Function Calling Leaderboard's (BFCL) tools but never its
 questions, learning by one of three on-device methods: self-written notes, retrieval of past worked examples, or
@@ -53,8 +53,8 @@ continual low-rank adaptation (LoRA). An oracle shows the expected calls (teachi
 three seeds. Models that cannot make a valid multi-turn call (below the floor) gain at most a point from notes or
 worked examples, yet LoRA lifts two of them by about ten points on the benchmark; notes help no model's multi-turn score. Learning has
 side effects: trained on expert tool calls, every model learned to call tools when none fits, and a reasoning
-model was harmed by expert targets but not by its own verified successes. Above the floor, practice gains are
-mostly local: none is significant on BFCL's target category. Teaching is needed to pass the floor; beyond it,
+model was harmed by expert targets but not by its own verified successes. Above the floor, gains shrink on
+BFCL to a few points, below what its 200 target questions resolve. Teaching is needed to pass the floor; beyond it,
 learning from one's own successes does as well on the benchmark without harming the reasoning model.
 \end{abstract}
 \begin{keywords}
@@ -79,17 +79,21 @@ examples \citep{zheng2024synapse}; or through its weights, by continual fine-tun
 classification or factual knowledge, with no feedback on the model's own attempts. Whether small models can learn tool use
 continually, and which route serves them, is open.
 
-We measure the \emph{learning potential} of small models: the most a model gains from practice when the feedback is
-perfect. An oracle either shows the expected calls (teaching) or says only whether the task passed (judging). The
-results are therefore a ceiling for each method, not the behaviour of a system that must judge itself, and they show
-which routes are worth pursuing at this scale.
+This paper is a measurement study. Rather than propose a new learning method, we build an evaluation protocol for
+learning on the job and use it to compare three existing methods under the same conditions. What we measure is each
+method's \emph{learning potential}: the most a model gains from practice when the feedback is perfect. An oracle either
+shows the expected calls (teaching) or says only whether the task passed (judging), so the results are a ceiling for
+each method, not the behaviour of a system that must judge itself, and they show which routes are worth pursuing at
+this scale.
 
-Six models from five developers, of 0.8B to 1.7B nominal parameters, practise on the same 1,200 multi-turn tasks
-in one fixed order, with two more orders for the key cells (Fig.~\ref{fig:design}). The tasks use the tools and simulators of the Berkeley Function Calling
-Leaderboard (BFCL) but were written from the tools' documentation, never from BFCL's questions. Each model learns
-by self-written notes, retrieved experience or continual LoRA, and we measure learning three times: on the practice
-tasks, on 200 unseen tasks every 100 tasks, and on the BFCL v4 exam with the final state. Key cells are repeated
-over three seeds, and every claim is tested on paired questions.
+The protocol has four parts, all released. A practice ground of 2,400 multi-turn tasks uses the tools, simulators and
+checker of the Berkeley Function Calling Leaderboard (BFCL), but its tasks were written from the tools' documentation,
+never from BFCL's questions. A fixed stream of 1,200 practice tasks, in one order per seed, is followed by every run, and a held-out probe set of
+200 tasks is scored every 100 tasks with learning switched off. The final state takes the official BFCL v4 exam and is
+compared with the frozen model category by category, so that side effects are visible. Every claim is tested on paired
+questions, and the per-question results of every run are released. We apply the protocol to six models from five
+developers, of 0.8B to 1.7B nominal parameters, each learning by self-written notes, retrieved experience or continual
+LoRA, with key cells repeated over three seeds (Fig.~\ref{fig:design}).
 
 Four results stand out. First, there is a floor: the three models that cannot make a valid multi-turn call gain
 nothing from notes and at most a point from correct worked examples, yet continual LoRA lifts all three on our tasks
@@ -98,19 +102,22 @@ Second, learning has side effects that an overall score hides. In every model we
 calls taught it to call a tool even when none fits. In the reasoning model, expert targets harmed its other skills;
 keeping its reasoning in the targets reduced that harm but lowered its benchmark score, and only training on its own
 verified successes avoided harm. Third, above the floor, practice gains are real
-but mostly local: LoRA's carry over to unseen tasks of the same kind, but no method's is significant on the official
-benchmark's target category. Fourth, the two kinds of feedback suit different stages: teaching is needed to pass the
+but mostly local: LoRA's carry over to unseen tasks of the same kind, but no method gains significantly on the
+official benchmark's target category. There the changes range from $-$8 to +9 points, and its 200 questions resolve
+differences only to about $\pm$5 points. Measuring learning on the job therefore needs held-out tests larger or harder
+than a single benchmark category. Fourth, the two kinds of feedback suit different stages: teaching is needed to pass the
 floor, and beyond it learning from the model's own successes does as well on the benchmark and was the only arm that
 left the reasoning model unharmed.
 
 Our contributions are:
 \begin{itemize}[leftmargin=1.5em,itemsep=1pt,topsep=3pt]
-\item a practice ground on BFCL's tools that shares no questions with BFCL, with a fixed practice stream and probe set;
-\item a controlled comparison of learning on the job through context and through weights, with identical tasks, order
-  and oracle;
-\item a measurement design that separates learning in practice, on unseen tasks and on the official benchmark, reports
-  side effects per category, and tests every claim on paired questions;
-\item the four findings above, with practical guidance for learning on the job (Section~\ref{sec:guidance});
+\item an evaluation protocol for learning on the job: a practice ground on BFCL's tools that shares no questions with
+  BFCL, a fixed practice stream and probe set, and a measurement that separates learning in practice, on unseen tasks
+  and on the official benchmark, reports side effects per category, and tests every claim on paired questions;
+\item a controlled comparison, under this protocol, of learning through context and through weights, with identical
+  tasks, order and oracle;
+\item the four findings above, including the limit on what one benchmark category can detect, with practical guidance
+  for learning on the job (Section~\ref{sec:guidance});
 \item the code, the practice tasks and the per-question results of every run.
 \end{itemize}
 Section~\ref{sec:related} reviews related work, Section~\ref{sec:design} describes the design,
@@ -746,7 +753,10 @@ against 20, LFM2.5 26 against 9, Qwen3.5 25.5 against 8.5). The first of our thr
 which BFCL leaves to the model, and BFCL's tasks probably also demand longer plans and closer tracking of state. Our tasks
 share one generator's style as well, so part of what was learned may be that style rather than the tools. Learning on the
 job, for these models, is real but local; practice tasks that are harder, more varied, or calibrated against the
-benchmark's difficulty would test how far it can reach.
+benchmark's difficulty would test how far it can reach. The result is also a lesson about evaluation: for the models above the floor, LoRA's probe
+gains of 22 to 42 points arrived at the benchmark at a size its 200 target questions cannot resolve, so a single benchmark
+category is too blunt an instrument to judge learning on the job, and a larger held-out test, or one pooled over seeds,
+is needed to tell a small gain from none.
 
 \subsection{Teaching vs judging}\label{sec:teachjudge}
 The two kinds of feedback suit different starting points. Below the floor only teaching works: judging learns from
@@ -807,8 +817,8 @@ target skill: trained on tasks that always need calls, models learned to call wh
 
 Three implications follow for systems that learn on the job. The route should follow the model's starting point, and a
 frozen check on a few tasks shows which route is open. Practice should include requests that no tool can serve, and
-learning should be judged per category and outside the practice distribution, never by an overall score on the practice
-tasks. And at this scale, the notes a model writes for itself should not be relied on.
+learning should be judged per category and outside the practice distribution, on held-out tests large enough to
+resolve gains of a few points, never by an overall score on the practice tasks. And at this scale, the notes a model writes for itself should not be relied on.
 Our results are a ceiling under perfect feedback, for six small models and one task domain, with costs measured on
 server GPUs. Natural next steps are to test the floor directly, by checking whether a little fine-tuning first lets
 context methods work for models below the floor; to combine the routes; and to replace the oracle with the model's own
