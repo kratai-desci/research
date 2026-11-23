@@ -496,7 +496,7 @@ Every comparison is paired: the same tasks or questions, solved or not, under tw
 with its reference (the frozen model on practice, the start on the probe, the frozen score on BFCL), LoRA with retrieval and retrieval with notes for the same model and arm, and LoRA's arms with each other for the same
 model and seeds, with McNemar's exact test on the discordant pairs
 \citep{mcnemar1947note,dietterich1998approximate} and a 95\% paired bootstrap interval over tasks or questions
-\citep{efron1993introduction}. For cells with three seeds we report the mean over seeds, test it with a paired sign-flip
+\citep{efron1993introduction}. For cells and comparisons over three seeds we report the mean over seeds, test it with a paired sign-flip
 test of the per-question seed mean, and give a bootstrap interval over questions. Tests are corrected with Holm's method
 \citep{holm1979simple} within each family: all runs against their frozen score on BFCL multi-turn base, the same in BFCL's other
 groups, all runs on the probe, all runs on practice, the method comparisons, the comparisons of LoRA arms, the three-seed cells, and the calling and abstaining grid behind
