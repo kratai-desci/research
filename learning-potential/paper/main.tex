@@ -43,19 +43,19 @@ Measuring the Learning Potential of Notes, Retrieval and LoRA for Tool Use}
   addressline={2261 Market Street, STE 22858}, city={San Francisco}, state={CA}, postcode={94114}, country={USA}}
 \cortext[1]{Corresponding author}
 \begin{abstract}
-Small language models (0.8B--1.7B nominal parameters) are increasingly deployed on devices where they must use tools they were
-not trained for. How much can such a model learn from practice? We measure the \emph{learning potential} of six
-models from five families: the most a model gains on the job when feedback is perfect. Each model works through the
+Small language models (0.8B--1.7B nominal parameters) increasingly run on devices and must use tools they were
+not trained for. We build an evaluation protocol for learning on the job and use it to measure the \emph{learning
+potential} of six models from five families: the most a model gains when feedback is perfect. Each works through the
 same 1,200 multi-turn tool-use tasks, built on the Berkeley Function Calling Leaderboard's (BFCL) tools but never its
-questions, learning by one of three on-device methods: self-written notes, retrieval of past worked examples, or
-continual low-rank adaptation (LoRA). An oracle shows the expected calls (teaching) or says only pass or fail
+questions, learning by one of three on-device methods: self-written notes, retrieved worked examples, or
+continual low-rank adaptation (LoRA). An oracle gives the expected calls (teaching) or only pass or fail
 (judging). We test learning on 200 unseen tasks every 100 tasks and on the BFCL v4 exam, with key runs over
-three seeds. Models that cannot make a valid multi-turn call (below the floor) gain at most a point from notes or
+three seeds; tasks, code and per-question results are released. Models that cannot make a valid multi-turn call (below the floor) gain at most a point from notes or
 worked examples, yet LoRA lifts two of them by about ten points on the benchmark; notes help no model's multi-turn score. Learning has
 side effects: trained on expert tool calls, every model learned to call tools when none fits, and a reasoning
 model was harmed by expert targets but not by its own verified successes. Above the floor, gains shrink on
 BFCL to a few points, below what its 200 target questions resolve. Teaching is needed to pass the floor; beyond it,
-learning from one's own successes does as well on the benchmark without harming the reasoning model.
+learning from one's own successes does as well as teaching without harming the reasoning model.
 \end{abstract}
 \begin{keywords}
 small language models \sep tool use \sep function calling \sep continual learning \sep LoRA \sep
