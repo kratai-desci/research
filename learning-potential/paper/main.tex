@@ -214,11 +214,15 @@ oracle gives feedback after each task, and a learning method turns the feedback 
 of past tasks, or an adapter) that the next task uses. Everything except the learning method and the kind of feedback is
 held fixed across runs: the models and their harness, the tasks and, for a given seed, their order, the probe set and the final exam.
 
-The design answers four questions. RQ1: can a method lift a model that cannot yet do the task at all
-(Section~\ref{sec:floor})? RQ2: what else changes when a small model learns, and does a reasoning model need different
-targets (Sections~\ref{sec:side} and~\ref{sec:reasoningft})? RQ3: how far do gains made in practice reach, to unseen
-tasks of the same kind and to the official benchmark (Section~\ref{sec:transfer})? RQ4: which kind of feedback suits
-which model (Section~\ref{sec:teachjudge})?
+The design answers four questions:
+\begin{itemize}[leftmargin=2.6em,itemsep=1pt,topsep=3pt]
+\item[\textbf{RQ1}] Can a method lift a model that cannot yet do the task at all? (Section~\ref{sec:floor})
+\item[\textbf{RQ2}] What else changes when a small model learns, and does a reasoning model need different targets?
+  (Sections~\ref{sec:side} and~\ref{sec:reasoningft})
+\item[\textbf{RQ3}] How far do gains made in practice reach, to unseen tasks of the same kind and to the official
+  benchmark? (Section~\ref{sec:transfer})
+\item[\textbf{RQ4}] Which kind of feedback suits which model? (Section~\ref{sec:teachjudge})
+\end{itemize}
 
 We use a few terms throughout. A \emph{run} is one model learning by one method from one kind of feedback (an
 \emph{arm}: teaching, judging, or teaching with the reasoning kept) with one seed; a \emph{cell} is a model, method and
