@@ -71,9 +71,9 @@ examples \citep{zheng2024synapse}; or through its weights, by continual fine-tun
 \citep{hu2022lora}. These routes are usually studied separately and with large models. Where they have been compared
 \citep{mosbach2023few,ovadia2024fine,soudani2024fine}, the comparison was made once, on a fixed dataset, for classification or factual knowledge, with no feedback on the model's own attempts. Benchmarks that track learning over a
 stream of tasks exist, but they mostly evaluate in-context strategies by a single score along the stream
-(Section~\ref{sec:rw-eval}). Whether small models can learn tool use continually, and which route serves them, is open. We set out to find which of
-today's small models can learn tool use on the job, and so are worth building on, and how each learning method affects
-them (Section~\ref{sec:design} states the research questions).
+(Section~\ref{sec:rw-eval}). Whether small models can learn tool use continually, and which route serves them, is open. We set out to find what decides whether a small model can learn tool use on the job, and so which models are worth
+building on; through which route such learning happens, how far it reaches and what it changes; and how the kind of
+feedback interacts with the model's starting point (Section~\ref{sec:design} states the research questions).
 
 This paper is a measurement study. Rather than propose a new learning method, we build an evaluation protocol for
 learning on the job and use it to compare three existing methods under the same conditions. What we measure is each
@@ -210,13 +210,14 @@ held fixed across runs: the models and their harness, the tasks and, for a given
 
 The design answers three questions:
 \begin{itemize}[leftmargin=2.6em,itemsep=1pt,topsep=3pt]
-\item[\textbf{RQ1}] Which of today's small models can learn tool use on the job, and so are worth building on?
-  (Section~\ref{sec:answers})
-\item[\textbf{RQ2}] How does each learning method, notes, retrieval or LoRA, affect such a model: on the tasks it
-  practises, on unseen tasks, on the official benchmark, and in its other skills? (Section~\ref{sec:answers})
-\item[\textbf{RQ3}] Does it matter whether the feedback shows the answer (teaching) or only judges it (judging)?
-  (Section~\ref{sec:answers})
+\item[\textbf{RQ1}] What determines whether a small model can learn tool use on the job, and which of today's models
+  are therefore worth building on?
+\item[\textbf{RQ2}] Through which route, context or weights, does such learning happen, how far do its gains reach
+  beyond the practice tasks, and what does it change in the model's other skills?
+\item[\textbf{RQ3}] How does the kind of feedback, a shown answer or only a pass or fail verdict, interact with the
+  model's starting point?
 \end{itemize}
+All three are answered in Section~\ref{sec:answers}.
 
 We use a few terms throughout. A \emph{run} is one model learning by one method from one kind of feedback (an
 \emph{arm}: teaching, judging, or teaching with the reasoning kept) with one seed; a \emph{cell} is a model, method and
@@ -708,7 +709,7 @@ fine-tuning does to a reasoning model (Section~\ref{sec:reasoningft}) and what o
 implications for practice (Section~\ref{sec:guidance}).
 
 \subsection{Answers to the research questions}\label{sec:answers}
-\textbf{RQ1: which models to build on.} The deciding factor is a floor. The three models that solve no multi-turn task
+\textbf{RQ1: what determines learning, and which models to build on.} The deciding factor is a floor. The three models that solve no multi-turn task
 when frozen, Llama-3.2-1B, Falcon3-1B and Gemma-3-1B, learned nothing from their own notes and at most a point or two
 from correct worked examples, but continual LoRA on taught examples lifted all three on our tasks, and Llama and Gemma by
 10 to 11 points on BFCL multi-turn base, consistently over three seeds. Among the models above the floor, LFM2.5-1.2B
@@ -721,7 +722,7 @@ many of its training examples did not fit in memory, and its BFCL gain was not s
 oracle feedback and this domain, and every model over-called after LoRA teaching, so whichever is chosen needs practice
 that includes requests no tool can serve.
 
-\textbf{RQ2: how each method affects a model.} Self-written notes changed nothing measurable: no run gained
+\textbf{RQ2: which route, how far, and at what cost.} Self-written notes changed nothing measurable: no run gained
 significantly on practice, on the probe or on the benchmark's multi-turn questions, and the notes only shifted the
 balance between calling and abstaining in single-turn questions. Retrieved worked examples helped while practising, by up to 13.9 points, but their gains on unseen tasks were
 not significant and reached the benchmark only once, pooled over its multi-turn categories. Continual LoRA gave by far
@@ -733,7 +734,7 @@ fits (Section~\ref{sec:side}), and plain teaching harmed the reasoning model's o
 (Section~\ref{sec:reasoningft}). Notes and retrieval cost prompt length on every task; LoRA costs training time
 (Section~\ref{sec:res-cost}).
 
-\textbf{RQ3: teaching vs judging.} The two kinds of feedback suit different starting points. Below the floor only teaching works: judging learns from
+\textbf{RQ3: feedback and starting point.} The two kinds of feedback suit different starting points. Below the floor only teaching works: judging learns from
 passed tasks, and a model that passes none learns nothing. Above it, judging gained no less on the benchmark. Against teaching in the same seed, LoRA
 judging gained 2.5 and 2.0 more points on BFCL multi-turn base for LFM2.5 and Qwen3.5 (not significant) and, over three
 seeds, 7.3 more for Qwen3-1.7B (significant), although teaching gained more on our own tasks for LFM2.5 (17 points more
