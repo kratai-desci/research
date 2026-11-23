@@ -38,18 +38,18 @@ Measuring the Learning Potential of Notes, Retrieval and LoRA for Tool Use}
   addressline={2261 Market Street, STE 22858}, city={San Francisco}, state={CA}, postcode={94114}, country={USA}}
 \cortext[1]{Corresponding author}
 \begin{abstract}
-Small on-device language models meet unfamiliar tools and often cannot send data away for retraining, so they must
-learn on the job. Such learning has mostly been studied in large models, one method at a time. We measure the
-\emph{learning potential} of six small models (0.8B--1.7B nominal parameters): the most each gains when feedback is
-perfect. Each practises 1,200 multi-turn tool-use tasks built on the Berkeley Function Calling Leaderboard's (BFCL)
-tools, learning by self-written notes, retrieved examples or fine-tuning (LoRA), while a perfect judge shows the
-answer or says only whether it succeeded. We test on unseen tasks and the BFCL benchmark with paired tests, and
-release all tasks, code and results. First, learning depends on whether a model can already make a valid tool call:
-three that could not learned almost nothing from notes or examples, but fine-tuning taught them; of the rest,
-LFM2.5-1.2B learned most reliably and Qwen3.5-0.8B the most. Second, only fine-tuning taught much, and its gains, up
-to 56 points on unseen practice-like tasks, shrank sharply on the benchmark. Fine-tuning on expert answers also taught
-every model to call tools when none fits and cost a reasoning model other skills, which training on its own successes
-avoided. Third, models that cannot yet succeed must be shown the answer; those that can gained no less on the
+Small on-device language models meet unfamiliar tools and often cannot send data away for retraining, so they would
+have to learn on the job. Such learning has mostly been studied in large models, one method at a time. We build an
+evaluation protocol and measure the \emph{learning potential} of six small models (0.8B--1.7B nominal parameters):
+the most each gains when feedback is perfect. Each practises 1,200 multi-turn tool-use tasks built on the Berkeley
+Function Calling Leaderboard's (BFCL) tools but not its questions, learning by self-written notes, retrieved examples
+or fine-tuning (LoRA), while a perfect judge shows the answer or says only whether it succeeded. We test on unseen
+tasks and BFCL with paired tests, and release all tasks, code and results. First, learning depends on whether a model
+can already solve a multi-turn task: three that could not learned almost nothing from notes or examples, but
+fine-tuning taught them; of the rest, LFM2.5-1.2B learned most reliably and Qwen3.5-0.8B the most. Second, only
+fine-tuning taught much, and its gains, up to 56 points on unseen practice-like tasks, shrank sharply on the
+benchmark. Fine-tuning on expert answers also taught every model to call tools when none fits and cost a reasoning
+model other skills. Third, models that cannot yet succeed must be shown the answer; those that can gained no less on the
 benchmark from their own successes, which also spared the reasoning model. Learning on the job is real but mostly
 local, and should be judged per category on held-out tasks.
 \end{abstract}
