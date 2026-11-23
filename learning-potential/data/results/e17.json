@@ -1,0 +1,1011 @@
+{
+ "experiment": "E17 retrieval on the job",
+ "saved": "2026-11-22",
+ "about": "Summary of every run, as the lab's dashboard showed it, read from the experiment bucket (raw logs, snapshots and full exam scores are archived separately). Scores in %; gain in points over E15's frozen model on the same practice tasks; probe = [{day: tasks practised, score: % of the 200 probe tasks}]; exam base = BFCL v4 multi-turn base; headline = BFCL's category groups.",
+ "models": [
+  {
+   "key": "qwen3-1.7b",
+   "label": "Qwen3-1.7B",
+   "probe0": 51.0,
+   "runs": [
+    {
+     "run": "teach-s15",
+     "arm": "teach",
+     "arm_label": "Oracle teaching",
+     "seed": 15,
+     "pilot": false,
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 46.8,
+     "last50": 46.0,
+     "memory": 1200,
+     "examples_per_task": 2.78,
+     "secs_per_task": 23.8,
+     "gain": {
+      "tasks": 1200,
+      "all": -6.0,
+      "last200": -8.5
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 51.0
+      },
+      {
+       "day": 100,
+       "score": 50.5
+      },
+      {
+       "day": 200,
+       "score": 48.0
+      },
+      {
+       "day": 300,
+       "score": 49.5
+      },
+      {
+       "day": 400,
+       "score": 52.5
+      },
+      {
+       "day": 500,
+       "score": 48.5
+      },
+      {
+       "day": 600,
+       "score": 45.5
+      },
+      {
+       "day": 700,
+       "score": 49.0
+      },
+      {
+       "day": 800,
+       "score": 47.0
+      },
+      {
+       "day": 900,
+       "score": 51.5
+      },
+      {
+       "day": 1000,
+       "score": 47.0
+      },
+      {
+       "day": 1100,
+       "score": 44.0
+      },
+      {
+       "day": 1200,
+       "score": 47.5
+      }
+     ]
+    },
+    {
+     "run": "judge-s15",
+     "arm": "judge",
+     "arm_label": "Oracle judging",
+     "seed": 15,
+     "pilot": false,
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 49.4,
+     "last50": 46.0,
+     "memory": 593,
+     "examples_per_task": 2.65,
+     "secs_per_task": 23.6,
+     "gain": {
+      "tasks": 1200,
+      "all": -3.4,
+      "last200": -5.5
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 51.0
+      },
+      {
+       "day": 100,
+       "score": 51.0
+      },
+      {
+       "day": 200,
+       "score": 54.5
+      },
+      {
+       "day": 300,
+       "score": 52.5
+      },
+      {
+       "day": 400,
+       "score": 55.5
+      },
+      {
+       "day": 500,
+       "score": 49.0
+      },
+      {
+       "day": 600,
+       "score": 49.0
+      },
+      {
+       "day": 700,
+       "score": 49.5
+      },
+      {
+       "day": 800,
+       "score": 51.5
+      },
+      {
+       "day": 900,
+       "score": 47.0
+      },
+      {
+       "day": 1000,
+       "score": 51.5
+      },
+      {
+       "day": 1100,
+       "score": 49.5
+      },
+      {
+       "day": 1200,
+       "score": 48.0
+      }
+     ]
+    },
+    {
+     "run": "teach600-s15",
+     "arm": "teach",
+     "arm_label": "Oracle teaching (600 tokens)",
+     "seed": 15,
+     "pilot": false,
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 50.2,
+     "last50": 46.0,
+     "memory": 1200,
+     "examples_per_task": 2.16,
+     "secs_per_task": 23.9,
+     "gain": {
+      "tasks": 1200,
+      "all": -2.7,
+      "last200": -3.0
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 51.0
+      },
+      {
+       "day": 100,
+       "score": 47.5
+      },
+      {
+       "day": 200,
+       "score": 45.0
+      },
+      {
+       "day": 300,
+       "score": 48.5
+      },
+      {
+       "day": 400,
+       "score": 48.5
+      },
+      {
+       "day": 500,
+       "score": 46.5
+      },
+      {
+       "day": 600,
+       "score": 48.5
+      },
+      {
+       "day": 700,
+       "score": 50.0
+      },
+      {
+       "day": 800,
+       "score": 51.0
+      },
+      {
+       "day": 900,
+       "score": 48.5
+      },
+      {
+       "day": 1000,
+       "score": 50.0
+      },
+      {
+       "day": 1100,
+       "score": 48.0
+      },
+      {
+       "day": 1200,
+       "score": 50.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "lfm2.5-1.2b",
+   "label": "LFM2.5-1.2B",
+   "probe0": 26.0,
+   "runs": [
+    {
+     "run": "teach-s15",
+     "arm": "teach",
+     "arm_label": "Oracle teaching",
+     "seed": 15,
+     "pilot": false,
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 39.1,
+     "last50": 34.0,
+     "memory": 1200,
+     "examples_per_task": 2.79,
+     "secs_per_task": 5.1,
+     "gain": {
+      "tasks": 1200,
+      "all": 9.1,
+      "last200": 5.5
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 26.0
+      },
+      {
+       "day": 100,
+       "score": 30.5
+      },
+      {
+       "day": 200,
+       "score": 35.5
+      },
+      {
+       "day": 300,
+       "score": 36.5
+      },
+      {
+       "day": 400,
+       "score": 39.5
+      },
+      {
+       "day": 500,
+       "score": 39.5
+      },
+      {
+       "day": 600,
+       "score": 40.5
+      },
+      {
+       "day": 700,
+       "score": 38.5
+      },
+      {
+       "day": 800,
+       "score": 39.0
+      },
+      {
+       "day": 900,
+       "score": 36.5
+      },
+      {
+       "day": 1000,
+       "score": 38.5
+      },
+      {
+       "day": 1100,
+       "score": 38.5
+      },
+      {
+       "day": 1200,
+       "score": 35.5
+      }
+     ]
+    },
+    {
+     "run": "judge-s15",
+     "arm": "judge",
+     "arm_label": "Oracle judging",
+     "seed": 15,
+     "pilot": false,
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 31.8,
+     "last50": 24.0,
+     "memory": 382,
+     "examples_per_task": 2.26,
+     "secs_per_task": 5.1,
+     "gain": {
+      "tasks": 1200,
+      "all": 1.8,
+      "last200": 2.0
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 26.0
+      },
+      {
+       "day": 100,
+       "score": 26.0
+      },
+      {
+       "day": 200,
+       "score": 29.5
+      },
+      {
+       "day": 300,
+       "score": 33.0
+      },
+      {
+       "day": 400,
+       "score": 33.5
+      },
+      {
+       "day": 500,
+       "score": 33.0
+      },
+      {
+       "day": 600,
+       "score": 35.0
+      },
+      {
+       "day": 700,
+       "score": 34.0
+      },
+      {
+       "day": 800,
+       "score": 35.5
+      },
+      {
+       "day": 900,
+       "score": 35.5
+      },
+      {
+       "day": 1000,
+       "score": 35.0
+      },
+      {
+       "day": 1100,
+       "score": 34.5
+      },
+      {
+       "day": 1200,
+       "score": 33.5
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "qwen3.5-0.8b",
+   "label": "Qwen3.5-0.8B",
+   "probe0": 25.5,
+   "runs": [
+    {
+     "run": "teach-s15",
+     "arm": "teach",
+     "arm_label": "Oracle teaching",
+     "seed": 15,
+     "pilot": false,
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 39.8,
+     "last50": 28.0,
+     "memory": 1200,
+     "examples_per_task": 2.78,
+     "secs_per_task": 6.2,
+     "gain": {
+      "tasks": 1200,
+      "all": 13.9,
+      "last200": 4.5
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 25.5
+      },
+      {
+       "day": 100,
+       "score": 34.0
+      },
+      {
+       "day": 200,
+       "score": 36.5
+      },
+      {
+       "day": 300,
+       "score": 39.0
+      },
+      {
+       "day": 400,
+       "score": 37.5
+      },
+      {
+       "day": 500,
+       "score": 38.0
+      },
+      {
+       "day": 600,
+       "score": 39.0
+      },
+      {
+       "day": 700,
+       "score": 35.0
+      },
+      {
+       "day": 800,
+       "score": 35.0
+      },
+      {
+       "day": 900,
+       "score": 34.5
+      },
+      {
+       "day": 1000,
+       "score": 35.0
+      },
+      {
+       "day": 1100,
+       "score": 31.5
+      },
+      {
+       "day": 1200,
+       "score": 34.0
+      }
+     ]
+    },
+    {
+     "run": "judge-s15",
+     "arm": "judge",
+     "arm_label": "Oracle judging",
+     "seed": 15,
+     "pilot": false,
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 34.5,
+     "last50": 28.0,
+     "memory": 414,
+     "examples_per_task": 2.25,
+     "secs_per_task": 6.3,
+     "gain": {
+      "tasks": 1200,
+      "all": 8.6,
+      "last200": 3.5
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 25.5
+      },
+      {
+       "day": 100,
+       "score": 27.5
+      },
+      {
+       "day": 200,
+       "score": 28.5
+      },
+      {
+       "day": 300,
+       "score": 30.5
+      },
+      {
+       "day": 400,
+       "score": 31.5
+      },
+      {
+       "day": 500,
+       "score": 34.5
+      },
+      {
+       "day": 600,
+       "score": 30.5
+      },
+      {
+       "day": 700,
+       "score": 28.5
+      },
+      {
+       "day": 800,
+       "score": 25.5
+      },
+      {
+       "day": 900,
+       "score": 26.5
+      },
+      {
+       "day": 1000,
+       "score": 29.5
+      },
+      {
+       "day": 1100,
+       "score": 30.0
+      },
+      {
+       "day": 1200,
+       "score": 33.5
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "llama3.2-1b",
+   "label": "Llama-3.2-1B",
+   "probe0": 0.0,
+   "runs": [
+    {
+     "run": "teach-s15",
+     "arm": "teach",
+     "arm_label": "Oracle teaching",
+     "seed": 15,
+     "pilot": false,
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 1.0,
+     "last50": 0.0,
+     "memory": 1200,
+     "examples_per_task": 2.82,
+     "secs_per_task": 10.2,
+     "gain": {
+      "tasks": 1200,
+      "all": 1.0,
+      "last200": 2.0
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 0.0
+      },
+      {
+       "day": 100,
+       "score": 2.0
+      },
+      {
+       "day": 200,
+       "score": 2.0
+      },
+      {
+       "day": 300,
+       "score": 1.5
+      },
+      {
+       "day": 400,
+       "score": 1.5
+      },
+      {
+       "day": 500,
+       "score": 1.5
+      },
+      {
+       "day": 600,
+       "score": 1.5
+      },
+      {
+       "day": 700,
+       "score": 1.5
+      },
+      {
+       "day": 800,
+       "score": 0.5
+      },
+      {
+       "day": 900,
+       "score": 0.5
+      },
+      {
+       "day": 1000,
+       "score": 1.0
+      },
+      {
+       "day": 1100,
+       "score": 1.0
+      },
+      {
+       "day": 1200,
+       "score": 2.0
+      }
+     ]
+    },
+    {
+     "run": "judge-s15",
+     "arm": "judge",
+     "arm_label": "Oracle judging",
+     "seed": 15,
+     "pilot": false,
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 0.0,
+     "last50": 0.0,
+     "memory": 0,
+     "examples_per_task": 0.0,
+     "secs_per_task": 11.2,
+     "gain": {
+      "tasks": 1200,
+      "all": 0.0,
+      "last200": 0.0
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 0.0
+      },
+      {
+       "day": 100,
+       "score": 0.0
+      },
+      {
+       "day": 200,
+       "score": 0.0
+      },
+      {
+       "day": 300,
+       "score": 0.0
+      },
+      {
+       "day": 400,
+       "score": 0.0
+      },
+      {
+       "day": 500,
+       "score": 0.0
+      },
+      {
+       "day": 600,
+       "score": 0.0
+      },
+      {
+       "day": 700,
+       "score": 0.0
+      },
+      {
+       "day": 800,
+       "score": 0.0
+      },
+      {
+       "day": 900,
+       "score": 0.0
+      },
+      {
+       "day": 1000,
+       "score": 0.0
+      },
+      {
+       "day": 1100,
+       "score": 0.0
+      },
+      {
+       "day": 1200,
+       "score": 0.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "falcon3-1b",
+   "label": "Falcon3-1B",
+   "probe0": 0.0,
+   "runs": [
+    {
+     "run": "teach-s15",
+     "arm": "teach",
+     "arm_label": "Oracle teaching",
+     "seed": 15,
+     "pilot": false,
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 0.0,
+     "last50": 0.0,
+     "memory": 1200,
+     "examples_per_task": 2.75,
+     "secs_per_task": 4.2,
+     "gain": {
+      "tasks": 1200,
+      "all": 0.0,
+      "last200": 0.0
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 0.0
+      },
+      {
+       "day": 100,
+       "score": 0.0
+      },
+      {
+       "day": 200,
+       "score": 0.0
+      },
+      {
+       "day": 300,
+       "score": 0.0
+      },
+      {
+       "day": 400,
+       "score": 0.0
+      },
+      {
+       "day": 500,
+       "score": 0.0
+      },
+      {
+       "day": 600,
+       "score": 0.0
+      },
+      {
+       "day": 700,
+       "score": 0.0
+      },
+      {
+       "day": 800,
+       "score": 0.0
+      },
+      {
+       "day": 900,
+       "score": 0.0
+      },
+      {
+       "day": 1000,
+       "score": 0.0
+      },
+      {
+       "day": 1100,
+       "score": 0.0
+      },
+      {
+       "day": 1200,
+       "score": 0.0
+      }
+     ]
+    },
+    {
+     "run": "judge-s15",
+     "arm": "judge",
+     "arm_label": "Oracle judging",
+     "seed": 15,
+     "pilot": false,
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 0.0,
+     "last50": 0.0,
+     "memory": 0,
+     "examples_per_task": 0.0,
+     "secs_per_task": 7.7,
+     "gain": {
+      "tasks": 1200,
+      "all": 0.0,
+      "last200": 0.0
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 0.0
+      },
+      {
+       "day": 100,
+       "score": 0.0
+      },
+      {
+       "day": 200,
+       "score": 0.0
+      },
+      {
+       "day": 300,
+       "score": 0.0
+      },
+      {
+       "day": 400,
+       "score": 0.0
+      },
+      {
+       "day": 500,
+       "score": 0.0
+      },
+      {
+       "day": 600,
+       "score": 0.0
+      },
+      {
+       "day": 700,
+       "score": 0.0
+      },
+      {
+       "day": 800,
+       "score": 0.0
+      },
+      {
+       "day": 900,
+       "score": 0.0
+      },
+      {
+       "day": 1000,
+       "score": 0.0
+      },
+      {
+       "day": 1100,
+       "score": 0.0
+      },
+      {
+       "day": 1200,
+       "score": 0.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "gemma3-1b",
+   "label": "Gemma-3-1B",
+   "probe0": 0.0,
+   "runs": [
+    {
+     "run": "teach-s15",
+     "arm": "teach",
+     "arm_label": "Oracle teaching",
+     "seed": 15,
+     "pilot": false,
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 1.2,
+     "last50": 0.0,
+     "memory": 1200,
+     "examples_per_task": 2.76,
+     "secs_per_task": 6.6,
+     "gain": {
+      "tasks": 1200,
+      "all": 1.2,
+      "last200": 1.0
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 0.0
+      },
+      {
+       "day": 100,
+       "score": 0.5
+      },
+      {
+       "day": 200,
+       "score": 0.0
+      },
+      {
+       "day": 300,
+       "score": 0.5
+      },
+      {
+       "day": 400,
+       "score": 1.0
+      },
+      {
+       "day": 500,
+       "score": 0.5
+      },
+      {
+       "day": 600,
+       "score": 0.5
+      },
+      {
+       "day": 700,
+       "score": 0.5
+      },
+      {
+       "day": 800,
+       "score": 0.5
+      },
+      {
+       "day": 900,
+       "score": 1.5
+      },
+      {
+       "day": 1000,
+       "score": 1.0
+      },
+      {
+       "day": 1100,
+       "score": 1.0
+      },
+      {
+       "day": 1200,
+       "score": 0.5
+      }
+     ]
+    },
+    {
+     "run": "judge-s15",
+     "arm": "judge",
+     "arm_label": "Oracle judging",
+     "seed": 15,
+     "pilot": false,
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 0.0,
+     "last50": 0.0,
+     "memory": 0,
+     "examples_per_task": 0.0,
+     "secs_per_task": 6.9,
+     "gain": {
+      "tasks": 1200,
+      "all": 0.0,
+      "last200": 0.0
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 0.0
+      },
+      {
+       "day": 100,
+       "score": 0.0
+      },
+      {
+       "day": 200,
+       "score": 0.0
+      },
+      {
+       "day": 300,
+       "score": 0.0
+      },
+      {
+       "day": 400,
+       "score": 0.0
+      },
+      {
+       "day": 500,
+       "score": 0.0
+      },
+      {
+       "day": 600,
+       "score": 0.0
+      },
+      {
+       "day": 700,
+       "score": 0.0
+      },
+      {
+       "day": 800,
+       "score": 0.0
+      },
+      {
+       "day": 900,
+       "score": 0.0
+      },
+      {
+       "day": 1000,
+       "score": 0.0
+      },
+      {
+       "day": 1100,
+       "score": 0.0
+      },
+      {
+       "day": 1200,
+       "score": 0.0
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

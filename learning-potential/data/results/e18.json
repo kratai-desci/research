@@ -1,0 +1,648 @@
+{
+ "experiment": "E18 the final BFCL exam",
+ "saved": "2026-11-22",
+ "about": "Summary of every run, as the lab's dashboard showed it, read from the experiment bucket (raw logs, snapshots and full exam scores are archived separately). Scores in %; gain in points over E15's frozen model on the same practice tasks; probe = [{day: tasks practised, score: % of the 200 probe tasks}]; exam base = BFCL v4 multi-turn base; headline = BFCL's category groups.",
+ "models": [
+  {
+   "key": "qwen3-1.7b",
+   "label": "Qwen3-1.7B",
+   "floor": {
+    "headline": {
+     "overall": 29.98,
+     "relevance": 81.25,
+     "non_live": 83.94,
+     "live": 73.87,
+     "multi_turn": 15.88,
+     "memory": 8.39,
+     "irrelevance": 77.64
+    },
+    "base": 20.0,
+    "stage": "done"
+   },
+   "exams": [
+    {
+     "exam": "e15-qwen3-1.7b-teach-s15",
+     "exp": "e15",
+     "method": "Notes (E15)",
+     "arm": "Oracle teaching",
+     "stage": "done",
+     "headline": {
+      "overall": 30.19,
+      "relevance": 62.5,
+      "non_live": 82.19,
+      "live": 75.72,
+      "multi_turn": 14.0,
+      "memory": 13.12,
+      "irrelevance": 75.8
+     },
+     "base": 18.0
+    },
+    {
+     "exam": "e15-qwen3-1.7b-judge-s15",
+     "exp": "e15",
+     "method": "Notes (E15)",
+     "arm": "Oracle judging",
+     "stage": "done",
+     "headline": {
+      "overall": 30.29,
+      "relevance": 87.5,
+      "non_live": 82.02,
+      "live": 73.95,
+      "multi_turn": 14.75,
+      "memory": 12.26,
+      "irrelevance": 78.21
+     },
+     "base": 21.0
+    },
+    {
+     "exam": "e16-qwen3-1.7b-teach-s15",
+     "exp": "e16",
+     "method": "LoRA (E16)",
+     "arm": "Oracle teaching",
+     "stage": "done",
+     "headline": {
+      "overall": 17.49,
+      "relevance": 43.75,
+      "non_live": 57.85,
+      "live": 43.38,
+      "multi_turn": 8.25,
+      "memory": 0.43,
+      "irrelevance": 48.11
+     },
+     "base": 11.0
+    },
+    {
+     "exam": "e16-qwen3-1.7b-judge-s15",
+     "exp": "e16",
+     "method": "LoRA (E16)",
+     "arm": "Oracle judging",
+     "stage": "done",
+     "headline": {
+      "overall": 31.07,
+      "relevance": 87.5,
+      "non_live": 84.23,
+      "live": 72.46,
+      "multi_turn": 15.12,
+      "memory": 16.99,
+      "irrelevance": 74.63
+     },
+     "base": 25.0
+    },
+    {
+     "exam": "e17-qwen3-1.7b-teach-s15",
+     "exp": "e17",
+     "method": "Retrieval (E17)",
+     "arm": "Oracle teaching",
+     "stage": "done",
+     "headline": {
+      "overall": 29.32,
+      "relevance": 75.0,
+      "non_live": 84.31,
+      "live": 74.83,
+      "multi_turn": 11.62,
+      "memory": 10.97,
+      "irrelevance": 77.26
+     },
+     "base": 21.0
+    },
+    {
+     "exam": "e17-qwen3-1.7b-judge-s15",
+     "exp": "e17",
+     "method": "Retrieval (E17)",
+     "arm": "Oracle judging",
+     "stage": "done",
+     "headline": {
+      "overall": 30.52,
+      "relevance": 87.5,
+      "non_live": 83.96,
+      "live": 74.98,
+      "multi_turn": 14.63,
+      "memory": 12.69,
+      "irrelevance": 77.03
+     },
+     "base": 23.0
+    },
+    {
+     "exam": "e17-qwen3-1.7b-teach600-s15",
+     "exp": "e17",
+     "method": "Retrieval (E17)",
+     "arm": "Oracle teaching (600 tokens)",
+     "stage": "done",
+     "headline": {
+      "overall": 29.73,
+      "relevance": 87.5,
+      "non_live": 83.9,
+      "live": 74.61,
+      "multi_turn": 11.13,
+      "memory": 14.19,
+      "irrelevance": 77.05
+     },
+     "base": 17.0
+    }
+   ]
+  },
+  {
+   "key": "lfm2.5-1.2b",
+   "label": "LFM2.5-1.2B",
+   "floor": {
+    "headline": {
+     "overall": 23.9,
+     "relevance": 81.25,
+     "non_live": 67.44,
+     "live": 63.8,
+     "multi_turn": 4.5,
+     "memory": 7.1,
+     "irrelevance": 80.11
+    },
+    "base": 9.0,
+    "stage": "done"
+   },
+   "exams": [
+    {
+     "exam": "e15-lfm2.5-1.2b-teach-s15",
+     "exp": "e15",
+     "method": "Notes (E15)",
+     "arm": "Oracle teaching",
+     "stage": "done",
+     "headline": {
+      "overall": 24.19,
+      "relevance": 93.75,
+      "non_live": 78.62,
+      "live": 63.95,
+      "multi_turn": 5.0,
+      "memory": 6.67,
+      "irrelevance": 71.0
+     },
+     "base": 10.0
+    },
+    {
+     "exam": "e15-lfm2.5-1.2b-judge-s15",
+     "exp": "e15",
+     "method": "Notes (E15)",
+     "arm": "Oracle judging",
+     "stage": "done",
+     "headline": {
+      "overall": 23.76,
+      "relevance": 87.5,
+      "non_live": 76.83,
+      "live": 60.4,
+      "multi_turn": 5.0,
+      "memory": 4.95,
+      "irrelevance": 75.52
+     },
+     "base": 10.5
+    },
+    {
+     "exam": "e16-lfm2.5-1.2b-teach-s15",
+     "exp": "e16",
+     "method": "LoRA (E16)",
+     "arm": "Oracle teaching",
+     "stage": "done",
+     "headline": {
+      "overall": 21.81,
+      "relevance": 93.75,
+      "non_live": 78.38,
+      "live": 62.25,
+      "multi_turn": 7.62,
+      "memory": 2.37,
+      "irrelevance": 49.84
+     },
+     "base": 11.0
+    },
+    {
+     "exam": "e16-lfm2.5-1.2b-judge-s15",
+     "exp": "e16",
+     "method": "LoRA (E16)",
+     "arm": "Oracle judging",
+     "stage": "done",
+     "headline": {
+      "overall": 23.65,
+      "relevance": 100.0,
+      "non_live": 68.04,
+      "live": 67.65,
+      "multi_turn": 7.25,
+      "memory": 12.9,
+      "irrelevance": 53.23
+     },
+     "base": 13.5
+    },
+    {
+     "exam": "e17-lfm2.5-1.2b-teach-s15",
+     "exp": "e17",
+     "method": "Retrieval (E17)",
+     "arm": "Oracle teaching",
+     "stage": "done",
+     "headline": {
+      "overall": 24.86,
+      "relevance": 81.25,
+      "non_live": 67.4,
+      "live": 63.88,
+      "multi_turn": 7.88,
+      "memory": 6.88,
+      "irrelevance": 79.9
+     },
+     "base": 14.5
+    },
+    {
+     "exam": "e17-lfm2.5-1.2b-judge-s15",
+     "exp": "e17",
+     "method": "Retrieval (E17)",
+     "arm": "Oracle judging",
+     "stage": "done",
+     "headline": {
+      "overall": 24.51,
+      "relevance": 75.0,
+      "non_live": 67.23,
+      "live": 64.03,
+      "multi_turn": 6.12,
+      "memory": 7.96,
+      "irrelevance": 79.56
+     },
+     "base": 12.5
+    }
+   ]
+  },
+  {
+   "key": "qwen3.5-0.8b",
+   "label": "Qwen3.5-0.8B",
+   "floor": {
+    "headline": {
+     "overall": 20.66,
+     "relevance": 56.25,
+     "non_live": 47.31,
+     "live": 56.77,
+     "multi_turn": 5.38,
+     "memory": 4.52,
+     "irrelevance": 77.34
+    },
+    "base": 8.5,
+    "stage": "done"
+   },
+   "exams": [
+    {
+     "exam": "e15-qwen3.5-0.8b-teach-s15",
+     "exp": "e15",
+     "method": "Notes (E15)",
+     "arm": "Oracle teaching",
+     "stage": "done",
+     "headline": {
+      "overall": 15.76,
+      "relevance": 93.75,
+      "non_live": 67.02,
+      "live": 59.22,
+      "multi_turn": 5.25,
+      "memory": 5.38,
+      "irrelevance": 4.83
+     },
+     "base": 9.5
+    },
+    {
+     "exam": "e15-qwen3.5-0.8b-judge-s15",
+     "exp": "e15",
+     "method": "Notes (E15)",
+     "arm": "Oracle judging",
+     "stage": "done",
+     "headline": {
+      "overall": 20.86,
+      "relevance": 81.25,
+      "non_live": 63.52,
+      "live": 58.11,
+      "multi_turn": 4.88,
+      "memory": 5.59,
+      "irrelevance": 61.19
+     },
+     "base": 8.5
+    },
+    {
+     "exam": "e16-qwen3.5-0.8b-teach-s15",
+     "exp": "e16",
+     "method": "LoRA (E16)",
+     "arm": "Oracle teaching",
+     "stage": "done",
+     "headline": {
+      "overall": 14.0,
+      "relevance": 93.75,
+      "non_live": 60.85,
+      "live": 49.81,
+      "multi_turn": 9.25,
+      "memory": 0.0,
+      "irrelevance": 1.62
+     },
+     "base": 15.5
+    },
+    {
+     "exam": "e16-qwen3.5-0.8b-judge-s15",
+     "exp": "e16",
+     "method": "LoRA (E16)",
+     "arm": "Oracle judging",
+     "stage": "done",
+     "headline": {
+      "overall": 14.03,
+      "relevance": 100.0,
+      "non_live": 35.65,
+      "live": 49.81,
+      "multi_turn": 11.37,
+      "memory": 3.66,
+      "irrelevance": 13.43
+     },
+     "base": 17.5
+    },
+    {
+     "exam": "e17-qwen3.5-0.8b-teach-s15",
+     "exp": "e17",
+     "method": "Retrieval (E17)",
+     "arm": "Oracle teaching",
+     "stage": "done",
+     "headline": {
+      "overall": 21.72,
+      "relevance": 62.5,
+      "non_live": 47.25,
+      "live": 56.55,
+      "multi_turn": 8.5,
+      "memory": 5.16,
+      "irrelevance": 77.57
+     },
+     "base": 12.5
+    },
+    {
+     "exam": "e17-qwen3.5-0.8b-judge-s15",
+     "exp": "e17",
+     "method": "Retrieval (E17)",
+     "arm": "Oracle judging",
+     "stage": "done",
+     "headline": {
+      "overall": 21.5,
+      "relevance": 68.75,
+      "non_live": 48.33,
+      "live": 55.88,
+      "multi_turn": 8.25,
+      "memory": 4.3,
+      "irrelevance": 77.38
+     },
+     "base": 13.5
+    }
+   ]
+  },
+  {
+   "key": "llama3.2-1b",
+   "label": "Llama-3.2-1B",
+   "floor": {
+    "headline": {
+     "overall": 10.73,
+     "relevance": 43.75,
+     "non_live": 37.88,
+     "live": 11.77,
+     "multi_turn": 0.0,
+     "memory": 2.58,
+     "irrelevance": 52.48
+    },
+    "base": 0.0,
+    "stage": "done"
+   },
+   "exams": [
+    {
+     "exam": "e15-llama3.2-1b-teach-s15",
+     "exp": "e15",
+     "method": "Notes (E15)",
+     "arm": "Oracle teaching",
+     "stage": "done",
+     "headline": {
+      "overall": 10.0,
+      "relevance": 31.25,
+      "non_live": 13.21,
+      "live": 5.33,
+      "multi_turn": 0.0,
+      "memory": 4.3,
+      "irrelevance": 72.84
+     },
+     "base": 0.0
+    },
+    {
+     "exam": "e15-llama3.2-1b-judge-s15",
+     "exp": "e15",
+     "method": "Notes (E15)",
+     "arm": "Oracle judging",
+     "stage": "done",
+     "headline": {
+      "overall": 10.9,
+      "relevance": 25.0,
+      "non_live": 17.38,
+      "live": 5.11,
+      "multi_turn": 0.0,
+      "memory": 3.87,
+      "irrelevance": 78.81
+     },
+     "base": 0.0
+    },
+    {
+     "exam": "e16-llama3.2-1b-teach-s15",
+     "exp": "e16",
+     "method": "LoRA (E16)",
+     "arm": "Oracle teaching",
+     "stage": "done",
+     "headline": {
+      "overall": 12.05,
+      "relevance": 87.5,
+      "non_live": 52.5,
+      "live": 41.3,
+      "multi_turn": 5.62,
+      "memory": 0.86,
+      "irrelevance": 8.11
+     },
+     "base": 8.0
+    },
+    {
+     "exam": "e17-llama3.2-1b-teach-s15",
+     "exp": "e17",
+     "method": "Retrieval (E17)",
+     "arm": "Oracle teaching",
+     "stage": "done",
+     "headline": {
+      "overall": 11.01,
+      "relevance": 37.5,
+      "non_live": 38.19,
+      "live": 11.4,
+      "multi_turn": 0.0,
+      "memory": 4.09,
+      "irrelevance": 52.33
+     },
+     "base": 0.0
+    }
+   ]
+  },
+  {
+   "key": "falcon3-1b",
+   "label": "Falcon3-1B",
+   "floor": {
+    "headline": {
+     "overall": 11.07,
+     "relevance": 0.0,
+     "non_live": 10.02,
+     "live": 2.96,
+     "multi_turn": 0.0,
+     "memory": 5.38,
+     "irrelevance": 86.92
+    },
+    "base": 0.0,
+    "stage": "done"
+   },
+   "exams": [
+    {
+     "exam": "e15-falcon3-1b-teach-s15",
+     "exp": "e15",
+     "method": "Notes (E15)",
+     "arm": "Oracle teaching",
+     "stage": "done",
+     "headline": {
+      "overall": 11.11,
+      "relevance": 6.25,
+      "non_live": 8.06,
+      "live": 2.0,
+      "multi_turn": 0.0,
+      "memory": 5.38,
+      "irrelevance": 90.3
+     },
+     "base": 0.0
+    },
+    {
+     "exam": "e15-falcon3-1b-judge-s15",
+     "exp": "e15",
+     "method": "Notes (E15)",
+     "arm": "Oracle judging",
+     "stage": "done",
+     "headline": {
+      "overall": 11.11,
+      "relevance": 25.0,
+      "non_live": 11.21,
+      "live": 3.03,
+      "multi_turn": 0.0,
+      "memory": 3.87,
+      "irrelevance": 89.16
+     },
+     "base": 0.0
+    },
+    {
+     "exam": "e16-falcon3-1b-teach-s15",
+     "exp": "e16",
+     "method": "LoRA (E16)",
+     "arm": "Oracle teaching",
+     "stage": "done",
+     "headline": {
+      "overall": 8.39,
+      "relevance": 100.0,
+      "non_live": 45.19,
+      "live": 27.98,
+      "multi_turn": 1.38,
+      "memory": 0.0,
+      "irrelevance": 6.61
+     },
+     "base": 3.0
+    },
+    {
+     "exam": "e17-falcon3-1b-teach-s15",
+     "exp": "e17",
+     "method": "Retrieval (E17)",
+     "arm": "Oracle teaching",
+     "stage": "done",
+     "headline": {
+      "overall": 10.87,
+      "relevance": 0.0,
+      "non_live": 9.21,
+      "live": 3.03,
+      "multi_turn": 0.0,
+      "memory": 4.73,
+      "irrelevance": 86.98
+     },
+     "base": 0.0
+    }
+   ]
+  },
+  {
+   "key": "gemma3-1b",
+   "label": "Gemma-3-1B",
+   "floor": {
+    "headline": {
+     "overall": 7.14,
+     "relevance": 37.5,
+     "non_live": 20.0,
+     "live": 11.84,
+     "multi_turn": 0.0,
+     "memory": 3.23,
+     "irrelevance": 33.14
+    },
+    "base": 0.0,
+    "stage": "done"
+   },
+   "exams": [
+    {
+     "exam": "e15-gemma3-1b-teach-s15",
+     "exp": "e15",
+     "method": "Notes (E15)",
+     "arm": "Oracle teaching",
+     "stage": "done",
+     "headline": {
+      "overall": 8.84,
+      "relevance": 25.0,
+      "non_live": 6.23,
+      "live": 7.03,
+      "multi_turn": 0.0,
+      "memory": 4.09,
+      "irrelevance": 67.0
+     },
+     "base": 0.0
+    },
+    {
+     "exam": "e15-gemma3-1b-judge-s15",
+     "exp": "e15",
+     "method": "Notes (E15)",
+     "arm": "Oracle judging",
+     "stage": "done",
+     "headline": {
+      "overall": 8.23,
+      "relevance": 37.5,
+      "non_live": 14.1,
+      "live": 8.29,
+      "multi_turn": 0.0,
+      "memory": 3.87,
+      "irrelevance": 52.18
+     },
+     "base": 0.0
+    },
+    {
+     "exam": "e16-gemma3-1b-teach-s15",
+     "exp": "e16",
+     "method": "LoRA (E16)",
+     "arm": "Oracle teaching",
+     "stage": "done",
+     "headline": {
+      "overall": 5.99,
+      "relevance": 100.0,
+      "non_live": 16.52,
+      "live": 16.43,
+      "multi_turn": 6.38,
+      "memory": 0.86,
+      "irrelevance": 6.12
+     },
+     "base": 11.5
+    },
+    {
+     "exam": "e17-gemma3-1b-teach-s15",
+     "exp": "e17",
+     "method": "Retrieval (E17)",
+     "arm": "Oracle teaching",
+     "stage": "done",
+     "headline": {
+      "overall": 7.19,
+      "relevance": 37.5,
+      "non_live": 20.12,
+      "live": 11.55,
+      "multi_turn": 0.12,
+      "memory": 3.23,
+      "irrelevance": 33.37
+     },
+     "base": 0.5
+    }
+   ]
+  }
+ ]
+}

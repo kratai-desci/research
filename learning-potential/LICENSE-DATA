@@ -1,0 +1,18 @@
+Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+Copyright (c) 2026 Decentralized Science, Inc.
+
+The data in `data/`, the experiment notes in `notes/`, the paper text and figures
+in `paper/`, and the archive of full run logs, notes snapshots, retrieval memories
+and LoRA adapters (published separately) are licensed under the Creative Commons
+Attribution 4.0 International licence. You may share and adapt the material for
+any purpose, including commercially, if you give appropriate credit to
+Decentralized Science, Inc., link to the licence, and indicate if changes were
+made.
+
+Full legal text: https://creativecommons.org/licenses/by/4.0/legalcode
+Summary:        https://creativecommons.org/licenses/by/4.0/
+
+The practice tasks in `data/pool/` run on the tool simulators of the Berkeley
+Function Calling Leaderboard (BFCL), which keep their own licence, and the models
+studied keep theirs. The code in `src/` is under the MIT licence (see LICENSE).

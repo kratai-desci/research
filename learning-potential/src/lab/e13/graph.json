@@ -1,0 +1,2657 @@
+{
+ "model": "gemini-3-flash-preview",
+ "edges": [
+  {
+   "from": "GorillaFileSystem.cat",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "file content used as message body"
+  },
+  {
+   "from": "GorillaFileSystem.cat",
+   "to": "TicketAPI.create_ticket",
+   "kind": "data",
+   "why": "file content used as ticket description"
+  },
+  {
+   "from": "GorillaFileSystem.cat",
+   "to": "TicketAPI.edit_ticket",
+   "kind": "data",
+   "why": "file content used for ticket updates"
+  },
+  {
+   "from": "GorillaFileSystem.cat",
+   "to": "TicketAPI.resolve_ticket",
+   "kind": "data",
+   "why": "file content used as resolution details"
+  },
+  {
+   "from": "GorillaFileSystem.cat",
+   "to": "TwitterAPI.authenticate_twitter",
+   "kind": "data",
+   "why": "credentials stored in file"
+  },
+  {
+   "from": "GorillaFileSystem.cat",
+   "to": "TwitterAPI.comment",
+   "kind": "data",
+   "why": "file content used as comment text"
+  },
+  {
+   "from": "GorillaFileSystem.cat",
+   "to": "TwitterAPI.follow_user",
+   "kind": "data",
+   "why": "username to follow stored in file"
+  },
+  {
+   "from": "GorillaFileSystem.cat",
+   "to": "TwitterAPI.post_tweet",
+   "kind": "data",
+   "why": "file content used as tweet text"
+  },
+  {
+   "from": "GorillaFileSystem.cd",
+   "to": "GorillaFileSystem.ls",
+   "kind": "requires",
+   "why": "Changing directory updates the state for subsequent ls calls."
+  },
+  {
+   "from": "GorillaFileSystem.cd",
+   "to": "GorillaFileSystem.pwd",
+   "kind": "requires",
+   "why": "Changing directory updates the path returned by pwd."
+  },
+  {
+   "from": "GorillaFileSystem.diff",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "file differences sent as message"
+  },
+  {
+   "from": "GorillaFileSystem.du",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "disk usage sent as message"
+  },
+  {
+   "from": "GorillaFileSystem.du",
+   "to": "TicketAPI.create_ticket",
+   "kind": "data",
+   "why": "disk usage report used in ticket description"
+  },
+  {
+   "from": "GorillaFileSystem.find",
+   "to": "GorillaFileSystem.cat",
+   "kind": "data",
+   "why": "The file paths found by find are used as input for cat."
+  },
+  {
+   "from": "GorillaFileSystem.find",
+   "to": "GorillaFileSystem.cd",
+   "kind": "data",
+   "why": "The directory paths found by find are used as input for cd."
+  },
+  {
+   "from": "GorillaFileSystem.find",
+   "to": "GorillaFileSystem.rm",
+   "kind": "data",
+   "why": "The file/directory paths found by find are used as input for rm."
+  },
+  {
+   "from": "GorillaFileSystem.find",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "file paths sent as message"
+  },
+  {
+   "from": "GorillaFileSystem.find",
+   "to": "TicketAPI.create_ticket",
+   "kind": "data",
+   "why": "file path used in ticket description"
+  },
+  {
+   "from": "GorillaFileSystem.find",
+   "to": "TwitterAPI.post_tweet",
+   "kind": "data",
+   "why": "search results used as tweet text"
+  },
+  {
+   "from": "GorillaFileSystem.grep",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "search results sent as message"
+  },
+  {
+   "from": "GorillaFileSystem.grep",
+   "to": "TicketAPI.create_ticket",
+   "kind": "data",
+   "why": "matching log lines used as ticket description"
+  },
+  {
+   "from": "GorillaFileSystem.grep",
+   "to": "TwitterAPI.post_tweet",
+   "kind": "data",
+   "why": "filtered lines used as tweet text"
+  },
+  {
+   "from": "GorillaFileSystem.ls",
+   "to": "GorillaFileSystem.cat",
+   "kind": "data",
+   "why": "The file names listed by ls are used as input for cat."
+  },
+  {
+   "from": "GorillaFileSystem.ls",
+   "to": "GorillaFileSystem.cd",
+   "kind": "data",
+   "why": "The directory names listed by ls are used as input for cd."
+  },
+  {
+   "from": "GorillaFileSystem.ls",
+   "to": "GorillaFileSystem.cp",
+   "kind": "data",
+   "why": "The file/directory names listed by ls are used as source for cp."
+  },
+  {
+   "from": "GorillaFileSystem.ls",
+   "to": "GorillaFileSystem.diff",
+   "kind": "data",
+   "why": "The file names listed by ls are used as input for diff."
+  },
+  {
+   "from": "GorillaFileSystem.ls",
+   "to": "GorillaFileSystem.grep",
+   "kind": "data",
+   "why": "The file names listed by ls are used as input for grep."
+  },
+  {
+   "from": "GorillaFileSystem.ls",
+   "to": "GorillaFileSystem.mv",
+   "kind": "data",
+   "why": "The file/directory names listed by ls are used as source for mv."
+  },
+  {
+   "from": "GorillaFileSystem.ls",
+   "to": "GorillaFileSystem.rm",
+   "kind": "data",
+   "why": "The file/directory names listed by ls are used as input for rm."
+  },
+  {
+   "from": "GorillaFileSystem.ls",
+   "to": "GorillaFileSystem.rmdir",
+   "kind": "data",
+   "why": "The directory names listed by ls are used as input for rmdir."
+  },
+  {
+   "from": "GorillaFileSystem.ls",
+   "to": "GorillaFileSystem.sort",
+   "kind": "data",
+   "why": "The file names listed by ls are used as input for sort."
+  },
+  {
+   "from": "GorillaFileSystem.ls",
+   "to": "GorillaFileSystem.tail",
+   "kind": "data",
+   "why": "The file names listed by ls are used as input for tail."
+  },
+  {
+   "from": "GorillaFileSystem.ls",
+   "to": "GorillaFileSystem.wc",
+   "kind": "data",
+   "why": "The file names listed by ls are used as input for wc."
+  },
+  {
+   "from": "GorillaFileSystem.ls",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "directory listing sent as message"
+  },
+  {
+   "from": "GorillaFileSystem.ls",
+   "to": "TwitterAPI.post_tweet",
+   "kind": "data",
+   "why": "directory listing used as tweet text"
+  },
+  {
+   "from": "GorillaFileSystem.mkdir",
+   "to": "GorillaFileSystem.cd",
+   "kind": "requires",
+   "why": "A directory must be created before it can be entered."
+  },
+  {
+   "from": "GorillaFileSystem.mkdir",
+   "to": "GorillaFileSystem.rmdir",
+   "kind": "requires",
+   "why": "A directory must exist before it can be removed."
+  },
+  {
+   "from": "GorillaFileSystem.pwd",
+   "to": "GorillaFileSystem.find",
+   "kind": "data",
+   "why": "The current working directory path can be used as the starting path for find."
+  },
+  {
+   "from": "GorillaFileSystem.pwd",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "current path sent as message"
+  },
+  {
+   "from": "GorillaFileSystem.pwd",
+   "to": "TicketAPI.create_ticket",
+   "kind": "data",
+   "why": "current path used as ticket context"
+  },
+  {
+   "from": "GorillaFileSystem.sort",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "sorted content sent as message"
+  },
+  {
+   "from": "GorillaFileSystem.tail",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "file tail sent as message"
+  },
+  {
+   "from": "GorillaFileSystem.tail",
+   "to": "TicketAPI.create_ticket",
+   "kind": "data",
+   "why": "recent file lines used as ticket description"
+  },
+  {
+   "from": "GorillaFileSystem.touch",
+   "to": "GorillaFileSystem.cat",
+   "kind": "requires",
+   "why": "A file must be created before its content can be displayed."
+  },
+  {
+   "from": "GorillaFileSystem.touch",
+   "to": "GorillaFileSystem.echo",
+   "kind": "requires",
+   "why": "A file must exist before content can be written to it via echo."
+  },
+  {
+   "from": "GorillaFileSystem.touch",
+   "to": "GorillaFileSystem.rm",
+   "kind": "requires",
+   "why": "A file must exist before it can be removed."
+  },
+  {
+   "from": "GorillaFileSystem.wc",
+   "to": "MathAPI.absolute_value",
+   "kind": "data",
+   "why": "use file count in calculation"
+  },
+  {
+   "from": "GorillaFileSystem.wc",
+   "to": "MathAPI.add",
+   "kind": "data",
+   "why": "use file count in calculation"
+  },
+  {
+   "from": "GorillaFileSystem.wc",
+   "to": "MathAPI.divide",
+   "kind": "data",
+   "why": "use file count in calculation"
+  },
+  {
+   "from": "GorillaFileSystem.wc",
+   "to": "MathAPI.imperial_si_conversion",
+   "kind": "data",
+   "why": "use file count in calculation"
+  },
+  {
+   "from": "GorillaFileSystem.wc",
+   "to": "MathAPI.logarithm",
+   "kind": "data",
+   "why": "use file count in calculation or precision"
+  },
+  {
+   "from": "GorillaFileSystem.wc",
+   "to": "MathAPI.max_value",
+   "kind": "data",
+   "why": "use file count in calculation"
+  },
+  {
+   "from": "GorillaFileSystem.wc",
+   "to": "MathAPI.mean",
+   "kind": "data",
+   "why": "use file count in calculation"
+  },
+  {
+   "from": "GorillaFileSystem.wc",
+   "to": "MathAPI.min_value",
+   "kind": "data",
+   "why": "use file count in calculation"
+  },
+  {
+   "from": "GorillaFileSystem.wc",
+   "to": "MathAPI.multiply",
+   "kind": "data",
+   "why": "use file count in calculation"
+  },
+  {
+   "from": "GorillaFileSystem.wc",
+   "to": "MathAPI.percentage",
+   "kind": "data",
+   "why": "use file count in calculation"
+  },
+  {
+   "from": "GorillaFileSystem.wc",
+   "to": "MathAPI.power",
+   "kind": "data",
+   "why": "use file count in calculation"
+  },
+  {
+   "from": "GorillaFileSystem.wc",
+   "to": "MathAPI.round_number",
+   "kind": "data",
+   "why": "use file count in calculation or decimal places"
+  },
+  {
+   "from": "GorillaFileSystem.wc",
+   "to": "MathAPI.si_unit_conversion",
+   "kind": "data",
+   "why": "use file count in calculation"
+  },
+  {
+   "from": "GorillaFileSystem.wc",
+   "to": "MathAPI.square_root",
+   "kind": "data",
+   "why": "use file count in calculation or precision"
+  },
+  {
+   "from": "GorillaFileSystem.wc",
+   "to": "MathAPI.standard_deviation",
+   "kind": "data",
+   "why": "use file count in calculation"
+  },
+  {
+   "from": "GorillaFileSystem.wc",
+   "to": "MathAPI.subtract",
+   "kind": "data",
+   "why": "use file count in calculation"
+  },
+  {
+   "from": "GorillaFileSystem.wc",
+   "to": "MathAPI.sum_values",
+   "kind": "data",
+   "why": "use file count in calculation"
+  },
+  {
+   "from": "GorillaFileSystem.wc",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "file count sent as message"
+  },
+  {
+   "from": "GorillaFileSystem.wc",
+   "to": "TicketAPI.create_ticket",
+   "kind": "data",
+   "why": "file statistics used in ticket description"
+  },
+  {
+   "from": "MathAPI.absolute_value",
+   "to": "GorillaFileSystem.echo",
+   "kind": "data",
+   "why": "save calculation result to file"
+  },
+  {
+   "from": "MathAPI.absolute_value",
+   "to": "MathAPI.logarithm",
+   "kind": "data",
+   "why": "ensure positive for log"
+  },
+  {
+   "from": "MathAPI.absolute_value",
+   "to": "MathAPI.square_root",
+   "kind": "data",
+   "why": "ensure positive for root"
+  },
+  {
+   "from": "MathAPI.add",
+   "to": "GorillaFileSystem.echo",
+   "kind": "data",
+   "why": "save calculation result to file"
+  },
+  {
+   "from": "MathAPI.add",
+   "to": "MathAPI.percentage",
+   "kind": "data",
+   "why": "use sum as whole"
+  },
+  {
+   "from": "MathAPI.add",
+   "to": "MathAPI.round_number",
+   "kind": "data",
+   "why": "round the sum"
+  },
+  {
+   "from": "MathAPI.add",
+   "to": "TradingBot.fund_account",
+   "kind": "data",
+   "why": "A calculated sum can be used as the amount to fund the account."
+  },
+  {
+   "from": "MathAPI.add",
+   "to": "TravelAPI.set_budget_limit",
+   "kind": "data",
+   "why": "calculate and set a new budget limit"
+  },
+  {
+   "from": "MathAPI.divide",
+   "to": "GorillaFileSystem.echo",
+   "kind": "data",
+   "why": "save calculation result to file"
+  },
+  {
+   "from": "MathAPI.divide",
+   "to": "MathAPI.round_number",
+   "kind": "data",
+   "why": "round the quotient"
+  },
+  {
+   "from": "MathAPI.imperial_si_conversion",
+   "to": "GorillaFileSystem.echo",
+   "kind": "data",
+   "why": "save calculation result to file"
+  },
+  {
+   "from": "MathAPI.imperial_si_conversion",
+   "to": "MathAPI.add",
+   "kind": "data",
+   "why": "sum converted values"
+  },
+  {
+   "from": "MathAPI.imperial_si_conversion",
+   "to": "MathAPI.round_number",
+   "kind": "data",
+   "why": "round the converted value"
+  },
+  {
+   "from": "MathAPI.imperial_si_conversion",
+   "to": "VehicleControlAPI.adjustClimateControl",
+   "kind": "data",
+   "why": "convert Fahrenheit input to Celsius for climate setting"
+  },
+  {
+   "from": "MathAPI.imperial_si_conversion",
+   "to": "VehicleControlAPI.estimate_drive_feasibility_by_mileage",
+   "kind": "data",
+   "why": "convert distance in km to miles for feasibility check"
+  },
+  {
+   "from": "MathAPI.imperial_si_conversion",
+   "to": "VehicleControlAPI.setCruiseControl",
+   "kind": "data",
+   "why": "convert speed from km/h to mph for cruise control activation"
+  },
+  {
+   "from": "MathAPI.logarithm",
+   "to": "GorillaFileSystem.echo",
+   "kind": "data",
+   "why": "save calculation result to file"
+  },
+  {
+   "from": "MathAPI.logarithm",
+   "to": "MathAPI.round_number",
+   "kind": "data",
+   "why": "round the log"
+  },
+  {
+   "from": "MathAPI.max_value",
+   "to": "GorillaFileSystem.echo",
+   "kind": "data",
+   "why": "save calculation result to file"
+  },
+  {
+   "from": "MathAPI.max_value",
+   "to": "TradingBot.filter_stocks_by_price",
+   "kind": "data",
+   "why": "A calculated maximum value can be used as the upper price limit for filtering stocks."
+  },
+  {
+   "from": "MathAPI.mean",
+   "to": "GorillaFileSystem.echo",
+   "kind": "data",
+   "why": "save calculation result to file"
+  },
+  {
+   "from": "MathAPI.mean",
+   "to": "MathAPI.round_number",
+   "kind": "data",
+   "why": "round the mean"
+  },
+  {
+   "from": "MathAPI.min_value",
+   "to": "GorillaFileSystem.echo",
+   "kind": "data",
+   "why": "save calculation result to file"
+  },
+  {
+   "from": "MathAPI.min_value",
+   "to": "TradingBot.filter_stocks_by_price",
+   "kind": "data",
+   "why": "A calculated minimum value can be used as the lower price limit for filtering stocks."
+  },
+  {
+   "from": "MathAPI.multiply",
+   "to": "GorillaFileSystem.echo",
+   "kind": "data",
+   "why": "save calculation result to file"
+  },
+  {
+   "from": "MathAPI.multiply",
+   "to": "MathAPI.round_number",
+   "kind": "data",
+   "why": "round the product"
+  },
+  {
+   "from": "MathAPI.multiply",
+   "to": "TradingBot.place_order",
+   "kind": "data",
+   "why": "A calculated value can be used as the price or amount for a new order."
+  },
+  {
+   "from": "MathAPI.multiply",
+   "to": "TravelAPI.compute_exchange_rate",
+   "kind": "data",
+   "why": "calculate a total value to be converted to another currency"
+  },
+  {
+   "from": "MathAPI.percentage",
+   "to": "GorillaFileSystem.echo",
+   "kind": "data",
+   "why": "save calculation result to file"
+  },
+  {
+   "from": "MathAPI.percentage",
+   "to": "MathAPI.round_number",
+   "kind": "data",
+   "why": "round the percentage"
+  },
+  {
+   "from": "MathAPI.percentage",
+   "to": "TradingBot.notify_price_change",
+   "kind": "data",
+   "why": "A calculated percentage can be used as the threshold for price change notifications."
+  },
+  {
+   "from": "MathAPI.percentage",
+   "to": "TravelAPI.purchase_insurance",
+   "kind": "data",
+   "why": "calculate insurance cost as a percentage of travel cost"
+  },
+  {
+   "from": "MathAPI.power",
+   "to": "GorillaFileSystem.echo",
+   "kind": "data",
+   "why": "save calculation result to file"
+  },
+  {
+   "from": "MathAPI.power",
+   "to": "MathAPI.round_number",
+   "kind": "data",
+   "why": "round the power"
+  },
+  {
+   "from": "MathAPI.round_number",
+   "to": "GorillaFileSystem.echo",
+   "kind": "data",
+   "why": "save calculation result to file"
+  },
+  {
+   "from": "MathAPI.round_number",
+   "to": "GorillaFileSystem.tail",
+   "kind": "data",
+   "why": "use rounded result as line count"
+  },
+  {
+   "from": "MathAPI.round_number",
+   "to": "TradingBot.place_order",
+   "kind": "data",
+   "why": "A rounded value is often required for placing an order at a specific price."
+  },
+  {
+   "from": "MathAPI.round_number",
+   "to": "TravelAPI.purchase_insurance",
+   "kind": "data",
+   "why": "use a rounded value as the insurance cost"
+  },
+  {
+   "from": "MathAPI.si_unit_conversion",
+   "to": "GorillaFileSystem.echo",
+   "kind": "data",
+   "why": "save calculation result to file"
+  },
+  {
+   "from": "MathAPI.si_unit_conversion",
+   "to": "MathAPI.add",
+   "kind": "data",
+   "why": "sum converted values"
+  },
+  {
+   "from": "MathAPI.si_unit_conversion",
+   "to": "MathAPI.round_number",
+   "kind": "data",
+   "why": "round the converted value"
+  },
+  {
+   "from": "MathAPI.square_root",
+   "to": "GorillaFileSystem.echo",
+   "kind": "data",
+   "why": "save calculation result to file"
+  },
+  {
+   "from": "MathAPI.square_root",
+   "to": "MathAPI.round_number",
+   "kind": "data",
+   "why": "round the root"
+  },
+  {
+   "from": "MathAPI.standard_deviation",
+   "to": "GorillaFileSystem.echo",
+   "kind": "data",
+   "why": "save calculation result to file"
+  },
+  {
+   "from": "MathAPI.standard_deviation",
+   "to": "MathAPI.round_number",
+   "kind": "data",
+   "why": "round the standard deviation"
+  },
+  {
+   "from": "MathAPI.subtract",
+   "to": "GorillaFileSystem.echo",
+   "kind": "data",
+   "why": "save calculation result to file"
+  },
+  {
+   "from": "MathAPI.subtract",
+   "to": "MathAPI.absolute_value",
+   "kind": "data",
+   "why": "get distance magnitude"
+  },
+  {
+   "from": "MathAPI.subtract",
+   "to": "MathAPI.round_number",
+   "kind": "data",
+   "why": "round the difference"
+  },
+  {
+   "from": "MathAPI.subtract",
+   "to": "TradingBot.withdraw_funds",
+   "kind": "data",
+   "why": "A calculated difference can be used as the amount to withdraw."
+  },
+  {
+   "from": "MathAPI.subtract",
+   "to": "TravelAPI.set_budget_limit",
+   "kind": "data",
+   "why": "reduce and update the budget limit"
+  },
+  {
+   "from": "MathAPI.subtract",
+   "to": "VehicleControlAPI.fillFuelTank",
+   "kind": "data",
+   "why": "calculate remaining tank capacity to determine fuel amount to add"
+  },
+  {
+   "from": "MathAPI.sum_values",
+   "to": "GorillaFileSystem.echo",
+   "kind": "data",
+   "why": "save calculation result to file"
+  },
+  {
+   "from": "MathAPI.sum_values",
+   "to": "MathAPI.percentage",
+   "kind": "data",
+   "why": "use total as whole"
+  },
+  {
+   "from": "MathAPI.sum_values",
+   "to": "MathAPI.round_number",
+   "kind": "data",
+   "why": "round the total"
+  },
+  {
+   "from": "MathAPI.sum_values",
+   "to": "TravelAPI.compute_exchange_rate",
+   "kind": "data",
+   "why": "convert the sum of multiple costs into a target currency"
+  },
+  {
+   "from": "MessageAPI.add_contact",
+   "to": "GorillaFileSystem.mkdir",
+   "kind": "data",
+   "why": "new user ID used as directory name"
+  },
+  {
+   "from": "MessageAPI.add_contact",
+   "to": "GorillaFileSystem.touch",
+   "kind": "data",
+   "why": "new user ID used as file name"
+  },
+  {
+   "from": "MessageAPI.add_contact",
+   "to": "MessageAPI.delete_message",
+   "kind": "data",
+   "why": "new user_id to identify message"
+  },
+  {
+   "from": "MessageAPI.add_contact",
+   "to": "MessageAPI.get_user_id",
+   "kind": "requires",
+   "why": "user must exist in workspace"
+  },
+  {
+   "from": "MessageAPI.add_contact",
+   "to": "MessageAPI.message_login",
+   "kind": "data",
+   "why": "new user_id for login"
+  },
+  {
+   "from": "MessageAPI.add_contact",
+   "to": "MessageAPI.send_message",
+   "kind": "requires",
+   "why": "receiver must exist in workspace"
+  },
+  {
+   "from": "MessageAPI.add_contact",
+   "to": "VehicleControlAPI.display_log",
+   "kind": "data",
+   "why": "Confirmation of a new contact can be logged."
+  },
+  {
+   "from": "MessageAPI.delete_message",
+   "to": "VehicleControlAPI.display_log",
+   "kind": "data",
+   "why": "Message deletion status can be logged."
+  },
+  {
+   "from": "MessageAPI.get_message_stats",
+   "to": "GorillaFileSystem.echo",
+   "kind": "data",
+   "why": "message stats saved to file"
+  },
+  {
+   "from": "MessageAPI.get_message_stats",
+   "to": "VehicleControlAPI.display_log",
+   "kind": "data",
+   "why": "Message statistics can be displayed in the car's log."
+  },
+  {
+   "from": "MessageAPI.get_user_id",
+   "to": "GorillaFileSystem.mkdir",
+   "kind": "data",
+   "why": "user ID used as directory name"
+  },
+  {
+   "from": "MessageAPI.get_user_id",
+   "to": "GorillaFileSystem.touch",
+   "kind": "data",
+   "why": "user ID used as file name"
+  },
+  {
+   "from": "MessageAPI.get_user_id",
+   "to": "MessageAPI.delete_message",
+   "kind": "data",
+   "why": "receiver_id to identify message"
+  },
+  {
+   "from": "MessageAPI.get_user_id",
+   "to": "MessageAPI.message_login",
+   "kind": "data",
+   "why": "user_id for login"
+  },
+  {
+   "from": "MessageAPI.get_user_id",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "receiver_id for message"
+  },
+  {
+   "from": "MessageAPI.get_user_id",
+   "to": "VehicleControlAPI.display_log",
+   "kind": "data",
+   "why": "User ID retrieval result can be logged."
+  },
+  {
+   "from": "MessageAPI.list_users",
+   "to": "GorillaFileSystem.echo",
+   "kind": "data",
+   "why": "user list saved to file"
+  },
+  {
+   "from": "MessageAPI.list_users",
+   "to": "GorillaFileSystem.mkdir",
+   "kind": "data",
+   "why": "user name used as directory name"
+  },
+  {
+   "from": "MessageAPI.list_users",
+   "to": "MessageAPI.get_user_id",
+   "kind": "data",
+   "why": "user name from list"
+  },
+  {
+   "from": "MessageAPI.list_users",
+   "to": "TradingBot.trading_login",
+   "kind": "data",
+   "why": "Use a workspace username to log into the trading system."
+  },
+  {
+   "from": "MessageAPI.list_users",
+   "to": "TravelAPI.authenticate_travel",
+   "kind": "data",
+   "why": "use workspace names for authentication"
+  },
+  {
+   "from": "MessageAPI.list_users",
+   "to": "TravelAPI.register_credit_card",
+   "kind": "data",
+   "why": "use workspace names for cardholder name"
+  },
+  {
+   "from": "MessageAPI.list_users",
+   "to": "VehicleControlAPI.display_log",
+   "kind": "data",
+   "why": "User list can be displayed in the car's log."
+  },
+  {
+   "from": "MessageAPI.message_get_login_status",
+   "to": "VehicleControlAPI.display_log",
+   "kind": "data",
+   "why": "Login status can be displayed in the car's log."
+  },
+  {
+   "from": "MessageAPI.message_login",
+   "to": "MessageAPI.delete_message",
+   "kind": "requires",
+   "why": "must be logged in"
+  },
+  {
+   "from": "MessageAPI.message_login",
+   "to": "MessageAPI.get_message_stats",
+   "kind": "requires",
+   "why": "must be logged in"
+  },
+  {
+   "from": "MessageAPI.message_login",
+   "to": "MessageAPI.search_messages",
+   "kind": "requires",
+   "why": "must be logged in"
+  },
+  {
+   "from": "MessageAPI.message_login",
+   "to": "MessageAPI.send_message",
+   "kind": "requires",
+   "why": "must be logged in"
+  },
+  {
+   "from": "MessageAPI.message_login",
+   "to": "MessageAPI.view_messages_sent",
+   "kind": "requires",
+   "why": "must be logged in"
+  },
+  {
+   "from": "MessageAPI.message_login",
+   "to": "VehicleControlAPI.display_log",
+   "kind": "data",
+   "why": "Login status messages can be logged."
+  },
+  {
+   "from": "MessageAPI.search_messages",
+   "to": "GorillaFileSystem.echo",
+   "kind": "data",
+   "why": "search results saved to file"
+  },
+  {
+   "from": "MessageAPI.search_messages",
+   "to": "MessageAPI.delete_message",
+   "kind": "data",
+   "why": "receiver_id from search results"
+  },
+  {
+   "from": "MessageAPI.search_messages",
+   "to": "TradingBot.add_to_watchlist",
+   "kind": "data",
+   "why": "Add a stock symbol mentioned in a message to the watchlist."
+  },
+  {
+   "from": "MessageAPI.search_messages",
+   "to": "TradingBot.cancel_order",
+   "kind": "data",
+   "why": "Cancel an order ID mentioned in a message."
+  },
+  {
+   "from": "MessageAPI.search_messages",
+   "to": "TradingBot.get_available_stocks",
+   "kind": "data",
+   "why": "Get stocks for a sector name mentioned in a message."
+  },
+  {
+   "from": "MessageAPI.search_messages",
+   "to": "TradingBot.get_order_details",
+   "kind": "data",
+   "why": "Look up details for an order ID mentioned in a message."
+  },
+  {
+   "from": "MessageAPI.search_messages",
+   "to": "TradingBot.get_stock_info",
+   "kind": "data",
+   "why": "Use a stock symbol found in a message to look up info."
+  },
+  {
+   "from": "MessageAPI.search_messages",
+   "to": "TradingBot.get_symbol_by_name",
+   "kind": "data",
+   "why": "Find a symbol for a company name mentioned in a message."
+  },
+  {
+   "from": "MessageAPI.search_messages",
+   "to": "TradingBot.place_order",
+   "kind": "data",
+   "why": "Use a stock symbol found in a message to place an order."
+  },
+  {
+   "from": "MessageAPI.search_messages",
+   "to": "TravelAPI.book_flight",
+   "kind": "data",
+   "why": "extract travel details from messages"
+  },
+  {
+   "from": "MessageAPI.search_messages",
+   "to": "TravelAPI.cancel_booking",
+   "kind": "data",
+   "why": "extract booking_id from messages"
+  },
+  {
+   "from": "MessageAPI.search_messages",
+   "to": "TravelAPI.contact_customer_support",
+   "kind": "data",
+   "why": "extract booking_id from messages"
+  },
+  {
+   "from": "MessageAPI.search_messages",
+   "to": "TravelAPI.get_credit_card_balance",
+   "kind": "data",
+   "why": "extract card_id from messages"
+  },
+  {
+   "from": "MessageAPI.search_messages",
+   "to": "TravelAPI.purchase_insurance",
+   "kind": "data",
+   "why": "extract booking_id from messages"
+  },
+  {
+   "from": "MessageAPI.search_messages",
+   "to": "TravelAPI.retrieve_invoice",
+   "kind": "data",
+   "why": "extract booking_id from messages"
+  },
+  {
+   "from": "MessageAPI.search_messages",
+   "to": "TravelAPI.verify_traveler_information",
+   "kind": "data",
+   "why": "extract passport or dob from messages"
+  },
+  {
+   "from": "MessageAPI.search_messages",
+   "to": "VehicleControlAPI.adjustClimateControl",
+   "kind": "data",
+   "why": "A temperature mentioned in a message can be used to set climate control."
+  },
+  {
+   "from": "MessageAPI.search_messages",
+   "to": "VehicleControlAPI.display_log",
+   "kind": "data",
+   "why": "Search results can be displayed in the car's log."
+  },
+  {
+   "from": "MessageAPI.search_messages",
+   "to": "VehicleControlAPI.estimate_distance",
+   "kind": "data",
+   "why": "Zipcodes mentioned in messages can be used to estimate distance."
+  },
+  {
+   "from": "MessageAPI.search_messages",
+   "to": "VehicleControlAPI.estimate_drive_feasibility_by_mileage",
+   "kind": "data",
+   "why": "A distance mentioned in a message can be checked for feasibility."
+  },
+  {
+   "from": "MessageAPI.search_messages",
+   "to": "VehicleControlAPI.fillFuelTank",
+   "kind": "data",
+   "why": "A fuel amount mentioned in a message can be used to fill the tank."
+  },
+  {
+   "from": "MessageAPI.search_messages",
+   "to": "VehicleControlAPI.gallon_to_liter",
+   "kind": "data",
+   "why": "A gallon amount in a message can be converted."
+  },
+  {
+   "from": "MessageAPI.search_messages",
+   "to": "VehicleControlAPI.get_zipcode_based_on_city",
+   "kind": "data",
+   "why": "A city name mentioned in a message can be used to find a zipcode."
+  },
+  {
+   "from": "MessageAPI.search_messages",
+   "to": "VehicleControlAPI.liter_to_gallon",
+   "kind": "data",
+   "why": "A liter amount in a message can be converted."
+  },
+  {
+   "from": "MessageAPI.search_messages",
+   "to": "VehicleControlAPI.setCruiseControl",
+   "kind": "data",
+   "why": "A speed mentioned in a message can be used for cruise control."
+  },
+  {
+   "from": "MessageAPI.search_messages",
+   "to": "VehicleControlAPI.set_navigation",
+   "kind": "data",
+   "why": "A destination found in a message can be used for navigation."
+  },
+  {
+   "from": "MessageAPI.send_message",
+   "to": "MessageAPI.delete_message",
+   "kind": "requires",
+   "why": "message must exist to delete"
+  },
+  {
+   "from": "MessageAPI.send_message",
+   "to": "VehicleControlAPI.display_log",
+   "kind": "data",
+   "why": "Message sending status can be logged."
+  },
+  {
+   "from": "MessageAPI.view_messages_sent",
+   "to": "GorillaFileSystem.echo",
+   "kind": "data",
+   "why": "message history saved to file"
+  },
+  {
+   "from": "MessageAPI.view_messages_sent",
+   "to": "MessageAPI.delete_message",
+   "kind": "data",
+   "why": "receiver_id from sent history"
+  },
+  {
+   "from": "MessageAPI.view_messages_sent",
+   "to": "TradingBot.get_order_details",
+   "kind": "data",
+   "why": "Check status of an order ID previously mentioned in a sent message."
+  },
+  {
+   "from": "MessageAPI.view_messages_sent",
+   "to": "TradingBot.get_stock_info",
+   "kind": "data",
+   "why": "Check info for a stock symbol previously mentioned in a sent message."
+  },
+  {
+   "from": "MessageAPI.view_messages_sent",
+   "to": "TravelAPI.retrieve_invoice",
+   "kind": "data",
+   "why": "extract booking_id from sent history"
+  },
+  {
+   "from": "MessageAPI.view_messages_sent",
+   "to": "VehicleControlAPI.adjustClimateControl",
+   "kind": "data",
+   "why": "A temperature mentioned in sent messages can be used to set climate control."
+  },
+  {
+   "from": "MessageAPI.view_messages_sent",
+   "to": "VehicleControlAPI.display_log",
+   "kind": "data",
+   "why": "Sent messages can be displayed in the car's log."
+  },
+  {
+   "from": "MessageAPI.view_messages_sent",
+   "to": "VehicleControlAPI.estimate_drive_feasibility_by_mileage",
+   "kind": "data",
+   "why": "A distance mentioned in sent messages can be checked for feasibility."
+  },
+  {
+   "from": "MessageAPI.view_messages_sent",
+   "to": "VehicleControlAPI.fillFuelTank",
+   "kind": "data",
+   "why": "A fuel amount mentioned in sent messages can be used to fill the tank."
+  },
+  {
+   "from": "MessageAPI.view_messages_sent",
+   "to": "VehicleControlAPI.setCruiseControl",
+   "kind": "data",
+   "why": "A speed mentioned in sent messages can be used for cruise control."
+  },
+  {
+   "from": "MessageAPI.view_messages_sent",
+   "to": "VehicleControlAPI.set_navigation",
+   "kind": "data",
+   "why": "A destination found in sent messages can be used for navigation."
+  },
+  {
+   "from": "TicketAPI.create_ticket",
+   "to": "TicketAPI.close_ticket",
+   "kind": "data",
+   "why": "The ID of the newly created ticket is used to close it."
+  },
+  {
+   "from": "TicketAPI.create_ticket",
+   "to": "TicketAPI.edit_ticket",
+   "kind": "data",
+   "why": "The ID of the newly created ticket is used to modify its details."
+  },
+  {
+   "from": "TicketAPI.create_ticket",
+   "to": "TicketAPI.get_ticket",
+   "kind": "data",
+   "why": "The ID of the newly created ticket is used to retrieve its details."
+  },
+  {
+   "from": "TicketAPI.create_ticket",
+   "to": "TicketAPI.resolve_ticket",
+   "kind": "data",
+   "why": "The ID of the newly created ticket is used to resolve it."
+  },
+  {
+   "from": "TicketAPI.get_ticket",
+   "to": "GorillaFileSystem.echo",
+   "kind": "data",
+   "why": "ticket details written to a file"
+  },
+  {
+   "from": "TicketAPI.get_ticket",
+   "to": "GorillaFileSystem.mkdir",
+   "kind": "data",
+   "why": "ticket ID used as directory name"
+  },
+  {
+   "from": "TicketAPI.get_ticket",
+   "to": "GorillaFileSystem.touch",
+   "kind": "data",
+   "why": "ticket ID used as filename"
+  },
+  {
+   "from": "TicketAPI.get_ticket",
+   "to": "TradingBot.cancel_order",
+   "kind": "data",
+   "why": "order_id from ticket to cancel"
+  },
+  {
+   "from": "TicketAPI.get_ticket",
+   "to": "TradingBot.fund_account",
+   "kind": "data",
+   "why": "amount from ticket to fund account"
+  },
+  {
+   "from": "TicketAPI.get_ticket",
+   "to": "TradingBot.get_order_details",
+   "kind": "data",
+   "why": "order_id from ticket to check status"
+  },
+  {
+   "from": "TicketAPI.get_ticket",
+   "to": "TradingBot.get_stock_info",
+   "kind": "data",
+   "why": "symbol from ticket to check price"
+  },
+  {
+   "from": "TicketAPI.get_ticket",
+   "to": "TradingBot.get_symbol_by_name",
+   "kind": "data",
+   "why": "company name from ticket to find symbol"
+  },
+  {
+   "from": "TicketAPI.get_ticket",
+   "to": "TradingBot.withdraw_funds",
+   "kind": "data",
+   "why": "amount from ticket to withdraw"
+  },
+  {
+   "from": "TicketAPI.get_ticket",
+   "to": "TravelAPI.cancel_booking",
+   "kind": "data",
+   "why": "booking_id extracted from ticket description"
+  },
+  {
+   "from": "TicketAPI.get_ticket",
+   "to": "TravelAPI.contact_customer_support",
+   "kind": "data",
+   "why": "booking_id extracted from ticket description"
+  },
+  {
+   "from": "TicketAPI.get_ticket",
+   "to": "TravelAPI.purchase_insurance",
+   "kind": "data",
+   "why": "booking_id or card_id extracted from ticket description"
+  },
+  {
+   "from": "TicketAPI.get_ticket",
+   "to": "TravelAPI.retrieve_invoice",
+   "kind": "data",
+   "why": "booking_id or insurance_id extracted from ticket description"
+  },
+  {
+   "from": "TicketAPI.get_ticket",
+   "to": "VehicleControlAPI.get_zipcode_based_on_city",
+   "kind": "data",
+   "why": "a city name mentioned in a ticket can be used to retrieve a zipcode for distance estimation"
+  },
+  {
+   "from": "TicketAPI.get_ticket",
+   "to": "VehicleControlAPI.set_navigation",
+   "kind": "data",
+   "why": "a destination address or location mentioned in a ticket description can be used for navigation"
+  },
+  {
+   "from": "TicketAPI.get_user_tickets",
+   "to": "GorillaFileSystem.echo",
+   "kind": "data",
+   "why": "list of tickets saved to a file"
+  },
+  {
+   "from": "TicketAPI.get_user_tickets",
+   "to": "TicketAPI.close_ticket",
+   "kind": "data",
+   "why": "Ticket IDs from the user's list are used to identify which ticket to close."
+  },
+  {
+   "from": "TicketAPI.get_user_tickets",
+   "to": "TicketAPI.edit_ticket",
+   "kind": "data",
+   "why": "Ticket IDs from the user's list are used to identify which ticket to edit."
+  },
+  {
+   "from": "TicketAPI.get_user_tickets",
+   "to": "TicketAPI.get_ticket",
+   "kind": "data",
+   "why": "Ticket IDs from the user's list are used to fetch specific ticket details."
+  },
+  {
+   "from": "TicketAPI.get_user_tickets",
+   "to": "TicketAPI.resolve_ticket",
+   "kind": "data",
+   "why": "Ticket IDs from the user's list are used to identify which ticket to resolve."
+  },
+  {
+   "from": "TicketAPI.get_user_tickets",
+   "to": "TradingBot.cancel_order",
+   "kind": "data",
+   "why": "order_id from ticket to cancel"
+  },
+  {
+   "from": "TicketAPI.get_user_tickets",
+   "to": "TradingBot.get_order_details",
+   "kind": "data",
+   "why": "order_id from ticket to check status"
+  },
+  {
+   "from": "TicketAPI.get_user_tickets",
+   "to": "TravelAPI.cancel_booking",
+   "kind": "data",
+   "why": "booking_id extracted from ticket description"
+  },
+  {
+   "from": "TicketAPI.get_user_tickets",
+   "to": "TravelAPI.retrieve_invoice",
+   "kind": "data",
+   "why": "booking_id extracted from ticket description"
+  },
+  {
+   "from": "TicketAPI.get_user_tickets",
+   "to": "VehicleControlAPI.get_zipcode_based_on_city",
+   "kind": "data",
+   "why": "cities mentioned in a user's tickets can be used to look up zipcodes"
+  },
+  {
+   "from": "TicketAPI.get_user_tickets",
+   "to": "VehicleControlAPI.set_navigation",
+   "kind": "data",
+   "why": "locations found in a user's list of tickets can be used as navigation destinations"
+  },
+  {
+   "from": "TicketAPI.ticket_login",
+   "to": "TicketAPI.create_ticket",
+   "kind": "requires",
+   "why": "User must be authenticated to create a ticket."
+  },
+  {
+   "from": "TicketAPI.ticket_login",
+   "to": "TicketAPI.get_user_tickets",
+   "kind": "requires",
+   "why": "User must be authenticated to view their tickets."
+  },
+  {
+   "from": "TicketAPI.ticket_login",
+   "to": "TicketAPI.logout",
+   "kind": "requires",
+   "why": "A user must be logged in to perform a logout."
+  },
+  {
+   "from": "TradingBot.cancel_order",
+   "to": "TicketAPI.resolve_ticket",
+   "kind": "data",
+   "why": "cancellation status to resolve ticket"
+  },
+  {
+   "from": "TradingBot.filter_stocks_by_price",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "Share filtered stock results with a contact."
+  },
+  {
+   "from": "TradingBot.fund_account",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "Notify a contact about updated balance after funding."
+  },
+  {
+   "from": "TradingBot.fund_account",
+   "to": "TicketAPI.resolve_ticket",
+   "kind": "data",
+   "why": "funding status to resolve ticket"
+  },
+  {
+   "from": "TradingBot.get_account_info",
+   "to": "MathAPI.subtract",
+   "kind": "data",
+   "why": "The account balance can be used to calculate remaining funds after a potential trade."
+  },
+  {
+   "from": "TradingBot.get_account_info",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "Share account balance or ID with a contact."
+  },
+  {
+   "from": "TradingBot.get_account_info",
+   "to": "TicketAPI.create_ticket",
+   "kind": "data",
+   "why": "account_id for ticket description"
+  },
+  {
+   "from": "TradingBot.get_account_info",
+   "to": "TradingBot.place_order",
+   "kind": "data",
+   "why": "The account balance is checked to ensure sufficient funds for buy orders."
+  },
+  {
+   "from": "TradingBot.get_account_info",
+   "to": "TradingBot.withdraw_funds",
+   "kind": "data",
+   "why": "The account balance is checked to determine how much can be withdrawn."
+  },
+  {
+   "from": "TradingBot.get_account_info",
+   "to": "TwitterAPI.post_tweet",
+   "kind": "data",
+   "why": "account balance information for tweet content"
+  },
+  {
+   "from": "TradingBot.get_available_stocks",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "Share available stocks in a specific sector with a contact."
+  },
+  {
+   "from": "TradingBot.get_available_stocks",
+   "to": "TradingBot.filter_stocks_by_price",
+   "kind": "data",
+   "why": "The list of stocks in a sector can be filtered by price."
+  },
+  {
+   "from": "TradingBot.get_available_stocks",
+   "to": "TradingBot.notify_price_change",
+   "kind": "data",
+   "why": "The list of stocks in a sector can be monitored for price changes."
+  },
+  {
+   "from": "TradingBot.get_available_stocks",
+   "to": "TwitterAPI.post_tweet",
+   "kind": "data",
+   "why": "list of stocks in a sector for tweet content"
+  },
+  {
+   "from": "TradingBot.get_current_time",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "Include the current trading time in a message."
+  },
+  {
+   "from": "TradingBot.get_order_details",
+   "to": "MathAPI.multiply",
+   "kind": "data",
+   "why": "Order price and amount are used to calculate the total value of an order."
+  },
+  {
+   "from": "TradingBot.get_order_details",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "Share order status or execution details with a contact."
+  },
+  {
+   "from": "TradingBot.get_order_details",
+   "to": "TicketAPI.create_ticket",
+   "kind": "data",
+   "why": "order status for ticket"
+  },
+  {
+   "from": "TradingBot.get_order_details",
+   "to": "TicketAPI.resolve_ticket",
+   "kind": "data",
+   "why": "order status to resolve ticket"
+  },
+  {
+   "from": "TradingBot.get_order_details",
+   "to": "TwitterAPI.post_tweet",
+   "kind": "data",
+   "why": "specific order details for tweet content"
+  },
+  {
+   "from": "TradingBot.get_order_history",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "Share a list of order IDs with a contact."
+  },
+  {
+   "from": "TradingBot.get_order_history",
+   "to": "TicketAPI.create_ticket",
+   "kind": "data",
+   "why": "order_id for ticket description"
+  },
+  {
+   "from": "TradingBot.get_order_history",
+   "to": "TradingBot.cancel_order",
+   "kind": "data",
+   "why": "Order IDs from the history are used to identify which order to cancel."
+  },
+  {
+   "from": "TradingBot.get_order_history",
+   "to": "TradingBot.get_order_details",
+   "kind": "data",
+   "why": "Order IDs from the history are used to fetch specific order details."
+  },
+  {
+   "from": "TradingBot.get_stock_info",
+   "to": "MathAPI.mean",
+   "kind": "data",
+   "why": "Stock prices or moving averages can be used to calculate an average price."
+  },
+  {
+   "from": "TradingBot.get_stock_info",
+   "to": "MathAPI.multiply",
+   "kind": "data",
+   "why": "Stock price is used to calculate the total cost for a specific number of shares."
+  },
+  {
+   "from": "TradingBot.get_stock_info",
+   "to": "MathAPI.standard_deviation",
+   "kind": "data",
+   "why": "Stock prices can be used to calculate volatility."
+  },
+  {
+   "from": "TradingBot.get_stock_info",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "Share stock price or moving average details with a contact."
+  },
+  {
+   "from": "TradingBot.get_stock_info",
+   "to": "TradingBot.place_order",
+   "kind": "data",
+   "why": "The current price of a stock is needed to set the price for a trade order."
+  },
+  {
+   "from": "TradingBot.get_stock_info",
+   "to": "TwitterAPI.post_tweet",
+   "kind": "data",
+   "why": "stock price and moving average data for tweet content"
+  },
+  {
+   "from": "TradingBot.get_symbol_by_name",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "Send a retrieved stock symbol to a contact."
+  },
+  {
+   "from": "TradingBot.get_symbol_by_name",
+   "to": "TradingBot.add_to_watchlist",
+   "kind": "data",
+   "why": "The symbol retrieved by name is used to add a stock to the watchlist."
+  },
+  {
+   "from": "TradingBot.get_symbol_by_name",
+   "to": "TradingBot.get_stock_info",
+   "kind": "data",
+   "why": "The symbol retrieved by name is used to get detailed stock information."
+  },
+  {
+   "from": "TradingBot.get_symbol_by_name",
+   "to": "TradingBot.place_order",
+   "kind": "data",
+   "why": "The symbol retrieved by name is used to specify which stock to trade."
+  },
+  {
+   "from": "TradingBot.get_symbol_by_name",
+   "to": "TwitterAPI.search_tweets",
+   "kind": "data",
+   "why": "stock symbol used as a keyword to search for news"
+  },
+  {
+   "from": "TradingBot.get_transaction_history",
+   "to": "MathAPI.sum_values",
+   "kind": "data",
+   "why": "Transaction amounts can be summed to find total volume."
+  },
+  {
+   "from": "TradingBot.get_transaction_history",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "Share deposit or withdrawal history with a contact."
+  },
+  {
+   "from": "TradingBot.get_transaction_history",
+   "to": "TicketAPI.create_ticket",
+   "kind": "data",
+   "why": "transaction details for ticket"
+  },
+  {
+   "from": "TradingBot.get_watchlist",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "Share the current stock watchlist with a contact."
+  },
+  {
+   "from": "TradingBot.get_watchlist",
+   "to": "TradingBot.notify_price_change",
+   "kind": "data",
+   "why": "The watchlist provides a list of symbols to check for price changes."
+  },
+  {
+   "from": "TradingBot.get_watchlist",
+   "to": "TradingBot.remove_stock_from_watchlist",
+   "kind": "data",
+   "why": "The watchlist provides the symbols available for removal."
+  },
+  {
+   "from": "TradingBot.get_watchlist",
+   "to": "TwitterAPI.post_tweet",
+   "kind": "data",
+   "why": "watchlist stock symbols for tweet content"
+  },
+  {
+   "from": "TradingBot.notify_price_change",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "Send price change notification messages to a contact."
+  },
+  {
+   "from": "TradingBot.notify_price_change",
+   "to": "TwitterAPI.post_tweet",
+   "kind": "data",
+   "why": "price change notification message for tweet content"
+  },
+  {
+   "from": "TradingBot.place_order",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "Notify a contact about a newly placed order ID."
+  },
+  {
+   "from": "TradingBot.place_order",
+   "to": "TicketAPI.create_ticket",
+   "kind": "data",
+   "why": "order_id for ticket description"
+  },
+  {
+   "from": "TradingBot.place_order",
+   "to": "TradingBot.cancel_order",
+   "kind": "data",
+   "why": "The order_id from a new order is used if the user decides to cancel it."
+  },
+  {
+   "from": "TradingBot.place_order",
+   "to": "TradingBot.get_order_details",
+   "kind": "data",
+   "why": "The order_id from a new order is used to check its status or details."
+  },
+  {
+   "from": "TradingBot.place_order",
+   "to": "TwitterAPI.post_tweet",
+   "kind": "data",
+   "why": "order confirmation and status for tweet content"
+  },
+  {
+   "from": "TradingBot.trading_login",
+   "to": "TicketAPI.create_ticket",
+   "kind": "data",
+   "why": "login status for ticket description"
+  },
+  {
+   "from": "TradingBot.trading_login",
+   "to": "TradingBot.fund_account",
+   "kind": "requires",
+   "why": "User must be authenticated to fund the account."
+  },
+  {
+   "from": "TradingBot.trading_login",
+   "to": "TradingBot.get_account_info",
+   "kind": "requires",
+   "why": "User must be authenticated to view account information."
+  },
+  {
+   "from": "TradingBot.trading_login",
+   "to": "TradingBot.get_order_history",
+   "kind": "requires",
+   "why": "User must be authenticated to view order history."
+  },
+  {
+   "from": "TradingBot.trading_login",
+   "to": "TradingBot.get_transaction_history",
+   "kind": "requires",
+   "why": "User must be authenticated to view transaction history."
+  },
+  {
+   "from": "TradingBot.trading_login",
+   "to": "TradingBot.get_watchlist",
+   "kind": "requires",
+   "why": "User must be authenticated to view the watchlist."
+  },
+  {
+   "from": "TradingBot.trading_login",
+   "to": "TradingBot.place_order",
+   "kind": "requires",
+   "why": "User must be authenticated to place an order."
+  },
+  {
+   "from": "TradingBot.trading_login",
+   "to": "TradingBot.remove_stock_from_watchlist",
+   "kind": "requires",
+   "why": "User must be authenticated to modify the watchlist."
+  },
+  {
+   "from": "TradingBot.trading_login",
+   "to": "TradingBot.withdraw_funds",
+   "kind": "requires",
+   "why": "User must be authenticated to withdraw funds."
+  },
+  {
+   "from": "TradingBot.withdraw_funds",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "Notify a contact about updated balance after withdrawal."
+  },
+  {
+   "from": "TradingBot.withdraw_funds",
+   "to": "TicketAPI.resolve_ticket",
+   "kind": "data",
+   "why": "withdrawal status to resolve ticket"
+  },
+  {
+   "from": "TravelAPI.authenticate_travel",
+   "to": "TravelAPI.book_flight",
+   "kind": "data",
+   "why": "access_token"
+  },
+  {
+   "from": "TravelAPI.authenticate_travel",
+   "to": "TravelAPI.cancel_booking",
+   "kind": "data",
+   "why": "access_token"
+  },
+  {
+   "from": "TravelAPI.authenticate_travel",
+   "to": "TravelAPI.get_booking_history",
+   "kind": "data",
+   "why": "access_token"
+  },
+  {
+   "from": "TravelAPI.authenticate_travel",
+   "to": "TravelAPI.get_credit_card_balance",
+   "kind": "data",
+   "why": "access_token"
+  },
+  {
+   "from": "TravelAPI.authenticate_travel",
+   "to": "TravelAPI.purchase_insurance",
+   "kind": "data",
+   "why": "access_token"
+  },
+  {
+   "from": "TravelAPI.authenticate_travel",
+   "to": "TravelAPI.register_credit_card",
+   "kind": "data",
+   "why": "access_token"
+  },
+  {
+   "from": "TravelAPI.authenticate_travel",
+   "to": "TravelAPI.retrieve_invoice",
+   "kind": "data",
+   "why": "access_token"
+  },
+  {
+   "from": "TravelAPI.authenticate_travel",
+   "to": "TravelAPI.set_budget_limit",
+   "kind": "data",
+   "why": "access_token"
+  },
+  {
+   "from": "TravelAPI.authenticate_travel",
+   "to": "TravelAPI.verify_traveler_information",
+   "kind": "requires",
+   "why": "sets user identity in state"
+  },
+  {
+   "from": "TravelAPI.book_flight",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "share booking_id via message"
+  },
+  {
+   "from": "TravelAPI.book_flight",
+   "to": "TicketAPI.create_ticket",
+   "kind": "data",
+   "why": "booking_id or transaction_id used in ticket description"
+  },
+  {
+   "from": "TravelAPI.book_flight",
+   "to": "TravelAPI.cancel_booking",
+   "kind": "data",
+   "why": "booking_id"
+  },
+  {
+   "from": "TravelAPI.book_flight",
+   "to": "TravelAPI.contact_customer_support",
+   "kind": "data",
+   "why": "booking_id"
+  },
+  {
+   "from": "TravelAPI.book_flight",
+   "to": "TravelAPI.purchase_insurance",
+   "kind": "data",
+   "why": "booking_id"
+  },
+  {
+   "from": "TravelAPI.book_flight",
+   "to": "TravelAPI.retrieve_invoice",
+   "kind": "data",
+   "why": "booking_id"
+  },
+  {
+   "from": "TravelAPI.book_flight",
+   "to": "TwitterAPI.post_tweet",
+   "kind": "data",
+   "why": "booking_id or travel details used in tweet content"
+  },
+  {
+   "from": "TravelAPI.compute_exchange_rate",
+   "to": "MathAPI.round_number",
+   "kind": "data",
+   "why": "round the converted currency value"
+  },
+  {
+   "from": "TravelAPI.compute_exchange_rate",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "share converted currency value via message"
+  },
+  {
+   "from": "TravelAPI.get_all_credit_cards",
+   "to": "MathAPI.sum_values",
+   "kind": "data",
+   "why": "calculate total available balance across all cards"
+  },
+  {
+   "from": "TravelAPI.get_all_credit_cards",
+   "to": "TicketAPI.create_ticket",
+   "kind": "data",
+   "why": "card_id used in ticket description"
+  },
+  {
+   "from": "TravelAPI.get_all_credit_cards",
+   "to": "TravelAPI.book_flight",
+   "kind": "data",
+   "why": "card_id"
+  },
+  {
+   "from": "TravelAPI.get_all_credit_cards",
+   "to": "TravelAPI.get_credit_card_balance",
+   "kind": "data",
+   "why": "card_id"
+  },
+  {
+   "from": "TravelAPI.get_all_credit_cards",
+   "to": "TravelAPI.purchase_insurance",
+   "kind": "data",
+   "why": "card_id"
+  },
+  {
+   "from": "TravelAPI.get_booking_history",
+   "to": "MathAPI.sum_values",
+   "kind": "data",
+   "why": "calculate total spending from booking history costs"
+  },
+  {
+   "from": "TravelAPI.get_booking_history",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "share booking history via message"
+  },
+  {
+   "from": "TravelAPI.get_booking_history",
+   "to": "TicketAPI.create_ticket",
+   "kind": "data",
+   "why": "booking_id used in ticket description"
+  },
+  {
+   "from": "TravelAPI.get_booking_history",
+   "to": "TravelAPI.cancel_booking",
+   "kind": "data",
+   "why": "booking_id"
+  },
+  {
+   "from": "TravelAPI.get_booking_history",
+   "to": "TravelAPI.contact_customer_support",
+   "kind": "data",
+   "why": "booking_id"
+  },
+  {
+   "from": "TravelAPI.get_booking_history",
+   "to": "TravelAPI.purchase_insurance",
+   "kind": "data",
+   "why": "booking_id"
+  },
+  {
+   "from": "TravelAPI.get_booking_history",
+   "to": "TravelAPI.retrieve_invoice",
+   "kind": "data",
+   "why": "booking_id"
+  },
+  {
+   "from": "TravelAPI.get_booking_history",
+   "to": "TwitterAPI.post_tweet",
+   "kind": "data",
+   "why": "travel history details used in tweet content"
+  },
+  {
+   "from": "TravelAPI.get_credit_card_balance",
+   "to": "MathAPI.percentage",
+   "kind": "data",
+   "why": "calculate what percentage of a balance a cost represents"
+  },
+  {
+   "from": "TravelAPI.get_credit_card_balance",
+   "to": "MathAPI.round_number",
+   "kind": "data",
+   "why": "round the credit card balance for display"
+  },
+  {
+   "from": "TravelAPI.get_credit_card_balance",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "share card balance via message"
+  },
+  {
+   "from": "TravelAPI.get_flight_cost",
+   "to": "MathAPI.max_value",
+   "kind": "data",
+   "why": "find the most expensive flight in the cost list"
+  },
+  {
+   "from": "TravelAPI.get_flight_cost",
+   "to": "MathAPI.mean",
+   "kind": "data",
+   "why": "calculate average flight cost from the list of costs"
+  },
+  {
+   "from": "TravelAPI.get_flight_cost",
+   "to": "MathAPI.sum_values",
+   "kind": "data",
+   "why": "calculate total cost for multiple flight options"
+  },
+  {
+   "from": "TravelAPI.get_flight_cost",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "share flight costs via message"
+  },
+  {
+   "from": "TravelAPI.get_flight_cost",
+   "to": "TwitterAPI.post_tweet",
+   "kind": "data",
+   "why": "flight cost information used in tweet content"
+  },
+  {
+   "from": "TravelAPI.get_nearest_airport_by_city",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "share airport code via message"
+  },
+  {
+   "from": "TravelAPI.get_nearest_airport_by_city",
+   "to": "TravelAPI.book_flight",
+   "kind": "data",
+   "why": "airport code"
+  },
+  {
+   "from": "TravelAPI.get_nearest_airport_by_city",
+   "to": "TravelAPI.get_flight_cost",
+   "kind": "data",
+   "why": "airport code"
+  },
+  {
+   "from": "TravelAPI.list_all_airports",
+   "to": "TravelAPI.book_flight",
+   "kind": "data",
+   "why": "airport code"
+  },
+  {
+   "from": "TravelAPI.list_all_airports",
+   "to": "TravelAPI.get_flight_cost",
+   "kind": "data",
+   "why": "airport code"
+  },
+  {
+   "from": "TravelAPI.purchase_insurance",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "share insurance_id via message"
+  },
+  {
+   "from": "TravelAPI.purchase_insurance",
+   "to": "TicketAPI.create_ticket",
+   "kind": "data",
+   "why": "insurance_id used in ticket description"
+  },
+  {
+   "from": "TravelAPI.purchase_insurance",
+   "to": "TravelAPI.retrieve_invoice",
+   "kind": "data",
+   "why": "insurance_id"
+  },
+  {
+   "from": "TravelAPI.register_credit_card",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "share card_id via message"
+  },
+  {
+   "from": "TravelAPI.register_credit_card",
+   "to": "TicketAPI.create_ticket",
+   "kind": "data",
+   "why": "card_id used in ticket description"
+  },
+  {
+   "from": "TravelAPI.register_credit_card",
+   "to": "TravelAPI.book_flight",
+   "kind": "data",
+   "why": "card_id"
+  },
+  {
+   "from": "TravelAPI.register_credit_card",
+   "to": "TravelAPI.get_credit_card_balance",
+   "kind": "data",
+   "why": "card_id"
+  },
+  {
+   "from": "TravelAPI.register_credit_card",
+   "to": "TravelAPI.purchase_insurance",
+   "kind": "data",
+   "why": "card_id"
+  },
+  {
+   "from": "TravelAPI.retrieve_invoice",
+   "to": "MathAPI.round_number",
+   "kind": "data",
+   "why": "round the travel cost from an invoice"
+  },
+  {
+   "from": "TravelAPI.retrieve_invoice",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "share invoice details via message"
+  },
+  {
+   "from": "TravelAPI.retrieve_invoice",
+   "to": "TicketAPI.create_ticket",
+   "kind": "data",
+   "why": "booking_id or transaction_id used in ticket description"
+  },
+  {
+   "from": "TravelAPI.retrieve_invoice",
+   "to": "TwitterAPI.post_tweet",
+   "kind": "data",
+   "why": "invoice details used in tweet content"
+  },
+  {
+   "from": "TwitterAPI.authenticate_twitter",
+   "to": "TwitterAPI.comment",
+   "kind": "requires",
+   "why": "user must be authenticated to comment"
+  },
+  {
+   "from": "TwitterAPI.authenticate_twitter",
+   "to": "TwitterAPI.follow_user",
+   "kind": "requires",
+   "why": "user must be authenticated to follow others"
+  },
+  {
+   "from": "TwitterAPI.authenticate_twitter",
+   "to": "TwitterAPI.list_all_following",
+   "kind": "requires",
+   "why": "user must be authenticated to see their following list"
+  },
+  {
+   "from": "TwitterAPI.authenticate_twitter",
+   "to": "TwitterAPI.post_tweet",
+   "kind": "requires",
+   "why": "user must be authenticated to post tweets"
+  },
+  {
+   "from": "TwitterAPI.authenticate_twitter",
+   "to": "TwitterAPI.retweet",
+   "kind": "requires",
+   "why": "user must be authenticated to retweet"
+  },
+  {
+   "from": "TwitterAPI.authenticate_twitter",
+   "to": "TwitterAPI.unfollow_user",
+   "kind": "requires",
+   "why": "user must be authenticated to unfollow others"
+  },
+  {
+   "from": "TwitterAPI.get_tweet",
+   "to": "GorillaFileSystem.echo",
+   "kind": "data",
+   "why": "tweet content saved to file"
+  },
+  {
+   "from": "TwitterAPI.get_tweet",
+   "to": "GorillaFileSystem.find",
+   "kind": "data",
+   "why": "username or tag used to find files"
+  },
+  {
+   "from": "TwitterAPI.get_tweet",
+   "to": "GorillaFileSystem.grep",
+   "kind": "data",
+   "why": "tweet content used as search pattern"
+  },
+  {
+   "from": "TwitterAPI.get_tweet",
+   "to": "GorillaFileSystem.mkdir",
+   "kind": "data",
+   "why": "username used as directory name"
+  },
+  {
+   "from": "TwitterAPI.get_tweet",
+   "to": "GorillaFileSystem.touch",
+   "kind": "data",
+   "why": "username used as file name"
+  },
+  {
+   "from": "TwitterAPI.get_tweet",
+   "to": "TradingBot.get_stock_info",
+   "kind": "data",
+   "why": "stock symbol found in a specific tweet to check price"
+  },
+  {
+   "from": "TwitterAPI.get_tweet",
+   "to": "TravelAPI.book_flight",
+   "kind": "data",
+   "why": "airport codes or travel dates from tweet used for booking"
+  },
+  {
+   "from": "TwitterAPI.get_tweet",
+   "to": "TravelAPI.get_flight_cost",
+   "kind": "data",
+   "why": "airport codes mentioned in tweet used to check flight costs"
+  },
+  {
+   "from": "TwitterAPI.get_tweet",
+   "to": "TravelAPI.get_nearest_airport_by_city",
+   "kind": "data",
+   "why": "location mentioned in tweet used to find nearest airport"
+  },
+  {
+   "from": "TwitterAPI.get_tweet",
+   "to": "TravelAPI.retrieve_invoice",
+   "kind": "data",
+   "why": "booking_id found in tweet content used to fetch invoice"
+  },
+  {
+   "from": "TwitterAPI.get_tweet",
+   "to": "TwitterAPI.comment",
+   "kind": "data",
+   "why": "id of the retrieved tweet"
+  },
+  {
+   "from": "TwitterAPI.get_tweet",
+   "to": "TwitterAPI.follow_user",
+   "kind": "data",
+   "why": "username of the tweet author"
+  },
+  {
+   "from": "TwitterAPI.get_tweet",
+   "to": "TwitterAPI.get_tweet_comments",
+   "kind": "data",
+   "why": "id of the retrieved tweet"
+  },
+  {
+   "from": "TwitterAPI.get_tweet",
+   "to": "TwitterAPI.get_user_stats",
+   "kind": "data",
+   "why": "username of the tweet author"
+  },
+  {
+   "from": "TwitterAPI.get_tweet",
+   "to": "TwitterAPI.get_user_tweets",
+   "kind": "data",
+   "why": "username of the tweet author"
+  },
+  {
+   "from": "TwitterAPI.get_tweet",
+   "to": "TwitterAPI.mention",
+   "kind": "data",
+   "why": "id of the retrieved tweet"
+  },
+  {
+   "from": "TwitterAPI.get_tweet",
+   "to": "TwitterAPI.retweet",
+   "kind": "data",
+   "why": "id of the retrieved tweet"
+  },
+  {
+   "from": "TwitterAPI.get_tweet",
+   "to": "VehicleControlAPI.display_log",
+   "kind": "data",
+   "why": "tweet content to car log display"
+  },
+  {
+   "from": "TwitterAPI.get_tweet",
+   "to": "VehicleControlAPI.get_zipcode_based_on_city",
+   "kind": "data",
+   "why": "city name from tweet to get zipcode"
+  },
+  {
+   "from": "TwitterAPI.get_tweet",
+   "to": "VehicleControlAPI.set_navigation",
+   "kind": "data",
+   "why": "tweet content as navigation destination"
+  },
+  {
+   "from": "TwitterAPI.get_tweet_comments",
+   "to": "TradingBot.get_stock_info",
+   "kind": "data",
+   "why": "stock symbol found in tweet comments to check price"
+  },
+  {
+   "from": "TwitterAPI.get_tweet_comments",
+   "to": "TwitterAPI.follow_user",
+   "kind": "data",
+   "why": "username of a commenter"
+  },
+  {
+   "from": "TwitterAPI.get_user_stats",
+   "to": "GorillaFileSystem.echo",
+   "kind": "data",
+   "why": "user statistics saved to file"
+  },
+  {
+   "from": "TwitterAPI.get_user_stats",
+   "to": "VehicleControlAPI.display_log",
+   "kind": "data",
+   "why": "user statistics to car log display"
+  },
+  {
+   "from": "TwitterAPI.get_user_tweets",
+   "to": "GorillaFileSystem.echo",
+   "kind": "data",
+   "why": "user tweets saved to file"
+  },
+  {
+   "from": "TwitterAPI.get_user_tweets",
+   "to": "TradingBot.get_stock_info",
+   "kind": "data",
+   "why": "stock symbol found in a user's feed to check price"
+  },
+  {
+   "from": "TwitterAPI.get_user_tweets",
+   "to": "TravelAPI.get_flight_cost",
+   "kind": "data",
+   "why": "airport codes in user tweets used to check flight costs"
+  },
+  {
+   "from": "TwitterAPI.get_user_tweets",
+   "to": "TravelAPI.get_nearest_airport_by_city",
+   "kind": "data",
+   "why": "location in user tweets used to find nearest airport"
+  },
+  {
+   "from": "TwitterAPI.get_user_tweets",
+   "to": "TwitterAPI.get_tweet",
+   "kind": "data",
+   "why": "id of a tweet from the user's timeline"
+  },
+  {
+   "from": "TwitterAPI.get_user_tweets",
+   "to": "VehicleControlAPI.set_navigation",
+   "kind": "data",
+   "why": "user tweet content as navigation destination"
+  },
+  {
+   "from": "TwitterAPI.list_all_following",
+   "to": "GorillaFileSystem.echo",
+   "kind": "data",
+   "why": "following list saved to file"
+  },
+  {
+   "from": "TwitterAPI.list_all_following",
+   "to": "TwitterAPI.get_user_stats",
+   "kind": "data",
+   "why": "username from the following list"
+  },
+  {
+   "from": "TwitterAPI.list_all_following",
+   "to": "TwitterAPI.unfollow_user",
+   "kind": "data",
+   "why": "username from the following list"
+  },
+  {
+   "from": "TwitterAPI.post_tweet",
+   "to": "TwitterAPI.comment",
+   "kind": "data",
+   "why": "tweet_id of the new tweet"
+  },
+  {
+   "from": "TwitterAPI.post_tweet",
+   "to": "TwitterAPI.get_tweet_comments",
+   "kind": "data",
+   "why": "tweet_id of the new tweet"
+  },
+  {
+   "from": "TwitterAPI.post_tweet",
+   "to": "TwitterAPI.mention",
+   "kind": "data",
+   "why": "tweet_id of the new tweet"
+  },
+  {
+   "from": "TwitterAPI.post_tweet",
+   "to": "TwitterAPI.retweet",
+   "kind": "data",
+   "why": "tweet_id of the new tweet"
+  },
+  {
+   "from": "TwitterAPI.search_tweets",
+   "to": "GorillaFileSystem.echo",
+   "kind": "data",
+   "why": "search results saved to file"
+  },
+  {
+   "from": "TwitterAPI.search_tweets",
+   "to": "TradingBot.add_to_watchlist",
+   "kind": "data",
+   "why": "stock symbol found in tweet to add to watchlist"
+  },
+  {
+   "from": "TwitterAPI.search_tweets",
+   "to": "TradingBot.get_stock_info",
+   "kind": "data",
+   "why": "stock symbol found in tweet tags or content to check price"
+  },
+  {
+   "from": "TwitterAPI.search_tweets",
+   "to": "TradingBot.get_symbol_by_name",
+   "kind": "data",
+   "why": "company name found in tweet content to look up symbol"
+  },
+  {
+   "from": "TwitterAPI.search_tweets",
+   "to": "TradingBot.place_order",
+   "kind": "data",
+   "why": "stock symbol found in tweet to execute a trade"
+  },
+  {
+   "from": "TwitterAPI.search_tweets",
+   "to": "TravelAPI.get_flight_cost",
+   "kind": "data",
+   "why": "airport codes in search results used to check flight costs"
+  },
+  {
+   "from": "TwitterAPI.search_tweets",
+   "to": "TravelAPI.get_nearest_airport_by_city",
+   "kind": "data",
+   "why": "location in search results used to find nearest airport"
+  },
+  {
+   "from": "TwitterAPI.search_tweets",
+   "to": "TwitterAPI.follow_user",
+   "kind": "data",
+   "why": "username of a tweet author found in search"
+  },
+  {
+   "from": "TwitterAPI.search_tweets",
+   "to": "TwitterAPI.get_tweet",
+   "kind": "data",
+   "why": "id of a tweet found in search"
+  },
+  {
+   "from": "TwitterAPI.search_tweets",
+   "to": "VehicleControlAPI.set_navigation",
+   "kind": "data",
+   "why": "search result content as navigation destination"
+  },
+  {
+   "from": "VehicleControlAPI.activateParkingBrake",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "Parking brake status can be sent."
+  },
+  {
+   "from": "VehicleControlAPI.adjustClimateControl",
+   "to": "MathAPI.imperial_si_conversion",
+   "kind": "data",
+   "why": "convert current AC temperature from Celsius to Fahrenheit"
+  },
+  {
+   "from": "VehicleControlAPI.adjustClimateControl",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "Climate settings can be sent."
+  },
+  {
+   "from": "VehicleControlAPI.check_tire_pressure",
+   "to": "MathAPI.mean",
+   "kind": "data",
+   "why": "calculate average tire pressure from individual tire readings"
+  },
+  {
+   "from": "VehicleControlAPI.check_tire_pressure",
+   "to": "MathAPI.sum_values",
+   "kind": "data",
+   "why": "calculate total tire pressure across all tires"
+  },
+  {
+   "from": "VehicleControlAPI.check_tire_pressure",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "Tire pressure status can be shared via message."
+  },
+  {
+   "from": "VehicleControlAPI.check_tire_pressure",
+   "to": "TicketAPI.create_ticket",
+   "kind": "data",
+   "why": "tire pressure status and health info can be used to populate a support ticket description"
+  },
+  {
+   "from": "VehicleControlAPI.check_tire_pressure",
+   "to": "TwitterAPI.post_tweet",
+   "kind": "data",
+   "why": "tire pressure status to tweet content"
+  },
+  {
+   "from": "VehicleControlAPI.displayCarStatus",
+   "to": "MathAPI.percentage",
+   "kind": "data",
+   "why": "calculate fuel level or battery voltage percentage relative to capacity"
+  },
+  {
+   "from": "VehicleControlAPI.displayCarStatus",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "Car status information can be shared via message."
+  },
+  {
+   "from": "VehicleControlAPI.displayCarStatus",
+   "to": "TicketAPI.create_ticket",
+   "kind": "data",
+   "why": "vehicle status details like fuel level or engine state are used to describe issues in a ticket"
+  },
+  {
+   "from": "VehicleControlAPI.displayCarStatus",
+   "to": "TwitterAPI.post_tweet",
+   "kind": "data",
+   "why": "car status info to tweet content"
+  },
+  {
+   "from": "VehicleControlAPI.displayCarStatus",
+   "to": "VehicleControlAPI.fillFuelTank",
+   "kind": "data",
+   "why": "The current fuel level is needed to calculate how much additional fuel is required to fill the tank."
+  },
+  {
+   "from": "VehicleControlAPI.displayCarStatus",
+   "to": "VehicleControlAPI.gallon_to_liter",
+   "kind": "data",
+   "why": "The fuel level in gallons from the car status can be converted to liters for display."
+  },
+  {
+   "from": "VehicleControlAPI.display_log",
+   "to": "TicketAPI.create_ticket",
+   "kind": "data",
+   "why": "vehicle log messages are naturally used as the description for a technical support ticket"
+  },
+  {
+   "from": "VehicleControlAPI.estimate_distance",
+   "to": "MathAPI.imperial_si_conversion",
+   "kind": "data",
+   "why": "convert estimated distance from km to miles"
+  },
+  {
+   "from": "VehicleControlAPI.estimate_distance",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "Distance calculation results can be sent to a contact."
+  },
+  {
+   "from": "VehicleControlAPI.estimate_distance",
+   "to": "TwitterAPI.post_tweet",
+   "kind": "data",
+   "why": "calculated distance to tweet content"
+  },
+  {
+   "from": "VehicleControlAPI.estimate_distance",
+   "to": "VehicleControlAPI.estimate_drive_feasibility_by_mileage",
+   "kind": "data",
+   "why": "The calculated distance between cities is used to check if the vehicle has enough fuel to make the trip."
+  },
+  {
+   "from": "VehicleControlAPI.estimate_drive_feasibility_by_mileage",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "Feasibility result can be sent."
+  },
+  {
+   "from": "VehicleControlAPI.fillFuelTank",
+   "to": "MathAPI.percentage",
+   "kind": "data",
+   "why": "calculate new fuel level percentage after filling"
+  },
+  {
+   "from": "VehicleControlAPI.fillFuelTank",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "New fuel level can be sent."
+  },
+  {
+   "from": "VehicleControlAPI.find_nearest_tire_shop",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "The shop location can be sent as a message."
+  },
+  {
+   "from": "VehicleControlAPI.find_nearest_tire_shop",
+   "to": "TicketAPI.create_ticket",
+   "kind": "data",
+   "why": "the shop location can be included in a ticket for scheduling maintenance"
+  },
+  {
+   "from": "VehicleControlAPI.find_nearest_tire_shop",
+   "to": "TwitterAPI.post_tweet",
+   "kind": "data",
+   "why": "tire shop location to tweet content"
+  },
+  {
+   "from": "VehicleControlAPI.find_nearest_tire_shop",
+   "to": "VehicleControlAPI.set_navigation",
+   "kind": "data",
+   "why": "The location of the tire shop is used as the destination for the navigation system."
+  },
+  {
+   "from": "VehicleControlAPI.gallon_to_liter",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "Conversion result can be sent."
+  },
+  {
+   "from": "VehicleControlAPI.get_current_speed",
+   "to": "MathAPI.imperial_si_conversion",
+   "kind": "data",
+   "why": "convert current speed from km/h to mph"
+  },
+  {
+   "from": "VehicleControlAPI.get_current_speed",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "Current speed can be shared via message."
+  },
+  {
+   "from": "VehicleControlAPI.get_current_speed",
+   "to": "TwitterAPI.post_tweet",
+   "kind": "data",
+   "why": "current speed to tweet content"
+  },
+  {
+   "from": "VehicleControlAPI.get_current_speed",
+   "to": "VehicleControlAPI.setCruiseControl",
+   "kind": "data",
+   "why": "The current speed of the vehicle can be used to set the target speed for cruise control."
+  },
+  {
+   "from": "VehicleControlAPI.get_outside_temperature_from_google",
+   "to": "MathAPI.imperial_si_conversion",
+   "kind": "data",
+   "why": "convert outside temperature from Celsius to Fahrenheit"
+  },
+  {
+   "from": "VehicleControlAPI.get_outside_temperature_from_google",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "Temperature info can be sent to a contact."
+  },
+  {
+   "from": "VehicleControlAPI.get_outside_temperature_from_google",
+   "to": "TwitterAPI.post_tweet",
+   "kind": "data",
+   "why": "outside temperature to tweet content"
+  },
+  {
+   "from": "VehicleControlAPI.get_outside_temperature_from_google",
+   "to": "VehicleControlAPI.adjustClimateControl",
+   "kind": "data",
+   "why": "The outside temperature is a natural reference for setting the vehicle's internal climate control."
+  },
+  {
+   "from": "VehicleControlAPI.get_zipcode_based_on_city",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "Zipcode can be sent."
+  },
+  {
+   "from": "VehicleControlAPI.get_zipcode_based_on_city",
+   "to": "TwitterAPI.search_tweets",
+   "kind": "data",
+   "why": "zipcode as search keyword"
+  },
+  {
+   "from": "VehicleControlAPI.get_zipcode_based_on_city",
+   "to": "VehicleControlAPI.estimate_distance",
+   "kind": "data",
+   "why": "The zipcode of a city is used as the input for distance estimation between cities."
+  },
+  {
+   "from": "VehicleControlAPI.liter_to_gallon",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "Conversion result can be sent."
+  },
+  {
+   "from": "VehicleControlAPI.liter_to_gallon",
+   "to": "VehicleControlAPI.fillFuelTank",
+   "kind": "data",
+   "why": "Converts fuel volume to gallons, which is the required input unit for filling the tank."
+  },
+  {
+   "from": "VehicleControlAPI.lockDoors",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "Door lock status can be sent."
+  },
+  {
+   "from": "VehicleControlAPI.lockDoors",
+   "to": "VehicleControlAPI.startEngine",
+   "kind": "requires",
+   "why": "All doors must be locked before the engine can be started."
+  },
+  {
+   "from": "VehicleControlAPI.pressBrakePedal",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "Brake pedal status can be sent."
+  },
+  {
+   "from": "VehicleControlAPI.pressBrakePedal",
+   "to": "VehicleControlAPI.startEngine",
+   "kind": "requires",
+   "why": "The brake pedal must be fully pressed to start the engine."
+  },
+  {
+   "from": "VehicleControlAPI.releaseBrakePedal",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "Brake pedal status can be sent."
+  },
+  {
+   "from": "VehicleControlAPI.setCruiseControl",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "Cruise control status can be sent."
+  },
+  {
+   "from": "VehicleControlAPI.setHeadlights",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "Headlight status can be sent."
+  },
+  {
+   "from": "VehicleControlAPI.set_navigation",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "Navigation status can be sent."
+  },
+  {
+   "from": "VehicleControlAPI.startEngine",
+   "to": "MathAPI.percentage",
+   "kind": "data",
+   "why": "calculate fuel or battery percentage from engine start status"
+  },
+  {
+   "from": "VehicleControlAPI.startEngine",
+   "to": "MessageAPI.send_message",
+   "kind": "data",
+   "why": "Engine start status/fuel/battery info can be sent."
+  },
+  {
+   "from": "VehicleControlAPI.startEngine",
+   "to": "VehicleControlAPI.setCruiseControl",
+   "kind": "requires",
+   "why": "The engine must be running to activate cruise control."
+  }
+ ]
+}

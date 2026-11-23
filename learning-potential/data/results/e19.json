@@ -1,0 +1,2287 @@
+{
+ "experiment": "E19 LoRA seeds and the reasoning kept",
+ "saved": "2026-11-22",
+ "about": "Summary of every run, as the lab's dashboard showed it, read from the experiment bucket (raw logs, snapshots and full exam scores are archived separately). Scores in %; gain in points over E15's frozen model on the same practice tasks; probe = [{day: tasks practised, score: % of the 200 probe tasks}]; exam base = BFCL v4 multi-turn base; headline = BFCL's category groups.",
+ "cells": [
+  {
+   "key": "qwen3-1.7b",
+   "label": "Qwen3-1.7B",
+   "arm": "teach",
+   "arm_label": "Oracle teaching",
+   "probe0": 51.0,
+   "floor_base": 20.0,
+   "floor_overall": 29.98,
+   "runs": [
+    {
+     "run": "teach-s15",
+     "arm": "teach",
+     "arm_label": "Oracle teaching",
+     "seed": 15,
+     "pilot": false,
+     "source": "E16",
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 46.9,
+     "last50": 28.0,
+     "updates": 120,
+     "examples": 8600,
+     "last_loss": 0.010200768237580617,
+     "teach_replay_valid": 1200,
+     "think": null,
+     "secs_per_task": 23.0,
+     "gain": {
+      "tasks": 1200,
+      "all": -5.9,
+      "last200": -19.0
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 51.0
+      },
+      {
+       "day": 100,
+       "score": 7.0
+      },
+      {
+       "day": 200,
+       "score": 61.0
+      },
+      {
+       "day": 300,
+       "score": 54.0
+      },
+      {
+       "day": 400,
+       "score": 47.5
+      },
+      {
+       "day": 500,
+       "score": 64.5
+      },
+      {
+       "day": 600,
+       "score": 64.0
+      },
+      {
+       "day": 700,
+       "score": 36.5
+      },
+      {
+       "day": 800,
+       "score": 62.5
+      },
+      {
+       "day": 900,
+       "score": 59.5
+      },
+      {
+       "day": 1000,
+       "score": 28.5
+      },
+      {
+       "day": 1100,
+       "score": 37.5
+      },
+      {
+       "day": 1200,
+       "score": 39.0
+      }
+     ],
+     "exam": {
+      "stage": "done",
+      "base": 11.0,
+      "headline": {
+       "overall": 17.49,
+       "relevance": 43.75,
+       "non_live": 57.85,
+       "live": 43.38,
+       "multi_turn": 8.25,
+       "memory": 0.43,
+       "irrelevance": 48.11
+      }
+     }
+    },
+    {
+     "run": "teach-s16",
+     "arm": "teach",
+     "arm_label": "Oracle teaching",
+     "seed": 16,
+     "pilot": false,
+     "source": "E19",
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 35.7,
+     "last50": 52.0,
+     "updates": 120,
+     "examples": 8600,
+     "last_loss": 0.009285026241317294,
+     "teach_replay_valid": 1200,
+     "think": null,
+     "secs_per_task": 26.6,
+     "gain": {
+      "tasks": 1200,
+      "all": -17.2,
+      "last200": 9.0
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 51.0
+      },
+      {
+       "day": 100,
+       "score": 54.5
+      },
+      {
+       "day": 200,
+       "score": 1.5
+      },
+      {
+       "day": 300,
+       "score": 24.0
+      },
+      {
+       "day": 400,
+       "score": 54.5
+      },
+      {
+       "day": 500,
+       "score": 21.5
+      },
+      {
+       "day": 600,
+       "score": 0.0
+      },
+      {
+       "day": 700,
+       "score": 47.5
+      },
+      {
+       "day": 800,
+       "score": 69.0
+      },
+      {
+       "day": 900,
+       "score": 66.0
+      },
+      {
+       "day": 1000,
+       "score": 64.5
+      },
+      {
+       "day": 1100,
+       "score": 55.5
+      },
+      {
+       "day": 1200,
+       "score": 61.5
+      }
+     ],
+     "exam": {
+      "stage": "done",
+      "base": 17.5,
+      "headline": {
+       "overall": 20.32,
+       "relevance": 75.0,
+       "non_live": 66.4,
+       "live": 55.66,
+       "multi_turn": 10.12,
+       "memory": 0.0,
+       "irrelevance": 50.74
+      }
+     }
+    },
+    {
+     "run": "teach-s17",
+     "arm": "teach",
+     "arm_label": "Oracle teaching",
+     "seed": 17,
+     "pilot": false,
+     "source": "E19",
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 58.5,
+     "last50": 78.0,
+     "updates": 120,
+     "examples": 8600,
+     "last_loss": 0.0069283750168476705,
+     "teach_replay_valid": 1200,
+     "think": null,
+     "secs_per_task": 23.9,
+     "gain": {
+      "tasks": 1200,
+      "all": 5.7,
+      "last200": 18.0
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 51.0
+      },
+      {
+       "day": 100,
+       "score": 52.0
+      },
+      {
+       "day": 200,
+       "score": 61.5
+      },
+      {
+       "day": 300,
+       "score": 29.0
+      },
+      {
+       "day": 400,
+       "score": 64.0
+      },
+      {
+       "day": 500,
+       "score": 68.5
+      },
+      {
+       "day": 600,
+       "score": 46.0
+      },
+      {
+       "day": 700,
+       "score": 64.0
+      },
+      {
+       "day": 800,
+       "score": 53.5
+      },
+      {
+       "day": 900,
+       "score": 47.5
+      },
+      {
+       "day": 1000,
+       "score": 69.5
+      },
+      {
+       "day": 1100,
+       "score": 71.5
+      },
+      {
+       "day": 1200,
+       "score": 69.0
+      }
+     ],
+     "exam": {
+      "stage": "done",
+      "base": 18.5,
+      "headline": {
+       "overall": 19.75,
+       "relevance": 100.0,
+       "non_live": 76.33,
+       "live": 66.03,
+       "multi_turn": 14.88,
+       "memory": 2.8,
+       "irrelevance": 4.94
+      }
+     }
+    }
+   ],
+   "probe_final": {
+    "n": 3,
+    "mean": 56.5,
+    "sd": 15.6,
+    "values": [
+     39.0,
+     61.5,
+     69.0
+    ]
+   },
+   "gain_all": {
+    "n": 3,
+    "mean": -5.8,
+    "sd": 11.5,
+    "values": [
+     -5.9,
+     -17.2,
+     5.7
+    ]
+   },
+   "exam_base": {
+    "n": 3,
+    "mean": 15.7,
+    "sd": 4.1,
+    "values": [
+     11.0,
+     17.5,
+     18.5
+    ]
+   },
+   "exam_overall": {
+    "n": 3,
+    "mean": 19.2,
+    "sd": 1.5,
+    "values": [
+     17.5,
+     20.3,
+     19.8
+    ]
+   }
+  },
+  {
+   "key": "qwen3-1.7b",
+   "label": "Qwen3-1.7B",
+   "arm": "teach-think",
+   "arm_label": "Oracle teaching, reasoning kept",
+   "probe0": 51.0,
+   "floor_base": 20.0,
+   "floor_overall": 29.98,
+   "runs": [
+    {
+     "run": "teach-think-s15",
+     "arm": "teach-think",
+     "arm_label": "Oracle teaching, reasoning kept",
+     "seed": 15,
+     "pilot": false,
+     "source": "E19",
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 60.4,
+     "last50": 62.0,
+     "updates": 120,
+     "examples": 8600,
+     "last_loss": 0.14693246812870106,
+     "teach_replay_valid": 1200,
+     "think": {
+      "written": 8600,
+      "leaks_dropped": 336,
+      "cut": 18
+     },
+     "secs_per_task": 38.2,
+     "gain": {
+      "tasks": 1200,
+      "all": 7.6,
+      "last200": 13.0
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 51.0
+      },
+      {
+       "day": 100,
+       "score": 49.5
+      },
+      {
+       "day": 200,
+       "score": 54.5
+      },
+      {
+       "day": 300,
+       "score": 58.5
+      },
+      {
+       "day": 400,
+       "score": 58.0
+      },
+      {
+       "day": 500,
+       "score": 58.0
+      },
+      {
+       "day": 600,
+       "score": 57.5
+      },
+      {
+       "day": 700,
+       "score": 61.5
+      },
+      {
+       "day": 800,
+       "score": 58.0
+      },
+      {
+       "day": 900,
+       "score": 60.0
+      },
+      {
+       "day": 1000,
+       "score": 60.5
+      },
+      {
+       "day": 1100,
+       "score": 62.5
+      },
+      {
+       "day": 1200,
+       "score": 63.0
+      }
+     ],
+     "exam": {
+      "stage": "done",
+      "base": 11.0,
+      "headline": {
+       "overall": 25.03,
+       "relevance": 93.75,
+       "non_live": 79.29,
+       "live": 69.43,
+       "multi_turn": 8.12,
+       "memory": 8.6,
+       "irrelevance": 59.98
+      }
+     }
+    },
+    {
+     "run": "teach-think-s16",
+     "arm": "teach-think",
+     "arm_label": "Oracle teaching, reasoning kept",
+     "seed": 16,
+     "pilot": false,
+     "source": "E19",
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 60.3,
+     "last50": 62.0,
+     "updates": 120,
+     "examples": 8600,
+     "last_loss": 0.13638501400008607,
+     "teach_replay_valid": 1200,
+     "think": {
+      "written": 8600,
+      "leaks_dropped": 321,
+      "cut": 27
+     },
+     "secs_per_task": 38.0,
+     "gain": {
+      "tasks": 1200,
+      "all": 7.5,
+      "last200": 17.0
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 51.0
+      },
+      {
+       "day": 100,
+       "score": 50.5
+      },
+      {
+       "day": 200,
+       "score": 57.0
+      },
+      {
+       "day": 300,
+       "score": 56.0
+      },
+      {
+       "day": 400,
+       "score": 57.5
+      },
+      {
+       "day": 500,
+       "score": 57.5
+      },
+      {
+       "day": 600,
+       "score": 60.5
+      },
+      {
+       "day": 700,
+       "score": 61.0
+      },
+      {
+       "day": 800,
+       "score": 60.5
+      },
+      {
+       "day": 900,
+       "score": 62.5
+      },
+      {
+       "day": 1000,
+       "score": 60.0
+      },
+      {
+       "day": 1100,
+       "score": 63.5
+      },
+      {
+       "day": 1200,
+       "score": 60.5
+      }
+     ],
+     "exam": {
+      "stage": "done",
+      "base": 11.5,
+      "headline": {
+       "overall": 24.93,
+       "relevance": 93.75,
+       "non_live": 78.52,
+       "live": 68.1,
+       "multi_turn": 8.25,
+       "memory": 9.25,
+       "irrelevance": 59.45
+      }
+     }
+    },
+    {
+     "run": "teach-think-s17",
+     "arm": "teach-think",
+     "arm_label": "Oracle teaching, reasoning kept",
+     "seed": 17,
+     "pilot": false,
+     "source": "E19",
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 59.9,
+     "last50": 68.0,
+     "updates": 120,
+     "examples": 8600,
+     "last_loss": 0.14552868772593755,
+     "teach_replay_valid": 1200,
+     "think": {
+      "written": 8600,
+      "leaks_dropped": 330,
+      "cut": 10
+     },
+     "secs_per_task": 38.1,
+     "gain": {
+      "tasks": 1200,
+      "all": 7.1,
+      "last200": 8.5
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 51.0
+      },
+      {
+       "day": 100,
+       "score": 51.0
+      },
+      {
+       "day": 200,
+       "score": 54.5
+      },
+      {
+       "day": 300,
+       "score": 56.0
+      },
+      {
+       "day": 400,
+       "score": 58.0
+      },
+      {
+       "day": 500,
+       "score": 57.5
+      },
+      {
+       "day": 600,
+       "score": 55.0
+      },
+      {
+       "day": 700,
+       "score": 60.0
+      },
+      {
+       "day": 800,
+       "score": 61.5
+      },
+      {
+       "day": 900,
+       "score": 62.5
+      },
+      {
+       "day": 1000,
+       "score": 63.0
+      },
+      {
+       "day": 1100,
+       "score": 63.5
+      },
+      {
+       "day": 1200,
+       "score": 62.5
+      }
+     ],
+     "exam": {
+      "stage": "done",
+      "base": 13.0,
+      "headline": {
+       "overall": 25.94,
+       "relevance": 93.75,
+       "non_live": 78.98,
+       "live": 69.43,
+       "multi_turn": 10.0,
+       "memory": 11.4,
+       "irrelevance": 58.22
+      }
+     }
+    }
+   ],
+   "probe_final": {
+    "n": 3,
+    "mean": 62.0,
+    "sd": 1.3,
+    "values": [
+     63.0,
+     60.5,
+     62.5
+    ]
+   },
+   "gain_all": {
+    "n": 3,
+    "mean": 7.4,
+    "sd": 0.3,
+    "values": [
+     7.6,
+     7.5,
+     7.1
+    ]
+   },
+   "exam_base": {
+    "n": 3,
+    "mean": 11.8,
+    "sd": 1.0,
+    "values": [
+     11.0,
+     11.5,
+     13.0
+    ]
+   },
+   "exam_overall": {
+    "n": 3,
+    "mean": 25.3,
+    "sd": 0.6,
+    "values": [
+     25.0,
+     24.9,
+     25.9
+    ]
+   }
+  },
+  {
+   "key": "qwen3-1.7b",
+   "label": "Qwen3-1.7B",
+   "arm": "judge",
+   "arm_label": "Oracle judging",
+   "probe0": 51.0,
+   "floor_base": 20.0,
+   "floor_overall": 29.98,
+   "runs": [
+    {
+     "run": "judge-s15",
+     "arm": "judge",
+     "arm_label": "Oracle judging",
+     "seed": 15,
+     "pilot": false,
+     "source": "E16",
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 53.9,
+     "last50": 48.0,
+     "updates": 120,
+     "examples": 5027,
+     "last_loss": 0.03874509553669301,
+     "teach_replay_valid": 0,
+     "think": null,
+     "secs_per_task": 24.3,
+     "gain": {
+      "tasks": 1200,
+      "all": 1.1,
+      "last200": 4.0
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 51.0
+      },
+      {
+       "day": 100,
+       "score": 52.5
+      },
+      {
+       "day": 200,
+       "score": 51.5
+      },
+      {
+       "day": 300,
+       "score": 53.5
+      },
+      {
+       "day": 400,
+       "score": 57.5
+      },
+      {
+       "day": 500,
+       "score": 53.5
+      },
+      {
+       "day": 600,
+       "score": 45.0
+      },
+      {
+       "day": 700,
+       "score": 53.5
+      },
+      {
+       "day": 800,
+       "score": 54.0
+      },
+      {
+       "day": 900,
+       "score": 57.5
+      },
+      {
+       "day": 1000,
+       "score": 53.0
+      },
+      {
+       "day": 1100,
+       "score": 58.5
+      },
+      {
+       "day": 1200,
+       "score": 62.5
+      }
+     ],
+     "exam": {
+      "stage": "done",
+      "base": 25.0,
+      "headline": {
+       "overall": 31.07,
+       "relevance": 87.5,
+       "non_live": 84.23,
+       "live": 72.46,
+       "multi_turn": 15.12,
+       "memory": 16.99,
+       "irrelevance": 74.63
+      }
+     }
+    },
+    {
+     "run": "judge-s16",
+     "arm": "judge",
+     "arm_label": "Oracle judging",
+     "seed": 16,
+     "pilot": false,
+     "source": "E19",
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 55.3,
+     "last50": 56.0,
+     "updates": 120,
+     "examples": 4701,
+     "last_loss": 0.0519211445699888,
+     "teach_replay_valid": 0,
+     "think": null,
+     "secs_per_task": 33.1,
+     "gain": {
+      "tasks": 1200,
+      "all": 2.5,
+      "last200": 6.0
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 51.0
+      },
+      {
+       "day": 100,
+       "score": 54.0
+      },
+      {
+       "day": 200,
+       "score": 57.5
+      },
+      {
+       "day": 300,
+       "score": 58.5
+      },
+      {
+       "day": 400,
+       "score": 57.5
+      },
+      {
+       "day": 500,
+       "score": 54.0
+      },
+      {
+       "day": 600,
+       "score": 60.0
+      },
+      {
+       "day": 700,
+       "score": 57.5
+      },
+      {
+       "day": 800,
+       "score": 59.0
+      },
+      {
+       "day": 900,
+       "score": 60.5
+      },
+      {
+       "day": 1000,
+       "score": 57.0
+      },
+      {
+       "day": 1100,
+       "score": 53.5
+      },
+      {
+       "day": 1200,
+       "score": 57.5
+      }
+     ],
+     "exam": {
+      "stage": "done",
+      "base": 20.5,
+      "headline": {
+       "overall": 30.4,
+       "relevance": 75.0,
+       "non_live": 84.02,
+       "live": 74.39,
+       "multi_turn": 15.38,
+       "memory": 12.47,
+       "irrelevance": 74.54
+      }
+     }
+    },
+    {
+     "run": "judge-s17",
+     "arm": "judge",
+     "arm_label": "Oracle judging",
+     "seed": 17,
+     "pilot": false,
+     "source": "E19",
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 57.6,
+     "last50": 66.0,
+     "updates": 120,
+     "examples": 5105,
+     "last_loss": 0.05400318829723452,
+     "teach_replay_valid": 0,
+     "think": null,
+     "secs_per_task": 35.3,
+     "gain": {
+      "tasks": 1200,
+      "all": 4.8,
+      "last200": 1.0
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 51.0
+      },
+      {
+       "day": 100,
+       "score": 59.5
+      },
+      {
+       "day": 200,
+       "score": 60.0
+      },
+      {
+       "day": 300,
+       "score": 56.0
+      },
+      {
+       "day": 400,
+       "score": 56.5
+      },
+      {
+       "day": 500,
+       "score": 54.5
+      },
+      {
+       "day": 600,
+       "score": 58.0
+      },
+      {
+       "day": 700,
+       "score": 53.0
+      },
+      {
+       "day": 800,
+       "score": 56.5
+      },
+      {
+       "day": 900,
+       "score": 57.5
+      },
+      {
+       "day": 1000,
+       "score": 56.5
+      },
+      {
+       "day": 1100,
+       "score": 56.5
+      },
+      {
+       "day": 1200,
+       "score": 58.5
+      }
+     ],
+     "exam": {
+      "stage": "done",
+      "base": 23.5,
+      "headline": {
+       "overall": 30.19,
+       "relevance": 87.5,
+       "non_live": 83.27,
+       "live": 72.61,
+       "multi_turn": 16.62,
+       "memory": 10.54,
+       "irrelevance": 75.05
+      }
+     }
+    }
+   ],
+   "probe_final": {
+    "n": 3,
+    "mean": 59.5,
+    "sd": 2.6,
+    "values": [
+     62.5,
+     57.5,
+     58.5
+    ]
+   },
+   "gain_all": {
+    "n": 3,
+    "mean": 2.8,
+    "sd": 1.9,
+    "values": [
+     1.1,
+     2.5,
+     4.8
+    ]
+   },
+   "exam_base": {
+    "n": 3,
+    "mean": 23.0,
+    "sd": 2.3,
+    "values": [
+     25.0,
+     20.5,
+     23.5
+    ]
+   },
+   "exam_overall": {
+    "n": 3,
+    "mean": 30.6,
+    "sd": 0.5,
+    "values": [
+     31.1,
+     30.4,
+     30.2
+    ]
+   }
+  },
+  {
+   "key": "lfm2.5-1.2b",
+   "label": "LFM2.5-1.2B",
+   "arm": "teach",
+   "arm_label": "Oracle teaching",
+   "probe0": 26.0,
+   "floor_base": 9.0,
+   "floor_overall": 23.9,
+   "runs": [
+    {
+     "run": "teach-s15",
+     "arm": "teach",
+     "arm_label": "Oracle teaching",
+     "seed": 15,
+     "pilot": false,
+     "source": "E16",
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 59.7,
+     "last50": 70.0,
+     "updates": 120,
+     "examples": 8600,
+     "last_loss": 0.015123035710310123,
+     "teach_replay_valid": 1200,
+     "think": null,
+     "secs_per_task": 12.4,
+     "gain": {
+      "tasks": 1200,
+      "all": 29.7,
+      "last200": 39.0
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 26.0
+      },
+      {
+       "day": 100,
+       "score": 39.0
+      },
+      {
+       "day": 200,
+       "score": 47.0
+      },
+      {
+       "day": 300,
+       "score": 50.0
+      },
+      {
+       "day": 400,
+       "score": 58.0
+      },
+      {
+       "day": 500,
+       "score": 57.5
+      },
+      {
+       "day": 600,
+       "score": 58.5
+      },
+      {
+       "day": 700,
+       "score": 62.0
+      },
+      {
+       "day": 800,
+       "score": 64.0
+      },
+      {
+       "day": 900,
+       "score": 65.0
+      },
+      {
+       "day": 1000,
+       "score": 63.0
+      },
+      {
+       "day": 1100,
+       "score": 65.5
+      },
+      {
+       "day": 1200,
+       "score": 65.0
+      }
+     ],
+     "exam": {
+      "stage": "done",
+      "base": 11.0,
+      "headline": {
+       "overall": 21.81,
+       "relevance": 93.75,
+       "non_live": 78.38,
+       "live": 62.25,
+       "multi_turn": 7.62,
+       "memory": 2.37,
+       "irrelevance": 49.84
+      }
+     }
+    },
+    {
+     "run": "teach-s16",
+     "arm": "teach",
+     "arm_label": "Oracle teaching",
+     "seed": 16,
+     "pilot": false,
+     "source": "E19",
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 58.8,
+     "last50": 66.0,
+     "updates": 120,
+     "examples": 8600,
+     "last_loss": 0.01465511557479132,
+     "teach_replay_valid": 1200,
+     "think": null,
+     "secs_per_task": 7.8,
+     "gain": {
+      "tasks": 1200,
+      "all": 28.8,
+      "last200": 36.0
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 26.0
+      },
+      {
+       "day": 100,
+       "score": 43.5
+      },
+      {
+       "day": 200,
+       "score": 50.0
+      },
+      {
+       "day": 300,
+       "score": 52.5
+      },
+      {
+       "day": 400,
+       "score": 55.0
+      },
+      {
+       "day": 500,
+       "score": 61.5
+      },
+      {
+       "day": 600,
+       "score": 56.5
+      },
+      {
+       "day": 700,
+       "score": 59.0
+      },
+      {
+       "day": 800,
+       "score": 63.5
+      },
+      {
+       "day": 900,
+       "score": 63.0
+      },
+      {
+       "day": 1000,
+       "score": 65.5
+      },
+      {
+       "day": 1100,
+       "score": 65.0
+      },
+      {
+       "day": 1200,
+       "score": 63.0
+      }
+     ],
+     "exam": {
+      "stage": "done",
+      "base": 13.0,
+      "headline": {
+       "overall": 22.15,
+       "relevance": 93.75,
+       "non_live": 78.71,
+       "live": 62.47,
+       "multi_turn": 7.5,
+       "memory": 3.87,
+       "irrelevance": 50.13
+      }
+     }
+    },
+    {
+     "run": "teach-s17",
+     "arm": "teach",
+     "arm_label": "Oracle teaching",
+     "seed": 17,
+     "pilot": false,
+     "source": "E19",
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 58.8,
+     "last50": 74.0,
+     "updates": 120,
+     "examples": 8600,
+     "last_loss": 0.011341903916684621,
+     "teach_replay_valid": 1200,
+     "think": null,
+     "secs_per_task": 7.8,
+     "gain": {
+      "tasks": 1200,
+      "all": 28.8,
+      "last200": 36.5
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 26.0
+      },
+      {
+       "day": 100,
+       "score": 41.5
+      },
+      {
+       "day": 200,
+       "score": 53.5
+      },
+      {
+       "day": 300,
+       "score": 57.0
+      },
+      {
+       "day": 400,
+       "score": 61.5
+      },
+      {
+       "day": 500,
+       "score": 56.5
+      },
+      {
+       "day": 600,
+       "score": 58.5
+      },
+      {
+       "day": 700,
+       "score": 59.0
+      },
+      {
+       "day": 800,
+       "score": 64.5
+      },
+      {
+       "day": 900,
+       "score": 62.0
+      },
+      {
+       "day": 1000,
+       "score": 61.5
+      },
+      {
+       "day": 1100,
+       "score": 66.5
+      },
+      {
+       "day": 1200,
+       "score": 65.5
+      }
+     ],
+     "exam": {
+      "stage": "done",
+      "base": 13.5,
+      "headline": {
+       "overall": 21.86,
+       "relevance": 93.75,
+       "non_live": 77.48,
+       "live": 62.32,
+       "multi_turn": 7.63,
+       "memory": 2.37,
+       "irrelevance": 51.2
+      }
+     }
+    }
+   ],
+   "probe_final": {
+    "n": 3,
+    "mean": 64.5,
+    "sd": 1.3,
+    "values": [
+     65.0,
+     63.0,
+     65.5
+    ]
+   },
+   "gain_all": {
+    "n": 3,
+    "mean": 29.1,
+    "sd": 0.5,
+    "values": [
+     29.7,
+     28.8,
+     28.8
+    ]
+   },
+   "exam_base": {
+    "n": 3,
+    "mean": 12.5,
+    "sd": 1.3,
+    "values": [
+     11.0,
+     13.0,
+     13.5
+    ]
+   },
+   "exam_overall": {
+    "n": 3,
+    "mean": 21.9,
+    "sd": 0.2,
+    "values": [
+     21.8,
+     22.1,
+     21.9
+    ]
+   }
+  },
+  {
+   "key": "qwen3.5-0.8b",
+   "label": "Qwen3.5-0.8B",
+   "arm": "teach",
+   "arm_label": "Oracle teaching",
+   "probe0": 25.5,
+   "floor_base": 8.5,
+   "floor_overall": 20.66,
+   "runs": [
+    {
+     "run": "teach-s15",
+     "arm": "teach",
+     "arm_label": "Oracle teaching",
+     "seed": 15,
+     "pilot": false,
+     "source": "E16",
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 61.1,
+     "last50": 68.0,
+     "updates": 120,
+     "examples": 8600,
+     "last_loss": 0.008473600493335523,
+     "teach_replay_valid": 1200,
+     "think": null,
+     "secs_per_task": 101.5,
+     "gain": {
+      "tasks": 1200,
+      "all": 35.2,
+      "last200": 39.0
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 25.5
+      },
+      {
+       "day": 100,
+       "score": 52.0
+      },
+      {
+       "day": 200,
+       "score": 57.0
+      },
+      {
+       "day": 300,
+       "score": 57.0
+      },
+      {
+       "day": 400,
+       "score": 53.0
+      },
+      {
+       "day": 500,
+       "score": 55.0
+      },
+      {
+       "day": 600,
+       "score": 61.5
+      },
+      {
+       "day": 700,
+       "score": 57.5
+      },
+      {
+       "day": 800,
+       "score": 66.0
+      },
+      {
+       "day": 900,
+       "score": 64.0
+      },
+      {
+       "day": 1000,
+       "score": 66.5
+      },
+      {
+       "day": 1100,
+       "score": 63.0
+      },
+      {
+       "day": 1200,
+       "score": 68.5
+      }
+     ],
+     "exam": {
+      "stage": "done",
+      "base": 15.5,
+      "headline": {
+       "overall": 14.0,
+       "relevance": 93.75,
+       "non_live": 60.85,
+       "live": 49.81,
+       "multi_turn": 9.25,
+       "memory": 0.0,
+       "irrelevance": 1.62
+      }
+     }
+    },
+    {
+     "run": "teach-s16",
+     "arm": "teach",
+     "arm_label": "Oracle teaching",
+     "seed": 16,
+     "pilot": false,
+     "source": "E19",
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 62.7,
+     "last50": 58.0,
+     "updates": 120,
+     "examples": 8600,
+     "last_loss": 0.008946778006172615,
+     "teach_replay_valid": 1200,
+     "think": null,
+     "secs_per_task": 100.9,
+     "gain": {
+      "tasks": 1200,
+      "all": 36.8,
+      "last200": 34.5
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 25.5
+      },
+      {
+       "day": 100,
+       "score": 56.5
+      },
+      {
+       "day": 200,
+       "score": 51.0
+      },
+      {
+       "day": 300,
+       "score": 60.5
+      },
+      {
+       "day": 400,
+       "score": 58.0
+      },
+      {
+       "day": 500,
+       "score": 59.0
+      },
+      {
+       "day": 600,
+       "score": 56.5
+      },
+      {
+       "day": 700,
+       "score": 65.5
+      },
+      {
+       "day": 800,
+       "score": 66.5
+      },
+      {
+       "day": 900,
+       "score": 68.5
+      },
+      {
+       "day": 1000,
+       "score": 61.5
+      },
+      {
+       "day": 1100,
+       "score": 68.5
+      },
+      {
+       "day": 1200,
+       "score": 54.5
+      }
+     ],
+     "exam": {
+      "stage": "done",
+      "base": 10.0,
+      "headline": {
+       "overall": 12.95,
+       "relevance": 93.75,
+       "non_live": 62.5,
+       "live": 48.78,
+       "multi_turn": 5.5,
+       "memory": 0.0,
+       "irrelevance": 1.72
+      }
+     }
+    },
+    {
+     "run": "teach-s17",
+     "arm": "teach",
+     "arm_label": "Oracle teaching",
+     "seed": 17,
+     "pilot": false,
+     "source": "E19",
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 62.5,
+     "last50": 66.0,
+     "updates": 120,
+     "examples": 8600,
+     "last_loss": 0.011097031737744317,
+     "teach_replay_valid": 1200,
+     "think": null,
+     "secs_per_task": 99.8,
+     "gain": {
+      "tasks": 1200,
+      "all": 36.6,
+      "last200": 39.5
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 25.5
+      },
+      {
+       "day": 100,
+       "score": 58.5
+      },
+      {
+       "day": 200,
+       "score": 28.5
+      },
+      {
+       "day": 300,
+       "score": 48.5
+      },
+      {
+       "day": 400,
+       "score": 65.5
+      },
+      {
+       "day": 500,
+       "score": 61.5
+      },
+      {
+       "day": 600,
+       "score": 59.5
+      },
+      {
+       "day": 700,
+       "score": 57.5
+      },
+      {
+       "day": 800,
+       "score": 57.0
+      },
+      {
+       "day": 900,
+       "score": 58.5
+      },
+      {
+       "day": 1000,
+       "score": 69.0
+      },
+      {
+       "day": 1100,
+       "score": 65.0
+      },
+      {
+       "day": 1200,
+       "score": 57.0
+      }
+     ],
+     "exam": {
+      "stage": "done",
+      "base": 17.0,
+      "headline": {
+       "overall": 13.86,
+       "relevance": 100.0,
+       "non_live": 54.12,
+       "live": 43.01,
+       "multi_turn": 13.0,
+       "memory": 0.0,
+       "irrelevance": 2.48
+      }
+     }
+    }
+   ],
+   "probe_final": {
+    "n": 3,
+    "mean": 60.0,
+    "sd": 7.5,
+    "values": [
+     68.5,
+     54.5,
+     57.0
+    ]
+   },
+   "gain_all": {
+    "n": 3,
+    "mean": 36.2,
+    "sd": 0.9,
+    "values": [
+     35.2,
+     36.8,
+     36.6
+    ]
+   },
+   "exam_base": {
+    "n": 3,
+    "mean": 14.2,
+    "sd": 3.7,
+    "values": [
+     15.5,
+     10.0,
+     17.0
+    ]
+   },
+   "exam_overall": {
+    "n": 3,
+    "mean": 13.6,
+    "sd": 0.6,
+    "values": [
+     14.0,
+     12.9,
+     13.9
+    ]
+   }
+  },
+  {
+   "key": "llama3.2-1b",
+   "label": "Llama-3.2-1B",
+   "arm": "teach",
+   "arm_label": "Oracle teaching",
+   "probe0": 0.0,
+   "floor_base": 0.0,
+   "floor_overall": 10.73,
+   "runs": [
+    {
+     "run": "teach-s15",
+     "arm": "teach",
+     "arm_label": "Oracle teaching",
+     "seed": 15,
+     "pilot": false,
+     "source": "E16",
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 49.2,
+     "last50": 60.0,
+     "updates": 120,
+     "examples": 8600,
+     "last_loss": 0.02779979485585801,
+     "teach_replay_valid": 1200,
+     "think": null,
+     "secs_per_task": 19.9,
+     "gain": {
+      "tasks": 1200,
+      "all": 49.2,
+      "last200": 59.5
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 0.0
+      },
+      {
+       "day": 100,
+       "score": 31.5
+      },
+      {
+       "day": 200,
+       "score": 41.5
+      },
+      {
+       "day": 300,
+       "score": 42.5
+      },
+      {
+       "day": 400,
+       "score": 49.0
+      },
+      {
+       "day": 500,
+       "score": 58.5
+      },
+      {
+       "day": 600,
+       "score": 55.5
+      },
+      {
+       "day": 700,
+       "score": 58.0
+      },
+      {
+       "day": 800,
+       "score": 54.5
+      },
+      {
+       "day": 900,
+       "score": 56.5
+      },
+      {
+       "day": 1000,
+       "score": 57.0
+      },
+      {
+       "day": 1100,
+       "score": 57.5
+      },
+      {
+       "day": 1200,
+       "score": 58.5
+      }
+     ],
+     "exam": {
+      "stage": "done",
+      "base": 8.0,
+      "headline": {
+       "overall": 12.05,
+       "relevance": 87.5,
+       "non_live": 52.5,
+       "live": 41.3,
+       "multi_turn": 5.62,
+       "memory": 0.86,
+       "irrelevance": 8.11
+      }
+     }
+    },
+    {
+     "run": "teach-s16",
+     "arm": "teach",
+     "arm_label": "Oracle teaching",
+     "seed": 16,
+     "pilot": false,
+     "source": "E19",
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 49.8,
+     "last50": 50.0,
+     "updates": 120,
+     "examples": 8600,
+     "last_loss": 0.026781368761404405,
+     "teach_replay_valid": 1200,
+     "think": null,
+     "secs_per_task": 15.2,
+     "gain": {
+      "tasks": 1200,
+      "all": 49.8,
+      "last200": 64.0
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 0.0
+      },
+      {
+       "day": 100,
+       "score": 31.5
+      },
+      {
+       "day": 200,
+       "score": 40.0
+      },
+      {
+       "day": 300,
+       "score": 44.5
+      },
+      {
+       "day": 400,
+       "score": 45.5
+      },
+      {
+       "day": 500,
+       "score": 51.5
+      },
+      {
+       "day": 600,
+       "score": 60.5
+      },
+      {
+       "day": 700,
+       "score": 50.0
+      },
+      {
+       "day": 800,
+       "score": 56.5
+      },
+      {
+       "day": 900,
+       "score": 57.0
+      },
+      {
+       "day": 1000,
+       "score": 56.5
+      },
+      {
+       "day": 1100,
+       "score": 62.0
+      },
+      {
+       "day": 1200,
+       "score": 56.0
+      }
+     ],
+     "exam": {
+      "stage": "done",
+      "base": 10.5,
+      "headline": {
+       "overall": 10.36,
+       "relevance": 93.75,
+       "non_live": 38.0,
+       "live": 32.27,
+       "multi_turn": 6.75,
+       "memory": 1.51,
+       "irrelevance": 10.03
+      }
+     }
+    },
+    {
+     "run": "teach-s17",
+     "arm": "teach",
+     "arm_label": "Oracle teaching",
+     "seed": 17,
+     "pilot": false,
+     "source": "E19",
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 49.2,
+     "last50": 50.0,
+     "updates": 120,
+     "examples": 8600,
+     "last_loss": 0.025319879617953234,
+     "teach_replay_valid": 1200,
+     "think": null,
+     "secs_per_task": 15.0,
+     "gain": {
+      "tasks": 1200,
+      "all": 49.2,
+      "last200": 56.0
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 0.0
+      },
+      {
+       "day": 100,
+       "score": 35.0
+      },
+      {
+       "day": 200,
+       "score": 42.0
+      },
+      {
+       "day": 300,
+       "score": 40.5
+      },
+      {
+       "day": 400,
+       "score": 52.5
+      },
+      {
+       "day": 500,
+       "score": 49.5
+      },
+      {
+       "day": 600,
+       "score": 50.0
+      },
+      {
+       "day": 700,
+       "score": 47.0
+      },
+      {
+       "day": 800,
+       "score": 55.0
+      },
+      {
+       "day": 900,
+       "score": 49.0
+      },
+      {
+       "day": 1000,
+       "score": 59.0
+      },
+      {
+       "day": 1100,
+       "score": 60.5
+      },
+      {
+       "day": 1200,
+       "score": 53.0
+      }
+     ],
+     "exam": {
+      "stage": "done",
+      "base": 12.5,
+      "headline": {
+       "overall": 12.1,
+       "relevance": 87.5,
+       "non_live": 41.08,
+       "live": 36.2,
+       "multi_turn": 7.75,
+       "memory": 1.08,
+       "irrelevance": 18.34
+      }
+     }
+    }
+   ],
+   "probe_final": {
+    "n": 3,
+    "mean": 55.8,
+    "sd": 2.8,
+    "values": [
+     58.5,
+     56.0,
+     53.0
+    ]
+   },
+   "gain_all": {
+    "n": 3,
+    "mean": 49.4,
+    "sd": 0.3,
+    "values": [
+     49.2,
+     49.8,
+     49.2
+    ]
+   },
+   "exam_base": {
+    "n": 3,
+    "mean": 10.3,
+    "sd": 2.3,
+    "values": [
+     8.0,
+     10.5,
+     12.5
+    ]
+   },
+   "exam_overall": {
+    "n": 3,
+    "mean": 11.5,
+    "sd": 1.0,
+    "values": [
+     12.1,
+     10.4,
+     12.1
+    ]
+   }
+  },
+  {
+   "key": "gemma3-1b",
+   "label": "Gemma-3-1B",
+   "arm": "teach",
+   "arm_label": "Oracle teaching",
+   "probe0": 0.0,
+   "floor_base": 0.0,
+   "floor_overall": 7.14,
+   "runs": [
+    {
+     "run": "teach-s15",
+     "arm": "teach",
+     "arm_label": "Oracle teaching",
+     "seed": 15,
+     "pilot": false,
+     "source": "E16",
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 40.7,
+     "last50": 52.0,
+     "updates": 120,
+     "examples": 8600,
+     "last_loss": 0.025682826065226934,
+     "teach_replay_valid": 1200,
+     "think": null,
+     "secs_per_task": 44.9,
+     "gain": {
+      "tasks": 1200,
+      "all": 40.7,
+      "last200": 56.0
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 0.0
+      },
+      {
+       "day": 100,
+       "score": 20.0
+      },
+      {
+       "day": 200,
+       "score": 29.0
+      },
+      {
+       "day": 300,
+       "score": 38.0
+      },
+      {
+       "day": 400,
+       "score": 35.0
+      },
+      {
+       "day": 500,
+       "score": 42.0
+      },
+      {
+       "day": 600,
+       "score": 48.0
+      },
+      {
+       "day": 700,
+       "score": 39.0
+      },
+      {
+       "day": 800,
+       "score": 49.5
+      },
+      {
+       "day": 900,
+       "score": 51.5
+      },
+      {
+       "day": 1000,
+       "score": 52.5
+      },
+      {
+       "day": 1100,
+       "score": 53.0
+      },
+      {
+       "day": 1200,
+       "score": 52.5
+      }
+     ],
+     "exam": {
+      "stage": "done",
+      "base": 11.5,
+      "headline": {
+       "overall": 5.99,
+       "relevance": 100.0,
+       "non_live": 16.52,
+       "live": 16.43,
+       "multi_turn": 6.38,
+       "memory": 0.86,
+       "irrelevance": 6.12
+      }
+     }
+    },
+    {
+     "run": "teach-s16",
+     "arm": "teach",
+     "arm_label": "Oracle teaching",
+     "seed": 16,
+     "pilot": false,
+     "source": "E19",
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 43.2,
+     "last50": 48.0,
+     "updates": 120,
+     "examples": 8600,
+     "last_loss": 0.03253689149363089,
+     "teach_replay_valid": 1200,
+     "think": null,
+     "secs_per_task": 40.3,
+     "gain": {
+      "tasks": 1200,
+      "all": 43.2,
+      "last200": 56.0
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 0.0
+      },
+      {
+       "day": 100,
+       "score": 24.0
+      },
+      {
+       "day": 200,
+       "score": 30.5
+      },
+      {
+       "day": 300,
+       "score": 31.0
+      },
+      {
+       "day": 400,
+       "score": 40.0
+      },
+      {
+       "day": 500,
+       "score": 47.0
+      },
+      {
+       "day": 600,
+       "score": 51.5
+      },
+      {
+       "day": 700,
+       "score": 53.0
+      },
+      {
+       "day": 800,
+       "score": 55.5
+      },
+      {
+       "day": 900,
+       "score": 51.5
+      },
+      {
+       "day": 1000,
+       "score": 46.5
+      },
+      {
+       "day": 1100,
+       "score": 51.5
+      },
+      {
+       "day": 1200,
+       "score": 52.0
+      }
+     ],
+     "exam": {
+      "stage": "done",
+      "base": 10.5,
+      "headline": {
+       "overall": 7.01,
+       "relevance": 93.75,
+       "non_live": 21.23,
+       "live": 21.98,
+       "multi_turn": 6.62,
+       "memory": 0.22,
+       "irrelevance": 6.61
+      }
+     }
+    },
+    {
+     "run": "teach-s17",
+     "arm": "teach",
+     "arm_label": "Oracle teaching",
+     "seed": 17,
+     "pilot": false,
+     "source": "E19",
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 41.1,
+     "last50": 56.0,
+     "updates": 120,
+     "examples": 8600,
+     "last_loss": 0.01999115594305087,
+     "teach_replay_valid": 1200,
+     "think": null,
+     "secs_per_task": 40.0,
+     "gain": {
+      "tasks": 1200,
+      "all": 41.1,
+      "last200": 51.5
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 0.0
+      },
+      {
+       "day": 100,
+       "score": 22.5
+      },
+      {
+       "day": 200,
+       "score": 24.0
+      },
+      {
+       "day": 300,
+       "score": 40.0
+      },
+      {
+       "day": 400,
+       "score": 37.0
+      },
+      {
+       "day": 500,
+       "score": 49.0
+      },
+      {
+       "day": 600,
+       "score": 51.5
+      },
+      {
+       "day": 700,
+       "score": 48.5
+      },
+      {
+       "day": 800,
+       "score": 51.5
+      },
+      {
+       "day": 900,
+       "score": 52.5
+      },
+      {
+       "day": 1000,
+       "score": 57.0
+      },
+      {
+       "day": 1100,
+       "score": 53.5
+      },
+      {
+       "day": 1200,
+       "score": 53.5
+      }
+     ],
+     "exam": {
+      "stage": "done",
+      "base": 11.0,
+      "headline": {
+       "overall": 5.75,
+       "relevance": 100.0,
+       "non_live": 16.37,
+       "live": 15.62,
+       "multi_turn": 6.5,
+       "memory": 0.65,
+       "irrelevance": 4.74
+      }
+     }
+    }
+   ],
+   "probe_final": {
+    "n": 3,
+    "mean": 52.7,
+    "sd": 0.8,
+    "values": [
+     52.5,
+     52.0,
+     53.5
+    ]
+   },
+   "gain_all": {
+    "n": 3,
+    "mean": 41.7,
+    "sd": 1.3,
+    "values": [
+     40.7,
+     43.2,
+     41.1
+    ]
+   },
+   "exam_base": {
+    "n": 3,
+    "mean": 11.0,
+    "sd": 0.5,
+    "values": [
+     11.5,
+     10.5,
+     11.0
+    ]
+   },
+   "exam_overall": {
+    "n": 3,
+    "mean": 6.2,
+    "sd": 0.7,
+    "values": [
+     6.0,
+     7.0,
+     5.8
+    ]
+   }
+  }
+ ]
+}

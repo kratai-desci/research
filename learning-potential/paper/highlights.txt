@@ -1,0 +1,7 @@
+Highlights
+
+- Models unable to make a valid multi-turn call learn little except by fine-tuning.
+- Fine-tuning on expert tool calls teaches every model to call tools when none fits.
+- A reasoning model was harmed by expert targets, not by its own verified successes.
+- Above that level, practice gains barely transfer to the official benchmark.
+- Teach a model until it can succeed, then let it learn from its own successes.

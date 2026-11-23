@@ -1,0 +1,1113 @@
+{
+ "experiment": "E15 skill notes",
+ "saved": "2026-11-22",
+ "about": "Summary of every run, as the lab's dashboard showed it, read from the experiment bucket (raw logs, snapshots and full exam scores are archived separately). Scores in %; gain in points over E15's frozen model on the same practice tasks; probe = [{day: tasks practised, score: % of the 200 probe tasks}]; exam base = BFCL v4 multi-turn base; headline = BFCL's category groups.",
+ "models": [
+  {
+   "key": "qwen3-1.7b",
+   "label": "Qwen3-1.7B",
+   "probe0": 51.0,
+   "runs": [
+    {
+     "run": "frozen-s15",
+     "arm": "frozen",
+     "arm_label": "Frozen (no notes)",
+     "seed": 15,
+     "pilot": false,
+     "stage": "done",
+     "done": 2400,
+     "tasks": 2400,
+     "success": 53.4,
+     "last50": 62.0,
+     "notes": 0,
+     "notes_tokens": 0,
+     "curations": 0,
+     "secs_per_task": 108.8,
+     "notes_text": "",
+     "gain": null,
+     "probe": []
+    },
+    {
+     "run": "teach-s15",
+     "arm": "teach",
+     "arm_label": "Oracle teaching",
+     "seed": 15,
+     "pilot": false,
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 51.2,
+     "last50": 46.0,
+     "notes": 18,
+     "notes_tokens": 212,
+     "curations": 3,
+     "secs_per_task": 79.3,
+     "notes_text": "- Always authenticate before accessing accounts, financials, or social media.\n- Use exact parameters and units for tool calls for accuracy.\n- Verify file and directory existence before operations.\n- Lock doors before starting the engine for safety.\n- Use find() for accurate file location.\n- Authenticate before creating or updating tickets.\n- Verify ticket existence before editing or resolving.\n- Use exact decimal values for numerical parameters.\n- Authenticate before financial or account-related requests.\n- Verify directory existence before creating files.\n- Always check login status before sending messages.\n- Verify airport codes and booking IDs for accuracy.\n- Always verify login status before sending messages or performing actions on accounts, financials, or systems.\n- Always verify login status before performing financial or account-related tasks.\n- Always authenticate before performing any actions on accounts, financials, or systems.\n- Find the file using exact path and name to ensure accurate location.\n- Always verify directory and file existence before performing operations to avoid errors.\n- Always authenticate before accessing accounts, financials, or systems to ensure secure and accurate operations.",
+     "gain": {
+      "tasks": 1200,
+      "all": -1.7,
+      "last200": -0.5
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 51.0
+      },
+      {
+       "day": 100,
+       "score": 54.5
+      },
+      {
+       "day": 200,
+       "score": 55.0
+      },
+      {
+       "day": 300,
+       "score": 55.5
+      },
+      {
+       "day": 400,
+       "score": 53.0
+      },
+      {
+       "day": 500,
+       "score": 51.5
+      },
+      {
+       "day": 600,
+       "score": 49.5
+      },
+      {
+       "day": 700,
+       "score": 52.0
+      },
+      {
+       "day": 800,
+       "score": 52.0
+      },
+      {
+       "day": 900,
+       "score": 49.0
+      },
+      {
+       "day": 1000,
+       "score": 53.0
+      },
+      {
+       "day": 1100,
+       "score": 51.0
+      },
+      {
+       "day": 1200,
+       "score": 53.0
+      }
+     ]
+    },
+    {
+     "run": "judge-s15",
+     "arm": "judge",
+     "arm_label": "Oracle judging",
+     "seed": 15,
+     "pilot": false,
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 49.4,
+     "last50": 62.0,
+     "notes": 33,
+     "notes_tokens": 538,
+     "curations": 0,
+     "secs_per_task": 76.2,
+     "notes_text": "- Log in to the support system with the correct credentials to access tickets and perform updates.\n- Log in with correct credentials before accessing or modifying tickets to ensure access to the required data and functionality.\n- Log in to all systems before performing actions to ensure access to data and functionality.\n- Ensure all file paths and directories exist before attempting to access them.\n- Ensure all systems and files are accessible before performing any operations to avoid errors.\n- Ensure all receiver IDs are valid before attempting to delete messages.\n- Use the correct unit conversion for Celsius to Fahrenheit when needed.\n- Ensure all system credentials are valid before accessing any data or performing operations.\n- Ensure all doors are locked before starting the engine to prevent errors.\n- Log in to the support system with valid credentials before accessing any data or performing operations.\n- Use the correct city and zip code parameters when calling the tools to ensure accurate results.\n- Log in with valid credentials before accessing any system or performing actions to ensure proper access and functionality.\n- Use the correct unit conversion tools and ensure all parameters are valid before performing operations.\n- Use valid credentials to access systems and data before performing any operations.\n- Use valid credentials before accessing any systems or data to ensure proper access and functionality.\n- Log in with valid credentials before performing any actions on systems or data.\n- Use valid parameters and credentials before calling tools to ensure accurate and reliable results.\n- Use the tool results directly to answer questions by identifying the maximum value from the provided data.\n- Ensure all systems and credentials are valid before performing any operations to ensure proper access and functionality.\n- Never press brake pedal when starting the engine to avoid errors.\n- Never press brake pedal before starting the engine.\n- Always verify user credentials before attempting to access systems or perform actions to ensure proper authentication and access.\n- Always authenticate before performing any actions on systems or data to ensure proper access and functionality.\n- Always verify user credentials and system access before performing any operations to ensure proper authentication and functionality.\n- Always authenticate and verify credentials before accessing systems or performing actions.\n- Always verify all door locks and brake status before starting the engine to prevent errors.\n- Always validate credentials and system access before performing any operations.\n- Always verify file paths and system access before performing any operations to ensure accuracy and prevent errors.\n- Always validate all system credentials and parameters before performing operations to ensure accurate and reliable results.\n- Always validate receiver IDs and system credentials before performing actions to ensure proper access and functionality.\n- Always verify file paths and directory existence before attempting to access or modify files.\n- Always validate file paths and directory existence before accessing or modifying files.\n- Always validate all city and zip code parameters before calling tools to ensure accurate results.",
+     "gain": {
+      "tasks": 1200,
+      "all": -3.4,
+      "last200": 3.0
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 51.0
+      },
+      {
+       "day": 100,
+       "score": 51.5
+      },
+      {
+       "day": 200,
+       "score": 50.5
+      },
+      {
+       "day": 300,
+       "score": 49.5
+      },
+      {
+       "day": 400,
+       "score": 50.5
+      },
+      {
+       "day": 500,
+       "score": 50.5
+      },
+      {
+       "day": 600,
+       "score": 54.0
+      },
+      {
+       "day": 700,
+       "score": 51.5
+      },
+      {
+       "day": 800,
+       "score": 51.5
+      },
+      {
+       "day": 900,
+       "score": 54.0
+      },
+      {
+       "day": 1000,
+       "score": 49.5
+      },
+      {
+       "day": 1100,
+       "score": 54.0
+      },
+      {
+       "day": 1200,
+       "score": 50.0
+      }
+     ]
+    },
+    {
+     "run": "pilot-frozen",
+     "arm": "frozen",
+     "arm_label": "Frozen (no notes)",
+     "seed": 15,
+     "pilot": true,
+     "stage": "done",
+     "done": 300,
+     "tasks": 300,
+     "success": 52.7,
+     "last50": 44.0,
+     "notes": 0,
+     "notes_tokens": 0,
+     "curations": 0,
+     "secs_per_task": 95.2,
+     "notes_text": "",
+     "gain": null,
+     "probe": []
+    },
+    {
+     "run": "pilot-teach",
+     "arm": "teach",
+     "arm_label": "Oracle teaching",
+     "seed": 15,
+     "pilot": true,
+     "stage": "done",
+     "done": 300,
+     "tasks": 300,
+     "success": 50.3,
+     "last50": 42.0,
+     "notes": 15,
+     "notes_tokens": 222,
+     "curations": 0,
+     "secs_per_task": 63.9,
+     "notes_text": "- Use the exact parameters as specified in the task to ensure accurate tool calls.\n- Use exact file and directory names as specified in the task to avoid errors.\n- cd(parent_directory); find(path='clients')\n- startEngine before activating cruise control.\n- Use exact parameters and ensure all tool calls match the task specifications to avoid errors.\n- Use exact parameters in tool calls to ensure accurate and successful execution.\n- lockDoors before starting the engine\n- Lock the doors before starting the engine to ensure a secure and accurate execution of trading tasks.\n- lock_doors_before_using_travel_tools\n- lock_doors_before_using_travel_tools_and_trading_tools\n- lockDoors before starting the engine to ensure safe and accurate execution of travel-related tasks.\n- lockDoors before using any travel or trading tools to ensure safety and proper execution of tasks.\n- Lock tools before using them to ensure safe and accurate execution of tasks.\n- lock_doors_before_using_travel_and_trading_tools_to_prevent_accidental_use_andensure_safety\n- Lock all tools before use to ensure safety and proper execution of tasks.",
+     "gain": null,
+     "probe": []
+    }
+   ]
+  },
+  {
+   "key": "lfm2.5-1.2b",
+   "label": "LFM2.5-1.2B",
+   "probe0": 26.0,
+   "runs": [
+    {
+     "run": "frozen-s15",
+     "arm": "frozen",
+     "arm_label": "Frozen (no notes)",
+     "seed": 15,
+     "pilot": false,
+     "stage": "done",
+     "done": 2400,
+     "tasks": 2400,
+     "success": 28.9,
+     "last50": 38.0,
+     "notes": 0,
+     "notes_tokens": 0,
+     "curations": 0,
+     "secs_per_task": 6.5,
+     "notes_text": "",
+     "gain": null,
+     "probe": []
+    },
+    {
+     "run": "teach-s15",
+     "arm": "teach",
+     "arm_label": "Oracle teaching",
+     "seed": 15,
+     "pilot": false,
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 30.8,
+     "last50": 28.0,
+     "notes": 14,
+     "notes_tokens": 161,
+     "curations": 28,
+     "secs_per_task": 5.6,
+     "notes_text": "- Validate inputs, credentials, and permissions securely\n- Confirm file paths, symbols, and user IDs match exactly\n- Verify stock symbols, order details, and permissions align\n- Check file permissions before any editing or modification\n- Ensure input formats match tool requirements\n- Review token scopes before sensitive actions\n- Confirm token scopes before each operation to avoid errors\n- Prioritize accurate identifiers and secure authentication\n- Double-check all parameters against expected values\n- Always confirm your credentials and scope before accessing sensitive data\n- Ensure tool parameters and context match expected formats\n- Verify file paths and permissions before modifying or accessing files\n- Always verify your authentication token and input parameters before accessing sensitive systems.\n- Always verify your authentication and tool permissions before initiating actions.",
+     "gain": {
+      "tasks": 1200,
+      "all": 0.8,
+      "last200": -2.5
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 26.0
+      },
+      {
+       "day": 100,
+       "score": 27.0
+      },
+      {
+       "day": 200,
+       "score": 26.5
+      },
+      {
+       "day": 300,
+       "score": 26.5
+      },
+      {
+       "day": 400,
+       "score": 27.0
+      },
+      {
+       "day": 500,
+       "score": 27.0
+      },
+      {
+       "day": 600,
+       "score": 27.5
+      },
+      {
+       "day": 700,
+       "score": 28.0
+      },
+      {
+       "day": 800,
+       "score": 26.5
+      },
+      {
+       "day": 900,
+       "score": 27.5
+      },
+      {
+       "day": 1000,
+       "score": 28.5
+      },
+      {
+       "day": 1100,
+       "score": 25.0
+      },
+      {
+       "day": 1200,
+       "score": 27.0
+      }
+     ]
+    },
+    {
+     "run": "judge-s15",
+     "arm": "judge",
+     "arm_label": "Oracle judging",
+     "seed": 15,
+     "pilot": false,
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 30.5,
+     "last50": 26.0,
+     "notes": 43,
+     "notes_tokens": 539,
+     "curations": 21,
+     "secs_per_task": 5.7,
+     "notes_text": "- Validate required fields before updates\n- Confirm authentication and user context\n- Name files clearly to avoid confusion\n- Check file existence and permissions before editing\n- Round fuel efficiency and distances to one decimal\n- Verify zip codes and trip distances\n- Keep file permissions secure after changes\n- Name files clearly to prevent confusion\n- Double-check token validity before changes\n- Confirm login token before accessing sensitive data\n- Always verify token and permissions for sensitive actions\n- Round all numerical data to one decimal\n- Always double-check token validity and permissions before making any changes to sensitive accounts.\n- Always verify token validity and permissions before making any changes to ensure secure access.\n- When searching files, always verify the file path and confirm you're in the correct directory before proceeding.\n- Always confirm your login and file permissions before making changes.\n- Always verify your authentication token before accessing or modifying sensitive accounts.\n- Always verify file permissions before editing any sensitive or shared files.\n- Always verify authentication and permissions before accessing or modifying any tool or account.\n- Always verify token permissions and file paths before making changes to ensure secure and successful tool interactions.\n- Always verify file paths before navigation to maintain accuracy and avoid confusion.\n- Always verify token validity before performing sensitive actions to maintain security and accuracy.\n- Always confirm file permissions before editing sensitive data to maintain security.\n- Always validate your authentication credentials before using them in sensitive operations.\n- Always verify your file paths and permissions before making changes to ensure security and accuracy.\n- Always confirm token permissions and valid credentials before making changes to sensitive accounts.\n- Always verify your file path before editing to avoid errors.\n- Always double-check required arguments and zip codes before sending commands.\n- Always verify file paths before moving or deleting to prevent accidental changes.\n- Always validate your token and permissions before modifying critical files or commands.\n- Always verify your authentication token before accessing sensitive data to maintain security.\n- Always validate token permissions before modifying sensitive bookings.\n- Always confirm your token and file permissions before making changes to ensure secure and accurate operations.\n- Always verify your token and permissions before making changes to sensitive data.\n- Always verify file paths before moving or deleting sensitive data to avoid errors.\n- Always verify your login credentials before accessing sensitive accounts.\n- Always verify your destination address before entering navigation.\n- Always confirm token permissions before changing sensitive data settings.\n- Always verify the city names and zip codes match before entering navigation data.\n- Always verify file paths before editing to avoid accidental changes.\n- Always double-check required fields and arguments before initiating sensitive operations.\n- Always validate your authentication before accessing sensitive data.\n- Always verify your token and permissions before any sensitive operation.",
+     "gain": {
+      "tasks": 1200,
+      "all": 0.5,
+      "last200": -1.5
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 26.0
+      },
+      {
+       "day": 100,
+       "score": 28.5
+      },
+      {
+       "day": 200,
+       "score": 27.5
+      },
+      {
+       "day": 300,
+       "score": 27.5
+      },
+      {
+       "day": 400,
+       "score": 28.5
+      },
+      {
+       "day": 500,
+       "score": 27.5
+      },
+      {
+       "day": 600,
+       "score": 27.0
+      },
+      {
+       "day": 700,
+       "score": 28.0
+      },
+      {
+       "day": 800,
+       "score": 26.5
+      },
+      {
+       "day": 900,
+       "score": 28.0
+      },
+      {
+       "day": 1000,
+       "score": 28.0
+      },
+      {
+       "day": 1100,
+       "score": 27.5
+      },
+      {
+       "day": 1200,
+       "score": 29.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "qwen3.5-0.8b",
+   "label": "Qwen3.5-0.8B",
+   "probe0": 25.5,
+   "runs": [
+    {
+     "run": "frozen-s15",
+     "arm": "frozen",
+     "arm_label": "Frozen (no notes)",
+     "seed": 15,
+     "pilot": false,
+     "stage": "done",
+     "done": 2400,
+     "tasks": 2400,
+     "success": 26.0,
+     "last50": 32.0,
+     "notes": 0,
+     "notes_tokens": 0,
+     "curations": 0,
+     "secs_per_task": 14.0,
+     "notes_text": "",
+     "gain": null,
+     "probe": []
+    },
+    {
+     "run": "teach-s15",
+     "arm": "teach",
+     "arm_label": "Oracle teaching",
+     "seed": 15,
+     "pilot": false,
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 27.2,
+     "last50": 22.0,
+     "notes": 27,
+     "notes_tokens": 493,
+     "curations": 26,
+     "secs_per_task": 9.6,
+     "notes_text": "- Verify credentials via `pwd()` before every API call to prevent silent failures.\n- Never call tools without first checking your session state with `pwd()`.\n- Validate inputs strictly before every command to avoid silent errors.\n- Log credentials and inputs explicitly using `pwd()` to ensure security.\n- Masterful precision requires exact parameter values and avoids silent failures.\n- Ensure you use environment variables or secure APIs to manage passwords.\n- Minimize duplicate parameter calls to save resources and ensure accurate interactions.\n- Audit API calls for duplicate parameters and distinct inputs to maintain accuracy.\n- Log in to your tools with `pwd()` before every request to avoid silent failures.\n- Prefer to call tools if credentials are known to be safe, or use `pwd()` to verify.\n- Always verify credentials with `pwd()` before every API call to guarantee secure execution.\n- Do not call tools without first verifying your session state and credentials via `pwd()`.\n- Never call tools without first verifying your session state via `pwd()` to prevent silent failures.\n- Verify credentials and inputs before every API call to ensure safe and accurate interactions.\n- Verify credentials with `pwd()` before making any API calls.\n- Never call tools without first verifying your session state via `pwd()` before every request to guarantee secure execution.\n- Always log in securely to API tools before using them to prevent silent failures.\n- Always verify session state with `pwd()` before making any API calls to prevent silent failures.\n- Avoid silent failures by logging in securely every time and validating inputs with `pwd()` to prevent accidental calls.\n- Always validate inputs and use `pwd()` to log in securely before every API call to prevent silent failures.\n- Call tools after `pwd()` to prevent silent failures.\n- Always verify credentials and session state with `pwd()` before every API call to prevent silent failures and ensure secure interactions.\n- Log in securely with `pwd()` before every API call to ensure safe interactions.\n- Never call tools without verifying credentials first! This simple habit prevents silent failures and ensures secure interactions.\n- Use `pwd()` to verify credentials every time you make an API call, ensuring secure and accurate interactions.\n- Always verify and log in securely before every API call.\n- Log in to your tools using `pwd()` to verify your session state before every API call to ensure secure and accurate interactions.",
+     "gain": {
+      "tasks": 1200,
+      "all": 1.2,
+      "last200": -4.0
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 25.5
+      },
+      {
+       "day": 100,
+       "score": 23.5
+      },
+      {
+       "day": 200,
+       "score": 26.5
+      },
+      {
+       "day": 300,
+       "score": 26.0
+      },
+      {
+       "day": 400,
+       "score": 23.5
+      },
+      {
+       "day": 500,
+       "score": 25.5
+      },
+      {
+       "day": 600,
+       "score": 25.0
+      },
+      {
+       "day": 700,
+       "score": 28.0
+      },
+      {
+       "day": 800,
+       "score": 23.5
+      },
+      {
+       "day": 900,
+       "score": 23.5
+      },
+      {
+       "day": 1000,
+       "score": 23.5
+      },
+      {
+       "day": 1100,
+       "score": 19.5
+      },
+      {
+       "day": 1200,
+       "score": 24.5
+      }
+     ]
+    },
+    {
+     "run": "judge-s15",
+     "arm": "judge",
+     "arm_label": "Oracle judging",
+     "seed": 15,
+     "pilot": false,
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 27.4,
+     "last50": 22.0,
+     "notes": 16,
+     "notes_tokens": 259,
+     "curations": 18,
+     "secs_per_task": 9.2,
+     "notes_text": "- Never trade data without verifying login credentials and inspecting the directory first.\n- Log in and inspect your directory immediately before making any tool calls to ensure safety.\n- Audit credentials and tire pressures before every financial or trading tool call.\n- Always verify and log in immediately before attempting any tool operation.\n- Ensure tire pressures are healthy before attempting any tool calls.\n- Start by logging in and verifying your credentials before attempting any financial or trading operations.\n- Log in with safe credentials before using any financial or trading tools.\n- Verify credentials and inspect the directory before using any financial or trading tools.\n- Audit credentials and tire pressures before every financial task to prevent errors.\n- Never attempt financial or trading tasks without verifying your login credentials first.\n- Maintain safe cruise control at 60 m/h while handling transactions.\n- Regularly verify credentials and inspect the directory before any tool call to prevent errors.\n- Always verify credentials and inspect your directory before making any tool calls to ensure your data is safe.\n- Verify your login and directory before any financial tool calls to prevent data loss and errors.\n- Log in securely and verify credentials before making any tool calls.\n- Ensure you verify and log in before making any tool calls to prevent errors.",
+     "gain": {
+      "tasks": 1200,
+      "all": 1.5,
+      "last200": 0.0
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 25.5
+      },
+      {
+       "day": 100,
+       "score": 23.0
+      },
+      {
+       "day": 200,
+       "score": 24.5
+      },
+      {
+       "day": 300,
+       "score": 24.0
+      },
+      {
+       "day": 400,
+       "score": 21.5
+      },
+      {
+       "day": 500,
+       "score": 25.5
+      },
+      {
+       "day": 600,
+       "score": 24.5
+      },
+      {
+       "day": 700,
+       "score": 21.5
+      },
+      {
+       "day": 800,
+       "score": 24.5
+      },
+      {
+       "day": 900,
+       "score": 23.0
+      },
+      {
+       "day": 1000,
+       "score": 22.5
+      },
+      {
+       "day": 1100,
+       "score": 23.5
+      },
+      {
+       "day": 1200,
+       "score": 24.5
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "llama3.2-1b",
+   "label": "Llama-3.2-1B",
+   "probe0": 0.0,
+   "runs": [
+    {
+     "run": "frozen-s15",
+     "arm": "frozen",
+     "arm_label": "Frozen (no notes)",
+     "seed": 15,
+     "pilot": false,
+     "stage": "done",
+     "done": 2400,
+     "tasks": 2400,
+     "success": 0.0,
+     "last50": 0.0,
+     "notes": 0,
+     "notes_tokens": 0,
+     "curations": 0,
+     "secs_per_task": 17.2,
+     "notes_text": "",
+     "gain": null,
+     "probe": []
+    },
+    {
+     "run": "teach-s15",
+     "arm": "teach",
+     "arm_label": "Oracle teaching",
+     "seed": 15,
+     "pilot": false,
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 0.0,
+     "last50": 0.0,
+     "notes": 28,
+     "notes_tokens": 390,
+     "curations": 12,
+     "secs_per_task": 10.3,
+     "notes_text": "- Verify tool documentation before executing tasks.\n- Specify tool names and keywords for consistent responses.\n- Confirm tool capabilities and usage before asking specific questions.\n- Check tool responses and documentation before asking for specific information.\n- Specify tool names and keywords for accurate responses.\n- Use the `displayCarStatus` tool for fuel level verification.\n- Use the built-in help function for tool capabilities.\n- Verify tool purpose and functionality before asking specific questions.\n- Use the 'displayCarStatus' tool for accurate fuel level checks.\n- Check tool names and keywords for consistency and accuracy.\n- Verify responses before confirming accuracy and relevance.\n- Use the `displayCarStatus` tool to confirm tool status and accuracy.\n- To avoid future requests, always verify tool names and keywords before asking specific questions and to double-check the tool's capabilities and usage before executing tasks.\n- Always verify tool responses and documentation before asking specific questions to ensure accuracy and reliability.\n- Verify tool capabilities before asking specific questions and confirm tool names and keywords for consistent responses.\n- General Rule:** Always verify tool names, keywords, and capabilities before asking specific questions to ensure accurate and reliable responses.\n- Always specify tool names and keywords in your requests to ensure accurate and reliable responses.\n- General Rule:** Always verify tool documentation before executing tasks to ensure accuracy and reliability.\n- Verify Tool Names and Keywords Before Asking Questions.\n- Always verify tool capabilities and usage before executing tasks.\n- Always Verify Tool Capabilities Before Asking Specific Questions.\n- Always Confirm Tool Capabilities and Use Tool Names for Accurate Responses.\n- Always check the tool's response and documentation before confirming accuracy and relevance of the information.\n- Verify the tool's documentation before asking specific questions.\n- Always confirm tool capabilities and usage before executing tasks to ensure accuracy and reliability.\n- Always Verify Tool Responses Before Confirming Accuracy.\n- Always verify the tool's purpose and functionality before asking specific questions to ensure accurate and reliable responses.\n- Verify Tool Documentation Before Asking.",
+     "gain": {
+      "tasks": 1200,
+      "all": 0.0,
+      "last200": 0.0
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 0.0
+      },
+      {
+       "day": 100,
+       "score": 0.0
+      },
+      {
+       "day": 200,
+       "score": 0.0
+      },
+      {
+       "day": 300,
+       "score": 0.0
+      },
+      {
+       "day": 400,
+       "score": 0.0
+      },
+      {
+       "day": 500,
+       "score": 0.0
+      },
+      {
+       "day": 600,
+       "score": 0.0
+      },
+      {
+       "day": 700,
+       "score": 0.0
+      },
+      {
+       "day": 800,
+       "score": 0.0
+      },
+      {
+       "day": 900,
+       "score": 0.0
+      },
+      {
+       "day": 1000,
+       "score": 0.0
+      },
+      {
+       "day": 1100,
+       "score": 0.0
+      },
+      {
+       "day": 1200,
+       "score": 0.0
+      }
+     ]
+    },
+    {
+     "run": "judge-s15",
+     "arm": "judge",
+     "arm_label": "Oracle judging",
+     "seed": 15,
+     "pilot": false,
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 0.0,
+     "last50": 0.0,
+     "notes": 30,
+     "notes_tokens": 496,
+     "curations": 6,
+     "secs_per_task": 9.4,
+     "notes_text": "- Always define the request before accessing tools to ensure efficient and clear communication.\n- Specify action, details, and necessary permissions before requesting access to tools.\n- Verify request details before accessing tools to avoid loops.\n- Ask explicit permission before accessing tools or resources to avoid security risks.\n- Verify tool documentation or settings before accessing tools to ensure efficient and accurate results.\n- Check tool capabilities and permissions before requesting access to tools.\n- Define, specify, and verify request and tool details before accessing them.\n- Confirm user input and permissions before accessing tools to ensure secure communication.\n- Verify request details before accessing tools to avoid potential security risks.\n- Always verify tool capabilities and permissions before accessing it.\n- Verify tool parameters and permissions before accessing tools to ensure efficient communication.\n- Verify the tool's capabilities and permissions before accessing it to avoid potential security risks.\n- Always define and specify the request before accessing tools.\n- Always define the scope of the request to avoid over-accessing or unnecessary tools.\n- Always request tool access with clear, descriptive, and concise details.\n- Always define and specify the request before accessing tools to avoid unnecessary over-accessing and potential security risks.\n- Always define the purpose of the task before requesting access to tools.\n- Always define the task, specify the scope, and verify details before accessing tools to ensure efficient and secure communication.\n- Always verify request details and tool capabilities before accessing to ensure efficient and secure communication.\n- Define the purpose of the task before requesting access to ensure efficient and secure communication.\n- Always verify the tool's capabilities and permissions before requesting access to ensure efficient and secure communication.\n- Always ask for explicit permission before accessing a tool or resource to avoid security risks.\n- Always prioritize and specify the request, including details, permissions, and capabilities, to ensure efficient and secure communication with tools.\n- Always confirm tool capabilities and permissions before requesting access to tools to avoid potential security risks and ensure efficient communication.\n- Always confirm and specify tool details before accessing to avoid security risks and ensure efficient communication.\n- Always ask for explicit permission before accessing tools or resources to ensure security and efficient communication.\n- Always specify the request, including details, permissions, and capabilities before accessing tools or resources.\n- Always prioritize tool access with clear, concise, and descriptive details to avoid over-accessing or unnecessary tools.\n- \"Always clearly define the scope and purpose of the task before requesting access to tools to avoid over-accessing unnecessary resources and ensure efficient communication.\"\n- Always Define the Request Clearly",
+     "gain": {
+      "tasks": 1200,
+      "all": 0.0,
+      "last200": 0.0
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 0.0
+      },
+      {
+       "day": 100,
+       "score": 0.0
+      },
+      {
+       "day": 200,
+       "score": 0.0
+      },
+      {
+       "day": 300,
+       "score": 0.0
+      },
+      {
+       "day": 400,
+       "score": 0.0
+      },
+      {
+       "day": 500,
+       "score": 0.0
+      },
+      {
+       "day": 600,
+       "score": 0.0
+      },
+      {
+       "day": 700,
+       "score": 0.0
+      },
+      {
+       "day": 800,
+       "score": 0.0
+      },
+      {
+       "day": 900,
+       "score": 0.0
+      },
+      {
+       "day": 1000,
+       "score": 0.0
+      },
+      {
+       "day": 1100,
+       "score": 0.0
+      },
+      {
+       "day": 1200,
+       "score": 0.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "falcon3-1b",
+   "label": "Falcon3-1B",
+   "probe0": 0.0,
+   "runs": [
+    {
+     "run": "frozen-s15",
+     "arm": "frozen",
+     "arm_label": "Frozen (no notes)",
+     "seed": 15,
+     "pilot": false,
+     "stage": "done",
+     "done": 2400,
+     "tasks": 2400,
+     "success": 0.0,
+     "last50": 0.0,
+     "notes": 0,
+     "notes_tokens": 0,
+     "curations": 0,
+     "secs_per_task": 13.8,
+     "notes_text": "",
+     "gain": null,
+     "probe": []
+    },
+    {
+     "run": "teach-s15",
+     "arm": "teach",
+     "arm_label": "Oracle teaching",
+     "seed": 15,
+     "pilot": false,
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 0.0,
+     "last50": 0.0,
+     "notes": 25,
+     "notes_tokens": 453,
+     "curations": 2,
+     "secs_per_task": 7.4,
+     "notes_text": "- Always validate user inputs for security and task adherence.\n- Ensure all inputs are secure and compliant before processing tasks.\n- Log user IDs for accountability and maintain task integrity.\n- Verify user IDs to prevent unauthorized actions and ensure task security.\n- Always log user IDs to enhance security and consistency.\n- Ensure all input validation and logging ID for secure and compliant actions.\n- Maintain task security and consistency by verifying and logging user IDs.\n- Enhance task security and compliance by ensuring all inputs are validated.\n- Log and verify user IDs to prevent unauthorized actions and ensure task adherence.\n- Ensure task security and compliance by validating all inputs and logging IDs.\n- Always log and verify user IDs for consistent task execution and security.\n- Ensure user privacy by logging all interactions and verifying credentials before task execution.\n- Rule: Verify and log user IDs meticulously for secure and compliant actions.\n- Rule: Always verify and log user IDs to avoid unauthorized actions and ensure secure, compliant task execution.\n- Ensure all user inputs are validated and logged for task security, maintaining user IDs to prevent unauthorized actions and ensuring task adherence.\n- Ensure user IDs are securely logged and verified before task execution for task security and compliance.\n- Always verify user IDs for task security and compliance, ensuring they're logged meticulously for consistent task execution and maintaining user privacy.\n- Ensure all user inputs are validated and logged meticulously for secure and compliant task execution.\n- Ensure all user inputs are logged and verified meticulously for task security and compliance. This ensures consistent task execution and maintains user privacy.\n- Rule: Always verify user IDs, log them meticulously, and maintain a secure environment for task execution.\n- Rule: Verify and log user IDs meticulously for secure and compliant task execution. This ensures consistent task execution and maintains user privacy.\n- Always verify user IDs before task execution to ensure task security and compliance.\n- Rule: Verify user IDs meticulously before task execution to prevent unauthorized actions and maintain consistent task security and compliance.\n- Ensure all inputs are logged meticulously, verifying user IDs for consistent task execution and maintaining user privacy.\n- Rule: Always verify and log user IDs meticulously to ensure task security and compliance, maintaining user privacy.",
+     "gain": {
+      "tasks": 1200,
+      "all": 0.0,
+      "last200": 0.0
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 0.0
+      },
+      {
+       "day": 100,
+       "score": 0.0
+      },
+      {
+       "day": 200,
+       "score": 0.0
+      },
+      {
+       "day": 300,
+       "score": 0.0
+      },
+      {
+       "day": 400,
+       "score": 0.0
+      },
+      {
+       "day": 500,
+       "score": 0.0
+      },
+      {
+       "day": 600,
+       "score": 0.0
+      },
+      {
+       "day": 700,
+       "score": 0.0
+      },
+      {
+       "day": 800,
+       "score": 0.0
+      },
+      {
+       "day": 900,
+       "score": 0.0
+      },
+      {
+       "day": 1000,
+       "score": 0.0
+      },
+      {
+       "day": 1100,
+       "score": 0.0
+      },
+      {
+       "day": 1200,
+       "score": 0.0
+      }
+     ]
+    },
+    {
+     "run": "judge-s15",
+     "arm": "judge",
+     "arm_label": "Oracle judging",
+     "seed": 15,
+     "pilot": false,
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 0.0,
+     "last50": 0.0,
+     "notes": 32,
+     "notes_tokens": 475,
+     "curations": 2,
+     "secs_per_task": 6.9,
+     "notes_text": "- Always verify user credentials before accessing sensitive systems.\n- Keep user permissions updated to maintain data integrity.\n- Secure tool access by verifying credentials before every action.\n- Always confirm user credentials before initiating system access.\n- Secure data integrity by verifying credentials before system use.\n- Ensure secure interactions with verified credentials before actions.\n- Maintain data integrity and minimize unauthorized access with verified credentials.\n- Verify before accessing sensitive systems to protect personal and organizational information.\n- Always verify credentials before taking any action to safeguard data.\n- Ensure data integrity and security with verified credentials before tool usage.\n- Always verify user credentials for access to systems to ensure data integrity.\n- Always verify credentials before system access to prevent unauthorized actions.\n- Verify credentials before every tool interaction for data integrity.\n- Always verify user credentials before every tool interaction to prevent unauthorized access.\n- Verify credentials before tool interactions to prevent unauthorized access and ensure data integrity.\n- Always verify user credentials before accessing any system to prevent unauthorized access and data breaches.\n- Ensure verified credentials are used for each tool interaction to safeguard data integrity and prevent unauthorized access.\n- Ensure verified credentials for tool interactions to prevent unauthorized access.\n- Always verify credentials for tool access to maintain data integrity and prevent unauthorized actions.\n- Always verify credentials before tool access. This practice ensures data integrity and security, protecting personal and organizational information.\n- Always verify credentials before tool access for data integrity and security.\n- Ensure always verify credentials before tool interaction to maintain data integrity.\n- Always verify credentials before every system interaction to ensure data integrity and safeguard against unauthorized access.\n- Verify credentials before every action to maintain data integrity and security.\n- Ensure verification before every tool interaction to maintain data integrity and secure personal and organizational information.\n- Always verify credentials before tool interactions to ensure data integrity and secure personal and organizational information.\n- Always verify credentials before tool interactions to prevent unauthorized access and protect personal and organizational information.\n- Ensure all tool interactions are verified with current credentials to maintain data integrity and security.\n- Always verify credentials before tool interactions.\n- Rule: Always verify user credentials before logging into systems.\n- Always verify user credentials before accessing systems to protect data integrity and personal information.\n- Always verify credentials before accessing systems. This practice ensures data integrity and security.",
+     "gain": {
+      "tasks": 1200,
+      "all": 0.0,
+      "last200": 0.0
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 0.0
+      },
+      {
+       "day": 100,
+       "score": 0.0
+      },
+      {
+       "day": 200,
+       "score": 0.0
+      },
+      {
+       "day": 300,
+       "score": 0.0
+      },
+      {
+       "day": 400,
+       "score": 0.0
+      },
+      {
+       "day": 500,
+       "score": 0.0
+      },
+      {
+       "day": 600,
+       "score": 0.0
+      },
+      {
+       "day": 700,
+       "score": 0.0
+      },
+      {
+       "day": 800,
+       "score": 0.0
+      },
+      {
+       "day": 900,
+       "score": 0.0
+      },
+      {
+       "day": 1000,
+       "score": 0.0
+      },
+      {
+       "day": 1100,
+       "score": 0.0
+      },
+      {
+       "day": 1200,
+       "score": 0.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "gemma3-1b",
+   "label": "Gemma-3-1B",
+   "probe0": 0.0,
+   "runs": [
+    {
+     "run": "frozen-s15",
+     "arm": "frozen",
+     "arm_label": "Frozen (no notes)",
+     "seed": 15,
+     "pilot": false,
+     "stage": "done",
+     "done": 2400,
+     "tasks": 2400,
+     "success": 0.0,
+     "last50": 0.0,
+     "notes": 0,
+     "notes_tokens": 0,
+     "curations": 0,
+     "secs_per_task": 8.4,
+     "notes_text": "",
+     "gain": null,
+     "probe": []
+    },
+    {
+     "run": "teach-s15",
+     "arm": "teach",
+     "arm_label": "Oracle teaching",
+     "seed": 15,
+     "pilot": false,
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 0.0,
+     "last50": 0.0,
+     "notes": 33,
+     "notes_tokens": 480,
+     "curations": 4,
+     "secs_per_task": 7.2,
+     "notes_text": "- Define a clear task goal before starting.\n- Use precise instructions for unambiguous execution.\n- Prioritize accuracy and avoid errors.\n- Clearly define input and desired outcome.\n- Start with a focused, well-defined task.\n- Analyze instructions thoroughly before proceeding.\n- Clarify goals and input precisely.\n- Focus on clearly defining the task goal.\n- Avoid ambiguity in instructions.\n- Break down complex tasks into steps.\n- Prioritize accurate execution.\n- Always clarify requirements.\n- Clarify requirements thoroughly before starting any task to ensure accurate execution.\n- Carefully define each step of a task before beginning, ensuring clarity and accuracy to avoid misunderstandings.\n- Clearly define the task goal before starting, provide precise instructions, and prioritize accuracy to avoid errors.\n- Clearly define your task goals and instructions before starting, ensuring accuracy and avoiding ambiguity.\n- Focus on clear, specific instructions to ensure accurate execution.\n- Carefully define your task goals before starting to ensure accuracy and avoid misunderstandings.\n- Clarify task goals and input precisely before starting to ensure accurate execution.\n- Carefully define the task goal before starting, ensuring clarity and accuracy to avoid errors.\n- Clearly define the task goal before starting, and use precise instructions for unambiguous execution.\n- Focus on clearly defining your task goals before starting to avoid misunderstandings and ensure accurate execution.\n- Before starting a task, clearly define the goal and input details to ensure accurate execution.\n- Clearly define the task goal before starting, specifying input details and desired outcome.\n- Clarify all requirements before starting a task to ensure accuracy and avoid misunderstandings.\n- Clarify task goals and input details thoroughly before starting any task to ensure accuracy and avoid misunderstandings.\n- Always start with a clear, defined goal before attempting any task.\n- Clearly define the task goal before starting, ensuring accuracy and avoiding misunderstandings.\n- Clarify all instructions before starting a task to avoid ambiguity and ensure accurate execution.\n- Always double-check your inputs before proceeding to avoid errors.\n- Carefully define each step before starting a task to avoid misunderstandings and ensure accurate execution.\n- When unsure, start with a clear goal and break down complex tasks into smaller, manageable steps.\n- Clearly define your task goal before starting, and ensure all instructions are precise and unambiguous.",
+     "gain": {
+      "tasks": 1200,
+      "all": 0.0,
+      "last200": 0.0
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 0.0
+      },
+      {
+       "day": 100,
+       "score": 0.0
+      },
+      {
+       "day": 200,
+       "score": 0.0
+      },
+      {
+       "day": 300,
+       "score": 0.0
+      },
+      {
+       "day": 400,
+       "score": 0.0
+      },
+      {
+       "day": 500,
+       "score": 0.0
+      },
+      {
+       "day": 600,
+       "score": 0.0
+      },
+      {
+       "day": 700,
+       "score": 0.0
+      },
+      {
+       "day": 800,
+       "score": 0.0
+      },
+      {
+       "day": 900,
+       "score": 0.0
+      },
+      {
+       "day": 1000,
+       "score": 0.0
+      },
+      {
+       "day": 1100,
+       "score": 0.0
+      },
+      {
+       "day": 1200,
+       "score": 0.0
+      }
+     ]
+    },
+    {
+     "run": "judge-s15",
+     "arm": "judge",
+     "arm_label": "Oracle judging",
+     "seed": 15,
+     "pilot": false,
+     "stage": "done",
+     "done": 1200,
+     "tasks": 1200,
+     "success": 0.0,
+     "last50": 0.0,
+     "notes": 33,
+     "notes_tokens": 511,
+     "curations": 2,
+     "secs_per_task": 6.9,
+     "notes_text": "- Prioritize user needs above all else.\n- Understand the \u2018why\u2019 behind each request.\n- Clarify intent before taking action.\n- Listen carefully to fully grasp user goals.\n- Focus on the core need, not just the surface.\n- Listen actively to ensure accurate responses.\n- Prioritize accuracy and helpfulness.\n- Listen attentively to understand user needs.\n- Listen carefully to avoid misinterpretations.\n- Ensure understanding before offering solutions.\n- Accuracy is paramount for effective assistance.\n- Listen to the user\u2019s goal first.\n- Listen actively to understand the user\u2019s needs before offering solutions.\n- Always clarify your request before proceeding.\n- Listen carefully to understand the user's goal before offering assistance.\n- Listen carefully to user needs to ensure accurate and helpful responses.\n- Pay close attention to the user\u2019s underlying need to ensure a truly helpful response.\n- Listen carefully to understand the user\u2019s goal before offering solutions \u2013 accuracy and user needs are key.\n- Listen actively to fully grasp user needs before offering solutions \u2013 accuracy and user needs are key.\n- Listen attentively to fully grasp the user\u2019s needs before offering solutions to ensure accuracy and helpfulness.\n- Listen carefully to understand the user\u2019s goal first, then clarify your request before proceeding.\n- Listen actively to understand the user\u2019s goal before offering assistance to ensure accuracy and a helpful response.\n- Listen actively to understand the core need before offering solutions, ensuring accuracy and a helpful response.\n- Listen deeply to understand the user\u2019s intent before offering solutions \u2013 accuracy is key.\n- Listen actively to fully grasp the user\u2019s goal before offering assistance \u2013 accuracy is paramount.\n- Listen carefully to fully grasp user needs before offering solutions \u2013 accuracy is paramount.\n- Listen actively to understand the user\u2019s underlying need to ensure accurate and helpful responses.\n- Focus on understanding the user\u2019s goal before offering solutions \u2013 accuracy is paramount.\n- Listen intently to understand the user\u2019s core need before offering assistance \u2013 accuracy is paramount.\n- Listen carefully to user needs to ensure accuracy and helpfulness \u2013 prioritize understanding their goal first.\n- Listen actively to understand the user\u2019s underlying need before offering solutions \u2013 accuracy and helpfulness are paramount.\n- Listen carefully to fully grasp user needs before offering assistance to ensure accuracy and a helpful response.\n- Listen attentively to understand the user\u2019s goal first \u2013 accuracy and helpfulness are paramount.",
+     "gain": {
+      "tasks": 1200,
+      "all": 0.0,
+      "last200": 0.0
+     },
+     "probe": [
+      {
+       "day": 0,
+       "score": 0.0
+      },
+      {
+       "day": 100,
+       "score": 0.0
+      },
+      {
+       "day": 200,
+       "score": 0.0
+      },
+      {
+       "day": 300,
+       "score": 0.0
+      },
+      {
+       "day": 400,
+       "score": 0.0
+      },
+      {
+       "day": 500,
+       "score": 0.0
+      },
+      {
+       "day": 600,
+       "score": 0.0
+      },
+      {
+       "day": 700,
+       "score": 0.0
+      },
+      {
+       "day": 800,
+       "score": 0.0
+      },
+      {
+       "day": 900,
+       "score": 0.0
+      },
+      {
+       "day": 1000,
+       "score": 0.0
+      },
+      {
+       "day": 1100,
+       "score": 0.0
+      },
+      {
+       "day": 1200,
+       "score": 0.0
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
