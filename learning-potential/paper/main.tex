@@ -845,9 +845,9 @@ teaching ended the probe anywhere from $-$12 to +18).
 \emph{Measurement noise.} BFCL's answers vary slightly between runs of the same model. Because retrieval adds nothing
 to single-turn and memory questions, its exams repeat the frozen model there: a few per cent of answers changed in each
 direction (up to 9\% in memory), and the net change stayed within 1.5 points, except in memory for Qwen3-1.7B (+2.6 to
-+5.8 over three exams, one of them significant), whose frozen score comes from an earlier run. Changes of a few points
-in memory should therefore not be read as effects; the over-calling effects, of 30 to 75 points, are far above this
-noise.
++5.8 over three exams, one of them significant), whose frozen score comes from an earlier run. Changes of a few points in Qwen3-1.7B's memory score should therefore not be read as effects; for the other models
+the noise stayed within 1.5 points, well below their memory losses (Section~\ref{sec:res-lora}) and the over-calling
+effects of 30 to 75 points.
 
 \emph{Implementation.} Settings were fixed before the runs and not tuned for any method, and another notes prompt or
 retrieval budget might do better. Two of the six handlers are ours, and two models ran on a newer vLLM. LoRA adapts
