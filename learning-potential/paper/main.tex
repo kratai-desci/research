@@ -722,8 +722,7 @@ model's own call format, so a weak model might simply fail to carry them over; b
 failed as completely, and LoRA, which trains on the model's own format, succeeded. Falcon's prompts overran its short
 context, which may explain why its BFCL gain was smaller than Llama's and Gemma's; but Llama and Gemma failed by not
 calling, not by running out of room. In-context learning is known to grow with model size \citep{brown2020language},
-and the floor may be where that ability runs out for a given task. Which route is open to a small model is therefore
-decided before any choice of method, and a frozen check on a few tasks tells which.
+and the floor may be where that ability runs out for a given task.
 
 The floor also reverses what earlier comparisons found for other kinds of learning, where the context route did as well as
 fine-tuning or better: few-shot fine-tuning and in-context learning generalised similarly \citep{mosbach2023few}, and
@@ -734,7 +733,8 @@ generic, repeated lessons of Section~\ref{sec:res-notes} are an extreme form of 
 that Zhang et al.~\citep{zhang2026agentic} describe in evolving contexts. LifelongAgentBench found that replaying past
 experience in the prompt helps agents little, because of irrelevant information and limited context
 \citep{zheng2025lifelongagentbench}; in small models we see the same limit more sharply, as retrieved examples gave
-significant gains only on practice and lowered practice for Qwen3-1.7B, whose prompts were already the longest.
+significant gains only on practice and lowered practice for Qwen3-1.7B, whose prompts were already the longest. Which route is open to a small model is
+therefore decided before any choice of method, and a frozen check on a few tasks tells which.
 
 \subsection{Side effects of learning}\label{sec:side}
 On RQ2, learning changed more than the skill being practised. The largest change was not a lost skill but a changed habit
