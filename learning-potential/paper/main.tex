@@ -49,13 +49,13 @@ potential} of six models from five families: the most a model gains when feedbac
 same 1,200 multi-turn tool-use tasks, built on the Berkeley Function Calling Leaderboard's (BFCL) tools but never its
 questions, learning by one of three on-device methods: self-written notes, retrieved worked examples, or
 continual low-rank adaptation (LoRA). An oracle gives the expected calls (teaching) or only pass or fail
-(judging). We test learning on 200 unseen tasks every 100 tasks and on the BFCL v4 exam, with key runs over
+(judging). We test learning on 200 unseen tasks every 100 tasks and on the BFCL v4, with key runs over
 three seeds; tasks, code and per-question results are released. Models that cannot make a valid multi-turn call (below the floor) gain at most a point from notes or
-worked examples, yet LoRA lifts two of them by about ten points on the benchmark; notes help no model's multi-turn score. Learning has
+worked examples, yet LoRA lifts two of them by about ten points on BFCL; notes help no model's multi-turn score. Learning has
 side effects: trained on expert tool calls, every model learned to call tools when none fits, and a reasoning
 model was harmed by expert targets but not by its own verified successes. Above the floor, gains shrink on
 BFCL to a few points, below what its 200 target questions resolve. Teaching is needed to pass the floor; beyond it,
-learning from one's own successes does as well as teaching without harming the reasoning model.
+learning from one's own successes gained no less than teaching on BFCL and spared the reasoning model.
 \end{abstract}
 \begin{keywords}
 small language models \sep tool use \sep function calling \sep continual learning \sep LoRA \sep
@@ -108,8 +108,8 @@ but mostly local: LoRA's carry over to unseen tasks of the same kind, but no met
 official benchmark's target category. There the changes range from $-$8 to +9 points, and its 200 questions resolve
 differences only to about $\pm$5 points. Measuring learning on the job therefore needs held-out tests larger or harder
 than a single benchmark category. Fourth, the two kinds of feedback suit different stages: teaching is needed to pass the
-floor, and beyond it learning from the model's own successes does as well on the benchmark and was the only arm that
-left the reasoning model unharmed.
+floor, and beyond it learning from the model's own successes gained no less on the benchmark (no difference was
+significant) and was the only arm that left the reasoning model unharmed.
 
 Our contributions are:
 \begin{itemize}[leftmargin=1.5em,itemsep=1pt,topsep=3pt]
@@ -704,7 +704,8 @@ Section~\ref{sec:transfer}), and which feedback suits which model (RQ4, Section~
 practical guidance (Section~\ref{sec:guidance}) and set out the limits of the study (Section~\ref{sec:limits}).
 
 \subsection{Only LoRA lifts models from zero}\label{sec:floor}
-The clearest result is a floor. Models that make no valid multi-turn call gained nothing from their own notes and at
+RQ1 has the clearest answer, and it reveals a floor: only weight updates lifted a model that could not yet do the task.
+Models that make no valid multi-turn call gained nothing from their own notes and at
 most a point on practice from correct worked examples of the same tools, with nothing on unseen tasks, yet continual
 LoRA lifted all three on our tasks and two of them, Llama and Gemma, on the official benchmark. We read this as a
 minimum competence that in-context learning needs and that weights can supply: Llama and Gemma failed almost every task
@@ -731,7 +732,7 @@ and the floor may be where that ability runs out for a given task. Which route i
 decided before any choice of method, and a frozen check on a few tasks tells which.
 
 \subsection{Side effects of learning}\label{sec:side}
-Learning changed more than the skill being practised. The largest change was not a lost skill but a changed habit
+On RQ2, learning changed more than the skill being practised. The largest change was not a lost skill but a changed habit
 (Fig.~\ref{fig:overcalling}): after LoRA teaching, every model called a tool when none fitted, losing 31 to 75 points
 of correct abstention, and LFM2.5 and Qwen3.5 did so under judging too, while Llama and Falcon called correctly more
 often. A likely cause is that every practice task asks for calls in every turn, so the training targets never show the
@@ -747,7 +748,8 @@ that gains on the target category and loses its ability to decline may score the
 learning on the job should therefore report each category, with the target named in advance.
 
 \subsection{Fine-tuning reasoning models}\label{sec:reasoningft}
-For Qwen3-1.7B, what it was trained on mattered more than whether its reasoning was kept. We expected the empty think
+For the reasoning model, the second part of RQ2, what Qwen3-1.7B was trained on mattered more than whether its
+reasoning was kept. We expected the empty think
 block in the expert targets to be the cause of the harm, by teaching the model to stop reasoning. Keeping the reasoning
 steadied learning and cut the damage to other skills by more than half, but did not remove it, and it was the only arm
 to lower the benchmark's target category significantly. This suggests that the reasoning it learned to write fitted our
@@ -773,7 +775,8 @@ seeds show the seed mean. Solid: significant after Holm correction; hatched: not
 gain at any stage), retrieval for the models below the floor (within about a point of zero), and retrieval for Qwen3-1.7B (practice $-$6.0,
 significant; no significant change on the probe or BFCL).}\label{fig:transfer}
 \end{figure}
-Fig.~\ref{fig:transfer} brings together the gains reported in Section~\ref{sec:results} at three distances from
+On RQ3, gains reached unseen tasks of the same kind but arrived at the official benchmark smaller than it can resolve,
+except for Llama and Gemma. Fig.~\ref{fig:transfer} brings together the gains reported in Section~\ref{sec:results} at three distances from
 practice. Retrieval's gains were of similar size on practice and on the probe for LFM2.5, but on 200 probe tasks they
 were not significant, and on BFCL they shrank further. LoRA reached unseen tasks, often by more than it gained on
 practice, which averages over early tasks before anything was learned, and it was significant there for every arm that
@@ -796,10 +799,10 @@ is needed to tell a small gain from none. Benchmarks that score learning along t
 other two can change the picture.
 
 \subsection{Teaching vs judging}\label{sec:teachjudge}
-The two kinds of feedback suit different starting points. Below the floor only teaching works: judging learns from
-passed tasks, and a model that passes none learns nothing. Above it, judging held its own on the benchmark: under LoRA,
-LFM2.5 and Qwen3.5 gained +4.5 and +9 on BFCL multi-turn base by judging against +3.5 and +5.7 by teaching (none
-significant), even though teaching gained more on our own tasks for LFM2.5 (probe +38.5 against +22). For the
+On RQ4, the two kinds of feedback suit different starting points. Below the floor only teaching works: judging learns from
+passed tasks, and a model that passes none learns nothing. Above it, judging gained no less on the benchmark: under LoRA,
+LFM2.5 and Qwen3.5 gained +4.5 and +9 on BFCL multi-turn base by judging against +3.5 and +5.7 by teaching, though no
+difference was significant and 200 questions cannot show one below about 5 points either way, even though teaching gained more on our own tasks for LFM2.5 (probe +38.5 against +22). For the
 reasoning model, judging was the only arm without harm (Section~\ref{sec:reasoningft}). Judging is not a cure for
 over-calling, however: LFM2.5 and Qwen3.5 lost 30 and 63 points of correct abstention under judging too, and Qwen3.5
 lost more on BFCL's non-live questions by judging than by teaching ($-$15.5 against $-$4.5). A natural schedule
@@ -810,7 +813,7 @@ For a small model that must learn a tool set on the job, the results suggest six
 explanation of over-calling but was not tested.
 \begin{enumerate}[leftmargin=1.5em,itemsep=1pt,topsep=3pt]
 \item Check first whether the model can do the task at all, for instance by running it frozen on a few dozen practice
-  tasks. If it passes none and makes no valid call, only fine-tuning will help, and it needs taught examples.
+  tasks. If it passes none and makes no valid call, then in our results only fine-tuning helped, and it needed taught examples.
 \item Once the model can succeed, let it learn from its own verified successes.
 \item Expect practice gains to transfer only partly: measure them outside the practice distribution, category by
   category.
@@ -847,8 +850,8 @@ give identical outputs.
 \section{Conclusion}\label{sec:conclusion}
 Small language models can learn tool use on the job, but mostly through their weights, and how much they learn depends
 on where they start. Below a floor of competence, the ability to make a valid multi-turn call, only fine-tuning on
-taught examples helped. Above it, a model gained as much on the benchmark from its own successes as from expert
-answers, and in the reasoning model only its own successes did no harm; but its gains stayed close to the tasks it
+taught examples helped. Above it, a model gained no less on the benchmark from its own successes than from expert
+answers (no difference was significant), and in the reasoning model only its own successes did no harm; but its gains stayed close to the tasks it
 practised. And learning changed more than the
 target skill: trained on tasks that always need calls, models learned to call when they should not.
 
