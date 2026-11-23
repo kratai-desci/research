@@ -74,36 +74,36 @@ examples \citep{zheng2024synapse}; or through its weights, by continual fine-tun
 \citep{hu2022lora}. These routes are usually studied separately and with large models. Where they have been compared
 \citep{mosbach2023few,ovadia2024fine,soudani2024fine}, the comparison was made once, on a fixed dataset, for classification or factual knowledge, with no feedback on the model's own attempts. Benchmarks that track learning over a
 stream of tasks exist, but they mostly evaluate in-context strategies by a single score along the stream
-(Section~\ref{sec:rw-eval}). Whether small models can learn tool use continually, and which route serves them, is open. We set out to find what decides whether a small model can learn tool use on the job, and so which models are worth
-building on; through which route such learning happens, how far it reaches and what it changes; and how the kind of
-feedback interacts with the model's starting point (Section~\ref{sec:design} states the research questions).
+(Section~\ref{sec:rw-eval}). Whether small models can learn tool use continually, and which route serves them, is open.
+
+We set out to find three things: what decides whether a small model can learn tool use on the job, and so which models
+are worth building on; through which route such learning happens, how far it reaches and what else it changes; and how
+the kind of feedback interacts with the model's starting point. Section~\ref{sec:design} states them as research
+questions.
 
 This paper is a measurement study. Rather than propose a new learning method, we build an evaluation protocol for
 learning on the job and use it to compare three existing methods under the same conditions. What we measure is each
 method's \emph{learning potential}: the most a model gains from practice when the feedback is perfect. An oracle either
 shows the expected calls (teaching) or says only whether the task passed (judging), so the results are a ceiling for
-each method, not the behaviour of a system that must judge itself, and they show which routes are worth pursuing at
-this scale.
+each method, not the behaviour of a system that must judge itself, and they show which models and routes are worth pursuing at this scale.
 
-The protocol has four parts, all released. A practice ground of 2,400 multi-turn tasks uses the tools, simulators and
+The protocol has four parts. A practice ground of 2,400 multi-turn tasks uses the tools, simulators and
 checker of the Berkeley Function Calling Leaderboard (BFCL), but its tasks were written from the tools' documentation,
 never from BFCL's questions. A fixed stream of 1,200 practice tasks, in one order per seed, is followed by every run, and a held-out probe set of
 200 tasks is scored every 100 tasks with learning switched off. The final state takes the official BFCL v4 exam and is
-compared with the frozen model category by category, so that side effects are visible. Every claim is tested on paired
-questions, and the per-question results of every run are released. We apply the protocol to six models from five
+compared with the frozen model category by category, so that side effects are visible. Every claim is tested on paired questions. We apply the protocol to six models from five
 developers, of 0.8B to 1.7B nominal parameters, each learning by self-written notes, retrieved experience or continual
 LoRA, with key cells repeated over three seeds (Fig.~\ref{fig:design}).
 
 Our contributions are as follows.
 \begin{itemize}[leftmargin=1.5em,itemsep=1pt,topsep=3pt]
-\item We build an evaluation protocol for learning on the job: a practice ground on BFCL's tools that shares no questions with
-  BFCL, a fixed practice stream and probe set, and a measurement that separates learning in practice, on unseen tasks
-  and on the official benchmark, reports side effects per category, and tests every claim on paired questions.
+\item We build an evaluation protocol for learning on the job, described above, that separates learning in practice,
+  on unseen tasks and on the official benchmark.
 \item We compare learning in context with learning in weights across six small models, under identical tasks,
   order and oracle.
 \item We show that a competence floor decides the route: models that solve no multi-turn task gain at most a point or
-  two from notes or worked examples, but continual LoRA lifts two of them by about ten points on the benchmark; this
-  tells which models are worth building on.
+  two from notes or worked examples, but continual LoRA lifts two of them by about ten points on the benchmark; together with how the models above
+  the floor learned, this tells which models are worth building on (Section~\ref{sec:answers}).
 \item We show that gains reach unseen tasks of the same kind, but on the benchmark's target category no gain above the
   floor survives correction for multiple comparisons, and only pooling its 800 multi-turn questions detects some, so a
   single benchmark category is too blunt to judge learning on the job.
