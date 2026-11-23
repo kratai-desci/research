@@ -118,8 +118,8 @@ Our contributions are:
   and on the official benchmark, reports side effects per category, and tests every claim on paired questions;
 \item a controlled comparison, under this protocol, of learning through context and through weights, with identical
   tasks, order and oracle;
-\item the four findings above, including the limit on what one benchmark category can detect, with practical guidance
-  for learning on the job (Section~\ref{sec:guidance});
+\item the four findings above, including the limit on what one benchmark category can detect, and what they imply for
+  learning on the job (Section~\ref{sec:conclusion});
 \item the code, the practice tasks and the per-question results of every run.
 \end{itemize}
 Section~\ref{sec:related} reviews related work, Section~\ref{sec:design} describes the design,
@@ -704,8 +704,8 @@ would take longer and would have to run while the device is idle. The cost of ev
 We take the four research questions in turn: whether a method can lift a model from zero (RQ1,
 Section~\ref{sec:floor}), what else changes when a model learns, in general and in a reasoning model (RQ2,
 Sections~\ref{sec:side} and~\ref{sec:reasoningft}), how far the gains reach beyond the practice tasks (RQ3,
-Section~\ref{sec:transfer}), and which feedback suits which model (RQ4, Section~\ref{sec:teachjudge}). We then draw
-practical guidance (Section~\ref{sec:guidance}) and set out the limits of the study (Section~\ref{sec:limits}).
+Section~\ref{sec:transfer}), and which feedback suits which model (RQ4, Section~\ref{sec:teachjudge}). We then set out
+the limits of the study (Section~\ref{sec:limits}).
 
 \subsection{Only LoRA lifts models from zero}\label{sec:floor}
 RQ1 has the clearest answer, and it reveals a floor: only weight updates lifted a model that could not yet do the task.
@@ -812,20 +812,6 @@ over-calling, however: LFM2.5 and Qwen3.5 lost 30 and 63 points of correct abste
 lost more on BFCL's non-live questions by judging than by teaching ($-$15.5 against $-$4.5). A natural schedule
 follows: teach a model until it can succeed, then let it learn from its own verified successes.
 
-\subsection{Practical guidance}\label{sec:guidance}
-For a small model that must learn a tool set on the job, the results suggest six rules; the fifth follows from our
-explanation of over-calling but was not tested.
-\begin{enumerate}[leftmargin=1.5em,itemsep=1pt,topsep=3pt]
-\item Check first whether the model can do the task at all, for instance by running it frozen on a few dozen practice
-  tasks. If it passes none and makes no valid call, then in our results only fine-tuning helped, and it needed taught examples.
-\item Once the model can succeed, let it learn from its own verified successes.
-\item Expect practice gains to transfer only partly: measure them outside the practice distribution, category by
-  category.
-\item For a reasoning model, fine-tune on its own successes rather than on expert answers.
-\item Include practice requests that no tool can serve, so that the model does not learn to call tools regardless.
-\item At this scale, do not rely on notes the model writes itself.
-\end{enumerate}
-
 \subsection{Limitations and threats to validity}\label{sec:limits}
 \emph{Scope.} The oracle makes these results a ceiling, not the behaviour of a deployable system that must judge
 itself. The study covers one domain (BFCL's tools, multi-turn), practice tasks written by one LLM, six models of 0.8B to
@@ -859,10 +845,18 @@ answers (no difference was significant), and in the reasoning model only its own
 practised. And learning changed more than the
 target skill: trained on tasks that always need calls, models learned to call when they should not.
 
-Three implications follow for systems that learn on the job. The route should follow the model's starting point, and a
-frozen check on a few tasks shows which route is open. Practice should include requests that no tool can serve, and
-learning should be judged per category and outside the practice distribution, on held-out tests large enough to
-resolve gains of a few points, never by an overall score on the practice tasks. And at this scale, the notes a model writes for itself should not be relied on.
+For systems that learn on the job, our results suggest four implications:
+\begin{itemize}[leftmargin=1.5em,itemsep=1pt,topsep=3pt]
+\item \emph{The route should follow the model's starting point.} A frozen check on a few practice tasks shows whether
+  context methods are open to the model or only fine-tuning on taught examples is; at this scale, the notes a model
+  writes for itself were not a route at all.
+\item \emph{Teach first, then let the model learn from its own successes.} Above the floor this gained no less on the
+  benchmark in our runs, and it was the only route that spared the reasoning model.
+\item \emph{Practice should include requests that no tool can serve.} This is the likely remedy for learning to call
+  tools regardless, although we did not test it.
+\item \emph{Learning should be judged per category and outside the practice distribution,} on held-out tests large
+  enough to resolve gains of a few points, never by an overall score on the practice tasks.
+\end{itemize}
 Our results are a ceiling under perfect feedback, for six small models and one task domain, with costs measured on
 server GPUs. Natural next steps are to test the floor directly, by checking whether a little fine-tuning first lets
 context methods work for models below the floor; to combine the routes; and to replace the oracle with the model's own
