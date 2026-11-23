@@ -22,8 +22,10 @@ SOFTWARE.
 
 ---
 
-Scope. This MIT licence covers the code in `src/`. The data in `data/`, the
-paper in `paper/` and the figures are licensed separately under CC BY 4.0 (see
-LICENSE-DATA). Third-party material keeps its own licence: WebShop, tau2-bench,
-the Qwen3 models, and the public datasets named in Table A3 of the paper, none
-of which is redistributed here except short text quoted from them.
+Scope. This MIT licence covers the code in `src/`, except the third-party data file
+`src/lab/e13/personas.jsonl`: 999 personas from PersonaHub (proj-persona/PersonaHub, persona
+configuration, first 1,000 rows), redistributed unchanged under their own licence, CC BY-NC-SA 4.0
+(https://creativecommons.org/licenses/by-nc-sa/4.0/). The data in `data/`, the notes in `notes/`, the
+paper in `paper/` and the figures are licensed separately under CC BY 4.0 (see LICENSE-DATA). The
+Berkeley Function Calling Leaderboard (BFCL), its tool simulators and the models studied keep their
+own licences.

@@ -17,6 +17,10 @@ Families:
   probe         every run's final state (task 1,200) against the model with nothing learnt, on the 200 probe tasks.
   practice      every learning run against E15's frozen model on the same 1,200 practice tasks.
   methods       LoRA against retrieval and retrieval against notes, same model and arm, seed 15: probe and BFCL base.
+  arms          LoRA arms against each other, same model and seeds: judging against teaching (LFM2.5 and Qwen3.5, seed
+                15; Qwen3-1.7B, seeds 15 to 17) and the reasoning kept against teaching (Qwen3-1.7B, seeds 15 to 17), on
+                BFCL base, BFCL's other groups and the probe. Three-seed comparisons use the per-item mean over seed
+                pairs, with the sign-flip test and a bootstrap interval over items.
 
     uv run --with numpy --with scipy python -m lab.e20.stats [--per-question ../data/per_question] [--out ../data/stats.json]
 """
@@ -208,13 +212,46 @@ def main():
                                                       GX.mean(axis=0) - F)})
     holm([c[m] for c in cells for m in ("bfcl_base_vs_floor", "probe_vs_start", "practice_vs_frozen")])
 
+    # ---- LoRA arms against each other (computed last, so the families above draw the same bootstrap samples) ----
+    def exam_name(key, arm, s):
+        return f"{'e16' if s == 15 and arm != 'teach-think' else 'e19'}-{key}-{arm}-s{s}"
+
+    def run_name(key, arm, s):
+        return f"{'e16' if s == 15 and arm != 'teach-think' else 'e19'}/{key}/{arm}-s{s}"
+
+    def paired_seeds(As, Bs) -> dict:
+        m = np.all([a >= 0 for a in As] + [b >= 0 for b in Bs], axis=0)
+        D = np.stack([b[m].astype(float) - a[m].astype(float) for a, b in zip(As, Bs)])
+        d = D.mean(axis=0)
+        n = len(d)
+        boots = d[RNG.integers(0, n, size=(B, n))].mean(axis=1) * 100
+        lo, hi = np.percentile(boots, [2.5, 97.5])
+        return {"n": n, "values": [round(100 * float(x.mean()), 1) for x in D], "diff": round(100 * float(d.mean()), 1),
+                "ci": [round(float(lo), 1), round(float(hi), 1)], "gained": int((d > 0).sum()),
+                "lost": int((d < 0).sum()), "p": signflip(d) if np.any(d != 0) else 1.0}
+
+    arm_rows = []
+    for key, hi_arm, lo_arm, seeds in [("lfm2.5-1.2b", "judge", "teach", (15,)), ("qwen3.5-0.8b", "judge", "teach", (15,)),
+                                       ("qwen3-1.7b", "judge", "teach", (15, 16, 17)),
+                                       ("qwen3-1.7b", "teach-think", "teach", (15, 16, 17))]:
+        lo_ex = [bfcl[exam_name(key, lo_arm, s)] for s in seeds]
+        hi_ex = [bfcl[exam_name(key, hi_arm, s)] for s in seeds]
+        measures = [("bfcl_base", [vec(e["multi_turn_base"]) for e in lo_ex], [vec(e["multi_turn_base"]) for e in hi_ex])]
+        measures += [(f"bfcl_{g}", [group_vec(e, g) for e in lo_ex], [group_vec(e, g) for e in hi_ex]) for g in GROUPS]
+        measures.append(("probe", [vec(probe[f"{run_name(key, lo_arm, s)}/1200"]) for s in seeds],
+                         [vec(probe[f"{run_name(key, hi_arm, s)}/1200"]) for s in seeds]))
+        for on, As, Bs in measures:
+            stats = paired(As[0], Bs[0]) if len(seeds) == 1 else paired_seeds(As, Bs)
+            arm_rows.append({"compare": f"{hi_arm} vs {lo_arm}", "on": on, "model": key, "seeds": list(seeds), **stats})
+    holm(arm_rows)
+
     out = {"about": __doc__.split("\n\n")[0], "method": {"test": "McNemar exact (two-sided)", "interval":
            "95% paired bootstrap over questions, 10,000 resamples, seed 20", "correction": "Holm within each family",
            "seed_cells": "mean over 3 seeds; ci_seeds = t interval over seeds; ci_questions = bootstrap over questions"},
            "bfcl_base": base_rows, "bfcl_groups": group_rows, "probe": probe_rows, "practice": prac_rows,
-           "methods": method_rows, "seed_cells": cells}
+           "methods": method_rows, "seed_cells": cells, "arms": arm_rows}
     Path(a.out).write_text(json.dumps(out, indent=1) + "\n")
-    for fam in ("bfcl_base", "bfcl_groups", "probe", "practice", "methods", "seed_cells"):
+    for fam in ("bfcl_base", "bfcl_groups", "probe", "practice", "methods", "seed_cells", "arms"):
         rows = out[fam] if fam != "seed_cells" else [c[m] for c in cells for m in
                                                       ("bfcl_base_vs_floor", "probe_vs_start", "practice_vs_frozen")]
         print(f"{fam}: {len(rows)} tests, {sum(r['significant'] for r in rows)} significant after Holm")

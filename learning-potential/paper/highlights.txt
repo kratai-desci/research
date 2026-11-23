@@ -1,7 +1,7 @@
 Highlights
 
-- Models unable to make a valid multi-turn call learn little except by fine-tuning.
+- Models that solve no multi-turn task learn little except by fine-tuning.
 - Fine-tuning on expert tool calls teaches every model to call tools when none fits.
 - A reasoning model was harmed by expert targets, not by its own verified successes.
-- Above that level, benchmark gains fall below what its 200 test questions resolve.
-- Teach a model until it can succeed, then let it learn from its own successes.
+- Above that level, benchmark gains are small, detectable only over pooled questions.
+- Under LoRA, own successes gained no less on the benchmark than expert answers.

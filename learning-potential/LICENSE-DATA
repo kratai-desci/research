@@ -15,4 +15,7 @@ Summary:        https://creativecommons.org/licenses/by/4.0/
 
 The practice tasks in `data/pool/` run on the tool simulators of the Berkeley
 Function Calling Leaderboard (BFCL), which keep their own licence, and the models
-studied keep theirs. The code in `src/` is under the MIT licence (see LICENSE).
+studied keep theirs. The LoRA adapters in the archive are derived from those models
+and are also subject to their licences (for example the Llama 3.2 Community License
+and the Gemma Terms of Use). The code in `src/` is under the MIT licence (see
+LICENSE), except the PersonaHub personas it names, which keep CC BY-NC-SA 4.0.

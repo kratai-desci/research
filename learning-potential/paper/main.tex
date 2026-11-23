@@ -1,14 +1,9 @@
-%% Paper 2: the learning potential of small language models for tool use (E13 to E19).
-%% Target: Knowledge-Based Systems (Elsevier), on Elsevier's CAS template (cas-dc, two columns), which the KBS Guide for
-%% Authors links; double-column layout is permitted for LaTeX submissions.
+%% The learning potential of small language models for tool use (alife, paper 2; experiments E13 to E20).
+%% Target: Knowledge-Based Systems (Elsevier), on Elsevier's CAS template (cas-dc, two columns).
 %% Build: tectonic main.tex   (thumbnails/: the small icons the template prints beside the email address)
-%% Status: design and setup outlined in full; results, analysis and discussion left until E19 is complete.
-%% Grey bullets are notes for the writing, not text; details come from lab/e13..e19/notes.md and the code.
-%% KBS Guide for Authors (checked 21 Nov 2026): research papers preferably <= 20 double-spaced pages including tables
-%% and figures (a soft limit); abstract <= 250 words; 1-7 keywords; 3-5 highlights of <= 85 characters, submitted as a
-%% separate file (highlights.txt); numbered references in square brackets, in order of appearance; figures also
-%% uploaded as separate files; research data deposited in a repository (Option C).
-%% Page target in this layout: about 12-15 pages, references included.
+%% KBS Guide for Authors: abstract <= 250 words; 1-7 keywords; 3-5 highlights of <= 85 characters in a separate file
+%% (highlights.txt); numbered references in order of appearance; research data deposited in a repository (Option C).
+%% Code, data and notes: https://github.com/kratai-desci/research/tree/learning-potential
 \documentclass[a4paper,fleqn]{cas-dc}
 
 \usepackage{amssymb,amsmath}
@@ -49,13 +44,12 @@ potential} of six models from five families: the most a model gains when feedbac
 same 1,200 multi-turn tool-use tasks, built on the Berkeley Function Calling Leaderboard's (BFCL) tools but never its
 questions, learning by one of three on-device methods: self-written notes, retrieved worked examples, or
 continual low-rank adaptation (LoRA). An oracle gives the expected calls (teaching) or only pass or fail
-(judging). We test learning on 200 unseen tasks every 100 tasks and on the BFCL v4, with key runs over
-three seeds; tasks, code and per-question results are released. Models that cannot make a valid multi-turn call (below the floor) gain at most a point from notes or
-worked examples, yet LoRA lifts two of them by about ten points on BFCL; notes help no model's multi-turn score. Learning has
+(judging). We test learning on 200 unseen tasks every 100 tasks and on BFCL v4, with key runs over
+three seeds; tasks, code and per-question results are released. Models that solve no multi-turn task (below the floor) gain at most two points from notes or worked examples, yet LoRA lifts two of them by about ten points on BFCL; notes help no model's multi-turn score. Learning has
 side effects: trained on expert tool calls, every model learned to call tools when none fits, and a reasoning
-model was harmed by expert targets but not by its own verified successes. Above the floor, gains shrink on
-BFCL to a few points, below what its 200 target questions resolve. Teaching is needed to pass the floor; beyond it,
-learning from one's own successes gained no less than teaching on BFCL and spared the reasoning model.
+model was harmed by expert targets but not by its own verified successes. Above the floor, gains shrink on BFCL to a few points, significant only when pooled over its 800 multi-turn
+questions. Under LoRA, teaching is needed to pass the floor; beyond it, learning from one's own successes gained no less
+on BFCL, and more for the reasoning model.
 \end{abstract}
 \begin{keywords}
 small language models \sep tool use \sep function calling \sep continual learning \sep LoRA \sep
@@ -75,8 +69,7 @@ How much can a model of this size learn from practice, and by which route? It ca
 writing notes about what worked \citep{suzgun2026dynamic,zhang2026agentic} or by retrieving past trajectories as worked
 examples \citep{zheng2024synapse}; or through its weights, by continual fine-tuning of a small adapter
 \citep{hu2022lora}. These routes are usually studied separately and with large models. Where they have been compared
-\citep{mosbach2023few,ovadia2024fine,soudani2024fine}, the comparison was made once, on fixed labelled data, for
-classification or factual knowledge, with no feedback on the model's own attempts. Benchmarks that track learning over a
+\citep{mosbach2023few,ovadia2024fine,soudani2024fine}, the comparison was made once, on a fixed dataset, for classification or factual knowledge, with no feedback on the model's own attempts. Benchmarks that track learning over a
 stream of tasks exist, but they mostly evaluate in-context strategies by a single score along the stream
 (Section~\ref{sec:rw-eval}). Whether small models can learn tool use continually, and which route serves them, is
 open.
@@ -97,19 +90,19 @@ questions, and the per-question results of every run are released. We apply the 
 developers, of 0.8B to 1.7B nominal parameters, each learning by self-written notes, retrieved experience or continual
 LoRA, with key cells repeated over three seeds (Fig.~\ref{fig:design}).
 
-Four results stand out. First, there is a floor: the three models that cannot make a valid multi-turn call gain
-nothing from notes and at most a point from correct worked examples, yet continual LoRA lifts all three on our tasks
+Four results stand out. First, there is a floor: the three models that solve no multi-turn task when frozen gain nothing from notes and at
+most a point or two from correct worked examples, yet continual LoRA lifts all three on our tasks
 and two of them on the official benchmark; notes improve no model on the multi-turn tasks they were written for.
 Second, learning has side effects that an overall score hides. In every model we tested, LoRA training on expert tool
 calls taught it to call a tool even when none fits. In the reasoning model, expert targets harmed its other skills;
 keeping its reasoning in the targets reduced that harm but lowered its benchmark score, and only training on its own
 verified successes avoided harm. Third, above the floor, practice gains are real
-but mostly local: LoRA's carry over to unseen tasks of the same kind, but no method gains significantly on the
-official benchmark's target category. There the changes range from $-$8 to +9 points, and its 200 questions resolve
-differences only to about $\pm$5 points. Measuring learning on the job therefore needs held-out tests larger or harder
-than a single benchmark category. Fourth, the two kinds of feedback suit different stages: teaching is needed to pass the
-floor, and beyond it learning from the model's own successes gained no less on the benchmark (no difference was
-significant) and was the only arm that left the reasoning model unharmed.
+but mostly local: LoRA's carry over to unseen tasks of the same kind, but on the official benchmark's target category,
+where the changes range from $-$8 to +9 points, no gain survives correction for multiple comparisons. Only pooled over
+BFCL's 800 multi-turn questions did three runs of LFM2.5 and Qwen3.5 gain significantly, by 3.4 to 7.6 points.
+Measuring learning on the job therefore needs held-out tests larger than a single benchmark category. Fourth, the two kinds of feedback suit different stages: under LoRA, teaching is needed to pass the floor, and beyond it learning from the model's own successes gained no
+less on the benchmark, and significantly more for the reasoning model, which it alone among the LoRA arms left
+unharmed.
 
 Our contributions are:
 \begin{itemize}[leftmargin=1.5em,itemsep=1pt,topsep=3pt]
@@ -199,9 +192,9 @@ benchmark, reports what changes in every other category, and tests each claim on
 \subsection{Comparing the two routes}\label{sec:rw-position}
 Several studies compare learning in context with learning in weights. With the model and number of examples held
 fixed, few-shot fine-tuning and in-context learning generalise similarly, and both vary widely and depend on model size and
-the number of examples \citep{mosbach2023few}. For injecting knowledge, retrieval consistently beats unsupervised fine-tuning
-\citep{ovadia2024fine}, especially for rare facts \citep{soudani2024fine}. These comparisons are made once, on fixed
-labelled data, for classification or knowledge questions, and neither route receives feedback on the model's own
+the number of examples \citep{mosbach2023few}. For injecting knowledge, retrieval consistently beats fine-tuning, whether unsupervised
+\citep{ovadia2024fine} or on synthetic question--answer pairs, especially for rare facts \citep{soudani2024fine}. These
+comparisons are made once, on a fixed dataset, for classification or knowledge questions, and neither route receives feedback on the model's own
 attempts. We compare the two routes in a
 different setting: \emph{continual} learning from a stream of practice tasks, for multi-turn \emph{tool use}, in
 \emph{small} models, with notes, retrieval and LoRA given identical tasks and order and the same oracle, and with the
@@ -229,8 +222,8 @@ We use a few terms throughout. A \emph{run} is one model learning by one method 
 arm, repeated over seeds where stated. The \emph{practice stream} is the 1,200 tasks a run learns from, the
 \emph{probe set} is 200 held-out tasks scored with learning switched off, and \emph{the benchmark} is BFCL v4. A
 \emph{frozen} model learns nothing: its results on practice and on the benchmark are the reference for every change,
-and its probe score is a run's \emph{start}. A model is \emph{below the floor} if, frozen, it cannot make a valid
-multi-turn call and so solves no multi-turn task; the other models are above it.
+and its probe score is a run's \emph{start}. A model is \emph{below the floor} if, frozen, it solves no multi-turn task, mostly because it makes no valid call;
+the other models are above it.
 
 \begin{figure*}[t]
 \centering
@@ -263,7 +256,7 @@ tasks in three generations of 800, each refining the last: the first spelled out
 the second, like BFCL's questions, left routine steps to the model (changing folder, looking up an identifier, logging
 in with credentials given earlier); the third also followed BFCL's mix of tool sets. The writer saw only the tools'
 documentation and simulator source code, never BFCL's questions. A task was kept only if its reference calls ran in the
-simulators without error, it passed a strict review by the same LLM, and the LLM, solving it through the simulators
+simulators without error, it was checked and, where needed, corrected in a strict review by the same LLM, and the LLM, solving it through the simulators
 without seeing the reference, passed it as BFCL scores it. Fig.~\ref{fig:task} shows one task. Each task gives the simulators' initial state, two to six user turns, and reference calls for each turn (one
 to four). Turns per task and calls per turn are drawn, within these ranges, from the distributions counted in the answer file of
 BFCL v4's multi-turn base category, and in the third generation the tool sets follow BFCL's composition: four main
@@ -279,7 +272,7 @@ pressure is healthy.''\\
 \textbf{Reference:} {\ttfamily displayCarStatus(option="fuel")}; {\ttfamily check\_tire\_pressure()}\\[4pt]
 \textbf{User, turn 2:} ``Everything looks good. Please start the engine so I can get going.''\\
 \textbf{Reference:} {\ttfamily startEngine(ignitionMode="START")}}}
-\caption{A practice task (second generation). After each turn, BFCL's checker compares the simulator's state with the
+\caption{A task of the practice ground (second generation; held out, so used in neither practice nor the probe). After each turn, BFCL's checker compares the simulator's state with the
 state the reference calls produce, and checks that the tools' responses to the reference calls are among those to the
 model's calls. The retrieval method shows a logged task to the model in this form: each user request followed by its
 calls.}\label{fig:task}
@@ -302,30 +295,31 @@ exact reference answer with a practice task, and 4.5\% share the same sequence o
 
 \subsection{Models and harness}\label{sec:models}
 We study six instruction-tuned models from five developers, of 0.8B to 1.7B nominal parameters
-(Table~\ref{tab:models}). We chose the smallest current instruction-tuned models of open families that BFCL and vLLM can
-serve, so that together they range from models that solve no multi-turn question to one that solves a fifth of them, and
+(Table~\ref{tab:models}). We chose instruction-tuned models of about 1B parameters from current open families that BFCL and vLLM can
+serve, so that together they range from models that solve no multi-turn question to one that solves a fifth of
+multi-turn base, and
 we include one reasoning model, Qwen3-1.7B, which writes its reasoning in a \emph{think block} before answering. Each
 model runs through a BFCL \emph{handler}, the adapter that writes the tools into the prompt and parses calls from the
-reply in the format the model expects: native function calling for four models, and calls written as text for
-Gemma-3-1B. BFCL had no handler for LFM2.5 and Qwen3.5, so we wrote handlers that follow their chat templates. Models are
+reply in the format the model expects: its native tool-call format for five models, and calls written as text for Gemma-3-1B. BFCL had no handler for LFM2.5 and Qwen3.5, so we wrote handlers that follow their chat templates. Models are
 served by vLLM \citep{kwon2023efficient} and decode near-greedily: BFCL sets temperature 0.001, which vLLM raises to its
 minimum of 0.01.
 
-BFCL v4 has four groups of questions, each scored by its own checker. \emph{Non-live} questions are single-turn requests
+BFCL v4 sorts its questions into non-live, live, multi-turn and agentic categories, the last being memory and web search. \emph{Non-live} questions are single-turn requests
 written by BFCL's authors (one, several or parallel calls); \emph{live} questions are single-turn requests contributed by
 users. Both include \emph{irrelevance} questions, where no offered tool fits and the right answer is to make no call.
 \emph{Multi-turn} questions are conversations against the stateful simulators, in a base form and three harder variants
 (a missing function, a missing parameter, a long context); \emph{memory} questions require the model to store and later
 recall information through memory tools. Our practice tasks are built for multi-turn base, the \emph{target category}.
 We examine every category except web search, which needs a paid search service. Table~\ref{tab:models} gives each
-model's frozen scores; for Falcon3-1B, whose leaderboard entry is public, our harness reproduces it (11.1 overall).
+model's frozen scores; for Falcon3-1B, whose leaderboard entry is public, our harness reproduces it (11.1 overall), and an earlier check
+reproduced the published scores of Qwen3-1.7B.
 Three models, Llama-3.2-1B, Falcon3-1B and Gemma-3-1B, solve no multi-turn question when frozen: they are below the
 floor, and they let us test whether a method can lift a model that starts at zero.
 
 \begin{table*}[t]
 \centering
-\caption{Models and their frozen BFCL v4 scores (\%). Overall: as BFCL weights it, without web search; multi-turn: mean
-of its four categories. Parameters: total in the released weights, embeddings included. Handler: BFCL's own (FC: native
+\caption{Models and their frozen BFCL v4 scores (\%). Overall: BFCL's weighted score, with web search, which we did not run, counted as zero. Non-live and live: accuracy on
+the questions that need a call (irrelevance is scored separately). Multi-turn: mean of its four categories. Parameters: total in the released weights, embeddings included. Handler: BFCL's own (FC: native
 function calling; prompt: calls written in text) or ours. Sources:
 \citep{yang2025qwen3,amini2025lfm2,liquidai2026introducing,qwenteam2026qwen35,meta2024llama32,falconllmteam2024falcon,gemmateam2025gemma}.}\label{tab:models}
 \small
@@ -362,8 +356,8 @@ retrieval method stores the calls, and LoRA trains on them.
 
 \subsection{Learning methods}\label{sec:methods}
 All three methods are meant to run on the device itself: none needs a larger model or an external service, and none
-changes the base weights. Notes and retrieval need only the model's own inference, plus one extra generation per task
-for notes to write the lesson; LoRA also needs training, whose cost we report in Section~\ref{sec:res-cost}. In
+changes the base weights. Notes and retrieval need no training: notes use the model's own inference to write and curate lessons, and
+retrieval adds a small sentence encoder; LoRA also needs training, whose cost we report in Section~\ref{sec:res-cost}. In
 knowledge-systems terms, the three keep what is learned in three forms: as explicit rules the model writes for itself
 (notes), as stored cases retrieved by similarity, as in case-based reasoning \citep{aamodt1994case} (retrieval), and as
 parameters (LoRA). Their settings are listed in Table~\ref{tab:settings}; the exact prompts are in the released
@@ -395,7 +389,7 @@ Method & Setting & Value \\
  & Adapter & rank 16, $\alpha$ 32, no dropout, on the attention and MLP projections (see text) \\
  & Optimiser & AdamW, learning rate $10^{-4}$, batch 1, 4-step gradient accumulation, clipping 1.0 \\
  & Update & every 10 tasks: one pass over new examples plus replayed ones \citep{rolnick2019experience}, $2\times$ as many \\
- & Loss & answer tokens only; examples over 12,288 tokens skipped \\
+ & Loss & answer tokens only; examples over 12,288 tokens or out of GPU memory skipped \\
  & Serving & new adapter hot-loaded into vLLM after each update (120 updates in a teaching run) \\
  & Targets & teaching: expected calls in the model's format; judging: the model's own passed attempts \\
 \midrule
@@ -497,19 +491,20 @@ potential for a model.
 
 \subsection{Statistical analysis}\label{sec:stats}
 Every comparison is paired: the same tasks or questions, solved or not, under two conditions. A single run is compared
-with its reference (the frozen model on practice, the start on the probe, the frozen score on BFCL), and LoRA with retrieval and
-retrieval with notes for the same model and arm, with McNemar's exact test on the discordant pairs
+with its reference (the frozen model on practice, the start on the probe, the frozen score on BFCL), LoRA with retrieval and retrieval with notes for the same model and arm, and LoRA's arms with each other for the same
+model and seeds, with McNemar's exact test on the discordant pairs
 \citep{mcnemar1947note,dietterich1998approximate} and a 95\% paired bootstrap interval over tasks or questions
 \citep{efron1993introduction}. For cells with three seeds we report the mean over seeds, test it with a paired sign-flip
 test of the per-question seed mean, and give a bootstrap interval over questions. Tests are corrected with Holm's method
 \citep{holm1979simple} within each family: all runs against their frozen score on BFCL multi-turn base, the same in BFCL's other
-groups, all runs on the probe, all runs on practice, the method comparisons, and the three-seed cells.
+groups, all runs on the probe, all runs on practice, the method comparisons, the comparisons of LoRA arms, the three-seed cells, and the calling and abstaining grid behind
+Fig.~\ref{fig:overcalling}.
 
 \subsection{Implementation and compute}\label{sec:compute}
 We used bfcl-eval 2026.3.23, vLLM 0.8.5 for four models (the version bfcl-eval pins) and vLLM 0.33 or
 0.34 for LFM2.5 and Qwen3.5 (the latest release when each machine was set up), and PEFT \citep{mangrulkar2022peft} for LoRA. Each run used one NVIDIA L4 (24\,GB) or A100
 (40\,GB) GPU on Google Cloud, which runs of the same model sometimes shared; under LoRA, the vLLM server used about half of the GPU's memory and the trainer
-the rest. A run took between 1.4 and 34 hours. The code, including every prompt, the practice tasks, the split and the per-question results of every run
+the rest. A learning run took between 1.4 and 34 hours of task time. The code, including every prompt, the practice tasks, the split and the per-question results of every run
 are openly available, with the full run logs and adapters archived separately (see Data availability).
 
 %% ---------------------------------------------------------------------------------------------------------------
@@ -524,9 +519,9 @@ Holm-adjusted $p<0.05$ within its family of tests (Section~\ref{sec:stats}).
 Frozen, the six models span the range the study needs. On the practice tasks Qwen3-1.7B solves 52.8\%, LFM2.5 30.0\%
 and Qwen3.5 25.9\%; on the probe they start at 51.0\%, 26.0\% and 25.5\%. Llama, Falcon and Gemma solve none, and
 they fail in a different way. A multi-turn task fails at its first wrong turn, and for Llama and Gemma that is a turn in
-which they make no call at all, in 99.3\% and 99.8\% of the 2,400 practice tasks. Instead of calling a tool they answer
+which they make no valid call, in 99.3\% and 99.8\% of the pool's 2,400 tasks. Instead of calling a tool they answer
 in prose or write code: asked on BFCL to find files, Llama named the function to use and then wrote its own Python
-function instead of calling it. Falcon either makes no call (37\%) or fails with errors from overrunning its short
+function instead of calling it. Falcon either makes no valid call (37\%) or fails with errors from overrunning its short
 context window (60\%). The models above the floor fail mostly by calling wrongly: LFM2.5 and Qwen3-1.7B leave the wrong
 state or responses in 62\% and 39\% of the tasks, and Qwen3.5 keeps calling until the turn is cut off in 31\%.
 
@@ -542,12 +537,11 @@ Notes produced no measurable learning (Fig.~\ref{fig:notes}). Against the frozen
 run changed by more than 3.4 points and none significantly; on the probe every run ended within 3 points of its start,
 and on BFCL multi-turn base within 2 points of its frozen score.
 
-The lessons show why. In every run, 70 to 100\% of them named no tool or function at all; they were maxims such as
-``Always validate tool parameters before execution to ensure accuracy'' (LFM2.5) or ``Carefully analyze instructions
-before executing any tool'' (Gemma). By the method's own overlap test, 27 to 96\% of lessons nearly repeated one of the
-previous 50, so the notes, held under 600 tokens, cycled through a few such rules. Where a lesson was specific, it could
+The lessons show why. In every run, 70 to 100\% of them named no function of the tools at all; they were maxims such as
+``Always validate tool parameters before execution to ensure accuracy'' (LFM2.5) or ``Carefully analyze instructions before executing any tool to ensure accurate task completion'' (Gemma). By the overlap test the method uses to drop repeats (word Jaccard of 0.6 or more), 27 to 96\% of lessons
+nearly repeated one of the previous 50, so the notes, held under 600 tokens, cycled through a few such rules. Where a lesson was specific, it could
 be wrong: 18 of the 27 lines in Qwen3.5's final notes under teaching told it, in different words, to ``verify
-credentials via \texttt{pwd()} before every API call'', although \texttt{pwd} only prints the current folder. The three
+credentials via \texttt{pwd()} before every API call to prevent silent failures'', although \texttt{pwd} only prints the current folder. The three
 models below the floor passed no practice task with or without notes, so their lessons never drew on a success.
 
 Notes did shift the balance between calling and abstaining, because they enter every BFCL prompt, single-turn questions
@@ -566,11 +560,11 @@ Qwen3.5 under teaching and judging (+13.9, +8.6), small but significant for Llam
 negative for Qwen3-1.7B under teaching ($-$6.0). On the probe the changes were of similar size for LFM2.5 (+9.5) and
 smaller for Qwen3.5 (+8.5), but with 200 tasks instead of 1,200 neither was significant after correction
 (Fig.~\ref{fig:retrieval}). On BFCL multi-turn base, LFM2.5 and Qwen3.5 gained 3.5 to 5.5 points, none significant
-(best: LFM2.5 teaching, +5.5, $p=0.019$ before correction).
+(best: LFM2.5 teaching, +5.5, $p=0.019$ before correction). Pooled over BFCL's four multi-turn categories (800 questions),
+LFM2.5's gain under teaching, +3.4, was significant.
 
 The examples are written in BFCL's reference syntax rather than in each model's own call format, so a model must
-carry them over into its own. For Qwen3-1.7B, whose prompts were already the longest because of its reasoning, they
-lowered practice by 6 points. Halving the budget to 600 tokens, to test whether prompt length was the limit, reduced
+carry them over into its own. For Qwen3-1.7B, whose prompts also carry its reasoning, they lowered practice by 6 points. Halving the budget to 600 tokens, to test whether prompt length was the limit, reduced
 that loss to 2.7 points and changed nothing significantly on the probe or on multi-turn base. Outside multi-turn,
 retrieval changed nothing it could change: single-turn and memory questions use other tools and receive no examples,
 so the model there is the frozen one, and its scores moved only by run-to-run variation (Section~\ref{sec:limits}).
@@ -587,11 +581,14 @@ Under teaching, LoRA produced the largest gains on our tasks (Fig.~\ref{fig:lora
 +49.4 points for Llama, +41.6 for Gemma, +36.2 for Qwen3.5 and +29.1 for LFM2.5, and the probe rose by +55.8, +52.7,
 +34.5 and +38.5; Falcon, with one seed, rose by +31 on the probe. All of these are significant. On BFCL multi-turn base
 the picture changes: Llama (+10.3, interval 6.8 to 14.0) and Gemma (+11.0, 7.3 to 15.0) gained significantly in every
-seed, but LFM2.5 (+3.5), Qwen3.5 (+5.7, $p=0.024$ before correction) and Falcon (+3, one seed) did not. Qwen3.5's three
+seed, but LFM2.5 (+3.5), Qwen3.5 (+5.7, $p=0.024$ before correction) and Falcon (+3, one seed) did not; pooled over BFCL's four multi-turn categories, one Qwen3.5 seed did
+gain significantly (+7.6). Falcon's training also skipped examples that were too long or did not fit in the GPU's
+memory, 729 times in its run (Gemma's: 357; the other models' teaching runs: none). Qwen3.5's three
 seeds also differed on the probe (54.5 to 68.5 at task 1,200; one seed fell to 28.5 at task 200 and recovered).
 
 Under judging, LoRA learned where the model already passed tasks: the probe rose significantly for LFM2.5 (+22) and
-Qwen3.5 (+42.5), while their BFCL gains (+4.5 and +9) were not significant after correction. The models below the floor,
+Qwen3.5 (+42.5), while their gains on BFCL multi-turn base (+4.5 and +9) were not significant after correction;
+pooled over the four multi-turn categories, Qwen3.5's (+6.0) was. The models below the floor,
 passing no task, learned nothing.
 
 \begin{figure*}[t]
@@ -608,7 +605,7 @@ call a tool even when none fitted. Correct abstention fell by 31 to 75 points fo
 30 for LFM2.5 and 63 for Qwen3.5 under judging, all significant. Asked ``How many calories does an apple have?'' with
 only a tool for estimating litigation costs on offer, frozen Llama replied that it had no function for this; after LoRA
 teaching it called {\ttfamily calculate\_litigation\_cost(length\_in\_days=5, complexity='low')}. At the same time
-correct calls rose for Llama (+20) and Falcon (+33). Separately, memory scores fell significantly under teaching for four
+correct calls rose for Llama (+20), Falcon (+33) and, slightly, LFM2.5 (+3). Separately, memory scores fell significantly under teaching for four
 models, by 4.5 to 8 points, to zero for Qwen3.5 in every seed.
 
 \subsection{Teaching with the reasoning kept}\label{sec:res-reasoning}
@@ -618,10 +615,11 @@ For Qwen3-1.7B we compare keeping the reasoning with the two other LoRA arms, pl
 Plain teaching on expert calls made learning erratic. The probe ended between $-$12 and +18 points from its start,
 depending on the seed, practice fell by 5.8 points against the frozen model, and BFCL's live and non-live scores fell in
 every seed: the model lost correct calls ($-$26) as well as correct abstention ($-$31) in seed 15
-(Fig.~\ref{fig:overcalling}b). Keeping the reasoning in the targets made learning steady, with the three seeds within
-about 3 points of each other, and cut the losses in live and non-live by more than half. But this arm was the only one to
+(Fig.~\ref{fig:overcalling}b). Keeping the reasoning in the targets made learning steady, with the three seeds ending within about 3 points of each
+other, and cut the losses in live and non-live by more than half (both significant against plain teaching). But this arm was the only one to
 lower multi-turn base significantly, by 8.2 points (7 to 9 in every seed). Judging, on the model's own passed attempts
-with its own reasoning, raised the probe by 8.5 points and lowered no BFCL group significantly in any seed.
+with its own reasoning, raised the probe by 8.5 points, lowered no BFCL group significantly in any seed, and gained 7.3 points more than
+plain teaching on multi-turn base (significant).
 
 \begin{table}[t]
 \centering
@@ -638,9 +636,9 @@ Measure & Teaching & Reasoning kept & Judging \\
 Practice                & $-$5.8*  & +7.4*    & +2.8   \\
 Probe                   & +5.5     & +11.0*   & +8.5*  \\
 Multi-turn base         & $-$4.3   & $-$8.2*  & +3.0   \\
-Live                    & $-$26.1* & $-$12.0* & $-$1.3 \\
+Live & $-$26.0* & $-$12.0* & $-$1.3 \\
 Non-live                & $-$20.3* & $-$5.5*  & $-$0.5 \\
-Memory                  & $-$7.3*  & +1.4     & +5.0   \\
+Memory & $-$7.3* & +1.4 & +4.9 \\
 Correct calls           & $-$26*   & $-$4*    & $-$1   \\
 Correct abstention      & $-$31*   & $-$20*   & $-$3   \\
 \bottomrule
@@ -693,8 +691,8 @@ Gemma-3-1B   &  0.0 &  0.0 &  0.0 & +0.5 & -- & +11.0* [7.3, 15.0] & -- & \\
 Measured on server GPUs, the methods differ in where their cost falls. Notes and retrieval need no training but lengthen
 every prompt: notes by 160 to 540 tokens (0.9--3.3\,KB, capped) and retrieval by up to 1,200 tokens; retrieval's memory
 also grows with every task, to 1.26\,MB after 1,200, and notes need one extra generation per task to write the lesson. A
-practice task took 4 to 10\,s with either method on a shared L4, except for the reasoning model (79\,s with notes on an
-L4, 24\,s with retrieval on an A100). LoRA adds nothing to the prompt once its 3.5--70\,MB adapter is merged, but training
+practice task took 4 to 11\,s with either method on a shared L4, except for the reasoning model (76 to 79\,s with
+notes on an L4, 24\,s with retrieval on an A100, each shared by three runs). LoRA adds nothing to the prompt once its 3.5--70\,MB adapter is merged, but training
 dominates its time: under plain teaching, training took 70 to 98\% of each practice task's time, and one update, every
 10 tasks, took 1 to 16 minutes on a dedicated A100 (LFM2.5 fastest, Qwen3.5 slowest). On a phone or laptop these updates
 would take longer and would have to run while the device is idle. The cost of every run is in the released data
@@ -709,18 +707,19 @@ the limits of the study (Section~\ref{sec:limits}) and, given them, the implicat
 (Section~\ref{sec:guidance}).
 
 \subsection{Only LoRA lifts models from zero}\label{sec:floor}
-RQ1 has the clearest answer, and it reveals a floor: only weight updates lifted a model that could not yet do the task.
-Models that make no valid multi-turn call gained nothing from their own notes and at
-most a point on practice from correct worked examples of the same tools, with nothing on unseen tasks, yet continual
+RQ1 has the clearest answer, and it reveals a floor: only weight updates lifted a model that could not yet do the task
+by more than a point or two. Models that solve no multi-turn task gained nothing from their own notes and about a
+point on practice from correct worked examples of the same tools, with no significant gain on unseen tasks, yet continual
 LoRA lifted all three on our tasks and two of them, Llama and Gemma, on the official benchmark. We read this as a
 minimum competence that in-context learning needs and that weights can supply: Llama and Gemma failed almost every task
-by producing no call at all, answering in prose or writing code instead, so an example of the right call had nothing to
+by producing no valid call, answering in prose or writing code instead, so an example of the right call had nothing to
 build on, whereas LFM2.5, which already produced calls, did gain from retrieval while practising.
 
 Two other explanations fit less well. Retrieved examples are written in BFCL's reference syntax rather than in each
 model's own call format, so a weak model might simply fail to carry them over; but the notes, which are plain advice,
 failed as completely, and LoRA, which trains on the model's own format, succeeded. Falcon's prompts overran its short
-context, which may explain why its BFCL gain was smaller than Llama's and Gemma's; but Llama and Gemma failed by not
+context, and its training skipped many examples that did not fit in memory, which may explain why its BFCL gain was
+smaller than Llama's and Gemma's; but Llama and Gemma failed by not
 calling, not by running out of room. In-context learning is known to grow with model size \citep{brown2020language},
 and the floor may be where that ability runs out for a given task.
 
@@ -731,23 +730,23 @@ small model, weights were the only route that worked below the floor. Self-writt
 the cheatsheet and playbook designs \citep{suzgun2026dynamic,zhang2026agentic}, did not help any model at this scale; the
 generic, repeated lessons of Section~\ref{sec:res-notes} are an extreme form of the brevity bias and context collapse
 that Zhang et al.~\citep{zhang2026agentic} describe in evolving contexts. LifelongAgentBench found that replaying past
-experience in the prompt helps agents little, because of irrelevant information and limited context
-\citep{zheng2025lifelongagentbench}; in small models we see the same limit more sharply, as retrieved examples gave
-significant gains only on practice and lowered practice for Qwen3-1.7B, whose prompts were already the longest. Which route is open to a small model is
+experience in the prompt helps unevenly across models and tasks, that more of it can stop helping or even hurt because
+of irrelevant information and limited context, and that reasoning models, with their long reasoning, do worse with it
+\citep{zheng2025lifelongagentbench}. We see the same limits in small models: retrieved examples gave significant gains
+on practice, but on BFCL only in one run pooled over its multi-turn categories, and they lowered practice for our
+reasoning model. Which route is open to a small model is
 therefore decided before any choice of method, and a frozen check on a few tasks tells which.
 
 \subsection{Side effects of learning}\label{sec:side}
 On RQ2, learning changed more than the skill being practised. The largest change was not a lost skill but a changed habit
 (Fig.~\ref{fig:overcalling}): after LoRA teaching, every model called a tool when none fitted, losing 31 to 75 points
-of correct abstention, and LFM2.5 and Qwen3.5 did so under judging too, while Llama and Falcon called correctly more
-often. A likely cause is that every practice task asks for calls in every turn, so the training targets never show the
+of correct abstention, and LFM2.5 and Qwen3.5 did so under judging too, while Llama, Falcon and, slightly, LFM2.5 called correctly more often. A likely cause is that every practice task asks for calls in every turn, so the training targets never show the
 model declining; practice for tool use should include requests that no tool can serve. Function-calling work has met
-this problem in offline training: Hammer adds a dataset of irrelevant functions so that small on-device models stay
+this problem in offline training: Hammer adds training examples in which no offered function fits so that small on-device models stay
 able to decline \citep{lin2025robust}, and our results show what on-the-job learning does without such data. Nor is this
 the forgetting that continual fine-tuning is usually checked for \citep{kirkpatrick2017overcoming,luo2025empirical}.
 LoRA with replay \citep{rolnick2019experience}, which forgets less than full fine-tuning \citep{biderman2024lora},
-still changed the model's habits, and a check of retained skills alone would have missed it, since correct calls even
-rose for two models. Notes shifted the same balance in
+still changed the model's habits, and a check of retained skills alone would have missed it, since correct calls even rose for three models. Notes shifted the same balance in
 either direction, and LoRA also erased Qwen3.5's memory score in every seed. An overall score blurs all of this: a model
 that gains on the target category and loses its ability to decline may score the same overall as before. Evaluations of
 learning on the job should therefore report each category, with the target named in advance.
@@ -756,10 +755,11 @@ learning on the job should therefore report each category, with the target named
 For the reasoning model, the second part of RQ2, what Qwen3-1.7B was trained on mattered more than whether its
 reasoning was kept. We expected the empty think
 block in the expert targets to be the cause of the harm, by teaching the model to stop reasoning. Keeping the reasoning
-steadied learning and cut the damage to other skills by more than half, but did not remove it, and it was the only arm
-to lower the benchmark's target category significantly. This suggests that the reasoning it learned to write fitted our
-tasks rather than BFCL's. Only training on its own verified successes, in its own words, avoided harm everywhere,
-although its benchmark gain was not significant.
+steadied learning and cut the losses in live and non-live questions by more than half, but did not remove the harm
+(correct abstention still fell by 20 points), and it was the only arm to lower the benchmark's target category
+significantly. This suggests that the reasoning it learned to write fitted our
+tasks rather than BFCL's. Only training on its own verified successes, in its own words, avoided harm everywhere; its benchmark gain over the
+frozen score was not significant, but it gained 7.3 points more than plain teaching (significant).
 
 A likely reason is distance from the model's own behaviour. Its passed attempts are text it already produces, so
 training on them sharpens habits it has; expert calls, and reasoning written for them by a model that was given the
@@ -777,13 +777,15 @@ reasoning model, and teaching was also variable for Qwen3.5, so the instability 
 \caption{Gain under oracle teaching at three distances from practice: on the practice tasks (against the frozen model),
 on the unseen probe tasks (against the start) and on BFCL multi-turn base (against the frozen score). LoRA cells with three
 seeds show the seed mean. Solid: significant after Holm correction; hatched: not significant. Not drawn: notes (no
-gain at any stage), retrieval for the models below the floor (within about a point of zero), and retrieval for Qwen3-1.7B (practice $-$6.0,
+gain at any stage), retrieval for the models below the floor (within two points of zero), and retrieval for Qwen3-1.7B (practice $-$6.0,
 significant; no significant change on the probe or BFCL).}\label{fig:transfer}
 \end{figure}
-On RQ3, gains reached unseen tasks of the same kind but arrived at the official benchmark smaller than it can resolve,
-except for Llama and Gemma. Fig.~\ref{fig:transfer} brings together the gains reported in Section~\ref{sec:results} at three distances from
+On RQ3, gains reached unseen tasks of the same kind but arrived at the official benchmark small: significant on its
+target category only for Llama and Gemma, and for LFM2.5 and Qwen3.5 only when pooled over its 800 multi-turn
+questions. Fig.~\ref{fig:transfer} brings together the gains reported in Section~\ref{sec:results} at three distances from
 practice. Retrieval's gains were of similar size on practice and on the probe for LFM2.5, but on 200 probe tasks they
-were not significant, and on BFCL they shrank further. LoRA reached unseen tasks, often by more than it gained on
+were not significant, and on BFCL they shrank further (significant only for LFM2.5 under teaching, pooled over the
+multi-turn categories). LoRA reached unseen tasks, often by more than it gained on
 practice, which averages over early tasks before anything was learned, and it was significant there for every arm that
 learned except Qwen3-1.7B under plain teaching. On BFCL multi-turn base, however, it was significant only for Llama and
 Gemma, two of the three models that started at zero.
@@ -796,22 +798,24 @@ share one generator's style as well, so part of what was learned may be that sty
 the price of never practising on BFCL's own questions, which we avoided because public benchmarks may leak into
 training \citep{golchin2024time}. Learning on the
 job, for these models, is real but local; practice tasks that are harder, more varied, or calibrated against the
-benchmark's difficulty would test how far it can reach. The result is also a lesson about evaluation: for the models above the floor, LoRA's probe
-gains of 22 to 42 points arrived at the benchmark at a size its 200 target questions cannot resolve, so a single benchmark
-category is too blunt an instrument to judge learning on the job, and a larger held-out test, or one pooled over seeds,
-is needed to tell a small gain from none. Benchmarks that score learning along the stream itself
+benchmark's difficulty would test how far it can reach. The result is also a lesson about evaluation: for LFM2.5 and Qwen3.5, LoRA's probe
+gains of 22 to 42.5 points arrived at the benchmark as a few points. On its 200-question target category none of these
+survived correction for multiple comparisons; pooled over its 800 multi-turn questions, some did. A single benchmark
+category is too blunt an instrument to judge learning on the job: a larger held-out test, or one pooled over categories
+or seeds, is needed to tell a small gain from none. Benchmarks that score learning along the stream itself
 \citep{wu2024streambench,wei2025evomemory} measure the first of our three distances; our results show how much the
 other two can change the picture.
 
 \subsection{Teaching vs judging}\label{sec:teachjudge}
 On RQ4, the two kinds of feedback suit different starting points. Below the floor only teaching works: judging learns from
-passed tasks, and a model that passes none learns nothing. Above it, judging gained no less on the benchmark: under LoRA,
-LFM2.5 and Qwen3.5 gained +4.5 and +9 on BFCL multi-turn base by judging against +3.5 and +5.7 by teaching, though no
-difference was significant and 200 questions cannot show one below about 5 points either way, even though teaching gained more on our own tasks for LFM2.5 (probe +38.5 against +22). For the
-reasoning model, judging was the only arm without harm (Section~\ref{sec:reasoningft}). Judging is not a cure for
-over-calling, however: LFM2.5 and Qwen3.5 lost 30 and 63 points of correct abstention under judging too, and Qwen3.5
-lost more on BFCL's non-live questions by judging than by teaching ($-$15.5 against $-$4.5). A natural schedule
-follows: teach a model until it can succeed, then let it learn from its own verified successes.
+passed tasks, and a model that passes none learns nothing. Above it, judging gained no less on the benchmark. Against teaching in the same seed, LoRA
+judging gained 2.5 and 2.0 more points on BFCL multi-turn base for LFM2.5 and Qwen3.5 (not significant) and, over three
+seeds, 7.3 more for Qwen3-1.7B (significant), although teaching gained more on our own tasks for LFM2.5 (17 points more
+on the probe, significant). For the reasoning model, judging was the only LoRA arm without harm
+(Section~\ref{sec:reasoningft}). Judging is not a cure for
+over-calling, however: LFM2.5 and Qwen3.5 lost 30 and 63 points of correct abstention under judging too, and Qwen3.5 lost 11 points more on BFCL's non-live questions by judging than by teaching (significant). These
+results suggest a schedule we did not test: teach a model until it can succeed, then let it learn from its own verified
+successes.
 
 \subsection{Limitations and threats to validity}\label{sec:limits}
 \emph{Scope.} The oracle makes these results a ceiling, not the behaviour of a deployable system that must judge
@@ -819,7 +823,8 @@ itself. The study covers one domain (BFCL's tools, multi-turn), practice tasks w
 1.7B nominal parameters, and one reasoning model.
 
 \emph{Statistical power.} With 200 questions, the 95\% intervals on BFCL multi-turn base span about $\pm$5 points and
-those on the probe about $\pm$7, so smaller gains cannot be told from zero: ``not significant'' means not shown, not
+those on the probe about $\pm$7, and correcting for the 46 comparisons on multi-turn base raises the bar to about 9
+points, so smaller gains cannot be told from zero: ``not significant'' means not shown, not
 absent. Most cells have one seed, and the seeds we did run show that a single run can mislead (Qwen3-1.7B under
 teaching ended the probe anywhere from $-$12 to +18).
 
@@ -832,7 +837,8 @@ noise.
 
 \emph{Implementation.} Settings were fixed before the runs and not tuned for any method, and another notes prompt or
 retrieval budget might do better. Two of the six handlers are ours, and two models ran on a newer vLLM. LoRA adapts
-fewer layers in LFM2.5 and Qwen3.5 than in the other models (Section~\ref{sec:methods}), and retrieved examples use
+fewer layers in LFM2.5 and Qwen3.5 than in the other models (Section~\ref{sec:methods}), it skipped many of Falcon's
+and Gemma's training examples for lack of GPU memory (Section~\ref{sec:res-lora}), and retrieved examples use
 BFCL's reference syntax rather than each model's own format. Costs were measured on server GPUs (L4 and A100), shared
 in different ways, so they compare the methods but do not give on-device times. Adapters were hot-loaded during
 practice and merged into the weights for the exam; the two are mathematically equivalent, but we did not check that they
@@ -845,8 +851,9 @@ test rather than as rules.
 \item \emph{Let the route follow the model's starting point.} A frozen check on a few practice tasks may show whether
   context methods are open to a model at all; for the models below the floor, only fine-tuning on taught examples
   helped, and self-written notes helped no model (Sections~\ref{sec:res-notes} and~\ref{sec:floor}).
-\item \emph{Consider teaching first and then learning from the model's own successes.} Above the floor this gained no
-  less on the benchmark in our runs, and it was the only route that spared the reasoning model
+\item \emph{Consider teaching first and then learning from the model's own successes.} We did not test this schedule,
+  but above the floor learning from the model's own successes gained no less on the benchmark than teaching, and it was
+  the only LoRA arm that spared the reasoning model
   (Sections~\ref{sec:reasoningft} and~\ref{sec:teachjudge}).
 \item \emph{Include practice requests that no tool can serve.} This is the likely remedy for learning to call tools
   regardless (Section~\ref{sec:side}), although we did not test it.
@@ -859,8 +866,9 @@ We built an evaluation protocol for learning on the job, practice on BFCL's tool
 official exam, and used it to measure three ways a small model can learn tool use; the tasks, code and per-question
 results are released. Small language models can learn tool use on the job, but how they learn depends on where they
 start. Models below a
-floor of competence, unable to make a valid multi-turn call, learned only through their weights; models above it
-gained on the tasks they practised, but those gains arrived at the official benchmark smaller than it can resolve. And
+floor of competence, solving no multi-turn task, learned little except through their weights; models above it
+gained on the tasks they practised, but those gains arrived at the official benchmark as a few points, detectable only
+when pooled over its multi-turn categories. And
 learning changed more than the target skill: trained on tasks that always need calls, models learned to call tools when
 none fits. What this suggests for systems that learn on the job is drawn out in Section~\ref{sec:guidance}.
 
@@ -883,7 +891,7 @@ relationships that could have appeared to influence the work reported in this pa
 This work was funded by Decentralized Science, Inc., which owns the intellectual property in the work and in the
 released code and data. The code is released under the MIT licence and the data, notes and paper under CC BY 4.0, both
 with copyright held by Decentralized Science, Inc. (files \texttt{LICENSE} and \texttt{LICENSE-DATA} in the repository
-named under Data availability). Third-party benchmarks, models and libraries keep their own licences.
+named under Data availability). Third-party benchmarks, models, data and libraries keep their own licences.
 
 \section*{Data availability}
 The code, the 2,400 practice tasks with their reference answers, the fixed split, the per-question results of every
