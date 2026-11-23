@@ -717,7 +717,15 @@ minimum competence that in-context learning needs and that weights can supply: L
 by producing no call at all, answering in prose or writing code instead, so an example of the right call had nothing to
 build on, whereas LFM2.5, which already produced calls, did gain from retrieval while practising.
 
-This reverses what earlier comparisons found for other kinds of learning, where the context route did as well as
+Two other explanations fit less well. Retrieved examples are written in BFCL's reference syntax rather than in each
+model's own call format, so a weak model might simply fail to carry them over; but the notes, which are plain advice,
+failed as completely, and LoRA, which trains on the model's own format, succeeded. Falcon's prompts overran its short
+context, which may explain why its BFCL gain was smaller than Llama's and Gemma's; but Llama and Gemma failed by not
+calling, not by running out of room. In-context learning is known to grow with model size \citep{brown2020language},
+and the floor may be where that ability runs out for a given task. Which route is open to a small model is therefore
+decided before any choice of method, and a frozen check on a few tasks tells which.
+
+The floor also reverses what earlier comparisons found for other kinds of learning, where the context route did as well as
 fine-tuning or better: few-shot fine-tuning and in-context learning generalised similarly \citep{mosbach2023few}, and
 retrieval beat fine-tuning for injecting knowledge \citep{ovadia2024fine,soudani2024fine}. For a procedural skill in a
 small model, weights were the only route that worked below the floor. Self-written notes, which improved large models in
@@ -727,14 +735,6 @@ that Zhang et al.~\citep{zhang2026agentic} describe in evolving contexts. Lifelo
 experience in the prompt helps agents little, because of irrelevant information and limited context
 \citep{zheng2025lifelongagentbench}; in small models we see the same limit more sharply, as retrieved examples gave
 significant gains only on practice and lowered practice for Qwen3-1.7B, whose prompts were already the longest.
-
-Two other explanations fit less well. Retrieved examples are written in BFCL's reference syntax rather than in each
-model's own call format, so a weak model might simply fail to carry them over; but the notes, which are plain advice,
-failed as completely, and LoRA, which trains on the model's own format, succeeded. Falcon's prompts overran its short
-context, which may explain why its BFCL gain was smaller than Llama's and Gemma's; but Llama and Gemma failed by not
-calling, not by running out of room. In-context learning is known to grow with model size \citep{brown2020language},
-and the floor may be where that ability runs out for a given task. Which route is open to a small model is therefore
-decided before any choice of method, and a frozen check on a few tasks tells which.
 
 \subsection{Side effects of learning}\label{sec:side}
 On RQ2, learning changed more than the skill being practised. The largest change was not a lost skill but a changed habit
@@ -855,7 +855,10 @@ test rather than as rules.
 \end{itemize}
 
 \section{Conclusion}\label{sec:conclusion}
-Small language models can learn tool use on the job, but how they learn depends on where they start. Models below a
+We built an evaluation protocol for learning on the job, practice on BFCL's tools with a held-out probe and the
+official exam, and used it to measure three ways a small model can learn tool use; the tasks, code and per-question
+results are released. Small language models can learn tool use on the job, but how they learn depends on where they
+start. Models below a
 floor of competence, unable to make a valid multi-turn call, learned only through their weights; models above it
 gained on the tasks they practised, but those gains arrived at the official benchmark smaller than it can resolve. And
 learning changed more than the target skill: trained on tasks that always need calls, models learned to call tools when
