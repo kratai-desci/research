@@ -15,6 +15,7 @@
 \usepackage{enumitem}
 \usepackage{tikz}
 \usepackage{xurl}  % long URLs (references, data availability) break at any character
+\newcommand{\redmark}[1]{\textcolor{red}{#1}}  % temporary marker for text still to be reworked
 \usetikzlibrary{positioning,arrows.meta}
 \hypersetup{hidelinks}
 
@@ -38,7 +39,9 @@ Measuring the Learning Potential of Notes, Retrieval and LoRA for Tool Use}
   addressline={2261 Market Street, STE 22858}, city={San Francisco}, state={CA}, postcode={94114}, country={USA}}
 \cortext[1]{Corresponding author}
 \begin{abstract}
-Small language models (0.8B--1.7B nominal parameters) increasingly run on devices and must use tools they were
+%% Red = to be reworked in detail; remove the \redmark wrapper before submission.
+\relax % the template drops the first token of the abstract
+\redmark{Small language models (0.8B--1.7B nominal parameters) increasingly run on devices and must use tools they were
 not trained for. We build an evaluation protocol for learning on the job and use it to measure the \emph{learning
 potential} of six models from five families: the most a model gains when feedback is perfect. Each works through the
 same 1,200 multi-turn tool-use tasks, built on the Berkeley Function Calling Leaderboard's (BFCL) tools but never its
@@ -49,7 +52,7 @@ three seeds; tasks, code and per-question results are released. Models that solv
 side effects: trained on expert tool calls, every model learned to call tools when none fits, and a reasoning
 model was harmed by expert targets but not by its own verified successes. Above the floor, gains shrink on BFCL to a few points, significant only when pooled over its 800 multi-turn
 questions. Under LoRA, teaching is needed to pass the floor; beyond it, learning from one's own successes gained no less
-on BFCL, and more for the reasoning model.
+on BFCL, and more for the reasoning model.}
 \end{abstract}
 \begin{keywords}
 small language models \sep tool use \sep function calling \sep continual learning \sep LoRA \sep
@@ -662,8 +665,10 @@ significantly for LFM2.5 and Qwen3.5 under both arms and for the three models be
 Qwen3-1.7B the two did not differ significantly, and retrieval and notes could not be told apart after correction. On BFCL multi-turn base, LoRA
 beat retrieval only for Llama (+8) and Gemma (+11); for LFM2.5 and Qwen3.5 the two were indistinguishable ($-$3.5 to
 +4, all $p>0.16$), and for Qwen3-1.7B under teaching LoRA was significantly worse ($-$10). Outside multi-turn, LoRA moved
-every model from abstaining towards calling (Fig.~\ref{fig:overcalling}), retrieval left the balance unchanged, and notes
-moved it in either direction (Section~\ref{sec:res-notes}).
+every model from abstaining towards calling (Fig.~\ref{fig:overcalling}), retrieval left the balance unchanged, and notes moved it in either direction (Section~\ref{sec:res-notes}). Between LoRA's arms, judging gained 2.5 and 2.0
+points more than teaching on multi-turn base for LFM2.5 and Qwen3.5 in the same seed (not significant) and 7.3 more for
+Qwen3-1.7B over three seeds (significant); teaching gained 17 points more on LFM2.5's probe, and Qwen3.5 lost 11 points
+more on non-live questions under judging (both significant).
 
 \begin{table*}[t]
 \centering
@@ -709,40 +714,33 @@ fine-tuning does to a reasoning model (Section~\ref{sec:reasoningft}) and what o
 implications for practice (Section~\ref{sec:guidance}).
 
 \subsection{Answers to the research questions}\label{sec:answers}
-\textbf{RQ1: what determines learning, and which models to build on.} The deciding factor is a floor. The three models that solve no multi-turn task
-when frozen, Llama-3.2-1B, Falcon3-1B and Gemma-3-1B, learned nothing from their own notes and at most a point or two
-from correct worked examples, but continual LoRA on taught examples lifted all three on our tasks, and Llama and Gemma by
-10 to 11 points on BFCL multi-turn base, consistently over three seeds. Among the models above the floor, LFM2.5-1.2B
-was the steadiest and cheapest to train: its three seeds ended within 2.5 points of each other on the probe (+37 to
-+39.5 under teaching) and an update took about a minute on an A100. Qwen3.5-0.8B learned the most, despite being the
-smallest (probe +42.5 under judging), but under teaching its seeds ended up to 14 points apart on the probe, an update
-took about 16 minutes, and it lost the most correct abstention under judging ($-$63). Qwen3-1.7B, the strongest frozen
-model, learned safely only from its own successes. Falcon3-1B was the weakest candidate: its prompts overran its context,
-many of its training examples did not fit in memory, and its BFCL gain was not significant. These verdicts hold for
-oracle feedback and this domain, and every model over-called after LoRA teaching, so whichever is chosen needs practice
-that includes requests no tool can serve.
+\textbf{RQ1: what determines learning, and which models to build on.} The deciding factor is a floor. The three
+models that solve no multi-turn task when frozen, Llama-3.2-1B, Falcon3-1B and Gemma-3-1B, learned almost nothing from
+notes or worked examples, but continual LoRA on taught examples lifted all three on our tasks, and Llama and Gemma by 10
+to 11 points on BFCL multi-turn base. Above the floor, LFM2.5-1.2B learned the most steadily and cheaply (its seeds ended
+within 2.5 points of each other on the probe, and an update took about a minute), and Qwen3.5-0.8B learned the most
+(probe +42.5 under judging), though less steadily and more slowly (Sections~\ref{sec:res-lora} and~\ref{sec:res-cost}).
+Qwen3-1.7B, the strongest frozen model, learned safely only from its own successes, and Falcon3-1B, whose prompts
+overran its context, was the weakest candidate. These verdicts hold for oracle feedback and this domain.
 
-\textbf{RQ2: which route, how far, and at what cost.} Self-written notes changed nothing measurable: no run gained
-significantly on practice, on the probe or on the benchmark's multi-turn questions, and the notes only shifted the
-balance between calling and abstaining in single-turn questions. Retrieved worked examples helped while practising, by up to 13.9 points, but their gains on unseen tasks were
-not significant and reached the benchmark only once, pooled over its multi-turn categories. Continual LoRA gave by far
-the largest gains on our tasks, under teaching +20 to +49 points on practice and +31 to +56 on the probe for every model
-but the reasoning model, and the only gains on the benchmark's target category, for Llama and Gemma; above the floor, its benchmark gains were
-a few points
-(Section~\ref{sec:transfer}). It also changed more than the target skill: every model learned to call tools when none
-fits (Section~\ref{sec:side}), and plain teaching harmed the reasoning model's other skills
-(Section~\ref{sec:reasoningft}). Notes and retrieval cost prompt length on every task; LoRA costs training time
-(Section~\ref{sec:res-cost}).
+\textbf{RQ2: which route, how far, and what else changes.} At this scale, learning happened mainly through the weights;
+its gains reached unseen tasks of the same kind but the official benchmark only in part; and it changed the model's
+habits outside the practised skill. Self-written notes changed nothing measurable on practice, on the probe or on the
+benchmark's multi-turn questions. Retrieved worked examples helped while practising but not significantly beyond it,
+except once on BFCL, pooled over its multi-turn categories. Continual LoRA gave by far the largest gains on our tasks
+and the only gains on the benchmark's target category, for Llama and Gemma; above the floor, its benchmark gains were a
+few points (Section~\ref{sec:transfer}). It also taught every model to call tools when none fits
+(Section~\ref{sec:side}) and, under plain teaching, harmed the reasoning model's other skills
+(Section~\ref{sec:reasoningft}).
 
-\textbf{RQ3: feedback and starting point.} The two kinds of feedback suit different starting points. Below the floor only teaching works: judging learns from
-passed tasks, and a model that passes none learns nothing. Above it, judging gained no less on the benchmark. Against teaching in the same seed, LoRA
-judging gained 2.5 and 2.0 more points on BFCL multi-turn base for LFM2.5 and Qwen3.5 (not significant) and, over three
-seeds, 7.3 more for Qwen3-1.7B (significant), although teaching gained more on our own tasks for LFM2.5 (17 points more
-on the probe, significant). For the reasoning model, judging was the only LoRA arm without harm
-(Section~\ref{sec:reasoningft}). Judging is not a cure for
-over-calling, however: LFM2.5 and Qwen3.5 lost 30 and 63 points of correct abstention under judging too, and Qwen3.5 lost 11 points more on BFCL's non-live questions by judging than by teaching (significant). These
-results suggest a schedule we did not test: teach a model until it can succeed, then let it learn from its own verified
-successes.
+\textbf{RQ3: feedback and starting point.} The two kinds of feedback suit different starting points. Below the floor
+only teaching works: judging learns from passed tasks, and a model that passes none learns nothing. Above it, LoRA
+judging gained no less on the benchmark than teaching, and for the reasoning model significantly more (+7.3 points over
+three seeds), although teaching gained more on our own tasks for LFM2.5 (Section~\ref{sec:bfcl}). For the reasoning
+model, judging was also the only LoRA arm without harm (Section~\ref{sec:reasoningft}). It is not a cure for
+over-calling, however: LFM2.5 and Qwen3.5 lost correct abstention under judging too (Section~\ref{sec:res-lora}).
+These results suggest a schedule we did not test: teach a model until it can succeed, then let it learn from its own
+verified successes.
 
 \subsection{Why only weights lift models from zero}\label{sec:floor}
 Below the floor, only weight updates lifted a model by more than a point or two. We read this as a
@@ -815,15 +813,10 @@ seeds show the seed mean. Solid: significant after Holm correction; hatched: not
 gain at any stage), retrieval for the models below the floor (within two points of zero), and retrieval for Qwen3-1.7B (practice $-$6.0,
 significant; no significant change on the probe or BFCL).}\label{fig:transfer}
 \end{figure}
-Gains reached unseen tasks of the same kind but arrived at the official benchmark small: significant on its
-target category only for Llama and Gemma, and for LFM2.5 and Qwen3.5 only when pooled over its 800 multi-turn
-questions. Fig.~\ref{fig:transfer} brings together the gains reported in Section~\ref{sec:results} at three distances from
-practice. Retrieval's gains were of similar size on practice and on the probe for LFM2.5, but on 200 probe tasks they
-were not significant, and on BFCL they shrank further (significant only for LFM2.5 under teaching, pooled over the
-multi-turn categories). LoRA reached unseen tasks, often by more than it gained on
-practice, which averages over early tasks before anything was learned, and it was significant there for every arm that
-learned except Qwen3-1.7B under plain teaching. On BFCL multi-turn base, however, it was significant only for Llama and
-Gemma, two of the three models that started at zero.
+Why do gains shrink between practice and the benchmark? Fig.~\ref{fig:transfer} shows the gains at three distances
+from practice. LoRA's large gains on our tasks reached unseen tasks of the same kind, often by more than on practice,
+which averages over early tasks before anything was learned; but above the floor they arrived at the benchmark as a few
+points.
 
 The main reason is likely that our tasks are easier than BFCL's, and the frozen models show it: the three that solve any
 multi-turn task each solved two and a half to three times as much of our probe as of BFCL multi-turn base (Qwen3-1.7B 51
