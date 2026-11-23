@@ -876,14 +876,19 @@ test rather than as rules.
 
 \section{Conclusion}\label{sec:conclusion}
 We built an evaluation protocol for learning on the job, practice on BFCL's tools with a held-out probe and the
-official exam, and used it to ask which small models can learn tool use on the job and how three learning methods affect them; the tasks, code and per-question
-results are released. Which model to build on depends on a floor. Models that solve no multi-turn task learned little except through their
+official exam, and used it to ask which small models can learn tool use on the job, through which route and how far,
+and how the feedback should match a model's starting point; the tasks, code and per-question results are released.
+
+Which model to build on depends on a floor. Models that solve no multi-turn task learned little except through their
 weights, and of these Llama-3.2-1B and Gemma-3-1B are the candidates, given taught examples; above the floor, LFM2.5
 learned the most steadily and cheaply and Qwen3.5 the most. Of the three methods, only LoRA's gains held up clearly
-beyond the practice tasks, but above the floor they arrived at the official benchmark as a few points, detectable only
-when pooled over its multi-turn categories, and LoRA taught every model to call tools when none fits. Teaching is needed
-below the floor; above it, learning from the model's own successes gained no less, and it alone among the LoRA arms
-spared the reasoning model. What this suggests for systems that learn on the job is drawn out in Section~\ref{sec:guidance}.
+beyond the practice tasks, and above the floor they arrived at the official benchmark as a few points, of which only
+some reached significance when pooled over its multi-turn categories. Learning also changed more than the target skill:
+after LoRA teaching every model called tools when none fits, and expert targets harmed the reasoning model's other
+skills while its own successes did not. Teaching is needed below the floor; above it, learning from the model's own
+successes gained no less on the benchmark, and it alone among the LoRA arms spared the reasoning model. Learning on the
+job should therefore be judged per category and outside the practice distribution, on held-out tests larger than a
+single benchmark category; Section~\ref{sec:guidance} draws out what this suggests for practice.
 
 These results are a ceiling under perfect feedback, for six small models and one task domain, with costs measured on
 server GPUs. Natural next steps are to test the floor directly, by checking whether a little fine-tuning first lets
