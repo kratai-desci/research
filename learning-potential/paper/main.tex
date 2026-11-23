@@ -44,13 +44,13 @@ evaluation protocol and measure the \emph{learning potential} of six small model
 the most each gains when feedback is perfect. Each practises 1,200 multi-turn tool-use tasks built on the Berkeley
 Function Calling Leaderboard's (BFCL) tools but not its questions, learning by self-written notes, retrieved examples
 or fine-tuning (LoRA), while a perfect judge shows the answer or says only whether it succeeded. We test on unseen
-tasks and BFCL with paired tests, and release all tasks, code and results. First, learning depends on whether a model
+tasks and BFCL with paired tests, and release tasks, code and results. First, learning depends on whether a model
 can already solve a multi-turn task: three that could not learned almost nothing from notes or examples, but
 fine-tuning taught them; of the rest, LFM2.5-1.2B learned most reliably and Qwen3.5-0.8B the most. Second, only
 fine-tuning taught much, and its gains, up to 56 points on unseen practice-like tasks, shrank sharply on the
 benchmark. Fine-tuning on expert answers also taught every model to call tools when none fits and cost a reasoning
-model other skills. Third, models that cannot yet succeed must be shown the answer; those that can gained no less on the
-benchmark from their own successes, which also spared the reasoning model. Learning on the job is real but mostly
+model other skills. Third, models that cannot yet succeed must be shown the answer; those that can gained no less on BFCL's
+multi-turn questions from their own successes, which also spared the reasoning model. Learning on the job is real but mostly
 local, and should be judged per category on held-out tasks.
 \end{abstract}
 \begin{keywords}
@@ -109,7 +109,7 @@ Our contributions are as follows.
 \item We show that learning has side effects an overall score hides: after LoRA teaching every model calls tools when none fits,
   and expert targets harm a reasoning model's other skills while its own successes do not.
 \item We show that the feedback must suit the starting point: taught examples are needed below the floor, while above
-  it learning from the model's own successes gains no less on the benchmark, and significantly more for the reasoning
+  it learning from the model's own successes gains no less on the benchmark's multi-turn questions, and significantly more for the reasoning
   model.
 \item We release the code, the practice tasks and the per-question results of every run, and draw implications for
   practice (Section~\ref{sec:guidance}).
@@ -731,8 +731,9 @@ few points (Section~\ref{sec:transfer}). It also taught every model to call tool
 
 \textbf{RQ3: feedback and starting point.} The two kinds of feedback suit different starting points. Below the floor
 only teaching works: judging learns from passed tasks, and a model that passes none learns nothing. Above it, LoRA
-judging gained no less on the benchmark than teaching, and for the reasoning model significantly more (+7.3 points over
-three seeds), although teaching gained more on our own tasks for LFM2.5 (Section~\ref{sec:bfcl}). For the reasoning
+judging gained no less than teaching on the benchmark's multi-turn questions, and for the reasoning model significantly
+more (+7.3 points on multi-turn base over three seeds), although teaching gained more on our own tasks for LFM2.5, and
+Qwen3.5 lost 11 points more on non-live questions under judging (Section~\ref{sec:bfcl}). For the reasoning
 model, judging was also the only LoRA arm without harm (Section~\ref{sec:reasoningft}). It is not a cure for
 over-calling, however: LFM2.5 and Qwen3.5 lost correct abstention under judging too (Section~\ref{sec:res-lora}).
 These results suggest a schedule we did not test: teach a model until it can succeed, then let it learn from its own
@@ -864,7 +865,7 @@ test rather than as rules.
   context methods are open to a model at all; for the models below the floor, only fine-tuning on taught examples
   helped, and self-written notes helped no model (Sections~\ref{sec:res-notes} and~\ref{sec:floor}).
 \item \emph{Consider teaching first and then learning from the model's own successes.} We did not test this schedule,
-  but above the floor learning from the model's own successes gained no less on the benchmark than teaching, and it was
+  but above the floor learning from the model's own successes gained no less than teaching on the benchmark's multi-turn questions, and it was
   the only LoRA arm that spared the reasoning model
   (Sections~\ref{sec:answers} and~\ref{sec:reasoningft}).
 \item \emph{Include practice requests that no tool can serve.} This is the likely remedy for learning to call tools
@@ -885,7 +886,7 @@ beyond the practice tasks, and above the floor they arrived at the official benc
 some reached significance when pooled over its multi-turn categories. Learning also changed more than the target skill:
 after LoRA teaching every model called tools when none fits, and expert targets harmed the reasoning model's other
 skills while its own successes did not. Teaching is needed below the floor; above it, learning from the model's own
-successes gained no less on the benchmark, and it alone among the LoRA arms spared the reasoning model. Learning on the
+successes gained no less on the benchmark's multi-turn questions, and it alone among the LoRA arms spared the reasoning model. Learning on the
 job should therefore be judged per category and outside the practice distribution, on held-out tests larger than a
 single benchmark category; Section~\ref{sec:guidance} draws out what this suggests for practice.
 

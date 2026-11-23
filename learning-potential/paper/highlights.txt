@@ -4,4 +4,4 @@ Highlights
 - Fine-tuning on expert tool calls teaches every model to call tools when none fits.
 - A reasoning model was harmed by expert targets, not by its own verified successes.
 - Above that level, benchmark gains are small, detectable only over pooled questions.
-- Under LoRA, own successes gained no less on the benchmark than expert answers.
+- Under LoRA, own successes gained no less on BFCL multi-turn than expert answers.
