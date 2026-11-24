@@ -17,3 +17,10 @@ level3/
 # generated arXiv upload package (rebuild from paper/)
 paper/arxiv/
 paper/discernment-arxiv.zip
+
+# Inteligencia Artificial version build output
+paper-intartif/*.aux
+paper-intartif/*.bbl
+paper-intartif/*.blg
+paper-intartif/*.log
+paper-intartif/*.out

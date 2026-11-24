@@ -1,0 +1,96 @@
+% Learning through Discernment: version for Inteligencia Artificial (Revista Iberoamericana de IA, Iberamia).
+% Journal template: iberamia.sty (from journal.iberamia.org/public/docs-intartif/iberamia_LaTex.zip), A4, 10 pt.
+% The text is shared with the TMLR version: every section is \input from ../paper/sections, so edits there
+% appear in both. Compile here with: tectonic -X compile main.tex
+% \anontrue: anonymous version for double-blind review (no authors, affiliations, funding or repository link).
+\documentclass[10pt,a4paper,twoside]{article}
+\newif\ifanon\anontrue
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb,amsmath}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{ifthen}
+\usepackage{graphicx,xcolor}
+\usepackage{booktabs,longtable,array,calc}
+\usepackage[numbers,sort&compress]{natbib}  % numbered citations, as the journal's sample uses
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\usepackage{url}
+\usepackage{fvextra}
+\usepackage[section]{placeins}
+\usepackage{iberamia}  % the journal's style file
+\graphicspath{{../paper/}}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\fvset{fontsize=\small}
+\RecustomVerbatimEnvironment{verbatim}{Verbatim}{breaklines=true,fontsize=\small,frame=single}
+\setlength{\emergencystretch}{3em}
+\let\cite\citep
+
+% The shared abstract file uses the abstract environment; the journal sets it as a small bold-headed paragraph.
+\renewenvironment{abstract}{\noindent\small\textbf{Abstract}\ }{\par\medskip}
+
+\ifanon
+  \newcommand{\repo}{a repository that we will link after review}
+\else
+  \newcommand{\repo}{\url{https://github.com/kratai-desci/research/tree/discernment/discernment}}
+\fi
+
+% Publication data (filled in by the journal on acceptance).
+\newcommand{\thispaperdoi}{}
+\setcounter{year}{2026}
+\setcounter{volume}{0}
+\setcounter{issue}{0}
+\setcounter{page}{1}
+
+\title{Learning through Discernment: when a small language model can learn from user feedback on the job}
+\ifanon
+  \author{}
+\else
+  \author{Sirisilp Kongsilp\smallskip\\
+  \small{Decentralized Science, Inc.; Department of Computer Engineering, Faculty of Engineering, Kasetsart University\\
+  tai@kratai.com, sirisilp.k@ku.th}}
+\fi
+\date{}
+
+\begin{document}
+\medskip
+\maketitle
+\pagestyle{Rest}
+\thispagestyle{FirstPage}
+\smallskip
+
+\input{../paper/sections/abstract}
+
+\noindent{\small\textbf{Resumen}\ Los modelos de lenguaje pequeños podrían seguir mejorando si aprendieran cada noche de su propio trabajo diario, siempre que algo decida qué intentos merecen ser aprendidos cuando nadie comprueba el resultado. Nos preguntamos cuándo funciona esto. Ajustamos Qwen3 (0,6B y 1,7B) cada noche con un adaptador LoRA sobre los intentos que acepta un juez, a lo largo de 127 vidas (ejecuciones de entrenamiento) de hasta un año en WebShop y $\tau^2$-bench, y comparamos jueces: el resultado verdadero (el oráculo), el veredicto declarado del usuario, el juicio del propio modelo y un ``sentido de retroalimentación'' congelado que lee la reacción del usuario. Aprender de los usuarios funcionó cuando el juez mantuvo fuera de las lecciones los intentos fallidos: un sentido que primero pregunta si el usuario dio un veredicto claro mantuvo 4 de 5 vidas cerca del oráculo durante dos semanas, y en 97 vidas la proporción de lecciones fallidas siguió de cerca el resultado (Spearman $\rho$ = -0,81). Falló de tres maneras. Al juzgarse a sí mismo, el modelo mejoró y luego decayó, incluso a lo largo de un año; un sentido que tomó por éxitos las renuncias corteses hizo colapsar 3 de 5 vidas; y en $\tau^2$-bench, donde el cliente no puede ver el resultado, los clientes cerraron mayormente con agradecimientos y el 80\% de las lecciones del sentido fueron fracasos. Las lecciones limpias no bastaron por sí solas: escasas, se desvanecieron, y hacia el día 60 el sentido de veredicto claro estaba al nivel del autojuicio.\par\medskip}
+
+\noindent{\small\textbf{Keywords}: continual learning, learning from user feedback, implicit feedback, self-training, small language models, LLM agents, on-device learning, LoRA.}
+
+\noindent{\small\textbf{Palabras clave}: aprendizaje continuo, aprendizaje a partir de la retroalimentación del usuario, retroalimentación implícita, autoentrenamiento, modelos de lenguaje pequeños, agentes basados en LLM.}
+
+\input{../paper/sections/1-introduction}
+\input{../paper/sections/2-related-work}
+\input{../paper/sections/3-creature}
+\input{../paper/sections/4-setup}
+\input{../paper/sections/5-results}
+\input{../paper/sections/5-5-tau2}
+\input{../paper/sections/5-6-what-decides}
+\input{../paper/sections/6-discussion}
+\input{../paper/sections/7-limitations}
+\input{../paper/sections/8-conclusion}
+\ifanon\else\input{../paper/sections/funding}\fi
+
+% Required by the journal: a dedicated section before the references, without identifying information.
+\section*{Declaration on the use of generative AI}
+During the preparation of this work, the authors used Claude (Anthropic; Claude Opus 5.5, through Claude Code) to help write and run the experiment and analysis code, to draft and edit the text, and to check the reported numbers against the data and the references against their sources. Gemini 3 Flash (Google) and Qwen3-32B (Alibaba) were part of the method itself, as the simulated user and customer, as $\tau^2$-bench's graders and as the teacher of the feedback sense (Sections~\ref{sec:creature} and~\ref{sec:setup}). The authors reviewed all output and take full responsibility for the content of the publication.
+
+\bibliographystyle{plainnat}
+\bibliography{../paper/references}
+
+\appendix
+\counterwithin{table}{section}\counterwithin{figure}{section}
+\renewcommand{\thetable}{\Alph{section}\arabic{table}}\renewcommand{\thefigure}{\Alph{section}\arabic{figure}}
+\input{../paper/sections/appendix-a-settings}
+\input{../paper/sections/appendix-b-statistics}
+\input{../paper/sections/appendix-creature-sense}
+\input{../paper/sections/appendix-d-tau2}
+\end{document}
